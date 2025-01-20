@@ -1,5 +1,5 @@
 Package: pacta.loanbook
-Title: Umbrella package for all PACTA for Banks packages and documentation
+Title: Easily Install and Load PACTA for Banks Packages
 Version: 0.0.0.9000
 Authors@R: 
     c(
