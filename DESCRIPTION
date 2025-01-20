@@ -37,3 +37,4 @@ RoxygenNote: 7.3.2
 Suggests: 
     covr
 Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate
+URL: https://rmi-pacta.github.io/pacta.loanbook/
