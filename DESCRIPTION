@@ -23,11 +23,13 @@ Authors@R:
         email = "PACTA4banks@rmi.org"
       )
     )
-Description: Installs all PACTA for Banks packages needed for a standard PACTA
-  for Banks analysis of a corporate loan book. It also provides thorough
-  documentation - the PACTA for Banks cookbook - on how to run a PACTA for Banks
-  analysis. This includes prerequisites for the analysis, the separate steps of
-  the analysis, interpretation of the results, and advanced use cases.
+Description: PACTA for Banks is a tool that allows banks to calculate the
+  climate alignment of their corporate lending portfolios. This package is
+  designed to make it easy to install and load multiple PACTA for Banks packages
+  in a single step. It also provides thorough documentation - the PACTA for
+  Banks cookbook - on how to run a PACTA for Banks analysis. This covers
+  prerequisites for the analysis, the separate steps of running the analysis,
+  the interpretation of PACTA for Banks results, and advanced use cases.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
