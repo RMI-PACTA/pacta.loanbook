@@ -1,0 +1,3 @@
+url: https://rmi-pacta.github.io/pacta.r.package
+template:
+  package: pacta.pkgdown.rmitemplate
