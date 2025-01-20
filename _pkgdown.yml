@@ -1,3 +1,4 @@
-url: https://rmi-pacta.github.io/pacta.loanbook
+url: https://rmi-pacta.github.io/pacta.loanbook/
 template:
   package: pacta.pkgdown.rmitemplate
+
