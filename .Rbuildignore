@@ -1,4 +1,4 @@
-^pacta\.r\.package\.Rproj$
+^pacta\.loanbook\.Rproj$
 ^\.Rproj\.user$
 ^codecov\.yml$
 ^\.github$
@@ -6,3 +6,4 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^README\.Rmd$
