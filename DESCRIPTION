@@ -1,20 +1,39 @@
-Package: pacta.r.package
-Title: What the Package Does (One Line, Title Case)
+Package: pacta.loanbook
+Title: Easily Install and Load PACTA for Banks Packages
 Version: 0.0.0.9000
 Authors@R: 
-    c(person(given = "First", 
-             family = "Last", 
-             role = c("aut", "cre"),
-             email = "first.last@example.com", 
-             comment = c(ORCID = "YOUR-ORCID-ID")),
-      person(given = "Rocky Mountain Institute", 
-             role = c("cph", "fnd"),
-             email = "PACTA4investors@rmi.org"))
-Description: What the package does (one paragraph).
+    c(
+      person(
+        given = "Jacob",
+        family = "Kastl",
+        role = c("aut", "cre", "ctr"),
+        email = "jacob.kastl@gmail.com",
+        comment = c(ORCID = "0009-0000-8281-8129")
+      ),
+      person(
+        given = "Jackson",
+        family = "Hoffart",
+        role = c("aut", "ctr"),
+        email = "jackson.hoffart@gmail.com",
+        comment = c(ORCID = "0000-0002-8600-5042")
+      ),
+      person(
+        given = "RMI",
+        role = c("cph", "fnd"),
+        email = "PACTA4banks@rmi.org"
+      )
+    )
+Description: PACTA for Banks is a tool that allows banks to calculate the
+  climate alignment of their corporate lending portfolios. This package is
+  designed to make it easy to install and load multiple PACTA for Banks packages
+  in a single step. It also provides thorough documentation - the PACTA for
+  Banks cookbook - on how to run a PACTA for Banks analysis. This covers
+  prerequisites for the analysis, the separate steps of running the analysis,
+  the interpretation of PACTA for Banks results, and advanced use cases.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Suggests: 
     covr
 Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate
