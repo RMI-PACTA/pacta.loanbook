@@ -1,5 +1,5 @@
 ---
-title: "pacta_loanbook_sit_rep"
+title: "pacta.loanbook situation report"
 ---
 
 | repo | lifecycle | status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | coverage | r-universe | CRAN | dev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | maintainer |
