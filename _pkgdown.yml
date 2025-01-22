@@ -2,6 +2,9 @@ url: https://rmi-pacta.github.io/pacta.loanbook/
 template:
   package: pacta.pkgdown.rmitemplate
 
+development:
+  mode: auto
+
 articles:
 - title: Cookbook
   desc: Cookbook demonstrating how to use this package for your own projects
@@ -12,6 +15,12 @@ articles:
   - cookbook_running_the_analysis
   - cookbook_interpretation
   - cookbook_advanced_use_cases
+
+- title: sit.rep
+  desc: Situation report showing an overview of the status of each of the packages
+  navbar: sit.rep
+  contents:
+  - articles/pacta_loanbook_sit_rep
 
 navbar:
   structure:
@@ -29,6 +38,3 @@ navbar:
         href: https://rmi-pacta.github.io/r2dii.analysis
       - text: r2dii.plot
         href: https://rmi-pacta.github.io/r2dii.plot
-    sit.rep:
-      text: "sit.rep"
-      href: articles/pacta_loanbook_sit_rep.html

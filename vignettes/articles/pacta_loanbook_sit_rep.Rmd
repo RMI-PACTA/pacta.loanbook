@@ -1,5 +1,10 @@
 ---
 title: "pacta.loanbook situation report"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{pacta_loanbook_sit_rep}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 | repo | lifecycle | status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | coverage | r-universe | CRAN | dev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | maintainer |
