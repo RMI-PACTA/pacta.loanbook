@@ -36,9 +36,11 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Suggests: 
     covr,
+    knitr,
     mockr,
+    rmarkdown,
     testthat (>= 3.0.0)
-Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate
+Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate, rmarkdown
 URL: https://rmi-pacta.github.io/pacta.loanbook/
 Imports: 
     cli,
@@ -53,3 +55,4 @@ Imports:
     rstudioapi,
     tibble
 Config/testthat/edition: 3
+VignetteBuilder: knitr

@@ -1,0 +1,19 @@
+---
+title: "cookbook_advanced_use_cases"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{cookbook_advanced_use_cases}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(pacta.loanbook)
+```
