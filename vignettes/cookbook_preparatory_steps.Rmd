@@ -14,6 +14,233 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(pacta.loanbook)
+# Preparatory Steps
+
+This section provides an overview of the preparatory steps that need to be taken before running the PACTA for Banks analysis. It includes information on the required input data sets and the required software.
+
+## Required Input Data Sets
+
+The PACTA for Banks analysis requires a number of input data sets to run. Some of these can be obtained from external sources, while others need to be prepared by the user. Furthermore, some of the input data sets are optional. 
+
+The main input data sets required for the analysis are the following:
+
+### Asset-based Company Data (ABCD)
+
+- required input
+- external source
+- XLSX file
+
+This data set provides information on the production profiles and emission intensities of companies active in the following real economy sectors: Automotive (light-duty vehicles) manufacturing, aviation, cement production, coal mining, upstream oil & gas extraction, power generation, and steel production. The ABCD is typically obtained from third party data providers. However, it is possible to prepare the ABCD yourself or complement an external data set with entries that may not be covered out of the box.
+
+The ABCD data set must be an XLSX file and contains the following columns:
+
+```{r cols_abcd, echo = FALSE, results = 'asis'}
+cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "abcd_demo"], "`", collapse = "\n"))
 ```
+
+While PACTA is data agnostic and allows using data from any provider that offers the appropriate format, one option to obtain ABCD for this analysis is to buy the data from the data provider Asset Impact. Further information on how to obtain ABCD for PACTA and documentation of the individual sectors and data points can be found on the [Asset Impact website](https://asset-impact.gresb.com/).
+
+### Scenario Data
+
+- required input(s)
+- external source
+- CSV file(s)
+
+The scenario data set provides information on the trajectories of technologies/fuel types and of emission intensity pathways for each of (or a subset of) the sectors covered in PACTA.
+
+For sectors with technology level trajectories, the data set provides the TMSR and SMSP pathways based on the Market Share Approach, an allocation rule that implies all companies active in a sector have to adjust their production in a way that keeps market shares constant and solves for the aggregate climate transition scenario. For more information on how to calculate the TMSR and the SMSP, see the [PACTA for Banks documentation](https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html).
+
+The target market share scenario data set must be a CSV file and contains the following columns:
+
+```{r cols_tms_scenario, echo = FALSE, results = 'asis'}
+cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "scenario_demo_2020"], "`", collapse = "\n"))
+```
+
+For sectors that do not have technology level pathways, PACTA uses the Sectoral Decarbonization Approach (SDA), an allocation rule that implies that all companies in a sector have to converge their physical emission intensity at a future scenario value - e.g. in the year 2050. This implies that more polluting companies have to reduce their physical emissions intensity more drastically than companies using cleaner technology. It does not have any direct implications on the amount of units produced by any company. For further information on calculating the SDA in PACTA, please see the [PACTA for Banks documentation](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html).
+
+The SDA scenario data set must be a CSV file and contains the following columns:
+
+```{r cols_sda_scenario, echo = FALSE, results = 'asis'}
+cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "scenario_demo_2020"], "`", collapse = "\n"))
+```
+
+While the raw input values of the scenarios are based on models from external third party organisations - such as the [World Energy Outlook](https://www.iea.org/reports/world-energy-outlook-2024) by the [International Energy Agency (IEA)](https://www.iea.org/), the [Global Energy and Climate Outlook by the Joint Research Center of the European Commission (JRC)](https://joint-research-centre.ec.europa.eu/scientific-activities-z/geco_en), or the [One Earth Climate Model by the Institute for Sustainable Futures (ISF)](https://www.uts.edu.au/oecm) - the input data set for PACTA must be prepared using additional steps, which are documented publicly on the following GitHub repositories:
+
+- [pacta.scenario.data.preparation](https://github.com/RMI-PACTA/pacta.scenario.data.preparation)
+- [workflow.scenario.preparation](https://github.com/RMI-PACTA/workflow.scenario.preparation)
+
+Since RMI has taken over stewardship of PACTA, the prepared scenario files can also be accessed as CSV downloads on the [PACTA website](https://pacta.rmi.org/pacta-for-banks-2020/) under the "Methodology and Documents" tab of the "PACTA for Banks" section. The files are usually updated annually based on the latest scenario publications and as a general rule, the year of the publication defines the initial year of the scenario data set. This is commonly also used as the start year of the analysis.
+
+### Raw Loan Book
+
+- required input
+- self-prepared
+- CSV file
+
+The raw loan book is the financial data set that you would like to analyze. It contains information on the loans that you have provided to companies. As a bank, the data required will be available in your internal systems.
+
+The raw loan book must be prepared as CSV files and contain at a minimum the following columns:
+
+```{r cols_raw_loanbooks, echo = FALSE, results = 'asis'}
+cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "loanbook_demo"], "`", collapse = "\n"))
+```
+
+For detailed descriptions of how to prepare raw loan books, see the [PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/) and navigate to the "Training Materials" tab of the "PACTA for Banks" section. The **"User Guide 2"**, the **"Data Dictionary"**, and the **"Loan Book Template"** files can all be helpful in preparing your data.
+
+### Misclassified Loans
+
+- optional input
+- self-prepared
+- CSV file
+
+The user can provide a list of loans that have been misclassified in the raw loan book. The aim here is specifically to remove false positives, that is, loans that are classified in scope of one of the PACTA sectors, but where manual research shows that the companies do not actually operate within the PACTA scope. Such a false positive may be due to erroneous data entry in the raw loan book, for example. Removing these loans from the falsely indicated sector in the calculation of the match success rate will give a more accurate picture of what match success rate can really be reached.
+
+### Asset-Based Company Data (ABCD) for company sector split
+
+- optional input
+- external source
+- XLSX file
+
+In case the user wants to split company exposures across sectors of in scope activity, the user must provide a version of the ABCD data set that follows the format of the Advanced Company Indicators data set by Asset Impact. This data set includes power generation values which are required for the primary energy based sector split. Again, more information on data from Asset Impact can be found on the [Asset Impact website](https://asset-impact.gresb.com/).
+
+### Companies to apply primary energy split on
+
+- optional input
+- self-prepared
+- CSV file
+
+When applying the sector split on company exposures, the user can provide a list of companies for which the sector split should be based on primary energy content. For all other companies, a simple equal weights split will be applied. For more information on the sector split, see the documentation in `vignette("sector_split")`.
+
+### Manual Sector Classification
+
+- optional input
+- self-prepared
+- CSV file
+
+In case the user cannot obtain sector classification codes of any of the classification systems featured in `r2dii.data::sector_classifications` (currently the following classification systems are featured: `r unique(r2dii.data::sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of `r2dii.data::sector_classifications`. It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
+
+## Required Software
+
+Using the `r2dii.*` suite of packages for the PACTA for Banks analysis requires the following software to be installed on your system:
+
+### R (version 4.1.0 or higher)
+
+R is the programming language that the `r2dii.*` suite of packages is written in. You can download R from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/).
+
+### RStudio (optional)
+
+RStudio is an integrated development environment (IDE) for R developed by Posit. It is not strictly required to run the analysis, but it can be helpful for managing your project and running the analysis. Generally, RStudio is very widely used among the R community and probably the easiest way to interact with most R tools, such as the `r2dii.*` suite of packages. RStudio Desktop is an open source tool and free of charge. You can download RStudio from the [Posit RStudio website](https://posit.co/downloads/).
+
+### `r2dii.*` suite of R packages
+
+The `r2dii.*` suite of R packages is the main software tool that you will use to run the PACTA for Banks analysis.
+
+::: {.pkgdown-release}
+You can install the `r2dii.*` suite of R packages from any CRAN mirror by running the following command in R:
+
+``` r
+install.packages(c("r2dii.data", "r2dii.match", "r2dii.analysis", "r2dii.plot"))
+```
+:::
+
+::: {.pkgdown-devel}
+You can install the development versions of the `r2dii.*` suite of R packages from GitHub with:
+
+``` r
+# install.packages("pak")
+pak::pak(c("RMI-PACTA/r2dii.data", "RMI-PACTA/r2dii.match", "RMI-PACTA/r2dii.analysis", "RMI-PACTA/r2dii.plot"))
+```
+
+We use the [`pak` package](https://pak.r-lib.org/index.html) as a simple [tool to install packages from GitHub](https://pak.r-lib.org/reference/pak.html).
+:::
+
+#### Connecting to GitHub from RStudio
+
+Note that if you choose to install the `r2dii.*` suite of R packages from GitHub, you will need to have:
+
+(1) registered a [GitHub](https://github.com/) account,
+(2) `git` installed locally,
+(3) set up credentials so that RStudio can communicate with GitHub.
+
+You can find more information on how to do this using the following resources:
+
+* [Happy Git and GitHub for the useR](https://happygitwithr.com/) is a great and comprehensive resource that takes you through the process of setting up git and GitHub with RStudio, including registering a GitHub account, installing git, and connecting RStudio to GitHub.
+* Additional information on managing your GitHub connection from within RStudio can be found in the usethis package documentation, for example on [managing git credentials](https://usethis.r-lib.org/articles/git-credentials.html).
+
+If you only plan to use GitHub to install this package or other packages as shown above, you will not have to have a deep understanding of all the git commands, so there is no need to be overwhelmed by the complexity of git.
+
+
+### Required R packages
+
+The `r2dii.*` suite of R packages depends on a number of other R packages. These dependencies will be installed automatically when you install the `r2dii.*` suite of R packages. The required packages are:
+
+```{r imports, echo = FALSE, results = 'asis'}
+imports <- paste(
+  utils::packageDescription("r2dii.data")[["Imports"]],
+  utils::packageDescription("r2dii.match")[["Imports"]],
+  utils::packageDescription("r2dii.analysis")[["Imports"]],
+  utils::packageDescription("r2dii.plot")[["Imports"]],
+  sep = ", "
+)
+imports <- sort(unique(unlist(strsplit(x = imports, split = ",[[:space:]]"))))
+cat(paste0("`", paste0(imports, collapse = "`, `"), "`"))
+```
+
+### Suggested R packages
+
+The suggested packages are not required to run the analysis, but they are used in the examples and vignettes provided with the package:
+
+```{r suggests, echo = FALSE, results = 'asis'}
+imports <- paste(
+  utils::packageDescription("r2dii.data")[["Suggests"]],
+  utils::packageDescription("r2dii.match")[["Suggests"]],
+  utils::packageDescription("r2dii.analysis")[["Suggests"]],
+  utils::packageDescription("r2dii.plot")[["Suggests"]],
+  sep = ", "
+)
+imports <- sort(unique(unlist(strsplit(x = imports, split = ",[[:space:]]"))))
+cat(paste0("`", paste0(imports, collapse = "`, `"), "`"))
+```
+
+### FAQ
+
+#### How do I install the `r2dii.*` suite of R packages?
+
+The most common ways to install R packages are via CRAN or [GitHub](#connecting-to-github-from-rstudio). Public institutions often have restrictions on the installation of packages from GitHub, so you may need to install the package from CRAN. In some cases, your institution may mirror CRAN in their internal application registry, so you may need to install the package from there. Should you have any issues with the installation from the internal application registry, it is best to reach out to your IT department. If you cannot obtain the package in any of these ways, please reach out to the package maintainers directly for exploring other options.
+
+#### How do I install the required R packages?
+
+In principle, all dependencies required to run the `r2dii.*` suite of R packages will be installed automatically when you install the packages. However, if you encounter any issues with the installation of the required packages, you can install them manually by running the following command in R, where `...` should be replaced with the package names from the list above, separated by commas:
+
+```{r install_deps, eval = FALSE}
+install.packages(c(...))
+```
+
+## Checklist of Preparatory Steps
+
+Before running the PACTA for Banks analysis, you should make sure that you have completed the following preparatory steps:
+
+- [ ] Obtained the required external input data sets:
+  - [ ] Asset-based Company Data (ABCD)
+  - [ ] Scenario Data
+- [ ] Prepared the required input data sets:
+  - [ ] Raw Loan Book
+- [ ] OPTIONAL - Obtained the optional external input data sets:
+  - [ ] Asset-based Company Data (ABCD) for company sector split
+- [ ] OPTIONAL - Prepared the optional input data sets:
+  - [ ] Companies to apply primary energy split on
+  - [ ] Misclassified Loans
+  - [ ] Manual Sector Classification
+- [ ] Installed the required software:
+  - [ ] R (version 4.1.0 or higher)
+  - [ ] RStudio (optional)
+  - [ ] `r2dii.*` suite of R packages
+  - [ ] [set up git and GitHub](#connecting-to-github-from-rstudio) (optional)
+- [ ] Installed the required R packages:
+  - [ ] `r2dii.*` suite of R packages dependencies
+- [ ] OPTIONAL - Installed the suggested R packages:
+  - [ ] `r2dii.*` suite of R packages suggests
+
+**PREVIOUS CHAPTER:** [Overview](cookbook_overview.html)
+
+**NEXT CHAPTER:** [Running the Analysis](cookbook_running_the_analysis.html)
