@@ -119,15 +119,12 @@ RStudio is an integrated development environment (IDE) for R developed by Posit.
 
 The `r2dii.*` suite of R packages is the main software tool that you will use to run the PACTA for Banks analysis.
 
-::: {.pkgdown-release}
 You can install the `r2dii.*` suite of R packages from any CRAN mirror by running the following command in R:
 
 ``` r
 install.packages(c("r2dii.data", "r2dii.match", "r2dii.analysis", "r2dii.plot"))
 ```
-:::
 
-::: {.pkgdown-devel}
 You can install the development versions of the `r2dii.*` suite of R packages from GitHub with:
 
 ``` r
@@ -136,7 +133,6 @@ pak::pak(c("RMI-PACTA/r2dii.data", "RMI-PACTA/r2dii.match", "RMI-PACTA/r2dii.ana
 ```
 
 We use the [`pak` package](https://pak.r-lib.org/index.html) as a simple [tool to install packages from GitHub](https://pak.r-lib.org/reference/pak.html).
-:::
 
 #### Connecting to GitHub from RStudio
 
