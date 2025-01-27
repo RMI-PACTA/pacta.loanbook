@@ -95,14 +95,6 @@ For detailed descriptions of how to prepare raw loan books, see the [PACTA for B
 
 The user can provide a list of loans that have been misclassified in the raw loan book. The aim here is specifically to remove false positives, that is, loans that are classified in scope of one of the PACTA sectors, but where manual research shows that the companies do not actually operate within the PACTA scope. Such a false positive may be due to erroneous data entry in the raw loan book, for example. Removing these loans from the falsely indicated sector in the calculation of the match success rate will give a more accurate picture of what match success rate can really be reached.
 
-### Asset-Based Company Data (ABCD) for company sector split
-
-- optional input
-- external source
-- XLSX file
-
-In case the user wants to split company exposures across sectors of in scope activity, the user must provide a version of the ABCD data set that follows the format of the Advanced Company Indicators data set by Asset Impact. This data set includes power generation values which are required for the primary energy based sector split. Again, more information on data from Asset Impact can be found on the [Asset Impact website](https://asset-impact.gresb.com/).
-
 ### Companies to apply primary energy split on
 
 - optional input
