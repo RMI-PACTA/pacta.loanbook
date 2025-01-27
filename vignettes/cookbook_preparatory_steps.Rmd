@@ -170,22 +170,6 @@ imports <- sort(unique(unlist(strsplit(x = imports, split = ",[[:space:]]"))))
 cat(paste0("`", paste0(imports, collapse = "`, `"), "`"))
 ```
 
-### Suggested R packages
-
-The suggested packages are not required to run the analysis, but they are used in the examples and vignettes provided with the package:
-
-```{r suggests, echo = FALSE, results = 'asis'}
-imports <- paste(
-  utils::packageDescription("r2dii.data")[["Suggests"]],
-  utils::packageDescription("r2dii.match")[["Suggests"]],
-  utils::packageDescription("r2dii.analysis")[["Suggests"]],
-  utils::packageDescription("r2dii.plot")[["Suggests"]],
-  sep = ", "
-)
-imports <- sort(unique(unlist(strsplit(x = imports, split = ",[[:space:]]"))))
-cat(paste0("`", paste0(imports, collapse = "`, `"), "`"))
-```
-
 ### FAQ
 
 #### How do I install the `r2dii.*` suite of R packages?
