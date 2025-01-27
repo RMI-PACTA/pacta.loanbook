@@ -1,0 +1,14 @@
+pandoc: 3.1.11
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  cookbook_advanced_use_cases: cookbook_advanced_use_cases.html
+  cookbook_interpretation: cookbook_interpretation.html
+  cookbook_overview: cookbook_overview.html
+  cookbook_preparatory_steps: cookbook_preparatory_steps.html
+  cookbook_running_the_analysis: cookbook_running_the_analysis.html
+  articles/pacta_loanbook_sit_rep: pacta_loanbook_sit_rep.html
+last_built: 2025-01-27T12:04Z
+urls:
+  reference: https://rmi-pacta.github.io/pacta.loanbook/reference
+  article: https://rmi-pacta.github.io/pacta.loanbook/articles
