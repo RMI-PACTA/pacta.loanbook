@@ -95,7 +95,7 @@ For detailed descriptions of how to prepare raw loan books, see the [PACTA for B
 
 The user can provide a list of loans that have been misclassified in the raw loan book. The aim here is specifically to remove false positives, that is, loans that are classified in scope of one of the PACTA sectors, but where manual research shows that the companies do not actually operate within the PACTA scope. Such a false positive may be due to erroneous data entry in the raw loan book, for example. Removing these loans from the falsely indicated sector in the calculation of the match success rate will give a more accurate picture of what match success rate can really be reached.
 
-### Manual Sector Classification
+### Manual Sector Classification (optional)
 
 - optional input
 - self-prepared
