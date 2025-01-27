@@ -209,8 +209,6 @@ Before running the PACTA for Banks analysis, you should make sure that you have 
   - [ ] Scenario Data
 - [ ] Prepared the required input data sets:
   - [ ] Raw Loan Book
-- [ ] OPTIONAL - Obtained the optional external input data sets:
-  - [ ] Asset-based Company Data (ABCD) for company sector split
 - [ ] OPTIONAL - Prepared the optional input data sets:
   - [ ] Companies to apply primary energy split on
   - [ ] Misclassified Loans
