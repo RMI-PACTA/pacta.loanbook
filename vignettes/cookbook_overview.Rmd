@@ -44,7 +44,7 @@ Users will be able to obtain both tabular outputs and plots that can be used for
 
 The main steps of the analysis are as follows:
 
-1. Data preparation: Prepare the ABCD data and optionally a custom sector split.
+1. Data preparation: Prepare the loan book, ABCD and Scenario input data.
 2. Matching process: Match the raw loan book to the ABCD data.
 3. Prioritization of loan book: Prioritize the matched loan book and analyze its coverage.
 4. Run PACTA for Banks analysis: Run the analysis and generate plots.
