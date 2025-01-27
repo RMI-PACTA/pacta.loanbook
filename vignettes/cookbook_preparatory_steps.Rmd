@@ -87,7 +87,7 @@ cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary
 
 For detailed descriptions of how to prepare raw loan books, see the [PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/) and navigate to the "Training Materials" tab of the "PACTA for Banks" section. The **"User Guide 2"**, the **"Data Dictionary"**, and the **"Loan Book Template"** files can all be helpful in preparing your data.
 
-### Misclassified Loans
+### Misclassified Loans (optional)
 
 - optional input
 - self-prepared
