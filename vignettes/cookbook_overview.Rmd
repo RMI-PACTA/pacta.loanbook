@@ -22,7 +22,7 @@ The sections of the cookbook are as follows:
 
 1. **Overview**: This section provides an overview of the PACTA for Banks analysis and its main steps.
 2. **[Preparatory Steps](cookbook_preparatory_steps.html)**: Prepare the Loanbook, ABCD and Scenario input data.
-3. **[Running the Analysis](cookbook_running_the_analysis.html)**: Match the raw loan books to the ABCD data and run the PACTA for Supervisors analysis.
+3. **[Running the Analysis](cookbook_running_the_analysis.html)**: Match the raw loan books to the ABCD data and run the PACTA for Banks analysis.
 4. **[Interpretation of Results](cookbook_interpretation.html)**: Interpret the results of the analysis and understand the outputs.
 5. **[Advanced Topics](cookbook_advanced_use_cases.html)**: Learn about advanced topics such as custom grouping of results and how to adjust the analysis parameters for best results on advanced research questions.
 
