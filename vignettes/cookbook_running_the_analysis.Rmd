@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Setup
 
-We use the `r2dii.*` suite of packages to access the most important functions you'll learn about. We also use example datasets from the package `r2dii.data`, and optional but convenient functions from the packages `dplyr` and `readxl`.
+We use the `r2dii.*` suite of packages to access the most important functions you'll learn about. We also use example datasets from the package `{r2dii.data}`, and optional but convenient functions from the packages `{dplyr}` and `{readxl}`.
 
 ```{r}
 library(r2dii.match)
@@ -31,7 +31,7 @@ library(readxl)
 
 We need two datasets: a "loanbook" and an "asset-based company dataset" (abcd). These should be formatted like:  [`r2dii.data::loanbook_demo`](https://rmi-pacta.github.io/r2dii.data/reference/loanbook_demo.html) and [`r2dii.data::abcd_demo`](https://rmi-pacta.github.io/r2dii.data/reference/abcd_demo.html) (from the [r2dii.data package](https://rmi-pacta.github.io/r2dii.data)).
 
-To simulate having these data files prepared, we will use the demo data included in the `r2dii.data` package to create example XLS files using the `writexl` package.
+To simulate having these data files prepared, we will use the demo data included in the `{r2dii.data}` package to create example XLS files using the `{writexl}` package.
 
 ```{r}
 library(writexl)
@@ -163,7 +163,7 @@ sector_in_scope <- glue::glue_collapse(
 )
 ```
 
-`r2dii.match` allows you to match loans from your loanbook to the companies in
+`{r2dii.match}` allows you to match loans from your loanbook to the companies in
 an asset-based company dataset. However, matching every loan is unlikely -- some
 loan-taking companies may be missing from the asset-based company dataset, or
 they may not operate in the sectors PACTA focuses on (`r sector_in_scope`).
@@ -177,7 +177,7 @@ one of the `loan_size_*` columns).
 
 ### Setup
 
-First we will need to load additional useful packages `purrr` and `ggplot2`:
+First we will need to load additional useful packages `{purrr}` and `{ggplot2}`:
 
 ```{r}
 library(purrr)
