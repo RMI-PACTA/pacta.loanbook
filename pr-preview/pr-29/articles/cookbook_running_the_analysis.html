@@ -105,9 +105,9 @@
 </h2>
 <p>We use the <code>r2dii.*</code> suite of packages to access the most
 important functions you’ll learn about. We also use example datasets
-from the package <code>r2dii.data</code>, and optional but convenient
-functions from the packages <code>dplyr</code> and
-<code>readxl</code>.</p>
+from the package <a href="https://rmi-pacta.github.io/r2dii.data/" class="external-link">r2dii.data</a>, and optional but convenient
+functions from the packages <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> and
+<a href="https://readxl.tidyverse.org" class="external-link">readxl</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.match/" class="external-link">r2dii.match</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RMI-PACTA/r2dii.analysis" class="external-link">r2dii.analysis</a></span><span class="op">)</span></span>
@@ -125,8 +125,8 @@ and <a href="https://rmi-pacta.github.io/r2dii.data/reference/abcd_demo.html" cl
 (from the <a href="https://rmi-pacta.github.io/r2dii.data" class="external-link">r2dii.data
 package</a>).</p>
 <p>To simulate having these data files prepared, we will use the demo
-data included in the <code>r2dii.data</code> package to create example
-XLS files using the <code>writexl</code> package.</p>
+data included in the <a href="https://rmi-pacta.github.io/r2dii.data/" class="external-link">r2dii.data</a> package to create example
+XLS files using the <a href="https://ropensci.r-universe.dev/writexl" class="external-link">writexl</a> package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropensci.r-universe.dev/writexl" class="external-link">writexl</a></span><span class="op">)</span></span>
 <span></span>
@@ -380,13 +380,13 @@ reverse the default priority.</p>
 <div class="section level2">
 <h2 id="calculating-matching-coverage">Calculating Matching Coverage<a class="anchor" aria-label="anchor" href="#calculating-matching-coverage"></a>
 </h2>
-<p><code>r2dii.match</code> allows you to match loans from your loanbook
-to the companies in an asset-based company dataset. However, matching
-every loan is unlikely – some loan-taking companies may be missing from
-the asset-based company dataset, or they may not operate in the sectors
-PACTA focuses on (power, cement, oil and gas, aviation, coal,
-automotive, steel, and hdv). Thus, you may want to measure how much of
-the loanbook matched some asset. This article shows two ways to
+<p><a href="https://rmi-pacta.github.io/r2dii.match/" class="external-link">r2dii.match</a> allows you to match loans from your
+loanbook to the companies in an asset-based company dataset. However,
+matching every loan is unlikely – some loan-taking companies may be
+missing from the asset-based company dataset, or they may not operate in
+the sectors PACTA focuses on (power, cement, oil and gas, aviation,
+coal, automotive, steel, and hdv). Thus, you may want to measure how
+much of the loanbook matched some asset. This article shows two ways to
 calculate such matching coverage:</p>
 <ol style="list-style-type: decimal">
 <li><p>Calculate the portion of your loanbook covered, by dollar value
@@ -397,7 +397,7 @@ calculate such matching coverage:</p>
 <h3 id="setup-1">Setup<a class="anchor" aria-label="anchor" href="#setup-1"></a>
 </h3>
 <p>First we will need to load additional useful packages
-<code>purrr</code> and <code>ggplot2</code>:</p>
+<a href="https://purrr.tidyverse.org/" class="external-link">purrr</a> and <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
