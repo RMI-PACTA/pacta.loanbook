@@ -5,28 +5,43 @@ template:
 development:
   mode: auto
 
-articles:
-- title: Cookbook
-  desc: Cookbook demonstrating how to use this package for your own projects
-  navbar: Cookbook
-  contents:
-  - cookbook_overview
-  - cookbook_preparatory_steps
-  - cookbook_running_the_analysis
-  - cookbook_interpretation
-  - cookbook_advanced_use_cases
-
-- title: sit.rep
-  desc: Situation report showing an overview of the status of each of the packages
-  navbar: sit.rep
-  contents:
-  - articles/pacta_loanbook_sit_rep
-
 navbar:
   structure:
-    left:  [intro, reference, articles, news, sit.rep]
-    right: [search, packages, github]
+    left:  [intro, reference, cookbook, articles, news]
+    right: [search, packages, sit.rep, github]
   components:
+    cookbook:
+      text: Cookbook
+      menu:
+      - text: Overview
+        href: articles/cookbook_overview.html
+      - text: Preparatory Steps
+        href: articles/cookbook_preparatory_steps.html
+      - text: Running the Analysis
+        href: articles/cookbook_running_the_analysis.html
+      - text: Interpretation of Results
+        href: articles/cookbook_interpretation.html
+      - text: Advanced Use Cases
+        href: articles/cookbook_advanced_use_cases.html
+    articles:
+      text: Articles
+      menu:
+      - text: r2dii.match
+      - text: Calculating Matching Coverage
+        href: https://rmi-pacta.github.io/r2dii.match/articles/matching-coverage.html
+      - text: Using match_name() with large loanbooks
+        href: https://rmi-pacta.github.io/r2dii.match/articles/chunk-your-data.html
+      - text: ---
+      - text: r2dii.analysis
+      - text: Sectoral Decarbonization Approach (SDA)
+        href: https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html
+      - text: Market Share Approach
+        href: https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html
+      - text: "Indicator Choices: Weighted Production vs. Weighted Percent Change in Production"
+        href: https://rmi-pacta.github.io/r2dii.analysis/articles/production-percent-change.html
+    sit.rep:
+      text: sit.rep
+      href: articles/pacta_loanbook_sit_rep.html
     packages:
       text: Packages
       menu:
