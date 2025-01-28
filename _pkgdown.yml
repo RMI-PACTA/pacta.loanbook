@@ -15,13 +15,13 @@ navbar:
       menu:
       - text: Overview
         href: articles/cookbook_overview.html
-      - text: Preparatory steps
+      - text: Preparatory Steps
         href: articles/cookbook_preparatory_steps.html
-      - text: Running the analysis
+      - text: Running the Analysis
         href: articles/cookbook_running_the_analysis.html
-      - text: Interpretation
+      - text: Interpretation of Results
         href: articles/cookbook_interpretation.html
-      - text: Advanced use cases
+      - text: Advanced Use Cases
         href: articles/cookbook_advanced_use_cases.html
     articles:
       text: Articles
