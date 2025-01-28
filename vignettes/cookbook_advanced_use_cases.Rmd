@@ -1,5 +1,5 @@
 ---
-title: "cookbook_advanced_use_cases"
+title: "Advanced Use Cases"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{cookbook_advanced_use_cases}
