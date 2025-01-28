@@ -85,7 +85,7 @@ The raw loan book must be prepared as CSV files and contain at a minimum the fol
 cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "loanbook_demo"], "`", collapse = "\n"))
 ```
 
-For detailed descriptions of how to prepare raw loan books, see the [PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/) and navigate to the "Training Materials" tab of the "PACTA for Banks" section. The **"User Guide 2"**, the **"Data Dictionary"**, and the **"Loan Book Template"** files can all be helpful in preparing your data.
+For detailed descriptions of how to prepare raw loan books, see the [PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/) and navigate to the "Training Materials" tab of the "PACTA for Banks" section. The ["User Guide 2"](https://pacta.rmi.org/wp-content/uploads/2020/10/User-Guide-2..pdf), the ["Data Dictionary"](https://pacta.rmi.org/wp-content/uploads/2020/09/data_dictionary.xlsx), and the ["Loan Book Template"](https://pacta.rmi.org/wp-content/uploads/2020/09/loanbook_demo.xlsx) files can all be helpful in preparing your data.
 
 ### Misclassified Loans (optional)
 
