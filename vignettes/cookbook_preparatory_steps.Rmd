@@ -162,7 +162,9 @@ imports <- paste(
   utils::packageDescription("r2dii.plot")[["Imports"]],
   sep = ", "
 )
-imports <- sort(unique(unlist(strsplit(x = imports, split = ",[[:space:]]"))))
+imports <- unlist(strsplit(x = imports, split = ",[[:space:]]"))
+imports <- sub(pattern = " [(].*[)]$", replacement = "", x = imports)
+imports <- sort(unique(imports))
 imports <- imports[!imports %in% c("utils", "stats")]
 cat(paste0("`", paste0(imports, collapse = "`, `"), "`"))
 ```
