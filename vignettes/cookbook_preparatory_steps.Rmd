@@ -166,7 +166,7 @@ imports <- unlist(strsplit(x = imports, split = ",[[:space:]]"))
 imports <- sub(pattern = " [(].*[)]$", replacement = "", x = imports)
 imports <- sort(unique(imports))
 imports <- imports[!imports %in% c("utils", "stats")]
-cat(paste0("`", paste0(imports, collapse = "`, `"), "`"))
+cat(paste0("`{", paste0(imports, collapse = "}`, `{"), "}`"))
 ```
 
 ### FAQ
