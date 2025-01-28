@@ -69,7 +69,7 @@ While the raw input values of the scenarios are based on models from external th
 - [pacta.scenario.data.preparation](https://github.com/RMI-PACTA/pacta.scenario.data.preparation)
 - [workflow.scenario.preparation](https://github.com/RMI-PACTA/workflow.scenario.preparation)
 
-Since RMI has taken over stewardship of PACTA, the prepared scenario files can also be accessed as CSV downloads on the [PACTA website](https://pacta.rmi.org/pacta-for-banks-2020/) under the "Methodology and Documents" tab of the "PACTA for Banks" section. The files are usually updated annually based on the latest scenario publications and as a general rule, the year of the publication defines the initial year of the scenario data set. This is commonly also used as the start year of the analysis.
+Since RMI has taken over stewardship of PACTA, the prepared scenario files can also be accessed as CSV downloads in the ["Methodology and Supporting Documents" section of the PACTA website](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/). The files are usually updated annually based on the latest scenario publications and as a general rule, the year of the publication defines the initial year of the scenario data set. This is commonly also used as the start year of the analysis.
 
 ### Raw Loan Book
 
@@ -85,7 +85,7 @@ The raw loan book must be prepared as CSV files and contain at a minimum the fol
 cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "loanbook_demo"], "`", collapse = "\n"))
 ```
 
-For detailed descriptions of how to prepare raw loan books, see the [PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/) and navigate to the "Training Materials" tab of the "PACTA for Banks" section. The ["User Guide 2"](https://pacta.rmi.org/wp-content/uploads/2020/10/User-Guide-2..pdf), the ["Data Dictionary"](https://pacta.rmi.org/wp-content/uploads/2020/09/data_dictionary.xlsx), and the ["Loan Book Template"](https://pacta.rmi.org/wp-content/uploads/2020/09/loanbook_demo.xlsx) files can all be helpful in preparing your data.
+For detailed descriptions of how to prepare raw loan books, see the ["Training Materials" section of the PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/). The ["User Guide 2"](https://pacta.rmi.org/wp-content/uploads/2020/10/User-Guide-2..pdf), the ["Data Dictionary"](https://pacta.rmi.org/wp-content/uploads/2020/09/data_dictionary.xlsx), and the ["Loan Book Template"](https://pacta.rmi.org/wp-content/uploads/2020/09/loanbook_demo.xlsx) files can all be helpful in preparing your data.
 
 ### Misclassified Loans (optional)
 
@@ -162,7 +162,10 @@ imports <- paste(
   utils::packageDescription("r2dii.plot")[["Imports"]],
   sep = ", "
 )
-imports <- sort(unique(unlist(strsplit(x = imports, split = ",[[:space:]]"))))
+imports <- unlist(strsplit(x = imports, split = ",[[:space:]]"))
+imports <- sub(pattern = " [(].*[)]$", replacement = "", x = imports)
+imports <- sort(unique(imports))
+imports <- imports[!imports %in% c("utils", "stats")]
 cat(paste0("`", paste0(imports, collapse = "`, `"), "`"))
 ```
 
