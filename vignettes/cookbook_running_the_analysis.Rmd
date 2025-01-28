@@ -14,6 +14,467 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(pacta.loanbook)
+## Setup
+
+We use the `r2dii.*` suite of packages to access the most important functions you'll learn about. We also use example datasets from the package `r2dii.data`, and optional but convenient functions from the packages `dplyr` and `readxl`.
+
+```{r}
+library(r2dii.match)
+library(r2dii.analysis)
+library(r2dii.plot)
+library(r2dii.data)
+library(dplyr, warn.conflicts = FALSE)
+library(readxl)
+```
+
+## Import raw loanbook and asset-based company data (abcd)
+
+We need two datasets: a "loanbook" and an "asset-based company dataset" (abcd). These should be formatted like:  [`r2dii.data::loanbook_demo`](https://rmi-pacta.github.io/r2dii.data/reference/loanbook_demo.html) and [`r2dii.data::abcd_demo`](https://rmi-pacta.github.io/r2dii.data/reference/abcd_demo.html) (from the [r2dii.data package](https://rmi-pacta.github.io/r2dii.data)).
+
+To simulate having these data files prepared, we will use the demo data included in the `r2dii.data` package to create example XLS files using the `writexl` package.
+
+```{r}
+library(writexl)
+
+writexl::write_xlsx(
+  x = r2dii.data::loanbook_demo,
+  path = file.path(tempdir(), "loanbook.xlsx")
+)
+
+writexl::write_xlsx(
+  x = r2dii.data::abcd_demo,
+  path = file.path(tempdir(), "abcd.xlsx")
+)
+```
+
+Typically, these data files are stored in XLS files on your computer. As an example, they could be imported as in the code below, however, if you use custom data that does not strictly follow the format as defined in [the previous section], you may need to adjust the import code and/or do some data manipulation in R after importing.
+
+```{r}
+loanbook <- readxl::read_excel(path = file.path(tempdir(), "loanbook.xlsx"))
+
+loanbook
+
+abcd <- readxl::read_excel(path = file.path(tempdir(), "abcd.xlsx"))
+
+abcd
+```
+
+A note on sector classification: Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, we only allow a couple specific values for `sector_classification_system`:
+
+```{r}
+unique(r2dii.data::sector_classifications$code_system)
+```
+
+If you would like to use a different classification system, please raise an issue in [r2dii.data](https://github.com/RMI-PACTA/r2dii.data) and we can incorporate it.
+
+## Score the goodness of the match between the loanbook and abcd datasets
+
+`match_name()` scores the match between names in a loanbook dataset (lbk) and names in an asset-based company dataset (abcd). The names come from the columns `name_direct_loantaker` and `name_ultimate_parent` of the loanbook dataset, and from the column `name_company` of the a asset-based company dataset. In the loan book data set, it is possible to optionally add any number of `name_intermediate_parent_*` columns, where `*` indicates the level up the corporate tree from `direct_loantaker`. 
+
+The raw names are internally transformed applying best-practices commonly used in name matching algorithms, such as:
+
+* Remove special characters.
+* Replace language specific characters.
+* Abbreviate certain names to reduce their importance in the matching.
+* Removing corporate suffixes when necessary.
+* Spell out numbers to increase their importance.
+
+The similarity is then scored between the internally-transformed names of the loanbook against the abcd. (For more information on the scoring algorithm used, see: `stringdist::stringsim()`).
+
+```{r}
+match_name(loanbook, abcd)
+```
+
+`match_name()` defaults to scoring matches between name strings that belong to the same sector. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate.
+
+```{r}
+match_name(loanbook, abcd, by_sector = FALSE) %>%
+  nrow()
+
+# Compare
+match_name(loanbook, abcd, by_sector = TRUE) %>%
+  nrow()
+```
+
+`min_score` allows you to minimum threshold `score`.
+
+```{r}
+matched <- match_name(loanbook, abcd, min_score = 0.9)
+range(matched$score)
+```
+
+### Maybe overwrite matches
+
+If you are happy with the matching coverage achieved, proceed to the next step. Otherwise, you can manually add matches, not found automatically by `match_name()`. To do this, manually inspect the `abcd` and find a company you would like to match to your loanbook. Once a match is found, use excel to write a .csv file similar to [`r2dii.data::overwrite_demo`](https://rmi-pacta.github.io/r2dii.data/reference/overwrite_demo.html), where: 
+
+* `level` indicates the level that the manual match should be added to (e.g. `direct_loantaker`)
+* `id_2dii` is the id of the loanbook company you would like to match (from the output of `match_name()`)
+* `name` is the abcd company you would like to manually link to
+* `sector` optionally you can also overwrite the sector.
+* `source` this can be used later to determine where all manual matches came from. 
+
+```{r}
+matched <- match_name(
+  loanbook, abcd,
+  min_score = 0.9, overwrite = r2dii.data::overwrite_demo
+)
+```
+
+Notice the warning.
+
+## Validate matches
+
+For information on validating matches, please see the documentation for `prioritize()` (`?r2dii.match::prioritize`)
+
+## Prioritize validated matches by level
+
+The validated dataset may have multiple matches per loan. Consider the case where a loan is given to "Acme Power USA", a subsidiary of "Acme Power Co.". There may be both "Acme Power USA" and "Acme Power Co." in the `abcd`, and so there could be two valid matches for this loan. To get the best match only, use `prioritize()` -- it picks rows where `score` is 1 and `level` per loan is of highest `priority()`:
+
+```{r}
+# Pretend we validated the matched dataset
+valid_matches <- matched
+
+some_interesting_columns <- c("id_2dii", "level", "score")
+
+valid_matches %>%
+  prioritize() %>%
+  select(all_of(some_interesting_columns))
+```
+
+By default, highest priority refers to the most granular match (`direct_loantaker`). The default priority is set internally via `prioritize_levels()`.
+
+```{r}
+prioritize_level(matched)
+```
+
+You may use a different priority. One way to do that is to pass a function to `priority`. For example, use `rev` to reverse the default priority.
+
+```{r}
+matched %>%
+  prioritize(priority = rev) %>%
+  select(all_of(some_interesting_columns))
+```
+
+## Calculating Matching Coverage
+
+```{r include=FALSE}
+sector_in_scope <- glue::glue_collapse(
+  unique(abcd$sector), sep = ", ", last = ", and "
+)
+```
+
+`r2dii.match` allows you to match loans from your loanbook to the companies in
+an asset-based company dataset. However, matching every loan is unlikely -- some
+loan-taking companies may be missing from the asset-based company dataset, or
+they may not operate in the sectors PACTA focuses on (`r sector_in_scope`).
+Thus, you may want to measure how much of the loanbook matched some asset. This
+article shows two ways to calculate such matching coverage:
+
+(1) Calculate the portion of your loanbook covered, by dollar value (i.e. using
+one of the `loan_size_*` columns).
+
+(2) Count the number of companies matched.
+
+### Setup
+
+First we will need to load additional useful packages `purrr` and `ggplot2`:
+
+```{r}
+library(purrr)
+library(ggplot2)
+```
+
+We will use the example datasets from created above. To demonstrate our point, we
+create a `loanbook` dataset with two mismatching loans:
+
+```{r}
+loanbook <- loanbook %>% 
+  mutate(
+    name_ultimate_parent = 
+      ifelse(id_loan == "L1", "unmatched company name", name_ultimate_parent),
+    sector_classification_direct_loantaker = 
+      ifelse(id_loan == "L2", "99", sector_classification_direct_loantaker)
+  )
+```
+
+We will then run the matching algorithm on this loanbook:
+
+```{r}
+matched <- loanbook %>% 
+    match_name(abcd) %>% 
+    prioritize()
+```
+
+Note that this `matched` dataset will contain _only_ loans that were matched
+successfully. To determine coverage, we need to go back to the original
+`loanbook` dataset. We must determine the 2DII sectors of each loan, as dictated
+by the `sector_classification_direct_loantaker` column.
+
+For this, we join the loanbook with the
+[`r2dii.data::sector_classifications`](https://rmi-pacta.github.io/r2dii.data/reference/sector_classifications.html)
+dataset, which lists all sector classification code standards used by 'PACTA'.
+Unfortunately we need to work around two caveats (you may ignore them because
+they are conceptually uninteresting):
+
+* In the two datasets, the columns we want to merge by have different names. We use the argument `by` to `dplyr::left_join()` to merge the columns `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`) with the columns `code_system` and `code` (from `sector_classifications`), respectively. 
+
+* In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type. 
+
+```{r}
+merge_by <- c("code_system", "code") %>% 
+  rlang::set_names(paste0("sector_classification_", c("system", "direct_loantaker")))
+
+loanbook_with_sectors <- loanbook %>% 
+  modify_at(names(merge_by)[[2]], as.character) %>% 
+  left_join(r2dii.data::sector_classifications, by = merge_by) %>% 
+  modify_at(names(merge_by)[[2]], as.character)
+```
+
+We can join these two datasets together, to generate our `coverage` dataset:
+
+``` {r}
+coverage <- left_join(loanbook_with_sectors, matched) %>% 
+  mutate(
+    loan_size_outstanding = as.numeric(loan_size_outstanding),
+    loan_size_credit_limit = as.numeric(loan_size_credit_limit),
+    matched = case_when(
+      score == 1   ~ "Matched", 
+      is.na(score) ~ "Not Matched",
+      TRUE         ~ "Not Mached"
+    ),
+    sector = case_when(
+      borderline == TRUE & matched == "Not Matched" ~ "not in scope",
+      TRUE ~ sector
+    )
+  )
+```
+
+### 1. Calculate the portion of your loanbook covered by dollar value
+
+From the `coverage` dataset, we can calculate the total loanbook coverage by
+dollar value. Let's create two helper functions, one to calculate dollar-value
+and another one to plot coverage in general.
+
+```{r}
+dollar_value <- function(data, ...) {
+  data %>% 
+    group_by(matched, ...) %>% 
+    summarize(loan_size_outstanding = sum(loan_size_outstanding))
+}
+
+plot_coverage <- function(data, x, y) {
+  ggplot(data) + 
+    geom_col(aes({{x}}, {{y}}, fill = matched)) +
+    # Use more horizontal space -- avoids overlap on x axis text
+    theme(legend.position = "top")
+}
+```
+
+Let's first explore all loans.
+
+```{r}
+coverage %>% 
+  dollar_value() %>% 
+  plot_coverage(matched, loan_size_outstanding)
+```
+
+To calculate the total, in-scope, loanbook coverage: 
+
+```{r}
+coverage %>% 
+  filter(sector != "not in scope") %>% 
+  dollar_value() %>% 
+  plot_coverage(matched, loan_size_outstanding)
+```
+
+### Break down by sector
+
+You may break-down the plot by sector: 
+
+```{r}
+coverage %>% 
+  dollar_value(sector) %>% 
+  plot_coverage(sector, loan_size_outstanding)
+```
+
+Or even further, by matching level:
+
+```{r}
+coverage %>% 
+  mutate(matched = case_when(
+    matched == "Matched" & level == "direct_loantaker"      ~ "Matched DL",
+    matched == "Matched" & level == "intermediate_parent_1" ~ "Matched IP1",
+    matched == "Matched" & level == "ultimate_parent"       ~ "Matched UP",
+    matched == "Not Matched"                                ~ "Not Matched",
+    TRUE                                                    ~ "Catch unknown"
+  )) %>% 
+  dollar_value(sector) %>% 
+  plot_coverage(sector, loan_size_outstanding)
+```
+
+### 2. Count the number of companies
+
+You might also be interested in knowing how many companies in your loanbook were
+matched. It probably makes most sense to do this at the `direct_loantaker`
+level:
+
+``` {r}
+companies_matched <- coverage %>% 
+  group_by(sector, matched) %>% 
+  summarize(no_companies = n_distinct(name_direct_loantaker))
+
+companies_matched %>% 
+  plot_coverage(sector, no_companies)
+```
+
+## A Note on Sector Classifications and the `borderline` Flag
+
+There are a zoo of sector classification code systems out there. Some are 
+granular, some are not. Since we currently cover a particular portion of the 
+supply chain (i.e. production), it is important we try to only match 
+the ABCD with companies that are actually active in this portion of the supply 
+chain. 
+
+An issue arises when, for example, a company is classified in the "power 
+transmission" sector. In a perfect world, these companies would produce no 
+electricity, and we would not try to match them. In practice, however, we find 
+there is often overlap. For this reason, we introduced the `borderline` flag.
+
+In the example below, we see two classification codes coming from the SIC 
+classification standard:
+
+``` {r}
+r2dii.data::nace_classification %>% 
+  filter(code %in% c("D35.11", "D35.14"))
+```
+
+Notice that the code D35.11 corresponds to power generation. This is an
+identical match to PACTA's `power` sector, and thus the `borderline` flag is set
+to `FALSE`. In contrast, code D35.14 corresponds to the distribution of
+electricity. In a perfect world, we would set this code to `not in scope`,
+however there is still a chance that these companies produce electricity. For
+this reason, we have mapped it to `power` with `borderline = TRUE`.
+
+In practice, if a company has a `borderline` of `TRUE` and _is_ matched, then 
+consider the company in scope. If it has a `borderline` of `TRUE` and _isn't_
+matched, then consider it out of scope.
+
+## Calculate targets
+
+You can calculate scenario targets using two different approaches: Market Share 
+Approach, or Sectoral Decarbonization Approach.
+
+### Market Share Approach
+
+The [Market Share Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html) is used to calculate scenario targets for the 
+`production` of a technology in a sector. For example, we can use this approach 
+to set targets for the production of electric vehicles in the automotive sector. 
+This approach is recommended for sectors where a granular technology scenario 
+roadmap exists.
+
+Targets can be set at the portfolio level:
+
+```{r market-share-targets-portfolio}
+# Use these datasets to practice but eventually you should use your own data.
+scenario <- r2dii.data::scenario_demo_2020
+regions <- r2dii.data::region_isos_demo
+
+market_share_targets_portfolio <- matched %>%
+  target_market_share(
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions
+  )
+
+market_share_targets_portfolio
+```
+
+Or at the company level: 
+
+```{r market-share-targets-company}
+market_share_targets_company <- matched %>%
+  target_market_share(
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions,
+    # Output results at company-level.
+    by_company = TRUE 
+  )
+
+market_share_targets_company
+```
+
+### Sectoral Decarbonization Approach
+
+The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html) 
+is used to calculate scenario targets for the `emission_factor` of a sector. For
+example, you can use this approach to set targets for the average emission 
+factor of the cement sector. This approach is recommended for sectors lacking 
+technology roadmaps.
+
+```{r sda-targets}
+# Use this dataset to practice but eventually you should use your own data.
+co2 <- r2dii.data::co2_intensity_scenario_demo
+
+sda_targets <- matched %>%
+  target_sda(abcd = abcd, co2_intensity_scenario = co2, region_isos = regions) %>% 
+  filter(sector == "cement", year >= 2020)
+
+sda_targets
+```
+
+## Visualization
+
+There are a large variety of possible visualizations stemming from the outputs 
+of `target_market_share()` and `target_sda()`. Below, we highlight a couple of 
+common plots that can easily be created using the `r2dii.plot` package.
+
+### Market Share: Sector-level technology mix
+
+From the market share output, you can plot the portfolio's exposure to various 
+climate sensitive technologies (`projected`), and compare with the corporate 
+economy, or against various scenario targets.
+
+```{r technoloy-mix-portfolio}
+# Pick the targets you want to plot.
+data <- filter(
+  market_share_targets_portfolio,
+  scenario_source == "demo_2020",
+  sector == "power",
+  region == "global",
+  metric %in% c("projected", "corporate_economy", "target_sds")
+)
+
+# Plot the technology mix
+qplot_techmix(data)
+```
+
+### Market Share: Technology-level volume trajectory
+
+You can also plot the technology-specific volume trend. All starting values are
+normalized to 1, to emphasize that we are comparing the rates of buildout and/or
+retirement. 
+
+```{r trajetory-portfolio}
+data <- filter(
+  market_share_targets_portfolio,
+  sector == "power",
+  technology == "renewablescap",
+  region == "global",
+  scenario_source == "demo_2020"
+)
+
+qplot_trajectory(data)
+```
+
+### SDA Target
+
+From the SDA output, we can compare the projected average emission intensity 
+attributed to the portfolio, with the actual emission intensity scenario, and 
+the scenario compliant SDA pathway that the portfolio must follow to achieve 
+the scenario ambition by 2050.
+
+```{r sda plot}
+data <- filter(sda_targets, sector == "cement", region == "global")
+qplot_emission_intensity(data)
 ```
