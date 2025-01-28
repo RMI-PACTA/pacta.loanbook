@@ -197,8 +197,6 @@ Before running the PACTA for Banks analysis, you should make sure that you have 
   - [ ] RStudio (optional)
   - [ ] `r2dii.*` suite of R packages
   - [ ] [set up git and GitHub](#connecting-to-github-from-rstudio) (optional)
-- [ ] Installed the required R packages:
-  - [ ] `r2dii.*` suite of R packages dependencies
 
 **PREVIOUS CHAPTER:** [Overview](cookbook_overview.html)
 
