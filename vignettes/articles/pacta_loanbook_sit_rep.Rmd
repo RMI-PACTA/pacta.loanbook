@@ -2,7 +2,7 @@
 title: "pacta.loanbook situation report"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{pacta_loanbook_sit_rep}
+  %\VignetteIndexEntry{pacta.loanbook situation report}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
