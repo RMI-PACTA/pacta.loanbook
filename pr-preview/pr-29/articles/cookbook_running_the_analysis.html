@@ -325,6 +325,34 @@ other than <code>1</code>.</li>
 </ul>
 <p>Re-import the edited file (validated), for example using
 <a href="https://readr.tidyverse.org" class="external-link">readr</a> to read a CSV file:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span></span>
+<span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"valid_matches.csv"</span><span class="op">)</span>,</span>
+<span>    show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">valid_matches</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 310 × 22</span></span></span>
+<span><span class="co">#&gt;    id_loan id_direct_loantaker name_direct_loantaker       id_ultimate_parent</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> L1      C294                Vitale Group                UP15              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> L3      C292                Rowe-Rowe                   UP288             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> L5      C305                Ring AG &amp; Co. KGaA          UP104             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> L6      C304                Kassulke-Kassulke           UP83              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> L6      C304                Kassulke-Kassulke           UP83              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> L7      C227                Morissette Group            UP134             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> L7      C227                Morissette Group            UP134             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> L8      C303                Barone s.r.l.               UP163             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> L9      C301                Werner Werner AG &amp; Co. KGaA UP138             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> L10     C302                De rosa s.r.l.              UP32              </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 300 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: name_ultimate_parent &lt;chr&gt;, loan_size_outstanding &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   loan_size_outstanding_currency &lt;chr&gt;, loan_size_credit_limit &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   loan_size_credit_limit_currency &lt;chr&gt;, sector_classification_system &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sector_classification_direct_loantaker &lt;chr&gt;, lei_direct_loantaker &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   isin_direct_loantaker &lt;lgl&gt;, id_2dii &lt;chr&gt;, level &lt;chr&gt;, sector &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sector_abcd &lt;chr&gt;, name &lt;chr&gt;, name_abcd &lt;chr&gt;, score &lt;dbl&gt;, …</span></span></span></code></pre></div>
 <p>For more information on validating matches, please see the
 documentation for <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize()</a></code>.</p>
 </div>
@@ -338,7 +366,7 @@ Co.” in the <code>abcd</code>, and so there could be two valid matches
 for this loan. To get the best match only, use <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize()</a></code>
 – it picks rows where <code>score</code> is 1 and <code>level</code> per
 loan is of highest <code>priority</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">some_interesting_columns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id_2dii"</span>, <span class="st">"level"</span>, <span class="st">"score"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">prioritized_matches</span> <span class="op">&lt;-</span></span>
@@ -363,13 +391,13 @@ loan is of highest <code>priority</code>:</p>
 <p>By default, highest priority refers to the most granular match
 (<code>direct_loantaker</code>). The default priority is set internally
 via <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize_level.html" class="external-link">prioritize_level()</a></code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize_level.html" class="external-link">prioritize_level</a></span><span class="op">(</span><span class="va">valid_matches</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "direct_loantaker" "ultimate_parent"</span></span></code></pre></div>
 <p>You may use a different priority. One way to do that is to pass a
 function to <code>priority</code>. For example, use <code><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev()</a></code>
 to reverse the default priority.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">rev</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
@@ -417,7 +445,7 @@ however, we find there is often overlap. For this reason, we introduced
 the <code>borderline</code> flag.</p>
 <p>In the example below, we see two classification codes coming from the
 SIC classification standard:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/nace_classification.html" class="external-link">nace_classification</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D35.11"</span>, <span class="st">"D35.14"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
@@ -453,7 +481,7 @@ use this approach to set targets for the production of electric vehicles
 in the automotive sector. This approach is recommended for sectors where
 a granular technology scenario roadmap exists.</p>
 <p>Targets can be set at the portfolio level:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use these datasets to practice but eventually you should use your own data.</span></span>
 <span><span class="va">scenario</span> <span class="op">&lt;-</span> <span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/scenario_demo_2020.html" class="external-link">scenario_demo_2020</a></span></span>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/region_isos_demo.html" class="external-link">region_isos_demo</a></span></span>
@@ -484,7 +512,7 @@ a granular technology scenario roadmap exists.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: technology_share &lt;dbl&gt;, scope &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   percentage_of_initial_production_by_scope &lt;dbl&gt;</span></span></span></code></pre></div>
 <p>Or at the company level:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">market_share_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_market_share.html" class="external-link">target_market_share</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
@@ -525,7 +553,7 @@ the <code>emission_factor</code> of a sector. For example, you can use
 this approach to set targets for the average emission factor of the
 cement sector. This approach is recommended for sectors lacking
 technology roadmaps.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use this dataset to practice but eventually you should use your own data.</span></span>
 <span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/co2_intensity_scenario_demo.html" class="external-link">co2_intensity_scenario_demo</a></span></span>
 <span></span>
