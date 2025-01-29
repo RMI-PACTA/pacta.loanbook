@@ -27,7 +27,7 @@ The goal of pacta.loanbook is to provide and easy way to load and install all
 packages needed for running PACTA for Banks.
 
 It also serves as a space to provide thorough and comprehensive documentation for
-running PACTA for Banks, in the form of a cookbook (**ADD LINK**).
+running PACTA for Banks, in the form of a [cookbook](https://rmi-pacta.github.io/pacta.loanbook/articles/cookbook_overview.html).
 
 ## Installation
 
