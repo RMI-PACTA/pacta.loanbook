@@ -493,27 +493,24 @@ a granular technology scenario roadmap exists.</p>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    scenario <span class="op">=</span> <span class="va">scenario</span>,</span>
 <span>    region_isos <span class="op">=</span> <span class="va">regions</span>,</span>
-<span>    by_company <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Output results at company-level</span></span>
+<span>    by_company <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Output results at company-level</span></span>
+<span>    weight_production <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: You've supplied `by_company = TRUE` and `weight_production = TRUE`.</span></span>
-<span><span class="co">#&gt; This will result in company-level results, weighted by the portfolio</span></span>
-<span><span class="co">#&gt; loan size, which is rarely useful. Did you mean to set one of these</span></span>
-<span><span class="co">#&gt; arguments to `FALSE`?</span></span>
 <span></span>
 <span><span class="va">market_share_targets_company</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 14,505 × 11</span></span></span>
 <span><span class="co">#&gt;    sector    technology  year region scenario_source name_abcd metric production</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Bernardi… proje…      <span style="text-decoration: underline;">6</span>646.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Bernardi… targe…      <span style="text-decoration: underline;">6</span>646.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Bernardi… targe…      <span style="text-decoration: underline;">6</span>646.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Bernardi… targe…      <span style="text-decoration: underline;">6</span>646.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Christia… proje…     <span style="text-decoration: underline;">11</span>894.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Christia… targe…     <span style="text-decoration: underline;">11</span>894.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Christia… targe…     <span style="text-decoration: underline;">11</span>894.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Christia… targe…     <span style="text-decoration: underline;">11</span>894.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Donati, … proje…      <span style="text-decoration: underline;">5</span>818.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Donati, … targe…      <span style="text-decoration: underline;">5</span>818.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Bernardi… proje…    <span style="text-decoration: underline;">324</span>592.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Bernardi… targe…    <span style="text-decoration: underline;">324</span>592.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Bernardi… targe…    <span style="text-decoration: underline;">324</span>592.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Bernardi… targe…    <span style="text-decoration: underline;">324</span>592.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Christia… proje…    <span style="text-decoration: underline;">512</span>438.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Christia… targe…    <span style="text-decoration: underline;">512</span>438.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Christia… targe…    <span style="text-decoration: underline;">512</span>438.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Christia… targe…    <span style="text-decoration: underline;">512</span>438.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Donati, … proje…    <span style="text-decoration: underline;">277</span>214.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> automoti… electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Donati, … targe…    <span style="text-decoration: underline;">277</span>214.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14,495 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: technology_share &lt;dbl&gt;, scope &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   percentage_of_initial_production_by_scope &lt;dbl&gt;</span></span></span></code></pre></div>
