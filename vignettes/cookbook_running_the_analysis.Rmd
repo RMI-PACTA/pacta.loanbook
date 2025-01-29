@@ -14,6 +14,251 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(pacta.loanbook)
+## Setup
+
+We use the `r2dii.*` suite of packages to access the most important functions you'll learn about. We also use example datasets from the package `{r2dii.data}`, and optional but convenient functions from the packages `{dplyr}` and `{readxl}`.
+
+```{r}
+library(r2dii.match)
+library(r2dii.analysis)
+library(r2dii.plot)
+library(r2dii.data)
+library(dplyr, warn.conflicts = FALSE)
+library(readxl)
 ```
+
+## Import data
+
+We need two datasets to begin: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd).
+
+To simulate having these data files prepared, we will use the demo data included in the `{r2dii.data}` package to create example XLS files using the `{writexl}` package.
+
+```{r}
+library(writexl)
+
+writexl::write_xlsx(
+  x = r2dii.data::loanbook_demo,
+  path = file.path(tempdir(), "loanbook.xlsx")
+)
+
+writexl::write_xlsx(
+  x = r2dii.data::abcd_demo,
+  path = file.path(tempdir(), "abcd.xlsx")
+)
+```
+
+Typically, these data files are stored in XLS files on your computer. As an example, they could be imported as in the code below using the `{readxl}` package, however, if you use custom data that does not strictly follow the format as defined in [the previous section](cookbook_preparatory_steps.html), you may need to adjust the import code and/or do some data manipulation in R after importing.
+
+```{r}
+loanbook <- readxl::read_excel(path = file.path(tempdir(), "loanbook.xlsx"))
+
+loanbook
+
+abcd <- readxl::read_excel(path = file.path(tempdir(), "abcd.xlsx"))
+
+abcd
+```
+
+## Score the match precision between the loanbook and abcd datasets
+
+`match_name()` scores the match between names in a loanbook dataset and names in an asset-based company dataset. The names come from the columns `name_direct_loantaker` and `name_ultimate_parent` of the loanbook dataset, and from the column `name_company` of the asset-based company dataset. In the loan book data set, it is possible to optionally add any number of `name_intermediate_parent_*` columns, where `*` indicates the level up the corporate tree from `direct_loantaker`.
+
+The raw names are internally transformed applying best-practices commonly used in name matching algorithms, such as:
+
+* Remove special characters
+* Replace language specific characters
+* Abbreviate certain names to reduce their importance in the matching
+* Remove corporate suffixes when necessary
+* Spell out numbers to increase their importance
+
+The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
+
+```{r}
+match_name(loanbook, abcd)
+```
+
+`match_name()` defaults to scoring matches between name strings that belong to the same sector. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate.
+
+```{r}
+match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
+
+# Compare to
+match_name(loanbook, abcd, by_sector = TRUE) %>% nrow()
+```
+
+The `min_score` argument allows you to set a minimum threshold score.
+
+```{r}
+match_name(loanbook, abcd, min_score = 0.9) %>%
+  pull(score) %>%
+  range()
+```
+
+### Maybe overwrite matches
+
+If you are happy with the matching coverage achieved, proceed to the next step. Otherwise, you can manually add matches, not found automatically by `match_name()`. To do this, manually inspect the `abcd` and find a company you would like to match to your loanbook. Once a match is found, use excel to write a .csv file similar to [`r2dii.data::overwrite_demo`](https://rmi-pacta.github.io/r2dii.data/reference/overwrite_demo.html), where: 
+
+* `level` indicates the level that the manual match should be added to (e.g. `direct_loantaker`)
+* `id_2dii` is the id of the loanbook company you would like to match (from the output of `match_name()`)
+* `name` is the abcd company you would like to manually link to
+* `sector` optionally you can also overwrite the sector.
+* `source` this can be used later to determine where all manual matches came from. 
+
+```{r}
+matched <-
+  match_name(
+    loanbook = loanbook,
+    abcd = abcd,
+    min_score = 0.9,
+    overwrite = r2dii.data::overwrite_demo
+  )
+```
+
+Notice the warning.
+
+## Validate matches
+
+Write the output of `match_name()` into a .csv file, for example using `{readr}` to save a CSV file:
+
+```{r}
+readr::write_csv(x = matched, file = file.path(tempdir(), "matched.csv"))
+```
+
+Compare, edit, and save the data manually:
+
+* Open `matched.csv` with any spreadsheet editor (Excel, Google Sheets, etc.).
+* Compare the columns `name` and `name_abcd` manually to determine if the match is valid. Other information can be used in conjunction with just the names to ensure the two entities match (sector, internal information on the company structure, etc.)
+* Edit the data:
+  * If you are happy with the match, set the `score` value to `1`.
+  * Otherwise set or leave the `score` value to anything other than `1`.
+* Save the edited file as, for example, `valid_matches.csv`.
+
+Re-import the edited file (validated), for example using `{readr}` to read a CSV file:
+
+```{r echo=FALSE, results='hide', message=FALSE}
+# simulating that the user did the above process and saved a new valid_matches.csv
+file.copy(from = file.path(tempdir(), "matched.csv"), to = file.path(tempdir(), "valid_matches.csv"))
+```
+
+```{r}
+valid_matches <- readr::read_csv(file = file.path(tempdir(), "valid_matches.csv"), show_col_types = FALSE)
+```
+
+For more information on validating matches, please see the documentation for `prioritize()`.
+
+## Prioritize validated matches by level
+
+The validated dataset may have multiple matches per loan. Consider the case where a loan is given to "Acme Power USA", a subsidiary of "Acme Power Co.". There may be both "Acme Power USA" and "Acme Power Co." in the `abcd`, and so there could be two valid matches for this loan. To get the best match only, use `prioritize()` -- it picks rows where `score` is 1 and `level` per loan is of highest `priority`:
+
+```{r}
+some_interesting_columns <- c("id_2dii", "level", "score")
+
+prioritized_matches <-
+  valid_matches %>%
+  prioritize()
+
+prioritized_matches %>% select(all_of(some_interesting_columns))
+```
+
+By default, highest priority refers to the most granular match (`direct_loantaker`). The default priority is set internally via `prioritize_level()`.
+
+```{r}
+prioritize_level(valid_matches)
+```
+
+You may use a different priority. One way to do that is to pass a function to `priority`. For example, use `rev()` to reverse the default priority.
+
+```{r}
+valid_matches %>%
+  prioritize(priority = rev) %>%
+  select(all_of(some_interesting_columns))
+```
+
+## A Note on Sector Classifications and the `borderline` Flag
+
+A note on sector classification: Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, we only allow a couple specific values for `sector_classification_system`:
+
+> `r unique(r2dii.data::sector_classifications$code_system)`
+
+If you would like to use a different classification system, please raise an issue in [r2dii.data](https://github.com/RMI-PACTA/r2dii.data) and we can incorporate it.
+
+There are a zoo of sector classification code systems out there. Some are granular, some are not. Since we currently cover a particular portion of the supply chain (i.e. production), it is important we try to only match the ABCD with companies that are actually active in this portion of the supply chain. 
+
+An issue arises when, for example, a company is classified in the "power transmission" sector. In a perfect world, these companies would produce no electricity, and we would not try to match them. In practice, however, we find there is often overlap. For this reason, we introduced the `borderline` flag.
+
+In the example below, we see two classification codes coming from the SIC classification standard:
+
+``` {r}
+r2dii.data::nace_classification %>% 
+  filter(code %in% c("D35.11", "D35.14"))
+```
+
+Notice that the code D35.11 corresponds to power generation. This is an identical match to PACTA's `power` sector, and thus the `borderline` flag is set to `FALSE`. In contrast, code D35.14 corresponds to the distribution of electricity. In a perfect world, we would set this code to `not in scope`, however there is still a chance that these companies produce electricity. For this reason, we have mapped it to `power` with `borderline = TRUE`.
+
+In practice, if a company has a `borderline` of `TRUE` and _is_ matched, then consider the company in scope. If it has a `borderline` of `TRUE` and _isn't_ matched, then consider it out of scope.
+
+## Calculate targets
+
+You can calculate scenario targets using two different approaches: Market Share Approach, or Sectoral Decarbonization Approach.
+
+### Market Share Approach
+
+The [Market Share Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html) is used to calculate scenario targets for the `production` of a technology in a sector. For example, we can use this approach to set targets for the production of electric vehicles in the automotive sector. This approach is recommended for sectors where a granular technology scenario roadmap exists.
+
+Targets can be set at the portfolio level:
+
+```{r}
+# Use these datasets to practice but eventually you should use your own data.
+scenario <- r2dii.data::scenario_demo_2020
+regions <- r2dii.data::region_isos_demo
+
+market_share_targets_portfolio <-
+  target_market_share(
+    data = prioritized_matches,
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions
+  )
+
+market_share_targets_portfolio
+```
+
+Or at the company level: 
+
+```{r market-share-targets-company}
+market_share_targets_company <-
+  target_market_share(
+    data = prioritized_matches,
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions,
+    by_company = TRUE, # Output results at company-level
+    weight_production = FALSE
+  )
+
+market_share_targets_company
+```
+
+### Sectoral Decarbonization Approach
+
+The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html) is used to calculate scenario targets for the `emission_factor` of a sector. For example, you can use this approach to set targets for the average emission factor of the cement sector. This approach is recommended for sectors lacking technology roadmaps.
+
+```{r sda-targets}
+# Use this dataset to practice but eventually you should use your own data.
+co2 <- r2dii.data::co2_intensity_scenario_demo
+
+sda_targets <-
+  target_sda(
+    data = prioritized_matches,
+    abcd = abcd,
+    co2_intensity_scenario = co2,
+    region_isos = regions
+  ) %>% 
+  filter(sector == "cement", year >= 2020)
+
+sda_targets
+```
+
+**PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
+
+**NEXT CHAPTER:** [Interpretation of Results](cookbook_interpretation.html)
