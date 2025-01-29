@@ -139,7 +139,7 @@ Re-import the edited file (validated), for example using `{readr}` to read a CSV
 file.copy(from = file.path(tempdir(), "matched.csv"), to = file.path(tempdir(), "valid_matches.csv"))
 ```
 
-```{r echo=FALSE, results='hide', message=FALSE}
+```{r}
 valid_matches <-
   readr::read_csv(
     file = file.path(tempdir(), "valid_matches.csv"),
