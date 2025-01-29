@@ -2,7 +2,7 @@
 title: "Preparatory Steps"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{cookbook_preparatory_steps}
+  %\VignetteIndexEntry{Preparatory Steps}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

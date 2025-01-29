@@ -2,7 +2,7 @@
 title: "Interpretation of Results"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{cookbook_interpretation}
+  %\VignetteIndexEntry{Interpretation of Results}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
