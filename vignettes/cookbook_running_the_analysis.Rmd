@@ -232,7 +232,8 @@ market_share_targets_company <-
     abcd = abcd,
     scenario = scenario,
     region_isos = regions,
-    by_company = TRUE # Output results at company-level
+    by_company = TRUE, # Output results at company-level
+    weight_production = FALSE
   )
 
 market_share_targets_company
