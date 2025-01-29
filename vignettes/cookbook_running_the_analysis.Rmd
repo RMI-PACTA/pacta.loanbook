@@ -59,7 +59,7 @@ abcd <- readxl::read_excel(path = file.path(tempdir(), "abcd.xlsx"))
 abcd
 ```
 
-## Score the goodness of the match between the loanbook and abcd datasets
+## Score the match precision between the loanbook and abcd datasets
 
 `match_name()` scores the match between names in a loanbook dataset and names in an asset-based company dataset. The names come from the columns `name_direct_loantaker` and `name_ultimate_parent` of the loanbook dataset, and from the column `name_company` of the asset-based company dataset. In the loan book data set, it is possible to optionally add any number of `name_intermediate_parent_*` columns, where `*` indicates the level up the corporate tree from `direct_loantaker`.
 
