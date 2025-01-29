@@ -136,6 +136,7 @@ Compare, edit, and save the data manually:
 Re-import the edited file (validated), for example using `{readr}` to read a CSV file:
 
 ```{r echo=FALSE, results='hide', message=FALSE}
+# simulating that the user did the above process and saved a new valid_matches.csv
 file.copy(from = file.path(tempdir(), "matched.csv"), to = file.path(tempdir(), "valid_matches.csv"))
 ```
 
@@ -145,8 +146,6 @@ valid_matches <-
     file = file.path(tempdir(), "valid_matches.csv"),
     show_col_types = FALSE
   )
-
-valid_matches
 ```
 
 For more information on validating matches, please see the documentation for `prioritize()`.
