@@ -141,7 +141,7 @@ file.copy(from = file.path(tempdir(), "matched.csv"), to = file.path(tempdir(), 
 ```
 
 ```{r}
-valid_matches <- readr::read_csv(file = file.path(tempdir(), "valid_matches.csv"))
+valid_matches <- readr::read_csv(file = file.path(tempdir(), "valid_matches.csv"), show_col_types = FALSE)
 ```
 
 For more information on validating matches, please see the documentation for `prioritize()`.
