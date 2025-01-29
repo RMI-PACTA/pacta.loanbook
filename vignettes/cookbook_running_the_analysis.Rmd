@@ -2,7 +2,7 @@
 title: "Running the Analysis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{cookbook_running_the_analysis}
+  %\VignetteIndexEntry{Running the Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
