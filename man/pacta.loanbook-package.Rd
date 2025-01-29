@@ -14,6 +14,7 @@ PACTA for Banks is a tool that allows banks to calculate the climate alignment o
 Useful links:
 \itemize{
   \item \url{https://rmi-pacta.github.io/pacta.loanbook/}
+  \item \url{https://github.com/rmi-pacta/pacta.loanbook}
 }
 
 }
