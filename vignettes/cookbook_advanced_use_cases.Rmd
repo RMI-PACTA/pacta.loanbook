@@ -17,3 +17,5 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(pacta.loanbook)
 ```
+
+**PREVIOUS CHAPTER:** [Interpretation of Results](cookbook_interpretation.html)
