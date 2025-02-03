@@ -15,7 +15,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, echo = FALSE}
-plot_table <- function(table) {
+plot_table <- function(dataset_name) {
+  library(r2dii.data)
+  table <- r2dii.data::data_dictionary
+  table <- dplyr::filter(table, .data[["dataset"]] == dataset_name)
+  table <- dplyr::arrange(table, match(column, names(get(dataset_name))))
   table_plot <- gt::gt(dplyr::select(table, -"dataset"))
   
   table_plot <- 
@@ -49,9 +53,12 @@ plot_table <- function(table) {
 
 An asset-based company dataset (ABCD) about physical assets (e.g. wind turbine power plant capacities), aggregated to company-level. These data are used to assess the climate alignment of financial portfolios. It is usually based on data from market-intelligence databases.
 
+```{r, echo = FALSE}
+plot_table("abcd_demo")
+```
+
 The `{r2dii.data}` package provides an example loanbook dataset `r2dii.data::abcd_demo`.
 
-```{r, echo = FALSE}
-table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "abcd_demo")
-plot_table(table)
+```{r, R.options = list(width = 400)}
+r2dii.data::abcd_demo
 ```

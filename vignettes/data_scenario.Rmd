@@ -15,7 +15,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, echo = FALSE}
-plot_table <- function(table) {
+plot_table <- function(dataset_name) {
+  library(r2dii.data)
+  table <- r2dii.data::data_dictionary
+  table <- dplyr::filter(table, .data[["dataset"]] == dataset_name)
+  table <- dplyr::arrange(table, match(column, names(get(dataset_name))))
   table_plot <- gt::gt(dplyr::select(table, -"dataset"))
   
   table_plot <- 
@@ -49,20 +53,26 @@ plot_table <- function(table) {
 
 Climate scenario dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment), e.g. from the International Energy Agency (IEA), including the change through time in production across industrial sectors.
 
+```{r, echo = FALSE}
+plot_table("scenario_demo_2020")
+```
+
 The `{r2dii.data}` package provides an example climate scenario dataset `r2dii.data::scenario_demo_2020`.
 
-```{r, echo = FALSE}
-table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "scenario_demo_2020")
-plot_table(table)
+```{r, R.options = list(width = 400)}
+r2dii.data::scenario_demo_2020
 ```
 
 ## CO^2^ intensity climate scenario dataset
 
 CO^2^ intensity climate scenario dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment), e.g. from the International Energy Agency (IEA), including the change through time in production across industrial sectors.
 
+```{r, echo = FALSE}
+plot_table("co2_intensity_scenario_demo")
+```
+
 The `{r2dii.data}` package provides an example CO^2^ intensity climate scenario dataset `r2dii.data::co2_intensity_scenario_demo`.
 
-```{r, echo = FALSE}
-table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "co2_intensity_scenario_demo")
-plot_table(table)
+```{r, R.options = list(width = 400)}
+r2dii.data::co2_intensity_scenario_demo
 ```
