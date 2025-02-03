@@ -14,6 +14,99 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(pacta.loanbook)
+```{r setup, echo = FALSE}
+plot_table <- function(table) {
+  table_plot <- gt::gt(dplyr::select(table, -"dataset"))
+  
+  table_plot <- 
+    gt::cols_width(
+      .data = table_plot,
+      column ~ gt::px(150),
+      typeof ~ gt::px(90)
+    )
+  
+  table_plot <-
+    gt::tab_style(
+      data = table_plot,
+      style = gt::cell_text(size = "smaller"),
+      locations = gt::cells_body(columns = 1:2)
+    )
+  
+  table_plot <-
+    gt::tab_options(
+      data = table_plot,
+      ihtml.active = TRUE,
+      ihtml.use_pagination = FALSE,
+      ihtml.use_sorting = TRUE,
+      ihtml.use_highlight = TRUE
+    )
+  
+  gt::fmt_passthrough(table_plot)
+}
+```
+
+### GICS classification dataset
+
+This dataset serves as a translation key between the GICS sector-classification system and sectors relevant to the 'PACTA' software.
+
+The `{r2dii.data}` package provides a GICS classification dataset `r2dii.data::gics_classification`.
+
+```{r, echo = FALSE}
+table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "gics_classification")
+plot_table(table)
+```
+
+### ISIC Rev 5 classification dataset
+
+This dataset serves as a translation key between the ISIC Rev 5 sector-classification system and sectors relevant to the 'PACTA' software.
+
+The `{r2dii.data}` package provides a ISIC Rev 5 classification dataset `r2dii.data::isic_classification`.
+
+```{r, echo = FALSE}
+table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "isic_classification")
+plot_table(table)
+```
+
+### NACE version 2.1 classification dataset
+
+This dataset serves as a translation key between the NACE version 2.1 sector-classification system and sectors relevant to the 'PACTA' software.
+
+The `{r2dii.data}` package provides a NACE version 2.1 classification dataset `r2dii.data::nace_classification`.
+
+```{r, echo = FALSE}
+table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "nace_classification")
+plot_table(table)
+```
+
+### PSIC classification dataset
+
+This dataset serves as a translation key between the PSIC sector-classification system and sectors relevant to the 'PACTA' software.
+
+The `{r2dii.data}` package provides a PSIC classification dataset `r2dii.data::psic_classification`.
+
+```{r, echo = FALSE}
+table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "psic_classification")
+plot_table(table)
+```
+
+### 2DII classification dataset
+
+This dataset serves as a translation key between the 2DII sector-classification system and sectors relevant to the 'PACTA' software.
+
+The `{r2dii.data}` package provides a 2DII classification dataset `r2dii.data::sector_classifications`.
+
+```{r, echo = FALSE}
+table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "sector_classifications")
+plot_table(table)
+```
+
+### SIC classification dataset
+
+This dataset serves as a translation key between the SIC sector-classification system and sectors relevant to the 'PACTA' software.
+
+The `{r2dii.data}` package provides a SIC classification dataset `r2dii.data::sic_classificatio`.
+
+```{r, echo = FALSE}
+table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "sic_classification")
+plot_table(table)
 ```

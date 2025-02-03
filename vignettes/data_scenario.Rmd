@@ -14,6 +14,55 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(pacta.loanbook)
+```{r setup, echo = FALSE}
+plot_table <- function(table) {
+  table_plot <- gt::gt(dplyr::select(table, -"dataset"))
+  
+  table_plot <- 
+    gt::cols_width(
+      .data = table_plot,
+      column ~ gt::px(150),
+      typeof ~ gt::px(90)
+    )
+  
+  table_plot <-
+    gt::tab_style(
+      data = table_plot,
+      style = gt::cell_text(size = "smaller"),
+      locations = gt::cells_body(columns = 1:2)
+    )
+  
+  table_plot <-
+    gt::tab_options(
+      data = table_plot,
+      ihtml.active = TRUE,
+      ihtml.use_pagination = FALSE,
+      ihtml.use_sorting = TRUE,
+      ihtml.use_highlight = TRUE
+    )
+  
+  gt::fmt_passthrough(table_plot)
+}
+```
+
+## Climate scenario dataset
+
+Climate scenario dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment), e.g. from the International Energy Agency (IEA), including the change through time in production across industrial sectors.
+
+The `{r2dii.data}` package provides an example CO^2^ intensity climate scenario dataset `r2dii.data::scenario_demo_2020`.
+
+```{r, echo = FALSE}
+table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "scenario_demo_2020")
+plot_table(table)
+```
+
+## CO^2^ intensity climate scenario dataset
+
+CO^2^ intensity climate scenario dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment), e.g. from the International Energy Agency (IEA), including the change through time in production across industrial sectors.
+
+The `{r2dii.data}` package provides an example CO^2^ intensity climate scenario dataset `r2dii.data::co2_intensity_scenario_demo`.
+
+```{r, echo = FALSE}
+table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "co2_intensity_scenario_demo")
+plot_table(table)
 ```

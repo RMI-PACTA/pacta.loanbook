@@ -38,6 +38,7 @@ Suggests:
     covr,
     ggplot2,
     glue,
+    gt,
     knitr,
     mockr,
     readr,
