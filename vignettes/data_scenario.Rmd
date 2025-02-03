@@ -49,7 +49,7 @@ plot_table <- function(table) {
 
 Climate scenario dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment), e.g. from the International Energy Agency (IEA), including the change through time in production across industrial sectors.
 
-The `{r2dii.data}` package provides an example CO^2^ intensity climate scenario dataset `r2dii.data::scenario_demo_2020`.
+The `{r2dii.data}` package provides an example climate scenario dataset `r2dii.data::scenario_demo_2020`.
 
 ```{r, echo = FALSE}
 table <- dplyr::filter(r2dii.data::data_dictionary, .data[["dataset"]] == "scenario_demo_2020")
