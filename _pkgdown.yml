@@ -7,7 +7,7 @@ development:
 
 navbar:
   structure:
-    left:  [intro, reference, cookbook, articles, news]
+    left:  [intro, reference, cookbook, data, articles, news]
     right: [search, packages, sit.rep, github]
   components:
     cookbook:
@@ -23,6 +23,19 @@ navbar:
         href: articles/cookbook_interpretation.html
       - text: Advanced Use Cases
         href: articles/cookbook_advanced_use_cases.html
+    data:
+      text: Data Dictionaries
+      menu:
+      - text: Loanbook
+        href: articles/data_loanbook.html
+      - text: ABCD
+        href: articles/data_abcd.html
+      - text: Scenario
+        href: articles/data_scenario.html
+      - text: Classification
+        href: articles/data_classification.html
+      - text: Outputs
+        href: articles/data_outputs.html
     articles:
       text: Articles
       menu:
