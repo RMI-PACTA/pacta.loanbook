@@ -51,7 +51,7 @@ plot_table <- function(dataset_name) {
 
 ## ABCD dataset
 
-An asset-based company dataset (ABCD) about physical assets (e.g. wind turbine power plant capacities), aggregated to company-level. These data are used to assess the climate alignment of financial portfolios. It is usually based on data from market-intelligence databases.
+An asset-based company dataset (ABCD) about physical assets (e.g. a wind turbine power plant, or a steel mill), aggregated to company-level. These data are used to assess the climate alignment of financial portfolios with climate transition pathways. It is usually based on data from market-intelligence databases.
 
 ```{r, echo = FALSE}
 plot_table("abcd_demo")
