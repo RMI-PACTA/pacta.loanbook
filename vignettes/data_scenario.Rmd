@@ -65,7 +65,7 @@ r2dii.data::scenario_demo_2020
 
 ## Climate transition scenario dataset (CO^2^ intensity pathways for sectoral decarbonization approach)
 
-CO^2^ intensity climate scenario dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment), e.g. from the International Energy Agency (IEA), including the change through time in production across industrial sectors.
+CO^2^ intensity climate transition scenario dataset, prepared for the PACTA for Banks software, e.g. based on scenarios from the International Energy Agency (IEA). Includes the change through time in production-based emission intensity across industrial sectors.
 
 ```{r, echo = FALSE}
 plot_table("co2_intensity_scenario_demo")
