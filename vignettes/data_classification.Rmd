@@ -115,7 +115,7 @@ This dataset contains all currently supported translation keys between the secto
 plot_table("sector_classifications")
 ```
 
-The `{r2dii.data}` package provides a 2DII classification dataset `r2dii.data::sector_classifications`.
+The `{r2dii.data}` package provides a sector classification dataset `r2dii.data::sector_classifications` that contains a sector mapping for all supported sector classification systems (`{r unique(r2dii.data::sector_classifications$code_system)}`).
 
 ```{r, R.options = list(width = 400)}
 r2dii.data::sector_classifications
