@@ -63,7 +63,7 @@ The `{r2dii.data}` package provides an example climate transition scenario datas
 r2dii.data::scenario_demo_2020
 ```
 
-## CO^2^ intensity climate scenario dataset
+## Climate transition scenario dataset (CO^2^ intensity pathways for sectoral decarbonization approach)
 
 CO^2^ intensity climate scenario dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment), e.g. from the International Energy Agency (IEA), including the change through time in production across industrial sectors.
 
