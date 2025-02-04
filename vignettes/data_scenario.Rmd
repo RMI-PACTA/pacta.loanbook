@@ -51,7 +51,7 @@ plot_table <- function(dataset_name) {
 
 ## Climate scenario dataset
 
-Climate scenario dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment), e.g. from the International Energy Agency (IEA), including the change through time in production across industrial sectors.
+Climate transition scenario dataset, prepared for the PACTA for Banks software, e.g. based on scenarios from the International Energy Agency (IEA). Includes the relative change through time in production across industrial sectors and technologies.
 
 ```{r, echo = FALSE}
 plot_table("scenario_demo_2020")
