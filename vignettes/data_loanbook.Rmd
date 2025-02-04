@@ -51,7 +51,7 @@ plot_table <- function(dataset_name) {
 
 ## Loanbook dataset
 
-Loanbook dataset, prepared for the software PACTA (Paris Agreement Capital Transition Assessment).
+Loanbook dataset, prepared by the user as the raw input for the PACTA for Banks software.
 
 ```{r, echo = FALSE}
 plot_table("loanbook_demo")
