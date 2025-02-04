@@ -123,7 +123,7 @@ r2dii.data::sector_classifications
 
 ## SIC classification dataset
 
-This dataset serves as a translation key between the SIC sector-classification system and sectors relevant to the 'PACTA' software.
+This dataset serves as a translation key between the SIC sector-classification system and sector scopes used in the 'PACTA' software.
 
 ```{r, echo = FALSE}
 plot_table("sic_classification")
