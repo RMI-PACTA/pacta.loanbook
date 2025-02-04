@@ -107,7 +107,7 @@ The `{r2dii.data}` package provides a PSIC classification dataset `r2dii.data::p
 r2dii.data::psic_classification
 ```
 
-## 2DII classification dataset
+## sector classifications dataset
 
 This dataset serves as a translation key between the 2DII sector-classification system and sectors relevant to the 'PACTA' software.
 
