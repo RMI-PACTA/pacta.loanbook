@@ -57,7 +57,7 @@ Climate transition scenario dataset, prepared for the PACTA for Banks software, 
 plot_table("scenario_demo_2020")
 ```
 
-The `{r2dii.data}` package provides an example climate scenario dataset `r2dii.data::scenario_demo_2020`.
+The `{r2dii.data}` package provides an example climate transition scenario dataset `r2dii.data::scenario_demo_2020`.
 
 ```{r, R.options = list(width = 400)}
 r2dii.data::scenario_demo_2020
