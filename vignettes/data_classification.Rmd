@@ -49,6 +49,20 @@ plot_table <- function(dataset_name) {
 }
 ```
 
+## sector classifications dataset
+
+This dataset contains all currently supported translation keys between the sector classification systems and sector scopes used in the 'PACTA' software.
+
+```{r, echo = FALSE}
+plot_table("sector_classifications")
+```
+
+The `{r2dii.data}` package provides a sector classification dataset `r2dii.data::sector_classifications` that contains a sector mapping for all supported sector classification systems (`{r unique(r2dii.data::sector_classifications$code_system)}`).
+
+```{r, R.options = list(width = 400)}
+r2dii.data::sector_classifications
+```
+
 ## GICS classification dataset
 
 This dataset serves as a translation key between the GICS sector-classification system and sector scopes used in the 'PACTA' software.
@@ -105,20 +119,6 @@ The `{r2dii.data}` package provides a PSIC classification dataset `r2dii.data::p
 
 ```{r, R.options = list(width = 400)}
 r2dii.data::psic_classification
-```
-
-## sector classifications dataset
-
-This dataset contains all currently supported translation keys between the sector classification systems and sector scopes used in the 'PACTA' software.
-
-```{r, echo = FALSE}
-plot_table("sector_classifications")
-```
-
-The `{r2dii.data}` package provides a sector classification dataset `r2dii.data::sector_classifications` that contains a sector mapping for all supported sector classification systems (`{r unique(r2dii.data::sector_classifications$code_system)}`).
-
-```{r, R.options = list(width = 400)}
-r2dii.data::sector_classifications
 ```
 
 ## SIC classification dataset
