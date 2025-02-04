@@ -71,7 +71,7 @@ CO^2^ intensity climate transition scenario dataset, prepared for the PACTA for 
 plot_table("co2_intensity_scenario_demo")
 ```
 
-The `{r2dii.data}` package provides an example CO^2^ intensity climate scenario dataset `r2dii.data::co2_intensity_scenario_demo`.
+The `{r2dii.data}` package provides an example CO^2^ intensity climate transition scenario dataset `r2dii.data::co2_intensity_scenario_demo`.
 
 ```{r, R.options = list(width = 400)}
 r2dii.data::co2_intensity_scenario_demo
