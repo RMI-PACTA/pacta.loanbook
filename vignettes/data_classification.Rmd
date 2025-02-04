@@ -81,7 +81,7 @@ r2dii.data::isic_classification
 
 ## NACE version 2.1 classification dataset
 
-This dataset serves as a translation key between the NACE version 2.1 sector-classification system and sectors relevant to the 'PACTA' software.
+This dataset serves as a translation key between the NACE version 2.1 sector-classification system and sector scopes used in the 'PACTA' software.
 
 ```{r, echo = FALSE}
 plot_table("nace_classification")
