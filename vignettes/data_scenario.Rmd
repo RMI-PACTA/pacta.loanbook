@@ -49,7 +49,7 @@ plot_table <- function(dataset_name) {
 }
 ```
 
-## Climate scenario dataset
+## Climate transition scenario dataset (technology pathways for target market share calculation)
 
 Climate transition scenario dataset, prepared for the PACTA for Banks software, e.g. based on scenarios from the International Energy Agency (IEA). Includes the relative change through time in production across industrial sectors and technologies.
 
