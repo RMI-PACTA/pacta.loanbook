@@ -14,6 +14,123 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(pacta.loanbook)
+```{r setup, echo = FALSE}
+plot_table <- function(dataset_name) {
+  library(r2dii.data)
+  table <- r2dii.data::data_dictionary
+  table <- dplyr::filter(table, .data[["dataset"]] == dataset_name)
+  table <- dplyr::arrange(table, match(column, names(get(dataset_name))))
+  table_plot <- gt::gt(dplyr::select(table, -"dataset"))
+  
+  table_plot <- 
+    gt::cols_width(
+      .data = table_plot,
+      column ~ gt::px(150),
+      typeof ~ gt::px(90)
+    )
+  
+  table_plot <-
+    gt::tab_style(
+      data = table_plot,
+      style = gt::cell_text(size = "smaller"),
+      locations = gt::cells_body(columns = 1:2)
+    )
+  
+  table_plot <-
+    gt::tab_options(
+      data = table_plot,
+      ihtml.active = TRUE,
+      ihtml.use_pagination = FALSE,
+      ihtml.use_sorting = TRUE,
+      ihtml.use_highlight = TRUE
+    )
+  
+  gt::fmt_passthrough(table_plot)
+}
+```
+
+## sector classifications dataset
+
+This dataset contains all currently supported translation keys between the sector classification systems and sector scopes used in the 'PACTA' software.
+
+```{r, echo = FALSE}
+plot_table("sector_classifications")
+```
+
+The `{r2dii.data}` package provides a sector classification dataset `r2dii.data::sector_classifications` that contains a sector mapping for all supported sector classification systems (currently: `r paste0(unique(r2dii.data::sector_classifications$code_system), collapse = ", ")`).
+
+```{r, R.options = list(width = 400)}
+r2dii.data::sector_classifications
+```
+
+## GICS classification dataset
+
+This dataset serves as a translation key between the GICS sector-classification system and sector scopes used in the 'PACTA' software.
+
+```{r, echo = FALSE}
+plot_table("gics_classification")
+```
+
+The `{r2dii.data}` package provides a GICS classification dataset `r2dii.data::gics_classification`.
+
+```{r, R.options = list(width = 400)}
+r2dii.data::gics_classification
+```
+
+## ISIC Rev 5 classification dataset
+
+This dataset serves as a translation key between the ISIC Rev 5 sector-classification system and sector scopes used in the 'PACTA' software.
+
+The `{r2dii.data}` package provides a ISIC Rev 5 classification dataset `r2dii.data::isic_classification`.
+
+```{r, echo = FALSE}
+plot_table("isic_classification")
+```
+
+The `{r2dii.data}` package provides a ISIC Rev 5 classification dataset `r2dii.data::isic_classification`.
+
+```{r, R.options = list(width = 400)}
+r2dii.data::isic_classification
+```
+
+## NACE version 2.1 classification dataset
+
+This dataset serves as a translation key between the NACE version 2.1 sector-classification system and sector scopes used in the 'PACTA' software.
+
+```{r, echo = FALSE}
+plot_table("nace_classification")
+```
+
+The `{r2dii.data}` package provides a NACE version 2.1 classification dataset `r2dii.data::nace_classification`.
+
+```{r, R.options = list(width = 400)}
+r2dii.data::nace_classification
+```
+
+## PSIC classification dataset
+
+This dataset serves as a translation key between the PSIC sector-classification system and sector scopes used in the 'PACTA' software.
+
+```{r, echo = FALSE}
+plot_table("psic_classification")
+```
+
+The `{r2dii.data}` package provides a PSIC classification dataset `r2dii.data::psic_classification`.
+
+```{r, R.options = list(width = 400)}
+r2dii.data::psic_classification
+```
+
+## SIC classification dataset
+
+This dataset serves as a translation key between the SIC sector-classification system and sector scopes used in the 'PACTA' software.
+
+```{r, echo = FALSE}
+plot_table("sic_classification")
+```
+
+The `{r2dii.data}` package provides a SIC classification dataset `r2dii.data::sic_classification`.
+
+```{r, R.options = list(width = 400)}
+r2dii.data::sic_classification
 ```
