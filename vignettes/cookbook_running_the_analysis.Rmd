@@ -73,8 +73,10 @@ The raw names are internally transformed applying best-practices commonly used i
 
 The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
 
-```{r}
+```{r, R.options = list(width = 400)}
 matched <- match_name(loanbook, abcd)
+
+matched
 ```
 
 `match_name()` defaults to scoring matches between name strings that belong to the same sector. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate.
