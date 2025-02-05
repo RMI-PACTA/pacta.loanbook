@@ -219,7 +219,9 @@ names of the loanbook against the names in the abcd. For more
 information on the scoring algorithm used, see
 <code><a href="https://rdrr.io/pkg/stringdist/man/stringsim.html" class="external-link">stringdist::stringsim()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">matched</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 326 × 22</span></span></span>
 <span><span class="co">#&gt;    id_loan id_direct_loantaker name_direct_loantaker       id_ultimate_parent name_ultimate_parent         loan_size_outstanding loan_size_outstanding_currency loan_size_credit_limit loan_size_credit_limit_currency sector_classification_system sector_classification_direct_loantaker lei_direct_loantaker isin_direct_loantaker id_2dii level   sector sector_abcd name  name_abcd score source borderline</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     </span></span>
@@ -253,54 +255,13 @@ threshold score.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9007692 1.0000000</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="maybe-overwrite-matches">Maybe overwrite matches<a class="anchor" aria-label="anchor" href="#maybe-overwrite-matches"></a>
-</h3>
-<p>If you are happy with the matching coverage achieved, proceed to the
-next step. Otherwise, you can manually add matches, not found
-automatically by <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name()</a></code>. To do this, manually inspect
-the <code>abcd</code> and find a company you would like to match to your
-loanbook. Once a match is found, use excel to write a .csv file similar
-to <a href="https://rmi-pacta.github.io/r2dii.data/reference/overwrite_demo.html" class="external-link"><code>r2dii.data::overwrite_demo</code></a>,
-where:</p>
-<ul>
-<li>
-<code>level</code> indicates the level that the manual match should
-be added to (e.g. <code>direct_loantaker</code>)</li>
-<li>
-<code>id_2dii</code> is the id of the loanbook company you would
-like to match (from the output of <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name()</a></code>)</li>
-<li>
-<code>name</code> is the abcd company you would like to manually
-link to</li>
-<li>
-<code>sector</code> optionally you can also overwrite the
-sector.</li>
-<li>
-<code>source</code> this can be used later to determine where all
-manual matches came from.</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">matched</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name</a></span><span class="op">(</span></span>
-<span>    loanbook <span class="op">=</span> <span class="va">loanbook</span>,</span>
-<span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
-<span>    min_score <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>    overwrite <span class="op">=</span> <span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/overwrite_demo.html" class="external-link">overwrite_demo</a></span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: You should only overwrite a sector at the level of the 'direct</span></span>
-<span><span class="co">#&gt; loantaker' (DL). If you overwrite a sector at the level of the 'ultimate</span></span>
-<span><span class="co">#&gt; parent' (UP) you consequently overwrite all children of that sector,</span></span>
-<span><span class="co">#&gt; which most likely is a mistake.</span></span></code></pre></div>
-<p>Notice the warning.</p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="validate-matches">Validate matches<a class="anchor" aria-label="anchor" href="#validate-matches"></a>
 </h2>
 <p>Write the output of <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name()</a></code> into a .csv file, for
 example using <a href="https://readr.tidyverse.org" class="external-link">readr</a> to save a CSV file:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">matched</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"matched.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Compare, edit, and save the data manually:</p>
 <ul>
@@ -323,7 +284,7 @@ other than <code>1</code>.</li>
 </ul>
 <p>Re-import the edited file (validated), for example using
 <a href="https://readr.tidyverse.org" class="external-link">readr</a> to read a CSV file:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"valid_matches.csv"</span><span class="op">)</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>For more information on validating matches, please see the
 documentation for <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize()</a></code>.</p>
@@ -338,7 +299,7 @@ Co.” in the <code>abcd</code>, and so there could be two valid matches
 for this loan. To get the best match only, use <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize()</a></code>
 – it picks rows where <code>score</code> is 1 and <code>level</code> per
 loan is of highest <code>priority</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">some_interesting_columns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id_2dii"</span>, <span class="st">"level"</span>, <span class="st">"score"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">prioritized_matches</span> <span class="op">&lt;-</span></span>
@@ -346,7 +307,7 @@ loan is of highest <code>priority</code>:</p>
 <span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">prioritized_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 175 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 177 × 3</span></span></span>
 <span><span class="co">#&gt;    id_2dii level            score</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> DL129   direct_loantaker     1</span></span>
@@ -359,21 +320,21 @@ loan is of highest <code>priority</code>:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> DL3     direct_loantaker     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> DL65    direct_loantaker     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> DL79    direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 165 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 167 more rows</span></span></span></code></pre></div>
 <p>By default, highest priority refers to the most granular match
 (<code>direct_loantaker</code>). The default priority is set internally
 via <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize_level.html" class="external-link">prioritize_level()</a></code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize_level.html" class="external-link">prioritize_level</a></span><span class="op">(</span><span class="va">valid_matches</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "direct_loantaker" "ultimate_parent"</span></span></code></pre></div>
 <p>You may use a different priority. One way to do that is to pass a
 function to <code>priority</code>. For example, use <code><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev()</a></code>
 to reverse the default priority.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">rev</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 175 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 177 × 3</span></span></span>
 <span><span class="co">#&gt;    id_2dii level           score</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> UP190   ultimate_parent     1</span></span>
@@ -386,7 +347,7 @@ to reverse the default priority.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> UP20    ultimate_parent     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> UP134   ultimate_parent     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> UP127   ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 165 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 167 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="a-note-on-sector-classifications-and-the-borderline-flag">A Note on Sector Classifications and the <code>borderline</code>
@@ -417,7 +378,7 @@ however, we find there is often overlap. For this reason, we introduced
 the <code>borderline</code> flag.</p>
 <p>In the example below, we see two classification codes coming from the
 SIC classification standard:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/nace_classification.html" class="external-link">nace_classification</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D35.11"</span>, <span class="st">"D35.14"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
@@ -453,7 +414,7 @@ use this approach to set targets for the production of electric vehicles
 in the automotive sector. This approach is recommended for sectors where
 a granular technology scenario roadmap exists.</p>
 <p>Targets can be set at the portfolio level:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use these datasets to practice but eventually you should use your own data.</span></span>
 <span><span class="va">scenario</span> <span class="op">&lt;-</span> <span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/scenario_demo_2020.html" class="external-link">scenario_demo_2020</a></span></span>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/region_isos_demo.html" class="external-link">region_isos_demo</a></span></span>
@@ -470,19 +431,19 @@ a granular technology scenario roadmap exists.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,076 × 10</span></span></span>
 <span><span class="co">#&gt;    sector     technology  year region scenario_source metric     production technology_share scope  percentage_of_initial_production_by_scope</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       projected     <span style="text-decoration: underline;">139</span>052.            0.168 sector                                  0       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       target_cps    <span style="text-decoration: underline;">139</span>052.            0.168 sector                                  0       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       target_sds    <span style="text-decoration: underline;">139</span>052.            0.168 sector                                  0       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       target_sps    <span style="text-decoration: underline;">139</span>052.            0.168 sector                                  0       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> automotive electric    <span style="text-decoration: underline;">2</span>021 global demo_2020       projected     <span style="text-decoration: underline;">140</span>395.            0.168 sector                                  0.000<span style="text-decoration: underline;">557</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> automotive electric    <span style="text-decoration: underline;">2</span>021 global demo_2020       target_cps    <span style="text-decoration: underline;">140</span>195.            0.168 sector                                  0.000<span style="text-decoration: underline;">474</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> automotive electric    <span style="text-decoration: underline;">2</span>021 global demo_2020       target_sds    <span style="text-decoration: underline;">145</span>990.            0.170 sector                                  0.002<span style="text-decoration: underline;">88</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> automotive electric    <span style="text-decoration: underline;">2</span>021 global demo_2020       target_sps    <span style="text-decoration: underline;">140</span>505.            0.168 sector                                  0.000<span style="text-decoration: underline;">602</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       projected     <span style="text-decoration: underline;">141</span>737.            0.168 sector                                  0.001<span style="text-decoration: underline;">11</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       target_cps    <span style="text-decoration: underline;">141</span>314.            0.168 sector                                  0.000<span style="text-decoration: underline;">938</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       projected     <span style="text-decoration: underline;">145</span>649.            0.165 sector                                  0       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       target_cps    <span style="text-decoration: underline;">145</span>649.            0.165 sector                                  0       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       target_sds    <span style="text-decoration: underline;">145</span>649.            0.165 sector                                  0       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       target_sps    <span style="text-decoration: underline;">145</span>649.            0.165 sector                                  0       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> automotive electric    <span style="text-decoration: underline;">2</span>021 global demo_2020       projected     <span style="text-decoration: underline;">147</span>480.            0.165 sector                                  0.000<span style="text-decoration: underline;">739</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> automotive electric    <span style="text-decoration: underline;">2</span>021 global demo_2020       target_cps    <span style="text-decoration: underline;">146</span>915.            0.165 sector                                  0.000<span style="text-decoration: underline;">511</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> automotive electric    <span style="text-decoration: underline;">2</span>021 global demo_2020       target_sds    <span style="text-decoration: underline;">153</span>332.            0.167 sector                                  0.003<span style="text-decoration: underline;">10</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> automotive electric    <span style="text-decoration: underline;">2</span>021 global demo_2020       target_sps    <span style="text-decoration: underline;">147</span>258.            0.165 sector                                  0.000<span style="text-decoration: underline;">649</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       projected     <span style="text-decoration: underline;">149</span>310.            0.165 sector                                  0.001<span style="text-decoration: underline;">48</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       target_cps    <span style="text-decoration: underline;">148</span>155.            0.164 sector                                  0.001<span style="text-decoration: underline;">01</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,066 more rows</span></span></span></code></pre></div>
 <p>Or at the company level:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">market_share_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_market_share.html" class="external-link">target_market_share</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
@@ -518,7 +479,7 @@ the <code>emission_factor</code> of a sector. For example, you can use
 this approach to set targets for the average emission factor of the
 cement sector. This approach is recommended for sectors lacking
 technology roadmaps.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use this dataset to practice but eventually you should use your own data.</span></span>
 <span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/co2_intensity_scenario_demo.html" class="external-link">co2_intensity_scenario_demo</a></span></span>
 <span></span>
@@ -548,7 +509,7 @@ technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cement  <span style="text-decoration: underline;">2</span>023 advanced economies demo_2020       projected                             0.023<span style="text-decoration: underline;">5</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 100 more rows</span></span></span></code></pre></div>
 <p>Or at the company level:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sda_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_sda.html" class="external-link">target_sda</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
