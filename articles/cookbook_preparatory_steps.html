@@ -147,17 +147,17 @@ covered out of the box.</p>
 columns:</p>
 <ul>
 <li><code>company_id</code></li>
-<li><code>emission_factor</code></li>
-<li><code>emission_factor_unit</code></li>
-<li><code>is_ultimate_owner</code></li>
-<li><code>lei</code></li>
 <li><code>name_company</code></li>
-<li><code>plant_location</code></li>
-<li><code>production</code></li>
-<li><code>production_unit</code></li>
+<li><code>lei</code></li>
 <li><code>sector</code></li>
 <li><code>technology</code></li>
+<li><code>production_unit</code></li>
 <li><code>year</code></li>
+<li><code>production</code></li>
+<li><code>emission_factor</code></li>
+<li><code>plant_location</code></li>
+<li><code>is_ultimate_owner</code></li>
+<li><code>emission_factor_unit</code></li>
 </ul>
 <p>For more detail about the necessary structure of this dataset, see
 the data dictionary for <a href="data_abcd.html">abcd</a>.</p>
@@ -188,14 +188,14 @@ for Banks documentation</a>.</p>
 <p>The target market share scenario data set must be a CSV file and
 contains the following columns:</p>
 <ul>
-<li><code>region</code></li>
 <li><code>scenario</code></li>
-<li><code>scenario_source</code></li>
 <li><code>sector</code></li>
-<li><code>smsp</code></li>
 <li><code>technology</code></li>
-<li><code>tmsr</code></li>
+<li><code>region</code></li>
 <li><code>year</code></li>
+<li><code>tmsr</code></li>
+<li><code>smsp</code></li>
+<li><code>scenario_source</code></li>
 </ul>
 <p>For more detail about the necessary structure of this dataset, see
 the data dictionary for <a href="data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation">scenario</a>.</p>
@@ -212,13 +212,13 @@ for Banks documentation</a>.</p>
 <p>The SDA scenario data set must be a CSV file and contains the
 following columns:</p>
 <ul>
-<li><code>emission_factor</code></li>
-<li><code>emission_factor_unit</code></li>
-<li><code>region</code></li>
-<li><code>scenario</code></li>
 <li><code>scenario_source</code></li>
+<li><code>scenario</code></li>
 <li><code>sector</code></li>
+<li><code>region</code></li>
 <li><code>year</code></li>
+<li><code>emission_factor_unit</code></li>
+<li><code>emission_factor</code></li>
 </ul>
 <p>For more detail about the necessary structure of this dataset, see
 the data dictionary for <a href="data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach">scenario</a>.</p>
@@ -258,19 +258,19 @@ internal systems.</p>
 <p>The raw loan book must be prepared as CSV files and contain at a
 minimum the following columns:</p>
 <ul>
-<li><code>id_direct_loantaker</code></li>
 <li><code>id_loan</code></li>
+<li><code>id_direct_loantaker</code></li>
+<li><code>name_direct_loantaker</code></li>
 <li><code>id_ultimate_parent</code></li>
-<li><code>isin_direct_loantaker</code></li>
-<li><code>lei_direct_loantaker</code></li>
-<li><code>loan_size_credit_limit</code></li>
-<li><code>loan_size_credit_limit_currency</code></li>
+<li><code>name_ultimate_parent</code></li>
 <li><code>loan_size_outstanding</code></li>
 <li><code>loan_size_outstanding_currency</code></li>
-<li><code>name_direct_loantaker</code></li>
-<li><code>name_ultimate_parent</code></li>
-<li><code>sector_classification_direct_loantaker</code></li>
+<li><code>loan_size_credit_limit</code></li>
+<li><code>loan_size_credit_limit_currency</code></li>
 <li><code>sector_classification_system</code></li>
+<li><code>sector_classification_direct_loantaker</code></li>
+<li><code>lei_direct_loantaker</code></li>
+<li><code>isin_direct_loantaker</code></li>
 </ul>
 <p>For more detail about the necessary structure of this dataset, see
 the data dictionary for <a href="data_loanbook.html">loanbook</a>.</p>
