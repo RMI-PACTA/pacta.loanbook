@@ -49,7 +49,7 @@ writexl::write_xlsx(
 
 Typically, these data files are stored in XLS files on your computer. As an example, they could be imported as in the code below using the `{readxl}` package, however, if you use custom data that does not strictly follow the format as defined in [the previous section](cookbook_preparatory_steps.html), you may need to adjust the import code and/or do some data manipulation in R after importing.
 
-```{r}
+```{r, R.options = list(width = 400)}
 loanbook <- readxl::read_excel(path = file.path(tempdir(), "loanbook.xlsx"))
 
 loanbook
@@ -73,7 +73,7 @@ The raw names are internally transformed applying best-practices commonly used i
 
 The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
 
-```{r}
+```{r, R.options = list(width = 400)}
 match_name(loanbook, abcd)
 ```
 
@@ -207,7 +207,7 @@ The [Market Share Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/
 
 Targets can be set at the portfolio level:
 
-```{r}
+```{r, R.options = list(width = 400)}
 # Use these datasets to practice but eventually you should use your own data.
 scenario <- r2dii.data::scenario_demo_2020
 regions <- r2dii.data::region_isos_demo
@@ -225,7 +225,7 @@ market_share_targets_portfolio
 
 Or at the company level: 
 
-```{r market-share-targets-company}
+```{r market-share-targets-company, R.options = list(width = 400)}
 market_share_targets_company <-
   target_market_share(
     data = prioritized_matches,
@@ -243,7 +243,7 @@ market_share_targets_company
 
 The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html) is used to calculate scenario targets for the `emission_factor` of a sector. For example, you can use this approach to set targets for the average emission factor of the cement sector. This approach is recommended for sectors lacking technology roadmaps.
 
-```{r sda-targets}
+```{r sda-targets, R.options = list(width = 400)}
 # Use this dataset to practice but eventually you should use your own data.
 co2 <- r2dii.data::co2_intensity_scenario_demo
 
