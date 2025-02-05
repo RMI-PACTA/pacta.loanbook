@@ -259,6 +259,21 @@ sda_targets <-
 sda_targets
 ```
 
+Or at the company level: 
+
+```{r sda-targets-company, R.options = list(width = 400)}
+sda_targets_company <-
+  target_sda(
+    data = prioritized_matches,
+    abcd = abcd,
+    co2_intensity_scenario = co2,
+    region_isos = regions,
+    by_company = TRUE # Output results at company-level
+  )
+
+sda_targets_company
+```
+
 **PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
 
 **NEXT CHAPTER:** [Interpretation of Results](cookbook_interpretation.html)
