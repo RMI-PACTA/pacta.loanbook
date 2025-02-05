@@ -49,7 +49,7 @@ writexl::write_xlsx(
 
 Typically, these data files are stored in XLS files on your computer. As an example, they could be imported as in the code below using the `{readxl}` package, however, if you use custom data that does not strictly follow the format as defined in [the previous section](cookbook_preparatory_steps.html), you may need to adjust the import code and/or do some data manipulation in R after importing.
 
-```{r}
+```{r, R.options = list(width = 400)}
 loanbook <- readxl::read_excel(path = file.path(tempdir(), "loanbook.xlsx"))
 
 loanbook
@@ -73,8 +73,10 @@ The raw names are internally transformed applying best-practices commonly used i
 
 The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
 
-```{r}
-match_name(loanbook, abcd)
+```{r, R.options = list(width = 400)}
+matched <- match_name(loanbook, abcd)
+
+matched
 ```
 
 `match_name()` defaults to scoring matches between name strings that belong to the same sector. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate.
@@ -93,28 +95,6 @@ match_name(loanbook, abcd, min_score = 0.9) %>%
   pull(score) %>%
   range()
 ```
-
-### Maybe overwrite matches
-
-If you are happy with the matching coverage achieved, proceed to the next step. Otherwise, you can manually add matches, not found automatically by `match_name()`. To do this, manually inspect the `abcd` and find a company you would like to match to your loanbook. Once a match is found, use excel to write a .csv file similar to [`r2dii.data::overwrite_demo`](https://rmi-pacta.github.io/r2dii.data/reference/overwrite_demo.html), where: 
-
-* `level` indicates the level that the manual match should be added to (e.g. `direct_loantaker`)
-* `id_2dii` is the id of the loanbook company you would like to match (from the output of `match_name()`)
-* `name` is the abcd company you would like to manually link to
-* `sector` optionally you can also overwrite the sector.
-* `source` this can be used later to determine where all manual matches came from. 
-
-```{r}
-matched <-
-  match_name(
-    loanbook = loanbook,
-    abcd = abcd,
-    min_score = 0.9,
-    overwrite = r2dii.data::overwrite_demo
-  )
-```
-
-Notice the warning.
 
 ## Validate matches
 
@@ -207,7 +187,7 @@ The [Market Share Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/
 
 Targets can be set at the portfolio level:
 
-```{r}
+```{r, R.options = list(width = 400)}
 # Use these datasets to practice but eventually you should use your own data.
 scenario <- r2dii.data::scenario_demo_2020
 regions <- r2dii.data::region_isos_demo
@@ -225,7 +205,7 @@ market_share_targets_portfolio
 
 Or at the company level: 
 
-```{r market-share-targets-company}
+```{r market-share-targets-company, R.options = list(width = 400)}
 market_share_targets_company <-
   target_market_share(
     data = prioritized_matches,
@@ -243,7 +223,7 @@ market_share_targets_company
 
 The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html) is used to calculate scenario targets for the `emission_factor` of a sector. For example, you can use this approach to set targets for the average emission factor of the cement sector. This approach is recommended for sectors lacking technology roadmaps.
 
-```{r sda-targets}
+```{r sda-targets, R.options = list(width = 400)}
 # Use this dataset to practice but eventually you should use your own data.
 co2 <- r2dii.data::co2_intensity_scenario_demo
 
@@ -257,6 +237,21 @@ sda_targets <-
   filter(sector == "cement", year >= 2020)
 
 sda_targets
+```
+
+Or at the company level: 
+
+```{r sda-targets-company, R.options = list(width = 400)}
+sda_targets_company <-
+  target_sda(
+    data = prioritized_matches,
+    abcd = abcd,
+    co2_intensity_scenario = co2,
+    region_isos = regions,
+    by_company = TRUE # Output results at company-level
+  )
+
+sda_targets_company
 ```
 
 **PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
