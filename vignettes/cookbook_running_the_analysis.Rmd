@@ -74,7 +74,9 @@ The raw names are internally transformed applying best-practices commonly used i
 The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
 
 ```{r, R.options = list(width = 400)}
-match_name(loanbook, abcd)
+matched <- match_name(loanbook, abcd)
+
+matched
 ```
 
 `match_name()` defaults to scoring matches between name strings that belong to the same sector. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate.
@@ -93,28 +95,6 @@ match_name(loanbook, abcd, min_score = 0.9) %>%
   pull(score) %>%
   range()
 ```
-
-### Maybe overwrite matches
-
-If you are happy with the matching coverage achieved, proceed to the next step. Otherwise, you can manually add matches, not found automatically by `match_name()`. To do this, manually inspect the `abcd` and find a company you would like to match to your loanbook. Once a match is found, use excel to write a .csv file similar to [`r2dii.data::overwrite_demo`](https://rmi-pacta.github.io/r2dii.data/reference/overwrite_demo.html), where: 
-
-* `level` indicates the level that the manual match should be added to (e.g. `direct_loantaker`)
-* `id_2dii` is the id of the loanbook company you would like to match (from the output of `match_name()`)
-* `name` is the abcd company you would like to manually link to
-* `sector` optionally you can also overwrite the sector.
-* `source` this can be used later to determine where all manual matches came from. 
-
-```{r}
-matched <-
-  match_name(
-    loanbook = loanbook,
-    abcd = abcd,
-    min_score = 0.9,
-    overwrite = r2dii.data::overwrite_demo
-  )
-```
-
-Notice the warning.
 
 ## Validate matches
 
