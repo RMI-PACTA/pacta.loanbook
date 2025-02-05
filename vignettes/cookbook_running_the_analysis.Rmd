@@ -29,7 +29,7 @@ library(readxl)
 
 ## Import data
 
-We need two datasets to begin: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd).
+We need two datasets to begin: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd). For more detail about the necessary structure of these datasets, see the data dictionaries for [loanbook](data_loanbook.html) and [abcd](data_abcd.html).
 
 To simulate having these data files prepared, we will use the demo data included in the `{r2dii.data}` package to create example XLS files using the `{writexl}` package.
 
@@ -156,7 +156,7 @@ valid_matches %>%
 
 ## A Note on Sector Classifications and the `borderline` Flag
 
-A note on sector classification: Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, we only allow a couple specific values for `sector_classification_system`:
+A note on sector classification: Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, we only allow a couple specific values for `sector_classification_system`, specified in `r2dii.data::sector_classifications`:
 
 > `r unique(r2dii.data::sector_classifications$code_system)`
 
