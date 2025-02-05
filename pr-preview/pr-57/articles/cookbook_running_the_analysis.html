@@ -132,7 +132,8 @@ functions from the packages <a href="https://dplyr.tidyverse.org" class="externa
 </h2>
 <p>We need two datasets to begin: a <a href="cookbook_preparatory_steps.html#raw-loan-book">loanbook</a> and an
 <a href="cookbook_preparatory_steps.html#asset-based-company-data-abcd">asset-based
-company dataset (abcd)</a>.</p>
+company dataset (abcd)</a>. For more detail about the necessary
+structure of these datasets, see the data dictionaries for <a href="data_loanbook.html">loanbook</a> and <a href="data_abcd.html">abcd</a>.</p>
 <p>To simulate having these data files prepared, we will use the demo
 data included in the <a href="https://rmi-pacta.github.io/r2dii.data/" class="external-link">r2dii.data</a> package to create example
 XLS files using the <a href="https://ropensci.r-universe.dev/writexl" class="external-link">writexl</a> package.</p>
@@ -359,7 +360,8 @@ sector from the <code>loanbook</code> matches the sector from the
 internally using the <code>sector_classification_system</code> and
 <code>sector_classification_direct_loantaker</code> columns. Currently,
 we only allow a couple specific values for
-<code>sector_classification_system</code>:</p>
+<code>sector_classification_system</code>, specified in
+<code><a href="https://rmi-pacta.github.io/r2dii.data/reference/sector_classifications.html" class="external-link">r2dii.data::sector_classifications</a></code>:</p>
 <blockquote>
 <p>GICS, ISIC, NACE, NAICS, PSIC, SIC</p>
 </blockquote>
