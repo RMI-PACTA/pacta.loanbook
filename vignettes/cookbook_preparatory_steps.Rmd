@@ -65,7 +65,7 @@ For sectors that do not have technology level pathways, PACTA uses the Sectoral 
 The SDA scenario data set must be a CSV file and contains the following columns:
 
 ```{r cols_sda_scenario, echo = FALSE, results = 'asis'}
-cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "scenario_demo_2020"], "`", collapse = "\n"))
+cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "co2_intensity_scenario_demo"], "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [scenario](data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach).
