@@ -61,7 +61,7 @@ For sectors that do not have technology level pathways, PACTA uses the Sectoral 
 The SDA scenario data set must be a CSV file and contains the following columns:
 
 ```{r cols_sda_scenario, echo = FALSE, results = 'asis'}
-cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "scenario_demo_2020"], "`", collapse = "\n"))
+cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "co2_intensity_scenario_demo"], "`", collapse = "\n"))
 ```
 
 While the raw input values of the scenarios are based on models from external third party organisations - such as the [World Energy Outlook](https://www.iea.org/reports/world-energy-outlook-2024) by the [International Energy Agency (IEA)](https://www.iea.org/), the [Global Energy and Climate Outlook by the Joint Research Center of the European Commission (JRC)](https://joint-research-centre.ec.europa.eu/scientific-activities-z/geco_en), or the [One Earth Climate Model by the Institute for Sustainable Futures (ISF)](https://www.uts.edu.au/oecm) - the input data set for PACTA must be prepared using additional steps, which are documented publicly on the following GitHub repositories:
