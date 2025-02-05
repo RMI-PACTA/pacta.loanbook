@@ -2,7 +2,7 @@
 title: "Outputs"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{outputs}
+  %\VignetteIndexEntry{Outputs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
