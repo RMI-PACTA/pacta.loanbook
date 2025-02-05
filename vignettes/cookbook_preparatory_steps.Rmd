@@ -35,7 +35,7 @@ This data set provides information on the production profiles and emission inten
 The ABCD data set must be an XLSX file and contains the following columns:
 
 ```{r cols_abcd, echo = FALSE, results = 'asis'}
-cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "abcd_demo"], "`", collapse = "\n"))
+cat(paste0("- `", names(r2dii.data::abcd_demo), "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [abcd](data_abcd.html).
@@ -55,7 +55,7 @@ For sectors with technology level trajectories, the data set provides the TMSR a
 The target market share scenario data set must be a CSV file and contains the following columns:
 
 ```{r cols_tms_scenario, echo = FALSE, results = 'asis'}
-cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "scenario_demo_2020"], "`", collapse = "\n"))
+cat(paste0("- `", names(r2dii.data::scenario_demo_2020), "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [scenario](data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation).
@@ -65,7 +65,7 @@ For sectors that do not have technology level pathways, PACTA uses the Sectoral 
 The SDA scenario data set must be a CSV file and contains the following columns:
 
 ```{r cols_sda_scenario, echo = FALSE, results = 'asis'}
-cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "co2_intensity_scenario_demo"], "`", collapse = "\n"))
+cat(paste0("- `", names(r2dii.data::co2_intensity_scenario_demo), "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [scenario](data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach).
@@ -88,7 +88,7 @@ The raw loan book is the financial data set that you would like to analyze. It c
 The raw loan book must be prepared as CSV files and contain at a minimum the following columns:
 
 ```{r cols_raw_loanbooks, echo = FALSE, results = 'asis'}
-cat(paste0("- `", r2dii.data::data_dictionary$column[r2dii.data::data_dictionary$dataset == "loanbook_demo"], "`", collapse = "\n"))
+cat(paste0("- `", names(r2dii.data::loanbook_demo), "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [loanbook](data_loanbook.html).
