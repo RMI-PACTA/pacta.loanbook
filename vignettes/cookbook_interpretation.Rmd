@@ -24,13 +24,7 @@ library(dplyr)
 loanbook <- r2dii.data::loanbook_demo
 abcd <- r2dii.data::abcd_demo
 
-matched <-
-  match_name(
-    loanbook = loanbook,
-    abcd = abcd,
-    min_score = 0.9,
-    overwrite = r2dii.data::overwrite_demo
-  )
+matched <- match_name(loanbook, abcd)
 
 valid_matches <- matched
 
