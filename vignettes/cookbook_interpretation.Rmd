@@ -138,7 +138,7 @@ coverage <- left_join(loanbook_with_sectors, matched) %>%
     matched = case_when(
       score == 1   ~ "Matched", 
       is.na(score) ~ "Not Matched",
-      TRUE         ~ "Not Mached"
+      TRUE         ~ "Not Matched"
     ),
     sector = case_when(
       borderline == TRUE & matched == "Not Matched" ~ "not in scope",
