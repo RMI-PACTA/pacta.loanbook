@@ -24,6 +24,7 @@ Useful links:
 Authors:
 \itemize{
   \item Jackson Hoffart \email{jackson.hoffart@gmail.com} (\href{https://orcid.org/0000-0002-8600-5042}{ORCID}) [contractor]
+  \item CJ Yetman \email{cj@cjyetman.com} (\href{https://orcid.org/0000-0001-5099-9500}{ORCID}) [contractor]
 }
 
 Other contributors:
