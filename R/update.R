@@ -73,9 +73,12 @@ pacta_loanbook_sitrep <- function() {
 #' @export
 pacta_loanbook_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)
-  deps <- tools::package_dependencies("pacta_loanbook", pkgs, recursive = recursive)
 
-  pkg_deps <- unique(sort(unlist(deps)))
+  pkg_deps <- utils::packageDescription("pacta.loanbook")[["Imports"]]
+  pkg_deps <- unlist(strsplit(x = pkg_deps, split = ",[[:space:]]"))
+  pkg_deps <- sub(pattern = " [(].*[)]$", replacement = "", x = pkg_deps)
+  pkg_deps <- sort(unique(pkg_deps))
+  pkg_deps <- pkg_deps[!pkg_deps %in% c("utils", "stats")]
 
   base_pkgs <- c(
     "base", "compiler", "datasets", "graphics", "grDevices", "grid",
