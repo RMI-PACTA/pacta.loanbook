@@ -110,7 +110,7 @@ matched <- loanbook %>%
     prioritize()
 ```
 
-Note that this `matched` dataset will contain _only_ loans that were matched successfully. To determine coverage, we need to go back to the original `loanbook` dataset. We must determine the 2DII sectors of each loan, as dictated by the `sector_classification_direct_loantaker` column.
+Note that this `matched` dataset will contain _only_ loans that were matched successfully. To determine coverage, we need to go back to the original `loanbook` dataset. We must determine the PACTA sectors of each loan, as dictated by the `sector_classification_direct_loantaker` column.
 
 For this, we join the loanbook with the `r2dii.data::sector_classifications` dataset, which lists all sector classification code standards used by 'PACTA'. Unfortunately we need to work around two caveats (you may ignore them because they are conceptually uninteresting):
 
