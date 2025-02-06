@@ -18,7 +18,8 @@ knitr::opts_chunk$set(
 plot_table <- function(dataset_name) {
   table <- dplyr::bind_rows(
     r2dii.match::data_dictionary,
-    r2dii.analysis::data_dictionary
+    r2dii.analysis::data_dictionary,
+    r2dii.plot::data_dictionary
   )
   table <- dplyr::filter(table, .data[["dataset"]] == dataset_name)
   table_plot <- gt::gt(dplyr::select(table, -"dataset"))
@@ -104,4 +105,28 @@ The output of `target_sda()` has the following columns:
 
 ```{r, echo = FALSE}
 plot_table("target_sda_output")
+```
+
+## prep_techmix() output
+
+The output of `prep_techmix()` has the following columns:
+
+```{r, echo = FALSE}
+plot_table("prep_techmix_output")
+```
+
+## prep_emission_intensity() output
+
+The output of `prep_emission_intensity()` has the following columns:
+
+```{r, echo = FALSE}
+plot_table("prep_emission_intensity_output")
+```
+
+## prep_trajectory() output
+
+The output of `prep_trajectory()` has the following columns:
+
+```{r, echo = FALSE}
+plot_table("prep_trajectory_output")
 ```
