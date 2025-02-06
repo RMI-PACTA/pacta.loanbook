@@ -159,8 +159,8 @@ two mismatching loans:</p>
 <p>Note that this <code>matched</code> dataset will contain
 <em>only</em> loans that were matched successfully. To determine
 coverage, we need to go back to the original <code>loanbook</code>
-dataset. We must determine the 2DII sectors of each loan, as dictated by
-the <code>sector_classification_direct_loantaker</code> column.</p>
+dataset. We must determine the PACTA sectors of each loan, as dictated
+by the <code>sector_classification_direct_loantaker</code> column.</p>
 <p>For this, we join the loanbook with the
 <code><a href="https://rmi-pacta.github.io/r2dii.data/reference/sector_classifications.html" class="external-link">r2dii.data::sector_classifications</a></code> dataset, which lists all
 sector classification code standards used by ‘PACTA’. Unfortunately we
