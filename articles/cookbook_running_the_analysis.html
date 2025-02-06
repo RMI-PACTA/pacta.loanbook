@@ -471,6 +471,13 @@ a granular technology scenario roadmap exists.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Donati, Donati e Donati s.r.l.    projected     <span style="text-decoration: underline;">277</span>214.           1      sector                                         0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> automotive electric    <span style="text-decoration: underline;">2</span>020 global demo_2020       Donati, Donati e Donati s.r.l.    target_cps    <span style="text-decoration: underline;">277</span>214.           1      sector                                         0</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14,495 more rows</span></span></span></code></pre></div>
+<p>These results can be saved/written to a CSV file for potential input
+to other models and software, for example:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">market_share_targets_portfolio</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"market_share_targets_portfolio.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">market_share_targets_company</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"market_share_targets_company.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Remember to replace <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> with the path to the
+directory that you wish to save your files in.</p>
 </div>
 <div class="section level3">
 <h3 id="sectoral-decarbonization-approach">Sectoral Decarbonization Approach<a class="anchor" aria-label="anchor" href="#sectoral-decarbonization-approach"></a>
@@ -481,7 +488,7 @@ the <code>emission_factor</code> of a sector. For example, you can use
 this approach to set targets for the average emission factor of the
 cement sector. This approach is recommended for sectors lacking
 technology roadmaps.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use this dataset to practice but eventually you should use your own data.</span></span>
 <span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/co2_intensity_scenario_demo.html" class="external-link">co2_intensity_scenario_demo</a></span></span>
 <span></span>
@@ -511,7 +518,7 @@ technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cement  <span style="text-decoration: underline;">2</span>023 advanced economies demo_2020       projected                             0.023<span style="text-decoration: underline;">5</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 100 more rows</span></span></span></code></pre></div>
 <p>Or at the company level:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sda_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_sda.html" class="external-link">target_sda</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
@@ -537,6 +544,13 @@ technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Eberhardt Eberhardt GmbH           projected                              0.685</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Geissler Geissler AG &amp; Co. KGaA    projected                              0.637</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 956 more rows</span></span></span></code></pre></div>
+<p>These results can be saved/written to a CSV file for potential input
+to other models and software, for example:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sda_targets</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sda_targets.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sda_targets_company</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sda_targets_company.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Remember to replace <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> with the path to the
+directory that you wish to save your files in.</p>
 <p><strong>PREVIOUS CHAPTER:</strong> <a href="cookbook_preparatory_steps.html">Preparatory Steps</a></p>
 <p><strong>NEXT CHAPTER:</strong> <a href="cookbook_interpretation.html">Interpretation of Results</a></p>
 </div>
