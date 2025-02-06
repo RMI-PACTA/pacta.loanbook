@@ -225,6 +225,7 @@ These results can be saved/written to a CSV file for potential input to other mo
 readr::write_csv(x = market_share_targets_portfolio, file = file.path(tempdir(), "market_share_targets_portfolio.csv"))
 readr::write_csv(x = market_share_targets_company, file = file.path(tempdir(), "market_share_targets_company.csv"))
 ```
+Remember to replace `tempdir()` with the path to the directory that you wish to save your files in.
 
 ### Sectoral Decarbonization Approach
 
