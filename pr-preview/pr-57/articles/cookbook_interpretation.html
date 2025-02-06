@@ -201,7 +201,7 @@ corresponding column <code>code</code> (otherwise
 <span>    matched <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
 <span>      <span class="va">score</span> <span class="op">==</span> <span class="fl">1</span>   <span class="op">~</span> <span class="st">"Matched"</span>, </span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Not Matched"</span>,</span>
-<span>      <span class="cn">TRUE</span>         <span class="op">~</span> <span class="st">"Not Mached"</span></span>
+<span>      <span class="cn">TRUE</span>         <span class="op">~</span> <span class="st">"Not Matched"</span></span>
 <span>    <span class="op">)</span>,</span>
 <span>    sector <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
 <span>      <span class="va">borderline</span> <span class="op">==</span> <span class="cn">TRUE</span> <span class="op">&amp;</span> <span class="va">matched</span> <span class="op">==</span> <span class="st">"Not Matched"</span> <span class="op">~</span> <span class="st">"not in scope"</span>,</span>
