@@ -32,6 +32,10 @@ pacta_loanbook_conflicts <- function(only = NULL) {
   conflict_funs <- purrr::imap(conflicts, confirm_conflict)
   conflict_funs <- purrr::compact(conflict_funs)
 
+  if (length(conflict_funs) == 0) {
+    return(invisible(NULL))
+  }
+
   structure(conflict_funs, class = "pacta_loanbook_conflicts")
 }
 
@@ -40,6 +44,15 @@ pacta_loanbook_conflict_message <- function(x) {
     left = cli::style_bold("Conflicts"),
     right = "pacta_loanbook_conflicts()"
   )
+
+  if (is.null(x)) {
+    return(
+      paste0(
+        header, "\n",
+        cli::format_bullets_raw(c(v = "no conflicts found"))
+      )
+    )
+  }
 
   pkgs <- x %>% purrr::map(~ gsub("^package:", "", .))
   others <- pkgs %>% purrr::map(`[`, -1)
