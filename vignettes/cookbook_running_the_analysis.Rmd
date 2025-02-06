@@ -219,6 +219,14 @@ market_share_targets_company <-
 market_share_targets_company
 ```
 
+These results can be saved/written to a CSV file for potential input to other models and software, for example:
+
+```{r}
+readr::write_csv(x = market_share_targets_portfolio, file = file.path(tempdir(), "market_share_targets_portfolio.csv"))
+readr::write_csv(x = market_share_targets_company, file = file.path(tempdir(), "market_share_targets_company.csv"))
+```
+Remember to replace `tempdir()` with the path to the directory that you wish to save your files in.
+
 ### Sectoral Decarbonization Approach
 
 The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html) is used to calculate scenario targets for the `emission_factor` of a sector. For example, you can use this approach to set targets for the average emission factor of the cement sector. This approach is recommended for sectors lacking technology roadmaps.
@@ -253,6 +261,14 @@ sda_targets_company <-
 
 sda_targets_company
 ```
+
+These results can be saved/written to a CSV file for potential input to other models and software, for example:
+
+```{r}
+readr::write_csv(x = sda_targets, file = file.path(tempdir(), "sda_targets.csv"))
+readr::write_csv(x = sda_targets_company, file = file.path(tempdir(), "sda_targets_company.csv"))
+```
+Remember to replace `tempdir()` with the path to the directory that you wish to save your files in.
 
 **PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
 
