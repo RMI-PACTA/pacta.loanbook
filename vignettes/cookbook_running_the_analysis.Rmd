@@ -59,19 +59,33 @@ abcd <- readxl::read_excel(path = file.path(tempdir(), "abcd.xlsx"))
 abcd
 ```
 
-## Score the match precision between the loanbook and abcd datasets
+## Matching process
+
+The next step after loading all required input files is to run the matching process, where you will match loans from the loanbook data with production data from the abcd.
+
+The matching process is divided into three main steps:
+
+-   Apply a matching algorithm to calculate scores of the match precision between the loanbook and abcd datasets
+-   Manually validate matches between the loanbook and abcd datasets, including slecting the appropriate match in cases where more than one company in the abcd receives a score higher than the threshold value
+-   Prioritize validated matches by level
+
+We will cover each of these steps in the following sections.
+
+### Score the match precision between the loanbook and abcd datasets
 
 `match_name()` scores the match between names in a loanbook dataset and names in an asset-based company dataset. The names come from the columns `name_direct_loantaker` and `name_ultimate_parent` of the loanbook dataset, and from the column `name_company` of the asset-based company dataset. In the loan book data set, it is possible to optionally add any number of `name_intermediate_parent_*` columns, where `*` indicates the level up the corporate tree from `direct_loantaker`.
 
 The raw names are internally transformed applying best-practices commonly used in name matching algorithms, such as:
 
-* Remove special characters
-* Replace language specific characters
-* Abbreviate certain names to reduce their importance in the matching
-* Remove corporate suffixes when necessary
-* Spell out numbers to increase their importance
+-   Remove special characters
+-   Replace language specific characters
+-   Abbreviate certain names to reduce their importance in the matching
+-   Remove corporate suffixes when necessary
+-   Spell out numbers to increase their importance
 
 The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
+
+The basic usage of `match_name()` is as follows:
 
 ```{r, R.options = list(width = 400)}
 matched <- match_name(loanbook, abcd)
@@ -79,7 +93,7 @@ matched <- match_name(loanbook, abcd)
 matched
 ```
 
-`match_name()` defaults to scoring matches between name strings that belong to the same sector. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate.
+`match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown, if the names in the loanbook and the abcd are sufficiently similar AND the loan is classified in the same sector as the company activity in the abcd. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
 
 ```{r}
 match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
@@ -88,7 +102,7 @@ match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
 match_name(loanbook, abcd, by_sector = TRUE) %>% nrow()
 ```
 
-The `min_score` argument allows you to set a minimum threshold score.
+The `min_score` argument allows you to set a minimum threshold score. This is useful when you either want to filter out potential matches that are not precise enough, or want to add additional potential matches because the given suggestions do not seem to provide sufficient matching coverage. The default value is 0.8, but you can set it to any value between 0 and 1. Since a higher score implies a closer match between company names in the loanbook and the abcd, fewer potential matches will usually be shown. The following code shows how to set the threshold to 0.9:
 
 ```{r}
 match_name(loanbook, abcd, min_score = 0.9) %>%
@@ -96,7 +110,13 @@ match_name(loanbook, abcd, min_score = 0.9) %>%
   range()
 ```
 
-## Validate matches
+### Manually validate matches
+
+After the initial calculation of scores for potential matches, you will manually have to inspect the suggested matches and decide which ones to keep or remove. This is especially important when using text-based matching because there is no guarantee that similar company names as identified by the algorithm actually refer to the same companies. The manual validation step is therefore crucial, it ensures data quality in the remainder of the analysis.
+
+The validation process is not automated and requires some time and effort on your part. This is often the most time-consuming part of the analysis, especially when trying to improve the matching coverage in multiple iterations.
+
+Below you will find a brief description of the manual validation process:
 
 Write the output of `match_name()` into a .csv file, for example using `{readr}` to save a CSV file:
 
@@ -106,12 +126,12 @@ readr::write_csv(x = matched, file = file.path(tempdir(), "matched.csv"))
 
 Compare, edit, and save the data manually:
 
-* Open `matched.csv` with any spreadsheet editor (Excel, Google Sheets, etc.).
-* Compare the columns `name` and `name_abcd` manually to determine if the match is valid. Other information can be used in conjunction with just the names to ensure the two entities match (sector, internal information on the company structure, etc.)
-* Edit the data:
-  * If you are happy with the match, set the `score` value to `1`.
-  * Otherwise set or leave the `score` value to anything other than `1`.
-* Save the edited file as, for example, `valid_matches.csv`.
+-   Open `matched.csv` with any spreadsheet editor (Excel, Google Sheets, etc.).
+-   Compare the columns `name` and `name_abcd` manually to determine if the match is valid. Other information can be used in conjunction with just the names to ensure the two entities match (sector, internal information on the company structure, etc.)
+-   Edit the data:
+    -   If you are happy with the match, set the `score` value to `1`.
+    -   Otherwise set or leave the `score` value to anything other than `1`.
+-   Save the edited file as, for example, `valid_matches.csv`.
 
 Re-import the edited file (validated), for example using `{readr}` to read a CSV file:
 
@@ -124,9 +144,9 @@ file.copy(from = file.path(tempdir(), "matched.csv"), to = file.path(tempdir(), 
 valid_matches <- readr::read_csv(file = file.path(tempdir(), "valid_matches.csv"), show_col_types = FALSE)
 ```
 
-For more information on validating matches, please see the documentation for `prioritize()`.
+You can find more detailed information about the matching process under the header "PACTA for Banks Training Webinar 2" in the [training materials section of the PACTA for Banks website](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/) and in the [corresponding slide deck](https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf.
 
-## Prioritize validated matches by level
+### Prioritize validated matches by level
 
 The validated dataset may have multiple matches per loan. Consider the case where a loan is given to "Acme Power USA", a subsidiary of "Acme Power Co.". There may be both "Acme Power USA" and "Acme Power Co." in the `abcd`, and so there could be two valid matches for this loan. To get the best match only, use `prioritize()` -- it picks rows where `score` is 1 and `level` per loan is of highest `priority`:
 
@@ -162,22 +182,22 @@ A note on sector classification: Matches are preferred when the sector from the 
 
 If you would like to use a different classification system, please raise an issue in [r2dii.data](https://github.com/RMI-PACTA/r2dii.data) and we can incorporate it.
 
-There are a zoo of sector classification code systems out there. Some are granular, some are not. Since we currently cover a particular portion of the supply chain (i.e. production), it is important we try to only match the ABCD with companies that are actually active in this portion of the supply chain. 
+There are a zoo of sector classification code systems out there. Some are granular, some are not. Since we currently cover a particular portion of the supply chain (i.e. production), it is important we try to only match the ABCD with companies that are actually active in this portion of the supply chain.
 
 An issue arises when, for example, a company is classified in the "power transmission" sector. In a perfect world, these companies would produce no electricity, and we would not try to match them. In practice, however, we find there is often overlap. For this reason, we introduced the `borderline` flag.
 
 In the example below, we see two classification codes coming from the SIC classification standard:
 
-``` {r}
+```{r}
 r2dii.data::nace_classification %>% 
   filter(code %in% c("D35.11", "D35.14"))
 ```
 
 Notice that the code D35.11 corresponds to power generation. This is an identical match to PACTA's `power` sector, and thus the `borderline` flag is set to `FALSE`. In contrast, code D35.14 corresponds to the distribution of electricity. In a perfect world, we would set this code to `not in scope`, however there is still a chance that these companies produce electricity. For this reason, we have mapped it to `power` with `borderline = TRUE`.
 
-In practice, if a company has a `borderline` of `TRUE` and _is_ matched, then consider the company in scope. If it has a `borderline` of `TRUE` and _isn't_ matched, then consider it out of scope.
+In practice, if a company has a `borderline` of `TRUE` and *is* matched, then consider the company in scope. If it has a `borderline` of `TRUE` and *isn't* matched, then consider it out of scope.
 
-## Calculate targets
+## Calculate PACTA alignment metrics
 
 You can calculate scenario targets using two different approaches: Market Share Approach, or Sectoral Decarbonization Approach.
 
@@ -203,7 +223,7 @@ market_share_targets_portfolio <-
 market_share_targets_portfolio
 ```
 
-Or at the company level: 
+Or at the company level:
 
 ```{r market-share-targets-company, R.options = list(width = 400)}
 market_share_targets_company <-
@@ -225,6 +245,7 @@ These results can be saved/written to a CSV file for potential input to other mo
 readr::write_csv(x = market_share_targets_portfolio, file = file.path(tempdir(), "market_share_targets_portfolio.csv"))
 readr::write_csv(x = market_share_targets_company, file = file.path(tempdir(), "market_share_targets_company.csv"))
 ```
+
 Remember to replace `tempdir()` with the path to the directory that you wish to save your files in.
 
 ### Sectoral Decarbonization Approach
@@ -247,7 +268,7 @@ sda_targets <-
 sda_targets
 ```
 
-Or at the company level: 
+Or at the company level:
 
 ```{r sda-targets-company, R.options = list(width = 400)}
 sda_targets_company <-
@@ -268,6 +289,7 @@ These results can be saved/written to a CSV file for potential input to other mo
 readr::write_csv(x = sda_targets, file = file.path(tempdir(), "sda_targets.csv"))
 readr::write_csv(x = sda_targets_company, file = file.path(tempdir(), "sda_targets_company.csv"))
 ```
+
 Remember to replace `tempdir()` with the path to the directory that you wish to save your files in.
 
 **PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
