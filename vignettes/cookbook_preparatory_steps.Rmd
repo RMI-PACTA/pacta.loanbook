@@ -109,35 +109,35 @@ The user can provide a list of loans that have been misclassified in the raw loa
 - self-prepared
 - CSV file
 
-In case the user cannot obtain sector classification codes of any of the classification systems featured in `r2dii.data::sector_classifications` (currently the following classification systems are featured: `r unique(r2dii.data::sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of `r2dii.data::sector_classifications`. It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
+In case the user cannot obtain sector classification codes of any of the classification systems featured in `pacta.loanbook::sector_classifications` (currently the following classification systems are featured: `r unique(pacta.loanbook::sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of `pacta.loanbook::sector_classifications`. It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
 
 ## Required Software
 
-Using the `r2dii.*` suite of packages for the PACTA for Banks analysis requires the following software to be installed on your system:
+Using the `{pacta.loanbook}` package for the PACTA for Banks analysis requires the following software to be installed on your system:
 
 ### R (version 4.1.0 or higher)
 
-R is the programming language that the `r2dii.*` suite of packages is written in. You can download R from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/).
+R is the programming language that the `{pacta.loanboo}` package is written in. You can download R from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/).
 
 ### RStudio (optional)
 
 RStudio is an integrated development environment (IDE) for R developed by Posit. It is not strictly required to run the analysis, but it can be helpful for managing your project and running the analysis. Generally, RStudio is very widely used among the R community and probably the easiest way to interact with most R tools, such as the `r2dii.*` suite of packages. RStudio Desktop is an open source tool and free of charge. You can download RStudio from the [Posit RStudio website](https://posit.co/downloads/).
 
-### `r2dii.*` suite of R packages
+### `{pacta.loanbook}` package
 
-The `r2dii.*` suite of R packages is the main software tool that you will use to run the PACTA for Banks analysis.
+The `{pacta.loanbook}` R package is the main software tool that you will use to run the PACTA for Banks analysis.
 
-You can install the `r2dii.*` suite of R packages from any CRAN mirror by running the following command in R:
+You can install the `{pacta.loanbook}` R package from any CRAN mirror by running the following command in R:
 
 ``` r
-install.packages(c("r2dii.data", "r2dii.match", "r2dii.analysis", "r2dii.plot"))
+install.packages("pacta.loanbook")
 ```
 
-You can install the development versions of the `r2dii.*` suite of R packages from GitHub with:
+You can install the development versions of the `{pacta.loanbook}` R package from GitHub with:
 
 ``` r
 # install.packages("pak")
-pak::pak(c("RMI-PACTA/r2dii.data", "RMI-PACTA/r2dii.match", "RMI-PACTA/r2dii.analysis", "RMI-PACTA/r2dii.plot"))
+pak::pak("RMI-PACTA/pacta.loanbook")
 ```
 
 We use the [`pak` package](https://pak.r-lib.org/index.html) as a simple [tool to install packages from GitHub](https://pak.r-lib.org/reference/pak.html).
@@ -160,10 +160,11 @@ If you only plan to use GitHub to install this package or other packages as show
 
 ### Required R packages
 
-The `r2dii.*` suite of R packages depends on a number of other R packages. These dependencies will be installed automatically when you install the `r2dii.*` suite of R packages. The required packages are:
+The `{pacta.loanbook}` R package depends on a number of other R packages. These dependencies will be installed automatically when you install the `{pacta.loanbook}` R packages The required packages are:
 
 ```{r imports, echo = FALSE, results = 'asis'}
 imports <- paste(
+  utils::packageDescription("pacta.loanbook")[["Imports"]],
   utils::packageDescription("r2dii.data")[["Imports"]],
   utils::packageDescription("r2dii.match")[["Imports"]],
   utils::packageDescription("r2dii.analysis")[["Imports"]],
@@ -179,13 +180,13 @@ cat(paste0("`{", paste0(imports, collapse = "}`, `{"), "}`"))
 
 ### FAQ
 
-#### How do I install the `r2dii.*` suite of R packages?
+#### How do I install the `{pacta.loanbook}` R package?
 
 The most common ways to install R packages are via CRAN or [GitHub](#connecting-to-github-from-rstudio). Public institutions often have restrictions on the installation of packages from GitHub, so you may need to install the package from CRAN. In some cases, your institution may mirror CRAN in their internal application registry, so you may need to install the package from there. Should you have any issues with the installation from the internal application registry, it is best to reach out to your IT department. If you cannot obtain the package in any of these ways, please reach out to the package maintainers directly for exploring other options.
 
 #### How do I install the required R packages?
 
-In principle, all dependencies required to run the `r2dii.*` suite of R packages will be installed automatically when you install the packages. However, if you encounter any issues with the installation of the required packages, you can install them manually by running the following command in R, where `...` should be replaced with the package names from the list above, separated by commas:
+In principle, all dependencies required to run the `{pacta.loanbook}` R package will be installed automatically when you install the packages. However, if you encounter any issues with the installation of the required packages, you can install them manually by running the following command in R, where `...` should be replaced with the package names from the list above, separated by commas:
 
 ```{r install_deps, eval = FALSE}
 install.packages(c(...))
@@ -206,7 +207,7 @@ Before running the PACTA for Banks analysis, you should make sure that you have 
 - [ ] Installed the required software:
   - [ ] R (version 4.1.0 or higher)
   - [ ] RStudio (optional)
-  - [ ] `r2dii.*` suite of R packages
+  - [ ] `{pacta.loanbook}` R package
   - [ ] [set up git and GitHub](#connecting-to-github-from-rstudio) (optional)
 
 **PREVIOUS CHAPTER:** [Overview](cookbook_overview.html)

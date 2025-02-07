@@ -16,14 +16,11 @@ knitr::opts_chunk$set(
 
 ## Setup
 
-We use the `r2dii.*` suite of packages to access the most important functions you'll learn about. We also use example datasets from the package `{r2dii.data}`, and optional but convenient functions from the packages `{dplyr}` and `{readxl}`.
+We use the `{pacta.loanbook}` package to access the most important functions you'll learn about. We also use example datasets from the package `{pacta.loanbook}`, and optional but convenient functions from the packages `{dplyr}` and `{readxl}`.
 
-```{r}
-library(r2dii.match)
-library(r2dii.analysis)
-library(r2dii.plot)
-library(r2dii.data)
-library(dplyr, warn.conflicts = FALSE)
+```{r, message=FALSE}
+library(pacta.loanbook)
+library(dplyr)
 library(readxl)
 ```
 
@@ -31,18 +28,18 @@ library(readxl)
 
 We need two datasets to begin: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd). For more detail about the necessary structure of these datasets, see the data dictionaries for [loanbook](data_loanbook.html) and [abcd](data_abcd.html).
 
-To simulate having these data files prepared, we will use the demo data included in the `{r2dii.data}` package to create example XLS files using the `{writexl}` package.
+To simulate having these data files prepared, we will use the demo data included in the `{pacta.loanbook}` package to create example XLS files using the `{writexl}` package.
 
 ```{r}
 library(writexl)
 
 writexl::write_xlsx(
-  x = r2dii.data::loanbook_demo,
+  x = loanbook_demo,
   path = file.path(tempdir(), "loanbook.xlsx")
 )
 
 writexl::write_xlsx(
-  x = r2dii.data::abcd_demo,
+  x = abcd_demo,
   path = file.path(tempdir(), "abcd.xlsx")
 )
 ```
@@ -156,9 +153,9 @@ valid_matches %>%
 
 ## A Note on Sector Classifications and the `borderline` Flag
 
-A note on sector classification: Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, we only allow a couple specific values for `sector_classification_system`, specified in `r2dii.data::sector_classifications`:
+A note on sector classification: Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, we only allow a couple specific values for `sector_classification_system`, specified in `sector_classifications`:
 
-> `r unique(r2dii.data::sector_classifications$code_system)`
+> `r unique(sector_classifications$code_system)`
 
 If you would like to use a different classification system, please raise an issue in [r2dii.data](https://github.com/RMI-PACTA/r2dii.data) and we can incorporate it.
 
@@ -169,7 +166,7 @@ An issue arises when, for example, a company is classified in the "power transmi
 In the example below, we see two classification codes coming from the SIC classification standard:
 
 ``` {r}
-r2dii.data::nace_classification %>% 
+nace_classification %>% 
   filter(code %in% c("D35.11", "D35.14"))
 ```
 
@@ -189,8 +186,8 @@ Targets can be set at the portfolio level:
 
 ```{r, R.options = list(width = 400)}
 # Use these datasets to practice but eventually you should use your own data.
-scenario <- r2dii.data::scenario_demo_2020
-regions <- r2dii.data::region_isos_demo
+scenario <- scenario_demo_2020
+regions <- region_isos_demo
 
 market_share_targets_portfolio <-
   target_market_share(
@@ -233,7 +230,7 @@ The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analys
 
 ```{r sda-targets, R.options = list(width = 400)}
 # Use this dataset to practice but eventually you should use your own data.
-co2 <- r2dii.data::co2_intensity_scenario_demo
+co2 <- co2_intensity_scenario_demo
 
 sda_targets <-
   target_sda(
