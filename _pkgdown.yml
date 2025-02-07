@@ -59,7 +59,7 @@ navbar:
       text: Packages
       menu:
       - text: pacta.loanbook
-        href: https://rmi-pacta.github.io/pacta.loanbook
+        href: https://rmi-pacta.github.io/pacta.loanbook/
       - text: r2dii.data
         href: https://rmi-pacta.github.io/r2dii.data
       - text: r2dii.match
