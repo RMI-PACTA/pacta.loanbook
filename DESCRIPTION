@@ -51,6 +51,7 @@ Suggests:
     readr,
     readxl,
     rmarkdown,
+    spelling,
     testthat (>= 3.0.0),
     writexl
 Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate, rmarkdown
@@ -69,3 +70,4 @@ Imports:
     tibble
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+Language: en-US
