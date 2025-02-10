@@ -18,12 +18,12 @@ knitr::opts_chunk$set(
 
 We use the `r2dii.*` suite of packages to access the most important functions you'll learn about. We also use example datasets from the package `{r2dii.data}`, and optional but convenient functions from the packages `{dplyr}` and `{readxl}`.
 
-```{r}
+```{r, message=FALSE}
 library(r2dii.match)
 library(r2dii.analysis)
 library(r2dii.plot)
 library(r2dii.data)
-library(dplyr, warn.conflicts = FALSE)
+library(dplyr)
 library(readxl)
 ```
 
