@@ -9,7 +9,7 @@
     inform_startup(pacta_loanbook_conflict_message(conflicts))
   }
 
-  print.pacta_loanbook_logo(pacta_loanbook_logo())
+  packageStartupMessage(pacta_loanbook_logo())
 }
 
 is_attached <- function(x) {
