@@ -67,30 +67,6 @@ The output of `prioritize()` has the following columns:
 plot_table("prioritize_output")
 ```
 
-## join_abcd_scenario() output
-
-The output of `join_abcd_scenario()` has the following columns:
-
-```{r, echo = FALSE}
-plot_table("join_abcd_scenario_output")
-```
-
-## summarize_weighted_percent_change() output
-
-The output of `summarize_weighted_percent_change()` has the following columns:
-
-```{r, echo = FALSE}
-plot_table("summarize_weighted_percent_change_output")
-```
-
-## summarize_weighted_production() output
-
-The output of `summarize_weighted_production()` has the following columns:
-
-```{r, echo = FALSE}
-plot_table("summarize_weighted_production_output")
-```
-
 ## target_market_share() output
 
 The output of `target_market_share()` has the following columns:
