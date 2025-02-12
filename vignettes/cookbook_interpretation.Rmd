@@ -82,10 +82,9 @@ one of the `loan_size_*` columns).
 
 ### Setup
 
-First we will need to load additional useful packages `{purrr}` and `{ggplot2}`:
+First we will need to load the additional useful package `{ggplot2}`:
 
 ```{r}
-library(purrr)
 library(ggplot2)
 ```
 
@@ -119,12 +118,14 @@ For this, we join the loanbook with the `r2dii.data::sector_classifications` dat
 * In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type. 
 
 ```{r}
-merge_by <- c("code_system", "code") %>% 
-  rlang::set_names(paste0("sector_classification_", c("system", "direct_loantaker")))
+merge_by <- c(
+    sector_classification_system = "code_system",
+    sector_classification_direct_loantaker = "code"
+  )
 
 loanbook_with_sectors <- loanbook %>% 
   left_join(r2dii.data::sector_classifications, by = merge_by) %>% 
-  modify_at(names(merge_by)[[2]], as.character)
+  mutate(sector_classification_direct_loantaker = as.character(sector_classification_direct_loantaker))
 ```
 
 We can join these two datasets together, to generate our `coverage` dataset:
