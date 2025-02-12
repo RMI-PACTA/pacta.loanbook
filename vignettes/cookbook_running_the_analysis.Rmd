@@ -22,6 +22,7 @@ We use the `{pacta.loanbook}` package to access the most important functions you
 library(pacta.loanbook)
 library(dplyr)
 library(readxl)
+library(readr)
 ```
 
 ## Import data
