@@ -25,6 +25,7 @@ library(r2dii.plot)
 library(r2dii.data)
 library(dplyr)
 library(readxl)
+library(readr)
 ```
 
 ## Import data
