@@ -114,7 +114,7 @@
 <div class="section level2">
 <h2 id="calculating-matching-coverage">Calculating Matching Coverage<a class="anchor" aria-label="anchor" href="#calculating-matching-coverage"></a>
 </h2>
-<p><a href="https://rmi-pacta.github.io/r2dii.match/" class="external-link">r2dii.match</a> allows you to match loans from your
+<p><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> allows you to match loans from your
 loanbook to the companies in an asset-based company dataset. However,
 matching every loan is unlikely – some loan-taking companies may be
 missing from the asset-based company dataset, or they may not operate in
@@ -160,23 +160,23 @@ two mismatching loans:</p>
 coverage, we need to go back to the original <code>loanbook</code>
 dataset. We must determine the PACTA sectors of each loan, as dictated
 by the <code>sector_classification_direct_loantaker</code> column.</p>
-<p>For this, we join the loanbook with the
-<code><a href="https://rmi-pacta.github.io/r2dii.data/reference/sector_classifications.html" class="external-link">r2dii.data::sector_classifications</a></code> dataset, which lists all
-sector classification code standards used by ‘PACTA’. Unfortunately we
-need to work around two caveats (you may ignore them because they are
+<p>For this, we join the <code>loanbook</code> with the
+<code>sector_classifications</code> dataset, which lists all sector
+classification code standards used by ‘PACTA’. Unfortunately we need to
+work around two caveats (you may ignore them because they are
 conceptually uninteresting):</p>
 <ul>
 <li><p>In the two datasets, the columns we want to merge by have
-different names. We use the argument <code>by</code> to
+different names. We use the argument <code>by</code> of
 <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> to merge the columns
 <code>sector_classification_system</code> and
 <code>sector_classification_direct_loantaker</code> (from
 <code>loanbook</code>) with the columns <code>code_system</code> and
-<code>code</code> (from
-<code><a href="https://rmi-pacta.github.io/r2dii.data/reference/sector_classifications.html" class="external-link">r2dii.data::sector_classifications</a></code>), respectively.</p></li>
+<code>code</code> (from <code>sector_classifications</code>),
+respectively.</p></li>
 <li><p>In the two datasets, the sector classification codes are
 represented with different data-types. We modify the column
-<code>sector_classification_direct_loantaker</code> before
+<code>sector_classification_direct_loantaker</code> before using
 <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> so it has the same type as the
 corresponding column <code>code</code> (otherwise
 <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> throws an error), and again after
@@ -189,7 +189,7 @@ corresponding column <code>code</code> (otherwise
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="va">loanbook_with_sectors</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="fu">r2dii.data</span><span class="fu">::</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/reference/sector_classifications.html" class="external-link">sector_classifications</a></span>, by <span class="op">=</span> <span class="va">merge_by</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">sector_classifications</span>, by <span class="op">=</span> <span class="va">merge_by</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>sector_classification_direct_loantaker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">sector_classification_direct_loantaker</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>We can join these two datasets together, to generate our
 <code>coverage</code> dataset:</p>
@@ -291,10 +291,10 @@ loanbook were matched. It probably makes most sense to do this at the
 <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
 </h2>
 <p>There are a large variety of possible visualizations stemming from
-the outputs of <code><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_market_share.html" class="external-link">r2dii.analysis::target_market_share()</a></code> and
-<code><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_sda.html" class="external-link">r2dii.analysis::target_sda()</a></code>. Below, we highlight a couple
-of common plots that can easily be created using the
-<a href="https://rmi-pacta.github.io/r2dii.plot/" class="external-link">r2dii.plot</a> package.</p>
+the outputs of <code><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_market_share.html" class="external-link">target_market_share()</a></code> and
+<code><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_sda.html" class="external-link">target_sda()</a></code>. Below, we highlight a couple of common plots
+that can easily be created using the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a>
+package.</p>
 <div class="section level3">
 <h3 id="market-share-sector-level-technology-mix">Market Share: Sector-level technology mix<a class="anchor" aria-label="anchor" href="#market-share-sector-level-technology-mix"></a>
 </h3>
