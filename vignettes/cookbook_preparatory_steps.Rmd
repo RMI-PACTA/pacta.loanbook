@@ -109,7 +109,7 @@ The user can provide a list of loans that have been misclassified in the raw loa
 - self-prepared
 - CSV file
 
-In case the user cannot obtain sector classification codes of any of the classification systems featured in `pacta.loanbook::sector_classifications` (currently the following classification systems are featured: `r unique(pacta.loanbook::sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of `pacta.loanbook::sector_classifications`. It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
+In case the user cannot obtain sector classification codes of any of the classification systems featured in `sector_classifications` (currently the following classification systems are featured: `r unique(sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of `sector_classifications`. It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
 
 ## Required Software
 
@@ -144,7 +144,7 @@ We use the [`pak` package](https://pak.r-lib.org/index.html) as a simple [tool t
 
 #### Connecting to GitHub from RStudio
 
-Note that if you choose to install the `r2dii.*` suite of R packages from GitHub, you will need to have:
+Note that if you choose to install the `{pacta.loanbook}` R package from GitHub, you will need to have:
 
 (1) registered a [GitHub](https://github.com/) account,
 (2) `git` installed locally,
@@ -160,7 +160,7 @@ If you only plan to use GitHub to install this package or other packages as show
 
 ### Required R packages
 
-The `{pacta.loanbook}` R package depends on a number of other R packages. These dependencies will be installed automatically when you install the `{pacta.loanbook}` R packages The required packages are:
+The `{pacta.loanbook}` R package depends on a number of other R packages. These dependencies will be installed automatically when you install the `{pacta.loanbook}` R package. The required packages are:
 
 ```{r imports, echo = FALSE, results = 'asis'}
 imports <- paste(
@@ -175,7 +175,6 @@ imports <- unlist(strsplit(x = imports, split = ",[[:space:]]"))
 imports <- sub(pattern = " [(].*[)]$", replacement = "", x = imports)
 imports <- sort(unique(imports))
 imports <- imports[!imports %in% c("utils", "stats")]
-imports <- imports[!unlist(lapply(imports, grepl, pattern = "^r2dii[.]"))]
 cat(paste0("`{", paste0(imports, collapse = "}`, `{"), "}`"))
 ```
 
@@ -187,7 +186,7 @@ The most common ways to install R packages are via CRAN or [GitHub](#connecting-
 
 #### How do I install the required R packages?
 
-In principle, all dependencies required to run the `{pacta.loanbook}` R package will be installed automatically when you install the packages. However, if you encounter any issues with the installation of the required packages, you can install them manually by running the following command in R, where `...` should be replaced with the package names from the list above, separated by commas:
+In principle, all dependencies required to run the `{pacta.loanbook}` R package will be installed automatically when you install the package. However, if you encounter any issues with the installation of the required packages, you can install them manually by running the following command in R, where `...` should be replaced with the package names from the list above, separated by commas:
 
 ```{r install_deps, eval = FALSE}
 install.packages(c(...))

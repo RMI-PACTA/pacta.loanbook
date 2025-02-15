@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Setup
 
-We use the `{pacta.loanbook}` package to access the most important functions you'll learn about. We also use example datasets from the package `{pacta.loanbook}`, and optional but convenient functions from the packages `{dplyr}` and `{readxl}`.
+We use the `{pacta.loanbook}` package to access the most important functions you'll learn about. We also use example datasets from the package `{pacta.loanbook}`, and optional but convenient functions from the packages `{dplyr}`, `{readxl}`, and `{readr}`.
 
 ```{r, message=FALSE}
 library(pacta.loanbook)

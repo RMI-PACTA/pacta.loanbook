@@ -68,7 +68,7 @@ sector_in_scope <- glue::glue_collapse(
 )
 ```
 
-`{r2dii.match}` allows you to match loans from your loanbook to the companies in
+`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in
 an asset-based company dataset. However, matching every loan is unlikely -- some
 loan-taking companies may be missing from the asset-based company dataset, or
 they may not operate in the sectors PACTA focuses on (`r sector_in_scope`).
@@ -111,11 +111,11 @@ matched <- loanbook %>%
 
 Note that this `matched` dataset will contain _only_ loans that were matched successfully. To determine coverage, we need to go back to the original `loanbook` dataset. We must determine the PACTA sectors of each loan, as dictated by the `sector_classification_direct_loantaker` column.
 
-For this, we join the loanbook with the `r2dii.data::sector_classifications` dataset, which lists all sector classification code standards used by 'PACTA'. Unfortunately we need to work around two caveats (you may ignore them because they are conceptually uninteresting):
+For this, we join the `loanbook` with the `sector_classifications` dataset, which lists all sector classification code standards used by 'PACTA'. Unfortunately we need to work around two caveats (you may ignore them because they are conceptually uninteresting):
 
-* In the two datasets, the columns we want to merge by have different names. We use the argument `by` to `dplyr::left_join()` to merge the columns `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`) with the columns `code_system` and `code` (from `r2dii.data::sector_classifications`), respectively. 
+* In the two datasets, the columns we want to merge by have different names. We use the argument `by` of `dplyr::left_join()` to merge the columns `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`) with the columns `code_system` and `code` (from `sector_classifications`), respectively. 
 
-* In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type. 
+* In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before using `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type. 
 
 ```{r}
 merge_by <- c(
@@ -124,7 +124,7 @@ merge_by <- c(
   )
 
 loanbook_with_sectors <- loanbook %>% 
-  left_join(r2dii.data::sector_classifications, by = merge_by) %>% 
+  left_join(sector_classifications, by = merge_by) %>% 
   mutate(sector_classification_direct_loantaker = as.character(sector_classification_direct_loantaker))
 ```
 
@@ -226,8 +226,8 @@ companies_matched %>%
 ## Visualization
 
 There are a large variety of possible visualizations stemming from the outputs 
-of `r2dii.analysis::target_market_share()` and `r2dii.analysis::target_sda()`. Below, we highlight a couple of 
-common plots that can easily be created using the `{r2dii.plot}` package.
+of `target_market_share()` and `target_sda()`. Below, we highlight a couple of 
+common plots that can easily be created using the `{pacta.loanbook}` package.
 
 ### Market Share: Sector-level technology mix
 
