@@ -5,6 +5,9 @@
 #' confirmation.
 #'
 #' @inheritParams pacta_loanbook_deps
+#'
+#' @family Utility functions
+#'
 #' @export
 #' @examples
 #' \dontrun{
@@ -42,6 +45,8 @@ pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos"))
 #' a quick idea of what's going on when you're helping someone else debug
 #' a problem.
 #'
+#' @family Utility functions
+#'
 #' @export
 pacta_loanbook_sitrep <- function() {
   cli::cat_rule("R & RStudio")
@@ -70,6 +75,9 @@ pacta_loanbook_sitrep <- function() {
 #'   pacta.loanbook packages.
 #' @param repos The repositories to use to check for updates.
 #'   Defaults to \code{getOption("repos")}.
+#'
+#' @family Utility functions
+#'
 #' @export
 pacta_loanbook_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)

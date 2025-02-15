@@ -28,6 +28,22 @@ than 2 degree temperature rise.
 head(increasing_or_decreasing)
 }
 \seealso{
-\link[r2dii.data]{data_dictionary}
+Other Datasets: 
+\code{\link{gics_classification}},
+\code{\link{isic_classification}},
+\code{\link{iso_codes}},
+\code{\link{market_share}},
+\code{\link{nace_classification}},
+\code{\link{naics_classification}},
+\code{\link{palette_colours}},
+\code{\link{psic_classification}},
+\code{\link{region_isos}},
+\code{\link{scenario_colours}},
+\code{\link{sda}},
+\code{\link{sector_classifications}},
+\code{\link{sector_colours}},
+\code{\link{sic_classification}},
+\code{\link{technology_colours}}
 }
+\concept{Datasets}
 \keyword{datasets}

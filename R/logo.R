@@ -7,6 +7,9 @@
 #'   on UTF-8 platforms.
 #'
 #' @md
+#'
+#' @family Utility functions
+#'
 #' @export
 #' @examples
 #' pacta_loanbook_logo()

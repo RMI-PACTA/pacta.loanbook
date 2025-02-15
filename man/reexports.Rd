@@ -4,9 +4,6 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
-\alias{join_abcd_scenario}
-\alias{summarize_weighted_percent_change}
-\alias{summarize_weighted_production}
 \alias{target_market_share}
 \alias{target_sda}
 \alias{crucial_lbk}
@@ -33,13 +30,16 @@
 \alias{theme_2dii}
 \alias{to_title}
 \title{Objects exported from other packages}
+\concept{Analysis functions}
+\concept{Matching functions}
+\concept{Plotting functions}
 \keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{r2dii.analysis}{\code{\link[r2dii.analysis]{join_abcd_scenario}}, \code{\link[r2dii.analysis:summarize_weighted_production]{summarize_weighted_percent_change}}, \code{\link[r2dii.analysis]{summarize_weighted_production}}, \code{\link[r2dii.analysis]{target_market_share}}, \code{\link[r2dii.analysis]{target_sda}}}
+  \item{r2dii.analysis}{\code{\link[r2dii.analysis]{target_market_share}}, \code{\link[r2dii.analysis]{target_sda}}}
 
   \item{r2dii.match}{\code{\link[r2dii.match]{crucial_lbk}}, \code{\link[r2dii.match]{match_name}}, \code{\link[r2dii.match]{prioritize}}, \code{\link[r2dii.match]{prioritize_level}}}
 

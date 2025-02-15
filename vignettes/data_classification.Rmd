@@ -14,10 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
+library(pacta.loanbook)
+
 plot_table <- function(dataset_name) {
-  library(r2dii.data)
-  table <- r2dii.data::data_dictionary
+  table <- data_dictionary
   table <- dplyr::filter(table, .data[["dataset"]] == dataset_name)
   table <- dplyr::arrange(table, match(column, names(get(dataset_name))))
   table_plot <- gt::gt(dplyr::select(table, -"dataset"))
@@ -57,10 +58,10 @@ This dataset contains all currently supported translation keys between the secto
 plot_table("sector_classifications")
 ```
 
-The `{r2dii.data}` package provides a sector classification dataset `r2dii.data::sector_classifications` that contains a sector mapping for all supported sector classification systems (currently: `r paste0(unique(r2dii.data::sector_classifications$code_system), collapse = ", ")`).
+The `{pacta.loanbook}` package provides a sector classification dataset `sector_classifications` that contains a sector mapping for all supported sector classification systems (currently: `r paste0(unique(sector_classifications$code_system), collapse = ", ")`).
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::sector_classifications
+sector_classifications
 ```
 
 ## GICS classification dataset
@@ -71,26 +72,26 @@ This dataset serves as a translation key between the GICS sector-classification 
 plot_table("gics_classification")
 ```
 
-The `{r2dii.data}` package provides a GICS classification dataset `r2dii.data::gics_classification`.
+The `{pacta.loanbook}` package provides a GICS classification dataset `gics_classification`.
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::gics_classification
+gics_classification
 ```
 
 ## ISIC Rev 5 classification dataset
 
 This dataset serves as a translation key between the ISIC Rev 5 sector-classification system and sector scopes used in the 'PACTA' software.
 
-The `{r2dii.data}` package provides a ISIC Rev 5 classification dataset `r2dii.data::isic_classification`.
+The `{pacta.loanbook}` package provides a ISIC Rev 5 classification dataset `isic_classification`.
 
 ```{r, echo = FALSE}
 plot_table("isic_classification")
 ```
 
-The `{r2dii.data}` package provides a ISIC Rev 5 classification dataset `r2dii.data::isic_classification`.
+The `{pacta.loanbook}` package provides a ISIC Rev 5 classification dataset `isic_classification`.
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::isic_classification
+isic_classification
 ```
 
 ## NACE version 2.1 classification dataset
@@ -101,10 +102,10 @@ This dataset serves as a translation key between the NACE version 2.1 sector-cla
 plot_table("nace_classification")
 ```
 
-The `{r2dii.data}` package provides a NACE version 2.1 classification dataset `r2dii.data::nace_classification`.
+The `{pacta.loanbook}` package provides a NACE version 2.1 classification dataset `nace_classification`.
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::nace_classification
+nace_classification
 ```
 
 ## PSIC classification dataset
@@ -115,10 +116,10 @@ This dataset serves as a translation key between the PSIC sector-classification 
 plot_table("psic_classification")
 ```
 
-The `{r2dii.data}` package provides a PSIC classification dataset `r2dii.data::psic_classification`.
+The `{pacta.loanbook}` package provides a PSIC classification dataset `psic_classification`.
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::psic_classification
+psic_classification
 ```
 
 ## SIC classification dataset
@@ -129,8 +130,8 @@ This dataset serves as a translation key between the SIC sector-classification s
 plot_table("sic_classification")
 ```
 
-The `{r2dii.data}` package provides a SIC classification dataset `r2dii.data::sic_classification`.
+The `{pacta.loanbook}` package provides a SIC classification dataset `sic_classification`.
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::sic_classification
+sic_classification
 ```

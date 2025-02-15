@@ -37,14 +37,22 @@ the wild to a relevant subset including 'power', 'oil and gas', 'coal',
 head(nace_classification)
 }
 \seealso{
-\link[r2dii.data]{data_dictionary}.
-
-Other datasets for bridging sector classification codes: 
-\code{\link[r2dii.data]{gics_classification}},
-\code{\link[r2dii.data]{isic_classification}},
-\code{\link[r2dii.data]{naics_classification}},
-\code{\link[r2dii.data]{psic_classification}},
-\code{\link[r2dii.data]{sector_classifications}},
-\code{\link[r2dii.data]{sic_classification}}
+Other Datasets: 
+\code{\link{gics_classification}},
+\code{\link{increasing_or_decreasing}},
+\code{\link{isic_classification}},
+\code{\link{iso_codes}},
+\code{\link{market_share}},
+\code{\link{naics_classification}},
+\code{\link{palette_colours}},
+\code{\link{psic_classification}},
+\code{\link{region_isos}},
+\code{\link{scenario_colours}},
+\code{\link{sda}},
+\code{\link{sector_classifications}},
+\code{\link{sector_colours}},
+\code{\link{sic_classification}},
+\code{\link{technology_colours}}
 }
+\concept{Datasets}
 \keyword{datasets}

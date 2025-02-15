@@ -8,6 +8,8 @@
 #' make the base equivalents generic, so shouldn't negatively affect any
 #' existing code.
 #'
+#' @family Utility functions
+#'
 #' @export
 #' @param only Set this to a character vector to restrict to conflicts only
 #'   with these packages.

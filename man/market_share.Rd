@@ -17,10 +17,22 @@ Dataset imitating the output of \code{\link[r2dii.analysis:target_market_share]{
 market_share
 }
 \seealso{
-\code{\link[r2dii.analysis:target_market_share]{r2dii.analysis::target_market_share()}}.
-
-Other datasets: 
-\code{\link[r2dii.plot]{r2dii_colours}},
-\code{\link[r2dii.plot]{sda}}
+Other Datasets: 
+\code{\link{gics_classification}},
+\code{\link{increasing_or_decreasing}},
+\code{\link{isic_classification}},
+\code{\link{iso_codes}},
+\code{\link{nace_classification}},
+\code{\link{naics_classification}},
+\code{\link{palette_colours}},
+\code{\link{psic_classification}},
+\code{\link{region_isos}},
+\code{\link{scenario_colours}},
+\code{\link{sda}},
+\code{\link{sector_classifications}},
+\code{\link{sector_colours}},
+\code{\link{sic_classification}},
+\code{\link{technology_colours}}
 }
+\concept{Datasets}
 \keyword{datasets}

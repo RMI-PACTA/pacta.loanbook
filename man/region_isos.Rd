@@ -29,10 +29,22 @@ For information about the ISO standard for country codes see
 head(region_isos)
 }
 \seealso{
-\link[r2dii.data]{data_dictionary}
-
-Other iso codes: 
-\code{\link[r2dii.data]{iso_codes}},
-\code{\link[r2dii.data]{region_isos_demo}}
+Other Datasets: 
+\code{\link{gics_classification}},
+\code{\link{increasing_or_decreasing}},
+\code{\link{isic_classification}},
+\code{\link{iso_codes}},
+\code{\link{market_share}},
+\code{\link{nace_classification}},
+\code{\link{naics_classification}},
+\code{\link{palette_colours}},
+\code{\link{psic_classification}},
+\code{\link{scenario_colours}},
+\code{\link{sda}},
+\code{\link{sector_classifications}},
+\code{\link{sector_colours}},
+\code{\link{sic_classification}},
+\code{\link{technology_colours}}
 }
+\concept{Datasets}
 \keyword{datasets}

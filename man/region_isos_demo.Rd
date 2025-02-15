@@ -34,15 +34,12 @@ For information about the ISO standard for country codes see
 region_isos_demo
 }
 \seealso{
-Other iso codes: 
-\code{\link[r2dii.data]{iso_codes}},
-\code{\link[r2dii.data]{region_isos}}
-
-Other demo datasets: 
-\code{\link[r2dii.data]{abcd_demo}},
-\code{\link[r2dii.data]{co2_intensity_scenario_demo}},
-\code{\link[r2dii.data]{loanbook_demo}},
-\code{\link[r2dii.data]{overwrite_demo}},
-\code{\link[r2dii.data]{scenario_demo_2020}}
+Other Demo data: 
+\code{\link{abcd_demo}},
+\code{\link{co2_intensity_scenario_demo}},
+\code{\link{loanbook_demo}},
+\code{\link{overwrite_demo}},
+\code{\link{scenario_demo_2020}}
 }
+\concept{Demo data}
 \keyword{datasets}
