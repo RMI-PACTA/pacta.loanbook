@@ -117,7 +117,7 @@ Using the `{pacta.loanbook}` package for the PACTA for Banks analysis requires t
 
 ### R (version 4.1.0 or higher)
 
-R is the programming language that the `{pacta.loanboo}` package is written in. You can download R from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/).
+R is the programming language that the `{pacta.loanbook}` package is written in. You can download R from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/).
 
 ### RStudio (optional)
 
