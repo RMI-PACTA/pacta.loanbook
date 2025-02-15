@@ -7,11 +7,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include = FALSE, message = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+library(pacta.loanbook)
 ```
 
 # Preparatory Steps
@@ -55,7 +57,7 @@ For sectors with technology level trajectories, the data set provides the TMSR a
 The target market share scenario data set must be a CSV file and contains the following columns:
 
 ```{r cols_tms_scenario, echo = FALSE, results = 'asis'}
-cat(paste0("- `", names(r2dii.data::scenario_demo_2020), "`", collapse = "\n"))
+cat(paste0("- `", names(scenario_demo_2020), "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [scenario](data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation).
@@ -65,7 +67,7 @@ For sectors that do not have technology level pathways, PACTA uses the Sectoral 
 The SDA scenario data set must be a CSV file and contains the following columns:
 
 ```{r cols_sda_scenario, echo = FALSE, results = 'asis'}
-cat(paste0("- `", names(r2dii.data::co2_intensity_scenario_demo), "`", collapse = "\n"))
+cat(paste0("- `", names(co2_intensity_scenario_demo), "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [scenario](data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach).
