@@ -1,6 +1,6 @@
-# saveRDS(c("PACTA", "pacta"), file = ".aspell/en-pacta.rds", version = 2)
+# saveRDS(c("PACTA", "pacta"), file = ".aspell/pacta.rds", version = 2)
 
-Rd_files <- vignettes <- R_files <- dcf <- description <-
+Rd_files <- vignettes <- R_files <- description <-
   list(encoding = "UTF-8",
        language = "en",
-       dictionaries = c("en_stats", "en-pacta"))
+       dictionaries = c("en_stats", ".aspell/pacta"))
