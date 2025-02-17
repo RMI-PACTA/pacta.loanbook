@@ -93,7 +93,7 @@
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other Plotting functions:
+    <div class="dont-index"><p>Other plotting functions:
 <code><a href="plot_emission_intensity.html">plot_emission_intensity</a>()</code>,
 <code><a href="plot_trajectory.html">plot_trajectory</a>()</code>,
 <code><a href="prep_emission_intensity.html">prep_emission_intensity</a>()</code>,
@@ -109,6 +109,7 @@
 <code><a href="scale_colour_r2dii_tech.html">scale_colour_r2dii_tech</a>()</code>,
 <code><a href="scale_fill_r2dii.html">scale_fill_r2dii</a>()</code>,
 <code><a href="scale_fill_r2dii_sector.html">scale_fill_r2dii_sector</a>()</code>,
+<code><a href="scale_fill_r2dii_tech.html">scale_fill_r2dii_tech</a>()</code>,
 <code><a href="spell_out_technology.html">spell_out_technology</a>()</code>,
 <code><a href="theme_2dii.html">theme_2dii</a>()</code>,
 <code><a href="to_title.html">to_title</a>()</code></p></div>
@@ -123,16 +124,17 @@
 <span class="r-in"><span>    <span class="va">sector</span> <span class="op">==</span> <span class="st">"power"</span> <span class="op">&amp;</span></span></span>
 <span class="r-in"><span>    <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span> <span class="op">&amp;</span></span></span>
 <span class="r-in"><span>    <span class="va">metric</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"projected"</span>, <span class="st">"corporate_economy"</span>, <span class="st">"target_sds"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="prep_techmix.html">prep_techmix</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    span_5yr <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>    convert_label <span class="op">=</span> <span class="va">recode_metric_techmix</span>,</span></span>
 <span class="r-in"><span>    convert_tech_label <span class="op">=</span> <span class="va">spell_out_technology</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in subset(market_share, scenario_source == "demo_2020" &amp; sector ==     "power" &amp; region == "global" &amp; metric %in% c("projected",     "corporate_economy", "target_sds")) %&gt;% prep_techmix(span_5yr = TRUE,     convert_label = recode_metric_techmix, convert_tech_label = spell_out_technology):</span> could not find function "%&gt;%"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The `technology_share` values are plotted for extreme years.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Do you want to plot different years? E.g. filter . with:`subset(., year %in% c(2020, 2030))`.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">plot_techmix</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_plot_techmix(data, env = env):</span> is.data.frame(data) is not TRUE</span>
+<span class="r-plt img"><img src="plot_techmix-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

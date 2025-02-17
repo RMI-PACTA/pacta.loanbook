@@ -93,7 +93,7 @@
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other Plotting functions:
+    <div class="dont-index"><p>Other plotting functions:
 <code><a href="plot_techmix.html">plot_techmix</a>()</code>,
 <code><a href="plot_trajectory.html">plot_trajectory</a>()</code>,
 <code><a href="prep_emission_intensity.html">prep_emission_intensity</a>()</code>,
@@ -109,6 +109,7 @@
 <code><a href="scale_colour_r2dii_tech.html">scale_colour_r2dii_tech</a>()</code>,
 <code><a href="scale_fill_r2dii.html">scale_fill_r2dii</a>()</code>,
 <code><a href="scale_fill_r2dii_sector.html">scale_fill_r2dii_sector</a>()</code>,
+<code><a href="scale_fill_r2dii_tech.html">scale_fill_r2dii_tech</a>()</code>,
 <code><a href="spell_out_technology.html">spell_out_technology</a>()</code>,
 <code><a href="theme_2dii.html">theme_2dii</a>()</code>,
 <code><a href="to_title.html">to_title</a>()</code></p></div>
@@ -117,12 +118,11 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># plot with `qplot_emission_intensity()` parameters</span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">sda</span>, <span class="va">sector</span> <span class="op">==</span> <span class="st">"cement"</span> <span class="op">&amp;</span> <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">sda</span>, <span class="va">sector</span> <span class="op">==</span> <span class="st">"cement"</span> <span class="op">&amp;</span> <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="prep_emission_intensity.html">prep_emission_intensity</a></span><span class="op">(</span>span_5yr <span class="op">=</span> <span class="cn">TRUE</span>, convert_label <span class="op">=</span> <span class="va">to_title</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in subset(sda, sector == "cement" &amp; region == "global") %&gt;% prep_emission_intensity(span_5yr = TRUE,     convert_label = to_title):</span> could not find function "%&gt;%"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">plot_emission_intensity</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_plot_emission_intensity(data, env = list(data = substitute(data))):</span> is.data.frame(data) is not TRUE</span>
+<span class="r-plt img"><img src="plot_emission_intensity-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

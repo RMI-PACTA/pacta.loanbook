@@ -18,7 +18,6 @@
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/index.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/abcd_demo.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/co2_intensity_scenario_demo.html</loc></url>
-<url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/crucial_lbk.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/data_dictionary.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/gics_classification.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/increasing_or_decreasing.html</loc></url>
@@ -39,6 +38,7 @@
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/pacta_loanbook_sitrep.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/pacta_loanbook_update.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/palette_colours.html</loc></url>
+<url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/pipe.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/plot_emission_intensity.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/plot_techmix.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/plot_trajectory.html</loc></url>
@@ -60,6 +60,7 @@
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/scale_colour_r2dii_tech.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/scale_fill_r2dii.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/scale_fill_r2dii_sector.html</loc></url>
+<url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/scale_fill_r2dii_tech.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/scenario_colours.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/scenario_demo_2020.html</loc></url>
 <url><loc>https://rmi-pacta.github.io/pacta.loanbook/reference/sda.html</loc></url>

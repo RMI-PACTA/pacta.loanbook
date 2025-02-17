@@ -79,9 +79,7 @@ palette.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">scale_colour_r2dii_tech</span><span class="op">(</span><span class="va">sector</span>, technologies <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">scale_colour_r2dii_tech</span><span class="op">(</span><span class="va">sector</span>, technologies <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">scale_colour_r2dii_tech</span><span class="op">(</span><span class="va">sector</span>, technologies <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -111,7 +109,7 @@ parameter in <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other Plotting functions:
+    <div class="dont-index"><p>Other plotting functions:
 <code><a href="plot_emission_intensity.html">plot_emission_intensity</a>()</code>,
 <code><a href="plot_techmix.html">plot_techmix</a>()</code>,
 <code><a href="plot_trajectory.html">plot_trajectory</a>()</code>,
@@ -127,25 +125,7 @@ parameter in <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual
 <code><a href="scale_colour_r2dii_sector.html">scale_colour_r2dii_sector</a>()</code>,
 <code><a href="scale_fill_r2dii.html">scale_fill_r2dii</a>()</code>,
 <code><a href="scale_fill_r2dii_sector.html">scale_fill_r2dii_sector</a>()</code>,
-<code><a href="spell_out_technology.html">spell_out_technology</a>()</code>,
-<code><a href="theme_2dii.html">theme_2dii</a>()</code>,
-<code><a href="to_title.html">to_title</a>()</code></p>
-<p>Other Plotting functions:
-<code><a href="plot_emission_intensity.html">plot_emission_intensity</a>()</code>,
-<code><a href="plot_techmix.html">plot_techmix</a>()</code>,
-<code><a href="plot_trajectory.html">plot_trajectory</a>()</code>,
-<code><a href="prep_emission_intensity.html">prep_emission_intensity</a>()</code>,
-<code><a href="prep_techmix.html">prep_techmix</a>()</code>,
-<code><a href="prep_trajectory.html">prep_trajectory</a>()</code>,
-<code><a href="qplot_emission_intensity.html">qplot_emission_intensity</a>()</code>,
-<code><a href="qplot_techmix.html">qplot_techmix</a>()</code>,
-<code><a href="qplot_trajectory.html">qplot_trajectory</a>()</code>,
-<code><a href="recode_metric_techmix.html">recode_metric_techmix</a>()</code>,
-<code><a href="recode_metric_trajectory.html">recode_metric_trajectory</a>()</code>,
-<code><a href="scale_colour_r2dii.html">scale_colour_r2dii</a>()</code>,
-<code><a href="scale_colour_r2dii_sector.html">scale_colour_r2dii_sector</a>()</code>,
-<code><a href="scale_fill_r2dii.html">scale_fill_r2dii</a>()</code>,
-<code><a href="scale_fill_r2dii_sector.html">scale_fill_r2dii_sector</a>()</code>,
+<code><a href="scale_fill_r2dii_tech.html">scale_fill_r2dii_tech</a>()</code>,
 <code><a href="spell_out_technology.html">spell_out_technology</a>()</code>,
 <code><a href="theme_2dii.html">theme_2dii</a>()</code>,
 <code><a href="to_title.html">to_title</a>()</code></p></div>
@@ -162,8 +142,8 @@ parameter in <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">cyl</span>, fill <span class="op">=</span> <span class="va">class</span><span class="op">)</span>, position <span class="op">=</span> <span class="st">"dodge"</span>, bins <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">scale_fill_r2dii_tech</span><span class="op">(</span><span class="st">"automotive"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in scale_fill_r2dii_tech("automotive"):</span> could not find function "scale_fill_r2dii_tech"</span>
+<span class="r-in"><span>  <span class="fu"><a href="scale_fill_r2dii_tech.html">scale_fill_r2dii_tech</a></span><span class="op">(</span><span class="st">"automotive"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="scale_colour_r2dii_tech-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

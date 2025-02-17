@@ -241,17 +241,17 @@ strings that belong to the same sector. Using
 computation time, and the number of potentially incorrect matches to
 manually validate.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 656</span></span>
 <span></span>
 <span><span class="co"># Compare to</span></span>
-<span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 326</span></span></code></pre></div>
 <p>The <code>min_score</code> argument allows you to set a minimum
 threshold score.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, min_score <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, min_score <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9007692 1.0000000</span></span></code></pre></div>
 </div>
@@ -302,10 +302,10 @@ loan is of highest <code>priority</code>:</p>
 <code class="sourceCode R"><span><span class="va">some_interesting_columns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id_2dii"</span>, <span class="st">"level"</span>, <span class="st">"score"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">prioritized_matches</span> <span class="op">&lt;-</span></span>
-<span>  <span class="va">valid_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">valid_matches</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">prioritized_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">prioritized_matches</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 177 × 3</span></span></span>
 <span><span class="co">#&gt;    id_2dii level            score</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -330,8 +330,8 @@ via <code><a href="../reference/prioritize_level.html">prioritize_level()</a></c
 function to <code>priority</code>. For example, use <code><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev()</a></code>
 to reverse the default priority.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">rev</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">rev</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 177 × 3</span></span></span>
 <span><span class="co">#&gt;    id_2dii level           score</span></span>
@@ -379,7 +379,7 @@ the <code>borderline</code> flag.</p>
 <p>In the example below, we see two classification codes coming from the
 SIC classification standard:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nace_classification</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">nace_classification</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D35.11"</span>, <span class="st">"D35.14"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
 <span><span class="co">#&gt;   original_code description                      code  sector borderline version</span></span>
@@ -496,7 +496,7 @@ technology roadmaps.</p>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    co2_intensity_scenario <span class="op">=</span> <span class="va">co2</span>,</span>
 <span>    region_isos <span class="op">=</span> <span class="va">regions</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sector</span> <span class="op">==</span> <span class="st">"cement"</span>, <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">2020</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removing rows in abcd where `emission_factor` is NA</span></span>
 <span></span>
