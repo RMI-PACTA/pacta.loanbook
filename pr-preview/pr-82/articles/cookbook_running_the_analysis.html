@@ -194,7 +194,7 @@ after importing.</p>
 <h2 id="score-the-match-precision-between-the-loanbook-and-abcd-datasets">Score the match precision between the loanbook and abcd
 datasets<a class="anchor" aria-label="anchor" href="#score-the-match-precision-between-the-loanbook-and-abcd-datasets"></a>
 </h2>
-<p><code><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name()</a></code> scores the match between names in a
+<p><code><a href="../reference/match_name.html">match_name()</a></code> scores the match between names in a
 loanbook dataset and names in an asset-based company dataset. The names
 come from the columns <code>name_direct_loantaker</code> and
 <code>name_ultimate_parent</code> of the loanbook dataset, and from the
@@ -218,7 +218,7 @@ names of the loanbook against the names in the abcd. For more
 information on the scoring algorithm used, see
 <code><a href="https://rdrr.io/pkg/stringdist/man/stringsim.html" class="external-link">stringdist::stringsim()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">matched</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 326 × 22</span></span></span>
@@ -235,22 +235,22 @@ information on the scoring algorithm used, see
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> L9      C301                Werner Werner AG &amp; Co. KGaA UP138              Leone-Leone s.r.l.                          <span style="text-decoration: underline;">407</span>513 EUR                                          20<span style="text-decoration: underline;">783</span>373 EUR                             NACE                         D35.11                                 <span style="color: #BB0000;">NA</span>                   <span style="color: #BB0000;">NA</span>                    DL274   direct… power  power       Wern… Wende We… 0.844 loanb… FALSE     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> L9      C301                Werner Werner AG &amp; Co. KGaA UP138              Leone-Leone s.r.l.                          <span style="text-decoration: underline;">407</span>513 EUR                                          20<span style="text-decoration: underline;">783</span>373 EUR                             NACE                         D35.11                                 <span style="color: #BB0000;">NA</span>                   <span style="color: #BB0000;">NA</span>                    UP132   ultima… power  power       Leon… Leone-Le… 1     loanb… FALSE     </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 316 more rows</span></span></span></code></pre></div>
-<p><code><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name()</a></code> defaults to scoring matches between name
+<p><code><a href="../reference/match_name.html">match_name()</a></code> defaults to scoring matches between name
 strings that belong to the same sector. Using
 <code>by_sector = FALSE</code> removes this limitation – increasing
 computation time, and the number of potentially incorrect matches to
 manually validate.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 656</span></span>
 <span></span>
 <span><span class="co"># Compare to</span></span>
-<span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 326</span></span></code></pre></div>
 <p>The <code>min_score</code> argument allows you to set a minimum
 threshold score.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, min_score <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, min_score <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9007692 1.0000000</span></span></code></pre></div>
@@ -258,7 +258,7 @@ threshold score.</p>
 <div class="section level2">
 <h2 id="validate-matches">Validate matches<a class="anchor" aria-label="anchor" href="#validate-matches"></a>
 </h2>
-<p>Write the output of <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name()</a></code> into a .csv file, for
+<p>Write the output of <code><a href="../reference/match_name.html">match_name()</a></code> into a .csv file, for
 example using <a href="https://readr.tidyverse.org" class="external-link">readr</a> to save a CSV file:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">matched</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"matched.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -286,7 +286,7 @@ other than <code>1</code>.</li>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"valid_matches.csv"</span><span class="op">)</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>For more information on validating matches, please see the
-documentation for <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize()</a></code>.</p>
+documentation for <code><a href="../reference/prioritize.html">prioritize()</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="prioritize-validated-matches-by-level">Prioritize validated matches by level<a class="anchor" aria-label="anchor" href="#prioritize-validated-matches-by-level"></a>
@@ -295,7 +295,7 @@ documentation for <code><a href="https://rmi-pacta.github.io/r2dii.match/referen
 the case where a loan is given to “Acme Power USA”, a subsidiary of
 “Acme Power Co.”. There may be both “Acme Power USA” and “Acme Power
 Co.” in the <code>abcd</code>, and so there could be two valid matches
-for this loan. To get the best match only, use <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize()</a></code>
+for this loan. To get the best match only, use <code><a href="../reference/prioritize.html">prioritize()</a></code>
 – it picks rows where <code>score</code> is 1 and <code>level</code> per
 loan is of highest <code>priority</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -303,7 +303,7 @@ loan is of highest <code>priority</code>:</p>
 <span></span>
 <span><span class="va">prioritized_matches</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">valid_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">prioritized_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 177 × 3</span></span></span>
@@ -322,16 +322,16 @@ loan is of highest <code>priority</code>:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 167 more rows</span></span></span></code></pre></div>
 <p>By default, highest priority refers to the most granular match
 (<code>direct_loantaker</code>). The default priority is set internally
-via <code><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize_level.html" class="external-link">prioritize_level()</a></code>.</p>
+via <code><a href="../reference/prioritize_level.html">prioritize_level()</a></code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize_level.html" class="external-link">prioritize_level</a></span><span class="op">(</span><span class="va">valid_matches</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prioritize_level.html">prioritize_level</a></span><span class="op">(</span><span class="va">valid_matches</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "direct_loantaker" "ultimate_parent"</span></span></code></pre></div>
 <p>You may use a different priority. One way to do that is to pass a
 function to <code>priority</code>. For example, use <code><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev()</a></code>
 to reverse the default priority.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">rev</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">rev</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 177 × 3</span></span></span>
 <span><span class="co">#&gt;    id_2dii level           score</span></span>
@@ -420,7 +420,7 @@ a granular technology scenario roadmap exists.</p>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="va">region_isos_demo</span></span>
 <span></span>
 <span><span class="va">market_share_targets_portfolio</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_market_share.html" class="external-link">target_market_share</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    scenario <span class="op">=</span> <span class="va">scenario</span>,</span>
@@ -445,7 +445,7 @@ a granular technology scenario roadmap exists.</p>
 <p>Or at the company level:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">market_share_targets_company</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_market_share.html" class="external-link">target_market_share</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    scenario <span class="op">=</span> <span class="va">scenario</span>,</span>
@@ -491,7 +491,7 @@ technology roadmaps.</p>
 <span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
 <span></span>
 <span><span class="va">sda_targets</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_sda.html" class="external-link">target_sda</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    co2_intensity_scenario <span class="op">=</span> <span class="va">co2</span>,</span>
@@ -518,7 +518,7 @@ technology roadmaps.</p>
 <p>Or at the company level:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sda_targets_company</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_sda.html" class="external-link">target_sda</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    co2_intensity_scenario <span class="op">=</span> <span class="va">co2</span>,</span>

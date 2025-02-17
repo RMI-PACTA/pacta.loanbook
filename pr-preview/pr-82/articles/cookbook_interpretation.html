@@ -138,8 +138,8 @@ calculate such matching coverage:</p>
 demonstrate our point, we create a <code>loanbook</code> dataset with
 two mismatching loans:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    name_ultimate_parent <span class="op">=</span> </span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">id_loan</span> <span class="op">==</span> <span class="st">"L1"</span>, <span class="st">"unmatched company name"</span>, <span class="va">name_ultimate_parent</span><span class="op">)</span>,</span>
 <span>    sector_classification_direct_loantaker <span class="op">=</span> </span>
@@ -147,9 +147,9 @@ two mismatching loans:</p>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>We will then run the matching algorithm on this loanbook:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op">%&gt;%</span> </span>
-<span>    <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/match_name.html" class="external-link">match_name</a></span><span class="op">(</span><span class="va">abcd</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>    <span class="fu"><a href="https://rmi-pacta.github.io/r2dii.match/reference/prioritize.html" class="external-link">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Some `sector_classification_direct_loantaker` are unknown:99</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> If you wish to request a new sector classification system, please create an issue here:</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> https://github.com/RMI-PACTA/r2dii.data/issues</span></span>
@@ -188,22 +188,22 @@ corresponding column <code>code</code> (otherwise
 <span>    sector_classification_direct_loantaker <span class="op">=</span> <span class="st">"code"</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="va">loanbook_with_sectors</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">sector_classifications</span>, by <span class="op">=</span> <span class="va">merge_by</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>sector_classification_direct_loantaker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">sector_classification_direct_loantaker</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">loanbook_with_sectors</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sector_classifications</span>, by <span class="op">=</span> <span class="va">merge_by</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sector_classification_direct_loantaker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">sector_classification_direct_loantaker</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>We can join these two datasets together, to generate our
 <code>coverage</code> dataset:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">&lt;-</span> <span class="fu">left_join</span><span class="op">(</span><span class="va">loanbook_with_sectors</span>, <span class="va">matched</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">loanbook_with_sectors</span>, <span class="va">matched</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    loan_size_outstanding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">loan_size_outstanding</span><span class="op">)</span>,</span>
 <span>    loan_size_credit_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">loan_size_credit_limit</span><span class="op">)</span>,</span>
-<span>    matched <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    matched <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
 <span>      <span class="va">score</span> <span class="op">==</span> <span class="fl">1</span>   <span class="op">~</span> <span class="st">"Matched"</span>, </span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Not Matched"</span>,</span>
 <span>      <span class="cn">TRUE</span>         <span class="op">~</span> <span class="st">"Not Matched"</span></span>
 <span>    <span class="op">)</span>,</span>
-<span>    sector <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    sector <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
 <span>      <span class="va">borderline</span> <span class="op">==</span> <span class="cn">TRUE</span> <span class="op">&amp;</span> <span class="va">matched</span> <span class="op">==</span> <span class="st">"Not Matched"</span> <span class="op">~</span> <span class="st">"not in scope"</span>,</span>
 <span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">sector</span></span>
 <span>    <span class="op">)</span></span>
@@ -225,8 +225,8 @@ one to calculate dollar-value and another one to plot coverage in
 general.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dollar_value</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">data</span> <span class="op">%&gt;%</span> </span>
-<span>    <span class="fu">summarize</span><span class="op">(</span>loan_size_outstanding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">loan_size_outstanding</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">matched</span>, <span class="va">...</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>loan_size_outstanding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">loan_size_outstanding</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">matched</span>, <span class="va">...</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">plot_coverage</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
@@ -237,15 +237,15 @@ general.</p>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Let’s first explore all loans.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">matched</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>To calculate the total, in-scope, loanbook coverage:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sector</span> <span class="op">!=</span> <span class="st">"not in scope"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sector</span> <span class="op">!=</span> <span class="st">"not in scope"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">matched</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
@@ -254,21 +254,21 @@ general.</p>
 </h3>
 <p>You may break-down the plot by sector:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <p>Or even further, by matching level:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>matched <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>matched <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
 <span>    <span class="va">matched</span> <span class="op">==</span> <span class="st">"Matched"</span> <span class="op">&amp;</span> <span class="va">level</span> <span class="op">==</span> <span class="st">"direct_loantaker"</span>      <span class="op">~</span> <span class="st">"Matched DL"</span>,</span>
 <span>    <span class="va">matched</span> <span class="op">==</span> <span class="st">"Matched"</span> <span class="op">&amp;</span> <span class="va">level</span> <span class="op">==</span> <span class="st">"intermediate_parent_1"</span> <span class="op">~</span> <span class="st">"Matched IP1"</span>,</span>
 <span>    <span class="va">matched</span> <span class="op">==</span> <span class="st">"Matched"</span> <span class="op">&amp;</span> <span class="va">level</span> <span class="op">==</span> <span class="st">"ultimate_parent"</span>       <span class="op">~</span> <span class="st">"Matched UP"</span>,</span>
 <span>    <span class="va">matched</span> <span class="op">==</span> <span class="st">"Not Matched"</span>                                <span class="op">~</span> <span class="st">"Not Matched"</span>,</span>
 <span>    <span class="cn">TRUE</span>                                                    <span class="op">~</span> <span class="st">"Catch unknown"</span></span>
-<span>  <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 </div>
@@ -279,10 +279,10 @@ general.</p>
 loanbook were matched. It probably makes most sense to do this at the
 <code>direct_loantaker</code> level:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">companies_matched</span> <span class="op">&lt;-</span> <span class="va">coverage</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">summarize</span><span class="op">(</span>no_companies <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">name_direct_loantaker</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sector</span>, <span class="va">matched</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">companies_matched</span> <span class="op">&lt;-</span> <span class="va">coverage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>no_companies <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">name_direct_loantaker</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sector</span>, <span class="va">matched</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">companies_matched</span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">companies_matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">no_companies</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
@@ -291,8 +291,8 @@ loanbook were matched. It probably makes most sense to do this at the
 <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
 </h2>
 <p>There are a large variety of possible visualizations stemming from
-the outputs of <code><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_market_share.html" class="external-link">target_market_share()</a></code> and
-<code><a href="https://rmi-pacta.github.io/r2dii.analysis/reference/target_sda.html" class="external-link">target_sda()</a></code>. Below, we highlight a couple of common plots
+the outputs of <code><a href="../reference/target_market_share.html">target_market_share()</a></code> and
+<code><a href="../reference/target_sda.html">target_sda()</a></code>. Below, we highlight a couple of common plots
 that can easily be created using the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a>
 package.</p>
 <div class="section level3">
@@ -304,7 +304,7 @@ compare with the corporate economy, or against various scenario
 targets.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pick the targets you want to plot.</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">market_share_targets_portfolio</span>,</span>
 <span>  <span class="va">scenario_source</span> <span class="op">==</span> <span class="st">"demo_2020"</span>,</span>
 <span>  <span class="va">sector</span> <span class="op">==</span> <span class="st">"power"</span>,</span>
@@ -313,7 +313,7 @@ targets.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot the technology mix</span></span>
-<span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.plot/reference/qplot_techmix.html" class="external-link">qplot_techmix</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/qplot_techmix.html">qplot_techmix</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; The `technology_share` values are plotted for extreme years.</span></span>
 <span><span class="co">#&gt; Do you want to plot different years? E.g. filter . with:`subset(., year %in% c(2020, 2030))`.</span></span>
 <span><span class="co">#&gt; Warning: Removed 3 rows containing missing values or values outside the scale range</span></span>
@@ -327,7 +327,7 @@ targets.</p>
 values are normalized to 1, to emphasize that we are comparing the rates
 of buildout and/or retirement.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">market_share_targets_portfolio</span>,</span>
 <span>  <span class="va">sector</span> <span class="op">==</span> <span class="st">"power"</span>,</span>
 <span>  <span class="va">technology</span> <span class="op">==</span> <span class="st">"renewablescap"</span>,</span>
@@ -335,7 +335,7 @@ of buildout and/or retirement.</p>
 <span>  <span class="va">scenario_source</span> <span class="op">==</span> <span class="st">"demo_2020"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.plot/reference/qplot_trajectory.html" class="external-link">qplot_trajectory</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/qplot_trajectory.html">qplot_trajectory</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_interpretation_files/figure-html/trajetory-portfolio-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -346,8 +346,8 @@ intensity attributed to the portfolio, with the actual emission
 intensity scenario, and the scenario compliant SDA pathway that the
 portfolio must follow to achieve the scenario ambition by 2050.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sda_targets</span>, <span class="va">sector</span> <span class="op">==</span> <span class="st">"cement"</span>, <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rmi-pacta.github.io/r2dii.plot/reference/qplot_emission_intensity.html" class="external-link">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sda_targets</span>, <span class="va">sector</span> <span class="op">==</span> <span class="st">"cement"</span>, <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_interpretation_files/figure-html/sda%20plot-1.png" width="700"></p>
 <p><strong>PREVIOUS CHAPTER:</strong> <a href="cookbook_running_the_analysis.html">Running the Analysis</a></p>
 <p><strong>NEXT CHAPTER:</strong> <a href="cookbook_advanced_use_cases.html">Advanced Use Cases</a></p>
