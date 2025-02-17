@@ -34,12 +34,12 @@ For information about the ISO standard for country codes see
 region_isos_demo
 }
 \seealso{
-Other Demo data: 
+Other demo data: 
 \code{\link{abcd_demo}},
 \code{\link{co2_intensity_scenario_demo}},
 \code{\link{loanbook_demo}},
 \code{\link{overwrite_demo}},
 \code{\link{scenario_demo_2020}}
 }
-\concept{Demo data}
+\concept{demo data}
 \keyword{datasets}

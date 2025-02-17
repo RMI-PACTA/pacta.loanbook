@@ -29,9 +29,8 @@ matched <- tibble::tibble(
 prioritize_level(matched)
 }
 \seealso{
-Other Matching functions: 
-\code{\link{crucial_lbk}()},
+Other matching functions: 
 \code{\link{match_name}()},
 \code{\link{prioritize}()}
 }
-\concept{Matching functions}
+\concept{matching functions}

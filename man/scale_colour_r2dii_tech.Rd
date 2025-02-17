@@ -5,8 +5,6 @@
 \title{Custom 2DII technology colour and fill scales}
 \usage{
 scale_colour_r2dii_tech(sector, technologies = NULL, ...)
-
-scale_colour_r2dii_tech(sector, technologies = NULL, ...)
 }
 \arguments{
 \item{sector}{A string. Sector name specifying a colour palette. Run
@@ -39,7 +37,7 @@ ggplot(mpg) +
   scale_fill_r2dii_tech("automotive")
 }
 \seealso{
-Other Plotting functions: 
+Other plotting functions: 
 \code{\link{plot_emission_intensity}()},
 \code{\link{plot_techmix}()},
 \code{\link{plot_trajectory}()},
@@ -55,28 +53,9 @@ Other Plotting functions:
 \code{\link{scale_colour_r2dii_sector}()},
 \code{\link{scale_fill_r2dii}()},
 \code{\link{scale_fill_r2dii_sector}()},
-\code{\link{spell_out_technology}()},
-\code{\link{theme_2dii}()},
-\code{\link{to_title}()}
-
-Other Plotting functions: 
-\code{\link{plot_emission_intensity}()},
-\code{\link{plot_techmix}()},
-\code{\link{plot_trajectory}()},
-\code{\link{prep_emission_intensity}()},
-\code{\link{prep_techmix}()},
-\code{\link{prep_trajectory}()},
-\code{\link{qplot_emission_intensity}()},
-\code{\link{qplot_techmix}()},
-\code{\link{qplot_trajectory}()},
-\code{\link{recode_metric_techmix}()},
-\code{\link{recode_metric_trajectory}()},
-\code{\link{scale_colour_r2dii}()},
-\code{\link{scale_colour_r2dii_sector}()},
-\code{\link{scale_fill_r2dii}()},
-\code{\link{scale_fill_r2dii_sector}()},
+\code{\link{scale_fill_r2dii_tech}()},
 \code{\link{spell_out_technology}()},
 \code{\link{theme_2dii}()},
 \code{\link{to_title}()}
 }
-\concept{Plotting functions}
+\concept{plotting functions}

@@ -30,12 +30,12 @@ they help to demonstrate and test the implementation in R of 'PACTA'
 head(loanbook_demo)
 }
 \seealso{
-Other Demo data: 
+Other demo data: 
 \code{\link{abcd_demo}},
 \code{\link{co2_intensity_scenario_demo}},
 \code{\link{overwrite_demo}},
 \code{\link{region_isos_demo}},
 \code{\link{scenario_demo_2020}}
 }
-\concept{Demo data}
+\concept{demo data}
 \keyword{datasets}

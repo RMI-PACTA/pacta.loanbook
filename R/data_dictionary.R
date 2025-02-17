@@ -3,7 +3,7 @@
 #' A table of column names and descriptions of data frames used or exported by
 #' the functions in this package.
 #'
-#' @family Data Dictionary
+#' @family data dictionary
 #'
 #' @format ## `data_dictionary`
 #' \describe{

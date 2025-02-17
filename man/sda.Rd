@@ -20,7 +20,7 @@ Dataset imitating the output of \code{\link[r2dii.analysis:target_sda]{r2dii.ana
 sda
 }
 \seealso{
-Other Datasets: 
+Other datasets: 
 \code{\link{gics_classification}},
 \code{\link{increasing_or_decreasing}},
 \code{\link{isic_classification}},
@@ -37,5 +37,5 @@ Other Datasets:
 \code{\link{sic_classification}},
 \code{\link{technology_colours}}
 }
-\concept{Datasets}
+\concept{datasets}
 \keyword{datasets}

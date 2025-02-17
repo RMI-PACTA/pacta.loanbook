@@ -24,11 +24,11 @@ existing code.
 pacta_loanbook_conflicts()
 }
 \seealso{
-Other Utility functions: 
+Other utility functions: 
 \code{\link{pacta_loanbook_deps}()},
 \code{\link{pacta_loanbook_logo}()},
 \code{\link{pacta_loanbook_packages}()},
 \code{\link{pacta_loanbook_sitrep}()},
 \code{\link{pacta_loanbook_update}()}
 }
-\concept{Utility functions}
+\concept{utility functions}

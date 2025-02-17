@@ -44,7 +44,7 @@ plot_trajectory(
 )
 }
 \seealso{
-Other Plotting functions: 
+Other plotting functions: 
 \code{\link{plot_emission_intensity}()},
 \code{\link{plot_techmix}()},
 \code{\link{prep_emission_intensity}()},
@@ -60,8 +60,9 @@ Other Plotting functions:
 \code{\link{scale_colour_r2dii_tech}()},
 \code{\link{scale_fill_r2dii}()},
 \code{\link{scale_fill_r2dii_sector}()},
+\code{\link{scale_fill_r2dii_tech}()},
 \code{\link{spell_out_technology}()},
 \code{\link{theme_2dii}()},
 \code{\link{to_title}()}
 }
-\concept{Plotting functions}
+\concept{plotting functions}

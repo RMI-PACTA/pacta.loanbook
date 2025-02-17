@@ -98,7 +98,7 @@ matched \%>\%
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other Analysis functions: 
+Other analysis functions: 
 \code{\link{target_sda}()}
 }
-\concept{Analysis functions}
+\concept{analysis functions}

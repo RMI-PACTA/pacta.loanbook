@@ -36,7 +36,7 @@ the wild to a relevant subset including 'power', 'oil and gas', 'coal',
 head(sector_classifications)
 }
 \seealso{
-Other Datasets: 
+Other datasets: 
 \code{\link{gics_classification}},
 \code{\link{increasing_or_decreasing}},
 \code{\link{isic_classification}},
@@ -53,5 +53,5 @@ Other Datasets:
 \code{\link{sic_classification}},
 \code{\link{technology_colours}}
 }
-\concept{Datasets}
+\concept{datasets}
 \keyword{datasets}

@@ -8,7 +8,7 @@
 #' make the base equivalents generic, so shouldn't negatively affect any
 #' existing code.
 #'
-#' @family Utility functions
+#' @family utility functions
 #'
 #' @export
 #' @param only Set this to a character vector to restrict to conflicts only

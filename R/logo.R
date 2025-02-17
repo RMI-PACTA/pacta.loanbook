@@ -8,7 +8,7 @@
 #'
 #' @md
 #'
-#' @family Utility functions
+#' @family utility functions
 #'
 #' @export
 #' @examples

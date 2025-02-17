@@ -13,7 +13,7 @@ inform_startup <- function(msg, ...) {
 #'
 #' @param include_self Include pacta.loanbook in the list?
 #'
-#' @family Utility functions
+#' @family utility functions
 #'
 #' @export
 #'

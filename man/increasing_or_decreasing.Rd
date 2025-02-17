@@ -28,7 +28,7 @@ than 2 degree temperature rise.
 head(increasing_or_decreasing)
 }
 \seealso{
-Other Datasets: 
+Other datasets: 
 \code{\link{gics_classification}},
 \code{\link{isic_classification}},
 \code{\link{iso_codes}},
@@ -45,5 +45,5 @@ Other Datasets:
 \code{\link{sic_classification}},
 \code{\link{technology_colours}}
 }
-\concept{Datasets}
+\concept{datasets}
 \keyword{datasets}

@@ -83,7 +83,7 @@ matched \%>\%
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other Analysis functions: 
+Other analysis functions: 
 \code{\link{target_market_share}()}
 }
-\concept{Analysis functions}
+\concept{analysis functions}

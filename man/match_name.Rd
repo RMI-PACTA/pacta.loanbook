@@ -167,9 +167,8 @@ options(restore)
 }
 }
 \seealso{
-Other Matching functions: 
-\code{\link{crucial_lbk}()},
+Other matching functions: 
 \code{\link{prioritize}()},
 \code{\link{prioritize_level}()}
 }
-\concept{Matching functions}
+\concept{matching functions}

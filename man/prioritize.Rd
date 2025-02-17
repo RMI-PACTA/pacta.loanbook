@@ -93,9 +93,8 @@ bad_idea <- c("intermediate_parent", "ultimate_parent", "direct_loantaker")
 prioritize(matched, priority = bad_idea)
 }
 \seealso{
-Other Matching functions: 
-\code{\link{crucial_lbk}()},
+Other matching functions: 
 \code{\link{match_name}()},
 \code{\link{prioritize_level}()}
 }
-\concept{Matching functions}
+\concept{matching functions}

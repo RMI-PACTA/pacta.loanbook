@@ -29,7 +29,7 @@ For information about the ISO standard for country codes see
 head(region_isos)
 }
 \seealso{
-Other Datasets: 
+Other datasets: 
 \code{\link{gics_classification}},
 \code{\link{increasing_or_decreasing}},
 \code{\link{isic_classification}},
@@ -46,5 +46,5 @@ Other Datasets:
 \code{\link{sic_classification}},
 \code{\link{technology_colours}}
 }
-\concept{Datasets}
+\concept{datasets}
 \keyword{datasets}

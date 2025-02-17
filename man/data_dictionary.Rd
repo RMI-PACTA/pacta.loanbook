@@ -26,5 +26,5 @@ the functions in this package.
 data_dictionary
 
 }
-\concept{Data Dictionary}
+\concept{data dictionary}
 \keyword{datasets}

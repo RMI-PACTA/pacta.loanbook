@@ -13,11 +13,11 @@ a quick idea of what's going on when you're helping someone else debug
 a problem.
 }
 \seealso{
-Other Utility functions: 
+Other utility functions: 
 \code{\link{pacta_loanbook_conflicts}()},
 \code{\link{pacta_loanbook_deps}()},
 \code{\link{pacta_loanbook_logo}()},
 \code{\link{pacta_loanbook_packages}()},
 \code{\link{pacta_loanbook_update}()}
 }
-\concept{Utility functions}
+\concept{utility functions}

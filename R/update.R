@@ -6,7 +6,7 @@
 #'
 #' @inheritParams pacta_loanbook_deps
 #'
-#' @family Utility functions
+#' @family utility functions
 #'
 #' @export
 #' @examples
@@ -45,7 +45,7 @@ pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos"))
 #' a quick idea of what's going on when you're helping someone else debug
 #' a problem.
 #'
-#' @family Utility functions
+#' @family utility functions
 #'
 #' @export
 pacta_loanbook_sitrep <- function() {
@@ -76,7 +76,7 @@ pacta_loanbook_sitrep <- function() {
 #' @param repos The repositories to use to check for updates.
 #'   Defaults to \code{getOption("repos")}.
 #'
-#' @family Utility functions
+#' @family utility functions
 #'
 #' @export
 pacta_loanbook_deps <- function(recursive = FALSE, repos = getOption("repos")) {

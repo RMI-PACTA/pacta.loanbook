@@ -7,19 +7,19 @@ development:
 
 reference:
 - title: Utility functions
-  contents: has_concept("Utility functions")
+  contents: has_concept("utility functions")
 - title: Matching functions
-  contents: has_concept("Matching functions")
+  contents: has_concept("matching functions")
 - title: Analysis functions
-  contents: has_concept("Analysis functions")
+  contents: has_concept("analysis functions")
 - title: Plotting functions
-  contents: has_concept("Plotting functions")
+  contents: has_concept("plotting functions")
 - title: Datasets
-  contents: has_concept("Datasets")
+  contents: has_concept("datasets")
 - title: Demo data
-  contents: has_concept("Demo data")
+  contents: has_concept("demo data")
 - title: Data dictionary
-  contents: has_concept("Data Dictionary")
+  contents: has_concept("data dictionary")
 
 navbar:
   structure:
