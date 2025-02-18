@@ -15,3 +15,12 @@ List all packages in pacta.loanbook
 \examples{
 pacta_loanbook_packages()
 }
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_conflicts}()},
+\code{\link{pacta_loanbook_deps}()},
+\code{\link{pacta_loanbook_logo}()},
+\code{\link{pacta_loanbook_sitrep}()},
+\code{\link{pacta_loanbook_update}()}
+}
+\concept{utility functions}

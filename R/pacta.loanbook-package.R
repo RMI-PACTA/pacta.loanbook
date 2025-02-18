@@ -16,3 +16,5 @@ release_bullets <- function() {
     '`usethis::use_latest_dependencies(TRUE, "CRAN")`'
   )
 }
+
+utils::globalVariables(".data")

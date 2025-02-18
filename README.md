@@ -13,7 +13,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 ## Overview
 
-The goal of pacta.loanbook is to provide and easy way to load and
+The goal of `{pacta.loanbook}` is to provide and easy way to load and
 install all packages needed for running PACTA for Banks.
 
 It also serves as a space to provide thorough and comprehensive
@@ -22,7 +22,7 @@ documentation for running PACTA for Banks, in the form of a
 
 ## Installation
 
-You can install the development version of pacta.loanbook from
+You can install the development version of `{pacta.loanbook}` from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -32,7 +32,8 @@ pak::pak("RMI-PACTA/pacta.loanbook")
 
 ## Usage (WIP!)
 
-`library(pacta.loanbook)` will load the core pacta.loanbook packages:
+`library(pacta.loanbook)` will load all the functions and datasets from
+the underlying packages:
 
 - [r2dii.data](https://rmi-pacta.github.io/r2dii.data/), for input data
   sets used in PACTA for Banks (e.g. sector classification systems,

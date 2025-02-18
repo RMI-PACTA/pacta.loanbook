@@ -1,8 +1,8 @@
 core <- c(
-  "r2dii.data",
-  "r2dii.match",
-  "r2dii.analysis",
-  "r2dii.plot"
+  # "r2dii.data",
+  # "r2dii.match",
+  # "r2dii.analysis",
+  # "r2dii.plot"
 )
 
 core_unloaded <- function() {

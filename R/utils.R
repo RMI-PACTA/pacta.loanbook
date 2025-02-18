@@ -12,9 +12,14 @@ inform_startup <- function(msg, ...) {
 #' List all packages in pacta.loanbook
 #'
 #' @param include_self Include pacta.loanbook in the list?
+#'
+#' @family utility functions
+#'
 #' @export
+#'
 #' @examples
 #' pacta_loanbook_packages()
+
 pacta_loanbook_packages <- function(include_self = TRUE) {
   raw <- utils::packageDescription("pacta.loanbook")$Imports
   imports <- strsplit(raw, ",")[[1]]
