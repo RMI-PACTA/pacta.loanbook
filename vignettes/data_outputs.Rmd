@@ -14,13 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
+library(pacta.loanbook)
+
 plot_table <- function(dataset_name) {
-  table <- dplyr::bind_rows(
-    r2dii.match::data_dictionary,
-    r2dii.analysis::data_dictionary,
-    r2dii.plot::data_dictionary
-  )
+  table <- data_dictionary
   table <- dplyr::filter(table, .data[["dataset"]] == dataset_name)
   table_plot <- gt::gt(dplyr::select(table, -"dataset"))
   

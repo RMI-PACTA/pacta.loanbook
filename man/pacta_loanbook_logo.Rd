@@ -16,3 +16,12 @@ Use \code{\link[cli:ansi_strip]{cli::ansi_strip()}} to get rid of the colors.
 \examples{
 pacta_loanbook_logo()
 }
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_conflicts}()},
+\code{\link{pacta_loanbook_deps}()},
+\code{\link{pacta_loanbook_packages}()},
+\code{\link{pacta_loanbook_sitrep}()},
+\code{\link{pacta_loanbook_update}()}
+}
+\concept{utility functions}

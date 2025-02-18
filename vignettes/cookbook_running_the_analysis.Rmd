@@ -46,13 +46,10 @@ In principle, these steps are sequential. However, in practice it has shown that
 
 ## Setup
 
-We use the `r2dii.*` suite of packages to access the most important functions you'll learn about. We also use example datasets from the package `{r2dii.data}`, and optional but convenient functions from the packages `{dplyr}` and `{readxl}`.
+We use the `{pacta.loanbook}` package to access the most important functions you'll learn about. We also use example datasets from the package `{pacta.loanbook}`, and optional but convenient functions from the packages `{dplyr}`, `{readxl}`, and `{readr}`.
 
 ```{r, message=FALSE}
-library(r2dii.match)
-library(r2dii.analysis)
-library(r2dii.plot)
-library(r2dii.data)
+library(pacta.loanbook)
 library(dplyr)
 library(readxl)
 library(readr)
@@ -62,18 +59,18 @@ library(readr)
 
 We need two datasets to begin: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd). For more detail about the necessary structure of these datasets, see the data dictionaries for [loanbook](data_loanbook.html) and [abcd](data_abcd.html).
 
-To simulate having these data files prepared, we will use the demo data included in the `{r2dii.data}` package to create example XLS files using the `{writexl}` package.
+To simulate having these data files prepared, we will use the demo data included in the `{pacta.loanbook}` package to create example XLS files using the `{writexl}` package.
 
 ```{r}
 library(writexl)
 
 writexl::write_xlsx(
-  x = r2dii.data::loanbook_demo,
+  x = loanbook_demo,
   path = file.path(tempdir(), "loanbook.xlsx")
 )
 
 writexl::write_xlsx(
-  x = r2dii.data::abcd_demo,
+  x = abcd_demo,
   path = file.path(tempdir(), "abcd.xlsx")
 )
 ```
@@ -209,9 +206,9 @@ valid_matches %>%
 
 #### A note on sector classification
 
-Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally by mapping the sector classification code from the loan book to a PACTA sector, using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, the following options are supported for `sector_classification_system`, specified in `r2dii.data::sector_classifications`:
+Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally by mapping the sector classification code from the loan book to a PACTA sector, using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, the following options are supported for `sector_classification_system`, specified in `sector_classifications`:
 
-> `r unique(r2dii.data::sector_classifications$code_system)`
+> `r unique(sector_classifications$code_system)`
 
 #### The `borderline` flag
 
@@ -220,7 +217,7 @@ An issue arises when, for example, a company is classified in the "power transmi
 In the example below, we see two classification codes coming from the NACE classification standard:
 
 ```{r}
-r2dii.data::nace_classification %>% 
+nace_classification %>% 
   filter(code %in% c("D35.11", "D35.14", "D35.1"))
 ```
 
@@ -250,14 +247,14 @@ sector_in_scope <- glue::glue_collapse(
 )
 ```
 
-`{r2dii.match}` allows you to match loans from your loanbook to the companies in
+`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in
 an asset-based company dataset. However, matching every loan is unlikely -- some
 loan-taking companies may be missing from the asset-based company dataset, or
 they may not operate in the sectors PACTA focuses on (`r sector_in_scope`).
 Thus, you may want to measure how much of the loanbook matched some asset. This
 article shows two ways to calculate such matching coverage:
 
-(1) Calculate the portion of your loanbook covered, by dollar value (i.e. using
+(1) Calculate the portion of your `loanbook` covered, by dollar value (i.e. using
 one of the `loan_size_*` columns).
 
 (2) Count the number of companies matched.
@@ -291,11 +288,11 @@ matched <- loanbook %>%
 
 Note that this `matched` dataset will contain _only_ loans that were matched successfully. To determine coverage, we need to go back to the original `loanbook` dataset. We must determine the PACTA sectors of each loan, as dictated by the `sector_classification_direct_loantaker` column.
 
-For this, we join the loanbook with the `r2dii.data::sector_classifications` dataset, which lists all sector classification code standards used by 'PACTA'. Unfortunately we need to work around two caveats (you may ignore them because they are conceptually uninteresting):
+For this, we join the `loanbook` with the `sector_classifications` dataset, which lists all sector classification code standards used by 'PACTA'. Unfortunately we need to work around two caveats (you may ignore them because they are conceptually uninteresting):
 
-* In the two datasets, the columns we want to merge by have different names. We use the argument `by` to `dplyr::left_join()` to merge the columns `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`) with the columns `code_system` and `code` (from `r2dii.data::sector_classifications`), respectively. 
+* In the two datasets, the columns we want to merge by have different names. We use the argument `by` of `dplyr::left_join()` to merge the columns `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`) with the columns `code_system` and `code` (from `sector_classifications`), respectively. 
 
-* In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type. 
+* In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before using `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type.
 
 ```{r}
 merge_by <- c(
@@ -304,7 +301,7 @@ merge_by <- c(
   )
 
 loanbook_with_sectors <- loanbook %>% 
-  left_join(r2dii.data::sector_classifications, by = merge_by) %>% 
+  left_join(sector_classifications, by = merge_by) %>% 
   mutate(sector_classification_direct_loantaker = as.character(sector_classification_direct_loantaker))
 ```
 
@@ -420,8 +417,8 @@ Targets can be set at the portfolio level:
 
 ```{r, R.options = list(width = 400)}
 # Use these datasets to practice but eventually you should use your own data.
-scenario <- r2dii.data::scenario_demo_2020
-regions <- r2dii.data::region_isos_demo
+scenario <- scenario_demo_2020
+regions <- region_isos_demo
 
 market_share_targets_portfolio <-
   target_market_share(
@@ -465,7 +462,7 @@ The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analys
 
 ```{r sda-targets, R.options = list(width = 400)}
 # Use this dataset to practice but eventually you should use your own data.
-co2 <- r2dii.data::co2_intensity_scenario_demo
+co2 <- co2_intensity_scenario_demo
 
 sda_targets <-
   target_sda(
@@ -505,7 +502,9 @@ Remember to replace `tempdir()` with the path to the directory that you wish to 
 
 ## Visualize PACTA alignment metrics
 
-There are a large variety of possible visualizations stemming from the outputs of `r2dii.analysis::target_market_share()` and `r2dii.analysis::target_sda()`. Below, we highlight a couple of common plots that can easily be created using the `{r2dii.plot}` package.
+There are a large variety of possible visualizations stemming from the outputs 
+of `target_market_share()` and `target_sda()`. Below, we highlight a couple of 
+common plots that can easily be created using the `{pacta.loanbook}` package.
 
 ### Market Share: Sector-level technology mix
 

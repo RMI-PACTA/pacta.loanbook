@@ -5,6 +5,22 @@ template:
 development:
   mode: auto
 
+reference:
+- title: Utility functions
+  contents: has_concept("utility functions")
+- title: Matching functions
+  contents: has_concept("matching functions")
+- title: Analysis functions
+  contents: has_concept("analysis functions")
+- title: Plotting functions
+  contents: has_concept("plotting functions")
+- title: Datasets
+  contents: has_concept("datasets")
+- title: Demo data
+  contents: has_concept("demo data")
+- title: Data dictionary
+  contents: has_concept("data dictionary")
+
 navbar:
   structure:
     left:  [intro, reference, cookbook, data, articles, news]

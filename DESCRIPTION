@@ -60,6 +60,7 @@ URL: https://rmi-pacta.github.io/pacta.loanbook/, https://github.com/rmi-pacta/p
 Imports: 
     cli,
     dplyr,
+    ggrepel,
     magrittr,
     purrr,
     r2dii.analysis (>= 0.5.0),
@@ -68,7 +69,9 @@ Imports:
     r2dii.plot (>= 0.5.0),
     rlang,
     rstudioapi,
-    tibble
+    scales,
+    tibble,
+    tidyselect
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Language: en-US

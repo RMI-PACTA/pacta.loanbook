@@ -23,3 +23,12 @@ existing code.
 \examples{
 pacta_loanbook_conflicts()
 }
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_deps}()},
+\code{\link{pacta_loanbook_logo}()},
+\code{\link{pacta_loanbook_packages}()},
+\code{\link{pacta_loanbook_sitrep}()},
+\code{\link{pacta_loanbook_update}()}
+}
+\concept{utility functions}

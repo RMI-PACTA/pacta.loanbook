@@ -68,7 +68,6 @@ knitr::opts_chunk$set(
 * Sectoral relevance
 * Plot demo (when applicable)
 
-
 **PREVIOUS CHAPTER:** [Running the Analysis](cookbook_running_the_analysis.html)
 
 **NEXT CHAPTER:** [Advanced Use Cases](cookbook_advanced_use_cases.html)

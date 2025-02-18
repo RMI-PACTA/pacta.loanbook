@@ -7,10 +7,6 @@
 
     Code
       cat(pacta_loanbook_attach_message(core))
-    Output
-      -- Attaching core pacta.loanbook packages -------------- pacta.loanbook 1.0.0 --
-      v r2dii.analysis 1.0.0     v r2dii.match    1.0.0
-      v r2dii.data     1.0.0     v r2dii.plot     1.0.0
 
 # highlights dev versions in red
 
