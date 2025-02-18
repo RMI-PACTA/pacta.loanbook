@@ -48,7 +48,7 @@ navbar:
         href: articles/data_abcd.html
       - text: Scenario
         href: articles/data_scenario.html
-      - text: Classification
+      - text: Sector Classification
         href: articles/data_classification.html
       - text: Outputs
         href: articles/data_outputs.html

@@ -1,8 +1,8 @@
 ---
-title: "Classification"
+title: "Sector Classification"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Classification}
+  %\VignetteIndexEntry{Sector Classification}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
