@@ -30,6 +30,7 @@ prioritize_level(matched)
 }
 \seealso{
 Other matching functions: 
+\code{\link{crucial_lbk}()},
 \code{\link{match_name}()},
 \code{\link{prioritize}()}
 }
