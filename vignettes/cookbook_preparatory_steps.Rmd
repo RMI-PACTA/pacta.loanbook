@@ -37,7 +37,7 @@ This data set provides information on the production profiles and emission inten
 The ABCD data set must be an XLSX file and contains the following columns:
 
 ```{r cols_abcd, echo = FALSE, results = 'asis'}
-cat(paste0("- `", names(r2dii.data::abcd_demo), "`", collapse = "\n"))
+cat(paste0("- `", names(abcd_demo), "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [abcd](data_abcd.html).
@@ -90,7 +90,7 @@ The raw loan book is the financial data set that you would like to analyze. It c
 The raw loan book must be prepared as CSV files and contain at a minimum the following columns:
 
 ```{r cols_raw_loanbooks, echo = FALSE, results = 'asis'}
-cat(paste0("- `", names(r2dii.data::loanbook_demo), "`", collapse = "\n"))
+cat(paste0("- `", names(loanbook_demo), "`", collapse = "\n"))
 ```
 
 For more detail about the necessary structure of this dataset, see the data dictionary for [loanbook](data_loanbook.html).
@@ -123,7 +123,7 @@ R is the programming language that the `{pacta.loanbook}` package is written in.
 
 ### RStudio (optional)
 
-RStudio is an integrated development environment (IDE) for R developed by Posit. It is not strictly required to run the analysis, but it can be helpful for managing your project and running the analysis. Generally, RStudio is very widely used among the R community and probably the easiest way to interact with most R tools, such as the `r2dii.*` suite of packages. RStudio Desktop is an open source tool and free of charge. You can download RStudio from the [Posit RStudio website](https://posit.co/downloads/).
+RStudio is an integrated development environment (IDE) for R developed by Posit. It is not strictly required to run the analysis, but it can be helpful for managing your project and running the analysis. Generally, RStudio is very widely used among the R community and probably the easiest way to interact with most R tools, such as the `{pacta.loanbook}` suite of packages. RStudio Desktop is an open source tool and free of charge. You can download RStudio from the [Posit RStudio website](https://posit.co/downloads/).
 
 ### `{pacta.loanbook}` package
 

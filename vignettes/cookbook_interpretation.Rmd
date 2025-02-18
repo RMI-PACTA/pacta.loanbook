@@ -15,14 +15,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-library(r2dii.match)
-library(r2dii.analysis)
-library(r2dii.plot)
-library(r2dii.data)
+library(pacta.loanbook)
 library(dplyr)
 
-loanbook <- r2dii.data::loanbook_demo
-abcd <- r2dii.data::abcd_demo
+loanbook <- loanbook_demo
+abcd <- abcd_demo
 
 matched <- match_name(loanbook, abcd)
 
@@ -36,16 +33,16 @@ market_share_targets_portfolio <-
   target_market_share(
     data = prioritized_matches,
     abcd = abcd,
-    scenario = r2dii.data::scenario_demo_2020,
-    region_isos = r2dii.data::region_isos_demo
+    scenario = scenario_demo_2020,
+    region_isos = region_isos_demo
   )
 
 market_share_targets_company <-
   target_market_share(
     data = prioritized_matches,
     abcd = abcd,
-    scenario = r2dii.data::scenario_demo_2020,
-    region_isos = r2dii.data::region_isos_demo,
+    scenario = scenario_demo_2020,
+    region_isos = region_isos_demo,
     by_company = TRUE, # Output results at company-level
     weight_production = FALSE
   )
@@ -54,8 +51,8 @@ sda_targets <-
   target_sda(
     data = prioritized_matches,
     abcd = abcd,
-    co2_intensity_scenario = r2dii.data::co2_intensity_scenario_demo,
-    region_isos = r2dii.data::region_isos_demo
+    co2_intensity_scenario = co2_intensity_scenario_demo,
+    region_isos = region_isos_demo
   ) %>% 
   filter(sector == "cement", year >= 2020)
 ```
