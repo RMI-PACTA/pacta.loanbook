@@ -309,28 +309,28 @@ success rate can really be reached.</p>
 </ul>
 <p>In case the user cannot obtain sector classification codes of any of
 the classification systems featured in
-<code><a href="https://rmi-pacta.github.io/r2dii.data/reference/sector_classifications.html" class="external-link">r2dii.data::sector_classifications</a></code> (currently the following
+<code>sector_classifications</code> (currently the following
 classification systems are featured: GICS, ISIC, NACE, NAICS, PSIC,
 SIC), the user can provide a manually created sector classification file
 for matching the loan book to the ABCD instead. Generally, any such
 manually prepared sector classification file must follow the format of
-<code><a href="https://rmi-pacta.github.io/r2dii.data/reference/sector_classifications.html" class="external-link">r2dii.data::sector_classifications</a></code>. It is recommended to
-use the built in sector classifications if possible, as mapping your own
-sector classification to the PACTA sectors can be complex and time
+<code>sector_classifications</code>. It is recommended to use the built
+in sector classifications if possible, as mapping your own sector
+classification to the PACTA sectors can be complex and time
 consuming.</p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="required-software">Required Software<a class="anchor" aria-label="anchor" href="#required-software"></a>
 </h3>
-<p>Using the <code>r2dii.*</code> suite of packages for the PACTA for
+<p>Using the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> package for the PACTA for
 Banks analysis requires the following software to be installed on your
 system:</p>
 <div class="section level4">
 <h4 id="r-version-4-1-0-or-higher">R (version 4.1.0 or higher)<a class="anchor" aria-label="anchor" href="#r-version-4-1-0-or-higher"></a>
 </h4>
-<p>R is the programming language that the <code>r2dii.*</code> suite of
-packages is written in. You can download R from the <a href="https://cran.r-project.org/" class="external-link">Comprehensive R Archive Network
+<p>R is the programming language that the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a>
+package is written in. You can download R from the <a href="https://cran.r-project.org/" class="external-link">Comprehensive R Archive Network
 (CRAN)</a>.</p>
 </div>
 <div class="section level4">
@@ -341,32 +341,33 @@ developed by Posit. It is not strictly required to run the analysis, but
 it can be helpful for managing your project and running the analysis.
 Generally, RStudio is very widely used among the R community and
 probably the easiest way to interact with most R tools, such as the
-<code>r2dii.*</code> suite of packages. RStudio Desktop is an open
-source tool and free of charge. You can download RStudio from the <a href="https://posit.co/downloads/" class="external-link">Posit RStudio website</a>.</p>
+<a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> suite of packages. RStudio Desktop is an
+open source tool and free of charge. You can download RStudio from the
+<a href="https://posit.co/downloads/" class="external-link">Posit RStudio website</a>.</p>
 </div>
 <div class="section level4">
-<h4 id="r2dii--suite-of-r-packages">
-<code>r2dii.*</code> suite of R packages<a class="anchor" aria-label="anchor" href="#r2dii--suite-of-r-packages"></a>
+<h4 id="pacta-loanbook-package">
+<code>{pacta.loanbook}</code> package<a class="anchor" aria-label="anchor" href="#pacta-loanbook-package"></a>
 </h4>
-<p>The <code>r2dii.*</code> suite of R packages is the main software
-tool that you will use to run the PACTA for Banks analysis.</p>
-<p>You can install the <code>r2dii.*</code> suite of R packages from any
+<p>The <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> R package is the main software tool
+that you will use to run the PACTA for Banks analysis.</p>
+<p>You can install the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> R package from any
 CRAN mirror by running the following command in R:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"r2dii.data"</span>, <span class="st">"r2dii.match"</span>, <span class="st">"r2dii.analysis"</span>, <span class="st">"r2dii.plot"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>You can install the development versions of the <code>r2dii.*</code>
-suite of R packages from GitHub with:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pacta.loanbook"</span><span class="op">)</span></span></code></pre></div>
+<p>You can install the development versions of the
+<a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> R package from GitHub with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RMI-PACTA/r2dii.data"</span>, <span class="st">"RMI-PACTA/r2dii.match"</span>, <span class="st">"RMI-PACTA/r2dii.analysis"</span>, <span class="st">"RMI-PACTA/r2dii.plot"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"RMI-PACTA/pacta.loanbook"</span><span class="op">)</span></span></code></pre></div>
 <p>We use the <a href="https://pak.r-lib.org/index.html" class="external-link"><code>pak</code> package</a> as
 a simple <a href="https://pak.r-lib.org/reference/pak.html" class="external-link">tool to
 install packages from GitHub</a>.</p>
 <div class="section level5">
 <h5 id="connecting-to-github-from-rstudio">Connecting to GitHub from RStudio<a class="anchor" aria-label="anchor" href="#connecting-to-github-from-rstudio"></a>
 </h5>
-<p>Note that if you choose to install the <code>r2dii.*</code> suite of
-R packages from GitHub, you will need to have:</p>
+<p>Note that if you choose to install the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a>
+R package from GitHub, you will need to have:</p>
 <ol style="list-style-type: decimal">
 <li>registered a <a href="https://github.com/" class="external-link">GitHub</a> account,</li>
 <li>
@@ -396,22 +397,25 @@ complexity of git.</p>
 <div class="section level4">
 <h4 id="required-r-packages">Required R packages<a class="anchor" aria-label="anchor" href="#required-r-packages"></a>
 </h4>
-<p>The <code>r2dii.*</code> suite of R packages depends on a number of
+<p>The <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> R package depends on a number of
 other R packages. These dependencies will be installed automatically
-when you install the <code>r2dii.*</code> suite of R packages. The
+when you install the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> R package. The
 required packages are:</p>
-<p><a href="https://r-datatable.com" class="external-link">data.table</a>, <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>,
+<p><a href="https://cli.r-lib.org" class="external-link">cli</a>, <a href="https://r-datatable.com" class="external-link">data.table</a>, <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>,
 <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>, <a href="https://ggrepel.slowkow.com/" class="external-link">ggrepel</a>, <a href="https://glue.tidyverse.org/" class="external-link">glue</a>,
 <a href="https://lifecycle.r-lib.org/" class="external-link">lifecycle</a>, <a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a>, <a href="https://purrr.tidyverse.org/" class="external-link">purrr</a>,
-<a href="https://rlang.r-lib.org" class="external-link">rlang</a>, <a href="https://scales.r-lib.org" class="external-link">scales</a>, <a href="https://github.com/markvanderloo/stringdist" class="external-link">stringdist</a>,
-<a href="https://stringi.gagolewski.com/" class="external-link">stringi</a>, <a href="https://stringr.tidyverse.org" class="external-link">stringr</a>, <a href="https://tibble.tidyverse.org/" class="external-link">tibble</a>,
-<a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a>, <a href="https://tidyselect.r-lib.org" class="external-link">tidyselect</a>, <a href="https://zoo.R-Forge.R-project.org/" class="external-link">zoo</a></p>
+<a href="https://rmi-pacta.github.io/r2dii.analysis/" class="external-link">r2dii.analysis</a>, <a href="https://rmi-pacta.github.io/r2dii.data/" class="external-link">r2dii.data</a>,
+<a href="https://rmi-pacta.github.io/r2dii.match/" class="external-link">r2dii.match</a>, <a href="https://rmi-pacta.github.io/r2dii.plot/" class="external-link">r2dii.plot</a>,
+<a href="https://rlang.r-lib.org" class="external-link">rlang</a>, <a href="https://rstudio.github.io/rstudioapi/" class="external-link">rstudioapi</a>, <a href="https://scales.r-lib.org" class="external-link">scales</a>,
+<a href="https://github.com/markvanderloo/stringdist" class="external-link">stringdist</a>, <a href="https://stringi.gagolewski.com/" class="external-link">stringi</a>,
+<a href="https://stringr.tidyverse.org" class="external-link">stringr</a>, <a href="https://tibble.tidyverse.org/" class="external-link">tibble</a>, <a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a>,
+<a href="https://tidyselect.r-lib.org" class="external-link">tidyselect</a>, <a href="https://zoo.R-Forge.R-project.org/" class="external-link">zoo</a></p>
 </div>
 <div class="section level4">
 <h4 id="faq">FAQ<a class="anchor" aria-label="anchor" href="#faq"></a>
 </h4>
 <div class="section level5">
-<h5 id="how-do-i-install-the-r2dii--suite-of-r-packages">How do I install the <code>r2dii.*</code> suite of R packages?<a class="anchor" aria-label="anchor" href="#how-do-i-install-the-r2dii--suite-of-r-packages"></a>
+<h5 id="how-do-i-install-the-pacta-loanbook-r-package">How do I install the <code>{pacta.loanbook}</code> R package?<a class="anchor" aria-label="anchor" href="#how-do-i-install-the-pacta-loanbook-r-package"></a>
 </h5>
 <p>The most common ways to install R packages are via CRAN or <a href="#connecting-to-github-from-rstudio">GitHub</a>. Public
 institutions often have restrictions on the installation of packages
@@ -427,8 +431,8 @@ maintainers directly for exploring other options.</p>
 <h5 id="how-do-i-install-the-required-r-packages">How do I install the required R packages?<a class="anchor" aria-label="anchor" href="#how-do-i-install-the-required-r-packages"></a>
 </h5>
 <p>In principle, all dependencies required to run the
-<code>r2dii.*</code> suite of R packages will be installed automatically
-when you install the packages. However, if you encounter any issues with
+<a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> R package will be installed automatically
+when you install the package. However, if you encounter any issues with
 the installation of the required packages, you can install them manually
 by running the following command in R, where <code>...</code> should be
 replaced with the package names from the list above, separated by
@@ -476,8 +480,8 @@ software:</label>
 <li><label><input type="checkbox">R (version 4.1.0 or
 higher)</label></li>
 <li><label><input type="checkbox">RStudio (optional)</label></li>
-<li><label><input type="checkbox"><code>r2dii.*</code> suite of R
-packages</label></li>
+<li><label><input type="checkbox"><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> R
+package</label></li>
 <li><label><input type="checkbox"><a href="#connecting-to-github-from-rstudio">set up git and GitHub</a>
 (optional)</label></li>
 </ul>
