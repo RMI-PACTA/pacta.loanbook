@@ -58,7 +58,7 @@ An asset-based company dataset (ABCD) about physical assets (e.g. a wind turbine
 plot_table("abcd_demo")
 ```
 
-The `{pacta.loanbook}` package provides an example loanbook dataset `abcd_demo`.
+The `{pacta.loanbook}` package provides an example abcd dataset `abcd_demo`.
 
 ```{r, R.options = list(width = 400)}
 abcd_demo
