@@ -82,7 +82,6 @@ gics_classification
 
 This dataset serves as a translation key between the ISIC Rev 5 sector-classification system and sector scopes used in the 'PACTA' software.
 
-The `{pacta.loanbook}` package provides a ISIC Rev 5 classification dataset `isic_classification`.
 
 ```{r, echo = FALSE}
 plot_table("isic_classification")
