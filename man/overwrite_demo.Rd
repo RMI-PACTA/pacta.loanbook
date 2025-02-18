@@ -35,8 +35,10 @@ Other demo data:
 \code{\link{abcd_demo}},
 \code{\link{co2_intensity_scenario_demo}},
 \code{\link{loanbook_demo}},
+\code{\link{market_share}},
 \code{\link{region_isos_demo}},
-\code{\link{scenario_demo_2020}}
+\code{\link{scenario_demo_2020}},
+\code{\link{sda}}
 }
 \concept{demo data}
 \keyword{datasets}
