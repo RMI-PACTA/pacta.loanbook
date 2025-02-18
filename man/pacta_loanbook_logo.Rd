@@ -2,7 +2,7 @@
 % Please edit documentation in R/logo.R
 \name{pacta_loanbook_logo}
 \alias{pacta_loanbook_logo}
-\title{The pacta_loanbook logo, using ASCII or Unicode characters}
+\title{The \code{{pacta.loanbook}} logo, using ASCII or Unicode characters}
 \usage{
 pacta_loanbook_logo(unicode = cli::is_utf8_output())
 }

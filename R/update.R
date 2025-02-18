@@ -1,7 +1,7 @@
-#' Update pacta.loanbook packages
+#' Update `{pacta.loanbook}` packages
 #'
-#' This will check to see if all pacta.loanbook packages (and optionally, their
-#' dependencies) are up-to-date, and will install after an interactive
+#' This will check to see if all `{pacta.loanbook}` packages (and optionally,
+#' their dependencies) are up-to-date, and will install after an interactive
 #' confirmation.
 #'
 #' @inheritParams pacta_loanbook_deps
@@ -38,12 +38,12 @@ pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos"))
   invisible()
 }
 
-#' Get a situation report on pacta.loanbook
+#' Get a situation report on `{pacta.loanbook}`
 #'
-#' This function gives a quick overview of the versions of R and RStudio as
-#' well as all pacta.loanbook packages. It's primarily designed to help you get
-#' a quick idea of what's going on when you're helping someone else debug
-#' a problem.
+#' This function gives a quick overview of the versions of R and RStudio as well
+#' as the `{pacta.loanbook}` package. It's primarily designed to help you get a
+#' quick idea of what's going on when you're helping someone else debug a
+#' problem.
 #'
 #' @family utility functions
 #'
@@ -69,10 +69,10 @@ pacta_loanbook_sitrep <- function() {
   cli::cat_bullet(packages[!deps$package %in% core])
 }
 
-#' List all pacta.loanbook dependencies
+#' List all `{pacta.loanbook}` dependencies
 #'
 #' @param recursive If \code{TRUE}, will also list all dependencies of
-#'   pacta.loanbook packages.
+#'   `{pacta.loanbook}` packages.
 #' @param repos The repositories to use to check for updates.
 #'   Defaults to \code{getOption("repos")}.
 #'
