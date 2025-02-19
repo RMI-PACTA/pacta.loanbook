@@ -111,6 +111,12 @@ The user can provide a list of loans that have been misclassified in the raw loa
 - self-prepared
 - CSV file
 
+The the manual sector classification data set must be prepared as a CSV file and contain the following columns:
+
+```{r cols_manual_sector_classifications, echo = FALSE, results = 'asis'}
+cat(paste0("- `", names(sector_classifications), "`", collapse = "\n"))
+```
+
 In case the user cannot obtain sector classification codes of any of the classification systems featured in `sector_classifications` (currently the following classification systems are featured: `r unique(sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of `sector_classifications`. It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
 
 ## Required Software
