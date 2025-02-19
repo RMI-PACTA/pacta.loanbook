@@ -55,7 +55,7 @@ Suggests:
     readxl,
     rmarkdown (>= 2.19),
     spelling,
-    testthat (>= 3.0.0),
+    testthat (>= 3.2.2),
     writexl
 Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate, rmarkdown
 URL: https://rmi-pacta.github.io/pacta.loanbook/, https://github.com/rmi-pacta/pacta.loanbook
