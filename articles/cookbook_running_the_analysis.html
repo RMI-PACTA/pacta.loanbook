@@ -56,7 +56,7 @@
 <li><a class="dropdown-item" href="../articles/data_loanbook.html">Loanbook</a></li>
     <li><a class="dropdown-item" href="../articles/data_abcd.html">ABCD</a></li>
     <li><a class="dropdown-item" href="../articles/data_scenario.html">Scenario</a></li>
-    <li><a class="dropdown-item" href="../articles/data_classification.html">Classification</a></li>
+    <li><a class="dropdown-item" href="../articles/data_classification.html">Sector Classification</a></li>
     <li><a class="dropdown-item" href="../articles/data_outputs.html">Outputs</a></li>
   </ul>
 </li>
@@ -246,7 +246,7 @@ production data from the abcd.</p>
 <li>Apply a matching algorithm to calculate scores of the match
 precision between the loanbook and abcd datasets</li>
 <li>Manually validate matches between the loanbook and abcd datasets,
-including slecting the appropriate match in cases where more than one
+including selecting the appropriate match in cases where more than one
 company in the abcd receives a score higher than the threshold
 value</li>
 <li>Prioritize validated matches by level</li>
@@ -1050,7 +1050,7 @@ portfolio must follow to achieve the scenario ambition by 2050.</p>
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sda_targets</span>, <span class="va">sector</span> <span class="op">==</span> <span class="st">"cement"</span>, <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_running_the_analysis_files/figure-html/sda%20plot-1.png" width="700"></p>
-<p><strong>ADD ISNTRUCTIONS</strong> Write to file</p>
+<p><strong>ADD INSTRUCTIONS</strong> Write to file</p>
 <p><strong>PREVIOUS CHAPTER:</strong> <a href="cookbook_preparatory_steps.html">Preparatory Steps</a></p>
 <p><strong>NEXT CHAPTER:</strong> <a href="cookbook_interpretation.html">Interpretation of Results</a></p>
 </div>
