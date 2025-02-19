@@ -229,10 +229,10 @@ In practice, if a company has a sector code with `borderline` is `TRUE` and *is*
 
 If you can obtain sector codes in any one of those classification systems for your loan book, it is strongly recommended using them. If you do not have your loans mapped to any of these systems, you can either run the matching without a sector classification (see above), or you can use a custom sector classification system.
 
-If you want to use your own custom sector classification system, you will need to create a file that follows the same structure as the sector classification files in `r2dii.data::sector_classifications`, that is, the file needs to contain the following columns (of the following types):
+If you want to use your own custom sector classification system, you will need to create a file that follows the same structure as the sector classification files in `sector_classifications`, that is, the file needs to contain the following columns (of the following types):
 
 ```{r cols_custom_sector_classification, echo = FALSE, results = 'asis'}
-cat(paste0("- `", names(r2dii.data::sector_classifications), "`: ", lapply(r2dii.data::sector_classifications, class),collapse = "\n"))
+cat(paste0("- `", names(sector_classifications), "`: ", lapply(sector_classifications, class),collapse = "\n"))
 ```
 
 Please notice that when manually preparing a custom sector classification file, you need to decide for every code of your mapping system which PACTA sector the code maps to. This requires the system to be relatively granular to capture the nuances of the supply chains of the companies in your loan book. As discussed above, any sector code that is not unambiguously in scope or out of scope for a given PACTA sector should be marked `TRUE` in the `borderline` column. Any sector code that is clearly not in scope should be marked `FALSE` and receive the sector value `not in scope`. Any sector code that is clearly in scope should be marked `FALSE` for `borderline` and receive the PACTA sector value that it maps to in the `sector` column.
@@ -400,7 +400,71 @@ companies_matched %>%
   plot_coverage(sector, no_companies)
 ```
 
-### Optional: Exclude misclassified loans from the analysis
+### Optional: Handling misclassified loans
+
+A loan is considered misclassified, if it is identified as in-scope of a PACTA sector based on the sector classification in the input loan book, but if it turns out that this classification is incorrect based on the counterparty's activities. For example, if a counterparty is classified as a fully in-scope power company, but in reality it is a power distribution company or even active in another sector altogether, such as upstream gas production, the counterparty is misclassified. Misclassification is a problem, because it leads to exaggeratedly low match success rates, that cannot be improved by iterating the matching process. You can search as long as you want, but a company that in reality does not operate any power plants will not be found in the ABCD regardless of how the settings of the matching algorithm are tweaked. The match success rate can only be a useful metric if the denominator, that is the classification in the loan book, is solid. This is also important to understand which loans are truly not matched. This category should only be companies that actually are active in a given in-scope sector, but were not found in the ABCD.
+
+Identifying misclassified loans is usually a manual process, where counterparties that have not been matched are researched to determine if they should be in scope or not. Depending on the size of the loan book, this can be a time-consuming process. It is recommended to start with the unmatched counterparties with the largest loans, as these have the largest impact on the match success rate. You may then have to decide for yourself, if you want to research all unmatched loans or set a cutoff point, e.g. based on the size of the loan.
+
+Once the list of misclassified loans is identified, there are two broad options to appropriately these cases. 
+
+1. Correct the classification in the raw loan book and re-run the matching process. If the loan was clearly misclassified, this may be the most appropriate way to handle the issue. It may be a good idea to keep notes on any such changes made in the input data though, to ensure the result is fully replicable. The upside of this approach is that the loan will now either be matched correctly, as it will be assigned the sector that the company should have and therefore find an entry in the ABCD data set to match against. Or, if there is still no match to be found in the ABCD, the loan will correctly be missing in the appropriate sector and therefore indicate a lower match success rate where it should. Lastly, if it should have been `"not in scope"`, it will not inflate the denominator of the match success rate anymore.
+2. If a manual re-classification of the raw loan book is not possible or desired, the calculation of the match success rate can be corrected by creating a file `loans_to_remove.csv`, which should include the column `id_loan` to indicate the precise misclassified loan that was identified. This loan then needs to be explicitly removed from the match success calculation, as shown below.
+
+Let's assume the the loan with id L255 is falsely classified as a steel company. Research shows this company is not a primary steel prodcuer, but it makes steel-based products for end use. Hence it is active downstream in the value chain and cannot be matched to the ABCD. If we cannot correct the input sector classification, we instead create a csv file with the id of the misclassified loan. In practice, this can be done prgramatically or manually.
+
+```{r}
+readr::write_csv(
+  x = tibble(id_loan = "L255"),
+  file = file.path(tempdir(), "loans_to_remove.csv")
+)
+
+```
+
+The loans_to_remove.csv file should have just one column, id_loan, and therefore be structured as follows:
+
+```{r, echo = FALSE, results = 'asis'}
+cat("- `id_loan`: character")
+```
+
+We then read in the file and remove the misclassified loan from the match success rate calculation. We compare the coverage before and after the removal of the misclassified loan to see the impact of the correction. For demonstration purposes, we artificially increase the loan_size_outstanding of the affected counterparty while focusing on the steel sector only, to see the clear impact.
+
+```{r, message=FALSE}
+coverage_compare <- coverage %>% 
+  mutate(
+    loan_size_outstanding = ifelse(id_loan == "L255", 50000000, loan_size_outstanding)
+  ) %>% 
+  filter(sector == "steel")
+
+coverage_compare %>%
+  mutate(matched = case_when(
+    matched == "Matched" & level == "direct_loantaker"      ~ "Matched DL",
+    matched == "Matched" & level == "intermediate_parent_1" ~ "Matched IP1",
+    matched == "Matched" & level == "ultimate_parent"       ~ "Matched UP",
+    matched == "Not Matched"                                ~ "Not Matched",
+    TRUE                                                    ~ "Catch unknown"
+  )) %>% 
+  dollar_value(sector) %>% 
+  plot_coverage(sector, loan_size_outstanding)
+
+loans_to_remove <- readr::read_csv(file.path(tempdir(), "loans_to_remove.csv"))
+
+coverage_corrected <- coverage_compare %>% 
+  anti_join(loans_to_remove, by = "id_loan")
+
+coverage_corrected %>% 
+  mutate(matched = case_when(
+    matched == "Matched" & level == "direct_loantaker"      ~ "Matched DL",
+    matched == "Matched" & level == "intermediate_parent_1" ~ "Matched IP1",
+    matched == "Matched" & level == "ultimate_parent"       ~ "Matched UP",
+    matched == "Not Matched"                                ~ "Not Matched",
+    TRUE                                                    ~ "Catch unknown"
+  )) %>% 
+  dollar_value(sector) %>% 
+  plot_coverage(sector, loan_size_outstanding)
+```
+
+The reason why it is a good idea to either correct misclassified loans or disregard them in the calculation of the match success rate is that a misclassified loan cannot possibly be matched in a given sector. Therefore, no amount of work would be sufficient to improve the sector match success rate, because it is calculated against an incorrect baseline. Technically, the user is not forced to correct misclassifications, and there may be a limit to how much time should be spent on this, but it is recommended to at least correct large misclassified loans.
 
 ...
 
