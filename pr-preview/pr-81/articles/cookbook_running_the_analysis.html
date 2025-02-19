@@ -300,7 +300,7 @@ information on the scoring algorithm used, see
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 316 more rows</span></span></span></code></pre></div>
 <p><code><a href="../reference/match_name.html">match_name()</a></code> defaults to scoring matches between name
 strings that belong to the same sector. This implies that a potential
-match will only be shown, if the names in the loanbook and the abcd are
+match will only be shown if the names in the loanbook and the abcd are
 sufficiently similar AND the loan is classified in the same sector as
 the company activity in the abcd. Using <code>by_sector = FALSE</code>
 removes this limitation – increasing computation time, and the number of
@@ -377,8 +377,8 @@ other than <code>1</code>.</li>
 <code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"valid_matches.csv"</span><span class="op">)</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>You can find more detailed information about the matching process
 under the header “PACTA for Banks Training Webinar 2” in the <a href="https://pacta.rmi.org/pacta-for-banks-2020/training-materials/" class="external-link">training
-materials section of the PACTA for Banks website</a> and in the
-[corresponding slide deck](<a href="https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf" class="external-link uri">https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf</a>.</p>
+materials section of the PACTA for Banks website</a> and in the <a href="https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf" class="external-link">corresponding
+slide deck</a>.</p>
 </div>
 <div class="section level4">
 <h4 id="prioritize-validated-matches-by-level">Prioritize validated matches by level<a class="anchor" aria-label="anchor" href="#prioritize-validated-matches-by-level"></a>
@@ -532,8 +532,8 @@ be relatively granular to capture the nuances of the supply chains of
 the companies in your loan book. As discussed above, any sector code
 that is not unambiguously in scope or out of scope for a given PACTA
 sector should be marked <code>TRUE</code> in the <code>borderline</code>
-column. Any sector that code that is clearly not in scope should be
-marked <code>FALSE</code> and receive the sector value
+column. Any sector code that is clearly not in scope should be marked
+<code>FALSE</code> and receive the sector value
 <code>not in scope</code>. Any sector code that is clearly in scope
 should be marked <code>FALSE</code> for <code>borderline</code> and
 receive the PACTA sector value that it maps to in the
