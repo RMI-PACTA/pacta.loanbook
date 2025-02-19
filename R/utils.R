@@ -38,3 +38,20 @@ invert <- function(x) {
   stacked <- utils::stack(x)
   tapply(as.character(stacked$ind), stacked$values, list)
 }
+
+#' @noRd
+#' @export
+
+list_col_names_and_types <- function(dataset) {
+  cat(
+    cli::ansi_html(
+      paste0(
+        "- ",
+        lapply(names(dataset), function(x) cli::format_inline("{.var {x}}")),
+        ": ",
+        lapply(dataset, function(x) cli::format_inline("{.cls {class(x)}}")),
+        collapse = "\n"
+      )
+    )
+  )
+}
