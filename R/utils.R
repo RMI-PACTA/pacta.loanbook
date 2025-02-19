@@ -40,6 +40,7 @@ invert <- function(x) {
 }
 
 #' @noRd
+#' @keywords internal
 #' @export
 
 list_col_names_and_types <- function(dataset) {
