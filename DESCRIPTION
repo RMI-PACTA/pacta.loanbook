@@ -48,7 +48,7 @@ Suggests:
     DiagrammeR,
     ggplot2,
     glue,
-    gt,
+    gt (>= 0.11.0),
     knitr,
     mockr,
     readr,
