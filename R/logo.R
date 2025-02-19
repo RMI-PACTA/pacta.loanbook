@@ -1,5 +1,5 @@
 
-#' The pacta_loanbook logo, using ASCII or Unicode characters
+#' The `{pacta.loanbook}` logo, using ASCII or Unicode characters
 #'
 #' Use [cli::ansi_strip()] to get rid of the colors.
 #'
