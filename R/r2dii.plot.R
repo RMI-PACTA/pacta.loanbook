@@ -141,7 +141,7 @@ to_title <- r2dii.plot::to_title
 # -------------------------------------------------------------------------
 
 #' @inherit r2dii.plot::market_share return title description details seealso sections references examples author source note format
-#' @family datasets
+#' @family demo data
 #' @export
 
 market_share <- r2dii.plot::market_share
@@ -162,7 +162,7 @@ scenario_colours <- r2dii.plot::scenario_colours
 
 
 #' @inherit r2dii.plot::sda return title description details seealso sections references examples author source note format
-#' @family datasets
+#' @family demo data
 #' @export
 
 sda <- r2dii.plot::sda

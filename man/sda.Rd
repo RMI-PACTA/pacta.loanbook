@@ -20,22 +20,14 @@ Dataset imitating the output of \code{\link[r2dii.analysis:target_sda]{r2dii.ana
 sda
 }
 \seealso{
-Other datasets: 
-\code{\link{gics_classification}},
-\code{\link{increasing_or_decreasing}},
-\code{\link{isic_classification}},
-\code{\link{iso_codes}},
+Other demo data: 
+\code{\link{abcd_demo}},
+\code{\link{co2_intensity_scenario_demo}},
+\code{\link{loanbook_demo}},
 \code{\link{market_share}},
-\code{\link{nace_classification}},
-\code{\link{naics_classification}},
-\code{\link{palette_colours}},
-\code{\link{psic_classification}},
-\code{\link{region_isos}},
-\code{\link{scenario_colours}},
-\code{\link{sector_classifications}},
-\code{\link{sector_colours}},
-\code{\link{sic_classification}},
-\code{\link{technology_colours}}
+\code{\link{overwrite_demo}},
+\code{\link{region_isos_demo}},
+\code{\link{scenario_demo_2020}}
 }
-\concept{datasets}
+\concept{demo data}
 \keyword{datasets}
