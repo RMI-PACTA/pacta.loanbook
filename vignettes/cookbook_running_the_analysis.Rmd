@@ -20,7 +20,7 @@ This section provides a brief overview of the main steps required to run the PAC
 
 ## Structure of the Workflow
 
-Assuming you have prepared and/or procured all required input data sets as described in the section "Preparatory Steps" **LINK**, implementing the PACTA for Banks analysis now follows the following main steps:
+Assuming you have prepared and/or procured all required input data sets as described in the section ["Preparatory Steps"](cookbook_preparatory_steps.html), implementing the PACTA for Banks analysis now follows the following main steps:
 
 1.  **Setup**: Load the necessary packages and import the data.
 2.  **Matching process**: Match the counterparties in the raw input loan book with the companies in the asset-based company data.
@@ -121,7 +121,7 @@ matched <- match_name(loanbook, abcd)
 matched
 ```
 
-`match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown, if the names in the loanbook and the abcd are sufficiently similar AND the loan is classified in the same sector as the company activity in the abcd. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
+`match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown if the names in the loanbook and the abcd are sufficiently similar AND the loan is classified in the same sector as the company activity in the abcd. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
 
 ```{r}
 match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
@@ -172,7 +172,7 @@ file.copy(from = file.path(tempdir(), "matched.csv"), to = file.path(tempdir(), 
 valid_matches <- readr::read_csv(file = file.path(tempdir(), "valid_matches.csv"), show_col_types = FALSE)
 ```
 
-You can find more detailed information about the matching process under the header "PACTA for Banks Training Webinar 2" in the [training materials section of the PACTA for Banks website](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/) and in the [corresponding slide deck](https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf.
+You can find more detailed information about the matching process under the header "PACTA for Banks Training Webinar 2" in the [training materials section of the PACTA for Banks website](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/) and in the [corresponding slide deck](https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf).
 
 ### Prioritize validated matches by level
 

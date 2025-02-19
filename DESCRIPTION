@@ -41,19 +41,21 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends:
+    R (>= 4.0.0)
 Suggests: 
     covr,
     DiagrammeR,
     ggplot2,
     glue,
-    gt,
-    knitr,
+    gt (>= 0.11.0),
+    knitr (>= 1.42),
     mockr,
     readr,
     readxl,
-    rmarkdown,
+    rmarkdown (>= 2.19),
     spelling,
-    testthat (>= 3.0.0),
+    testthat (>= 3.2.2),
     writexl
 Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate, rmarkdown
 URL: https://rmi-pacta.github.io/pacta.loanbook/, https://github.com/rmi-pacta/pacta.loanbook
