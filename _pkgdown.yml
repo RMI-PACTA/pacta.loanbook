@@ -13,12 +13,12 @@ reference:
 - title: Analysis functions
   contents: has_concept("analysis functions")
 - title: Plotting functions
+- subtitle: Preparing data
+  contents: starts_with("prep_")
 - subtitle: Quick plots
   contents: starts_with("qplot_")
 - subtitle: Plots
   contents: starts_with("plot_")
-- subtitle: Preparing data
-  contents: starts_with("prep_")
 - subtitle: Styling functions
   contents:
   - starts_with("theme_")
