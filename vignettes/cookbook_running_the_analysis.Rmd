@@ -20,7 +20,7 @@ This section provides a brief overview of the main steps required to run the PAC
 
 ## Structure of the Workflow
 
-Assuming you have prepared and/or procured all required input data sets as described in the section "Preparatory Steps" **LINK**, implementing the PACTA for Banks analysis now follows the following main steps:
+Assuming you have prepared and/or procured all required input data sets as described in the section ["Preparatory Steps"](cookbook_preparatory_steps.html), implementing the PACTA for Banks analysis now follows the following main steps:
 
 1.  **Setup**: Load the necessary packages and import the data.
 2.  **Matching process**: Match the counterparties in the raw input loan book with the companies in the asset-based company data.
