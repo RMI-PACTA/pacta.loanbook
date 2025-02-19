@@ -172,7 +172,7 @@ file.copy(from = file.path(tempdir(), "matched.csv"), to = file.path(tempdir(), 
 valid_matches <- readr::read_csv(file = file.path(tempdir(), "valid_matches.csv"), show_col_types = FALSE)
 ```
 
-You can find more detailed information about the matching process under the header "PACTA for Banks Training Webinar 2" in the [training materials section of the PACTA for Banks website](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/) and in the [corresponding slide deck](https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf.
+You can find more detailed information about the matching process under the header "PACTA for Banks Training Webinar 2" in the [training materials section of the PACTA for Banks website](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/) and in the [corresponding slide deck](https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf).
 
 ### Prioritize validated matches by level
 
