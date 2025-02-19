@@ -235,7 +235,7 @@ If you want to use your own custom sector classification system, you will need t
 cat(paste0("- `", names(r2dii.data::sector_classifications), "`: ", lapply(r2dii.data::sector_classifications, class),collapse = "\n"))
 ```
 
-Please notice that when manually preparing a custom sector classification file, you need to decide for every code of your mapping system which PACTA sector the code maps to. This requires the system to be relatively granular to capture the nuances of the supply chains of the companies in your loan book. As discussed above, any sector code that is not unambiguously in scope or out of scope for a given PACTA sector should be marked `TRUE` in the `borderline` column. Any sector that code that is clearly not in scope should be marked `FALSE` and receive the sector value `not in scope`. Any sector code that is clearly in scope should be marked `FALSE` for `borderline` and receive the PACTA sector value that it maps to in the `sector` column.
+Please notice that when manually preparing a custom sector classification file, you need to decide for every code of your mapping system which PACTA sector the code maps to. This requires the system to be relatively granular to capture the nuances of the supply chains of the companies in your loan book. As discussed above, any sector code that is not unambiguously in scope or out of scope for a given PACTA sector should be marked `TRUE` in the `borderline` column. Any sector code that is clearly not in scope should be marked `FALSE` and receive the sector value `not in scope`. Any sector code that is clearly in scope should be marked `FALSE` for `borderline` and receive the PACTA sector value that it maps to in the `sector` column.
 
 **ADD EXAMPLE**
 
