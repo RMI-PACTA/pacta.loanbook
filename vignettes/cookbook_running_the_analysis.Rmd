@@ -94,7 +94,7 @@ The next step after loading all required input files is to run the matching proc
 The matching process is divided into three main steps:
 
 -   Apply a matching algorithm to calculate scores of the match precision between the loanbook and abcd datasets
--   Manually validate matches between the loanbook and abcd datasets, including slecting the appropriate match in cases where more than one company in the abcd receives a score higher than the threshold value
+-   Manually validate matches between the loanbook and abcd datasets, including selecting the appropriate match in cases where more than one company in the abcd receives a score higher than the threshold value
 -   Prioritize validated matches by level
 
 We will cover each of these steps in the following sections.
@@ -620,7 +620,7 @@ data <- filter(sda_targets, sector == "cement", region == "global")
 qplot_emission_intensity(data)
 ```
 
-**ADD ISNTRUCTIONS** Write to file
+**ADD INSTRUCTIONS** Write to file
 
 **PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
 
