@@ -53,7 +53,7 @@ Suggests:
     mockr,
     readr,
     readxl,
-    rmarkdown,
+    rmarkdown (>= 2.19),
     spelling,
     testthat (>= 3.0.0),
     writexl
