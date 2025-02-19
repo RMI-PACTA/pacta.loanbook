@@ -14,6 +14,36 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Running the Analysis
+
+This section provides a brief overview of the main steps required to run the PACTA for Banks analysis. It starts with a high-level overview and elaborates on each step in more detail below. The whole process is demonstrated with code-snippets so that following them in your own environment is as straight-forward as possible.
+
+## Structure of the Workflow
+
+Assuming you have prepared and/or procured all required input data sets as described in the section ["Preparatory Steps"](cookbook_preparatory_steps.html), implementing the PACTA for Banks analysis now follows the following main steps:
+
+1.  **Setup**: Load the necessary packages and import the data.
+2.  **Matching process**: Match the counterparties in the raw input loan book with the companies in the asset-based company data.
+3.  **Calculate PACTA metrics**: Run the PACTA analysis to obtain alignment metrics for the matched loan book relative to benchmarks based on transition scenarios.
+4.  **Plot PACTA metrics**: Visualize the results of the PACTA analysis using the standard PACTA plots to facilitate interpretation.
+
+```{r workflow_structure, echo=FALSE, fig.cap='Fig. 1: Structure of the Workflow', fig.align='center'}
+DiagrammeR::mermaid('
+  graph TB;
+    id1("Setup") --> id2("Matching process");
+    id2("Matching process") --> id3("Calculate PACTA metrics");
+    id3("Calculate PACTA metrics") --> id4("Visualize PACTA metrics");
+    classDef nodeStyle fill: #45cfcc, stroke: #000, stroke-width: 2px;
+    class id1,id2,id3,id4 nodeStyle;
+    click id1 "#setup";
+    click id2 "#matching-process";
+    click id3 "#calculate-pacta-alignment-metrics";
+    click id4 "#visualize-pacta-alignment-metrics";
+')
+```
+
+In principle, these steps are sequential. However, in practice it has shown that one rarely ever achieves the best possible match rate in one iteration. Therefore, it may be required to iterate the matching process multiple times. We will cover these steps in more detail now.
+
 ## Setup
 
 We use the `{pacta.loanbook}` package to access the most important functions you'll learn about. We also use example datasets from the package `{pacta.loanbook}`, and optional but convenient functions from the packages `{dplyr}`, `{readxl}`, and `{readr}`.
@@ -25,7 +55,7 @@ library(readxl)
 library(readr)
 ```
 
-## Import data
+## Import Data
 
 We need two datasets to begin: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd). For more detail about the necessary structure of these datasets, see the data dictionaries for [loanbook](data_loanbook.html) and [abcd](data_abcd.html).
 
@@ -57,19 +87,33 @@ abcd <- readxl::read_excel(path = file.path(tempdir(), "abcd.xlsx"))
 abcd
 ```
 
-## Score the match precision between the loanbook and abcd datasets
+## Matching Process
+
+The next step after loading all required input files is to run the matching process, where you will match loans from the loanbook data with production data from the abcd.
+
+The matching process is divided into three main steps:
+
+-   Apply a matching algorithm to calculate scores of the match precision between the loanbook and abcd datasets
+-   Manually validate matches between the loanbook and abcd datasets, including slecting the appropriate match in cases where more than one company in the abcd receives a score higher than the threshold value
+-   Prioritize validated matches by level
+
+We will cover each of these steps in the following sections.
+
+### Score the match precision between the loanbook and abcd datasets
 
 `match_name()` scores the match between names in a loanbook dataset and names in an asset-based company dataset. The names come from the columns `name_direct_loantaker` and `name_ultimate_parent` of the loanbook dataset, and from the column `name_company` of the asset-based company dataset. In the loan book data set, it is possible to optionally add any number of `name_intermediate_parent_*` columns, where `*` indicates the level up the corporate tree from `direct_loantaker`.
 
 The raw names are internally transformed applying best-practices commonly used in name matching algorithms, such as:
 
-* Remove special characters
-* Replace language specific characters
-* Abbreviate certain names to reduce their importance in the matching
-* Remove corporate suffixes when necessary
-* Spell out numbers to increase their importance
+-   Remove special characters
+-   Replace language specific characters
+-   Abbreviate certain names to reduce their importance in the matching
+-   Remove corporate suffixes when necessary
+-   Spell out numbers to increase their importance
 
 The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
+
+The basic usage of `match_name()` is as follows:
 
 ```{r, R.options = list(width = 400)}
 matched <- match_name(loanbook, abcd)
@@ -77,7 +121,7 @@ matched <- match_name(loanbook, abcd)
 matched
 ```
 
-`match_name()` defaults to scoring matches between name strings that belong to the same sector. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate.
+`match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown if the names in the loanbook and the abcd are sufficiently similar AND the loan is classified in the same sector as the company activity in the abcd. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
 
 ```{r}
 match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
@@ -86,7 +130,7 @@ match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
 match_name(loanbook, abcd, by_sector = TRUE) %>% nrow()
 ```
 
-The `min_score` argument allows you to set a minimum threshold score.
+The `min_score` argument allows you to set a minimum threshold score. This is useful when you either want to filter out potential matches that are not precise enough, or want to add additional potential matches because the given suggestions do not seem to provide sufficient matching coverage. The default value is 0.8, but you can set it to any value between 0 and 1. Since a higher score implies a closer match between company names in the loanbook and the abcd, fewer potential matches will usually be shown. The following code shows how to set the threshold to 0.9:
 
 ```{r}
 match_name(loanbook, abcd, min_score = 0.9) %>%
@@ -94,7 +138,13 @@ match_name(loanbook, abcd, min_score = 0.9) %>%
   range()
 ```
 
-## Validate matches
+### Manually validate matches
+
+After the initial calculation of scores for potential matches, you will manually have to inspect the suggested matches and decide which ones to keep or remove. This is especially important when using text-based matching because there is no guarantee that similar company names as identified by the algorithm actually refer to the same companies. The manual validation step is therefore crucial, it ensures data quality in the remainder of the analysis.
+
+The validation process is not automated and requires some time and effort on your part. This is often the most time-consuming part of the analysis, especially when trying to improve the matching coverage in multiple iterations.
+
+Below you will find a brief description of the manual validation process:
 
 Write the output of `match_name()` into a .csv file, for example using `{readr}` to save a CSV file:
 
@@ -104,12 +154,12 @@ readr::write_csv(x = matched, file = file.path(tempdir(), "matched.csv"))
 
 Compare, edit, and save the data manually:
 
-* Open `matched.csv` with any spreadsheet editor (Excel, Google Sheets, etc.).
-* Compare the columns `name` and `name_abcd` manually to determine if the match is valid. Other information can be used in conjunction with just the names to ensure the two entities match (sector, internal information on the company structure, etc.)
-* Edit the data:
-  * If you are happy with the match, set the `score` value to `1`.
-  * Otherwise set or leave the `score` value to anything other than `1`.
-* Save the edited file as, for example, `valid_matches.csv`.
+-   Open `matched.csv` with any spreadsheet editor (Excel, Google Sheets, etc.).
+-   Compare the columns `name` and `name_abcd` manually to determine if the match is valid. Other information can be used in conjunction with just the names to ensure the two entities match (sector, internal information on the company structure, etc.)
+-   Edit the data:
+    -   If you are happy with the match, set the `score` value to `1`.
+    -   Otherwise set or leave the `score` value to anything other than `1`.
+-   Save the edited file as, for example, `valid_matches.csv`.
 
 Re-import the edited file (validated), for example using `{readr}` to read a CSV file:
 
@@ -122,9 +172,9 @@ file.copy(from = file.path(tempdir(), "matched.csv"), to = file.path(tempdir(), 
 valid_matches <- readr::read_csv(file = file.path(tempdir(), "valid_matches.csv"), show_col_types = FALSE)
 ```
 
-For more information on validating matches, please see the documentation for `prioritize()`.
+You can find more detailed information about the matching process under the header "PACTA for Banks Training Webinar 2" in the [training materials section of the PACTA for Banks website](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/) and in the [corresponding slide deck](https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf).
 
-## Prioritize validated matches by level
+### Prioritize validated matches by level
 
 The validated dataset may have multiple matches per loan. Consider the case where a loan is given to "Acme Power USA", a subsidiary of "Acme Power Co.". There may be both "Acme Power USA" and "Acme Power Co." in the `abcd`, and so there could be two valid matches for this loan. To get the best match only, use `prioritize()` -- it picks rows where `score` is 1 and `level` per loan is of highest `priority`:
 
@@ -152,30 +202,210 @@ valid_matches %>%
   select(all_of(some_interesting_columns))
 ```
 
-## A Note on Sector Classifications and the `borderline` Flag
+### A Note on Sector Classifications and the `borderline` Flag
 
-A note on sector classification: Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, we only allow a couple specific values for `sector_classification_system`, specified in `sector_classifications`:
+#### A note on sector classification
+
+Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally by mapping the sector classification code from the loan book to a PACTA sector, using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, the following options are supported for `sector_classification_system`, specified in `sector_classifications`:
 
 > `r unique(sector_classifications$code_system)`
 
-If you would like to use a different classification system, please raise an issue in [r2dii.data](https://github.com/RMI-PACTA/r2dii.data) and we can incorporate it.
+#### The `borderline` flag
 
-There are a zoo of sector classification code systems out there. Some are granular, some are not. Since we currently cover a particular portion of the supply chain (i.e. production), it is important we try to only match the ABCD with companies that are actually active in this portion of the supply chain. 
+An issue arises when, for example, a company is classified in the "power transmission" sector. In a perfect world, these companies would produce no electricity, and we would not try to match them. In practice, however, we find there is often overlap, as companies may have integrated business models that span multiple steps of the supply chain or sector classification systems do not break down every code clearly enough to map it to PACTA sectors unambiguously. For this reason, we introduced the `borderline` flag.
 
-An issue arises when, for example, a company is classified in the "power transmission" sector. In a perfect world, these companies would produce no electricity, and we would not try to match them. In practice, however, we find there is often overlap. For this reason, we introduced the `borderline` flag.
+In the example below, we see two classification codes coming from the NACE classification standard:
 
-In the example below, we see two classification codes coming from the SIC classification standard:
-
-``` {r}
+```{r}
 nace_classification %>% 
-  filter(code %in% c("D35.11", "D35.14"))
+  filter(code %in% c("D35.11", "D35.14", "D35.1"))
 ```
 
-Notice that the code D35.11 corresponds to power generation. This is an identical match to PACTA's `power` sector, and thus the `borderline` flag is set to `FALSE`. In contrast, code D35.14 corresponds to the distribution of electricity. In a perfect world, we would set this code to `not in scope`, however there is still a chance that these companies produce electricity. For this reason, we have mapped it to `power` with `borderline = TRUE`.
+Notice that the code D35.11 corresponds to power generation. This is an identical match to `power` sector in PACTA, and thus the `borderline` flag is set to `FALSE`. In contrast, code D35.14 corresponds to the distribution of electricity. In a perfect world, we would set this code to `not in scope`, however there is still a chance that these companies produce electricity. For this reason, we have mapped it to `power` with `borderline = TRUE`. Finally, code D35.1 corresponds to the wider electricity sector, covering "Electric power generation, transmission and distribution". This is a case where the granularity is insufficient to unambiguously match the code to the `power` sector as defined in PACTA, and thus the `borderline` flag is set to `TRUE`.
 
-In practice, if a company has a `borderline` of `TRUE` and _is_ matched, then consider the company in scope. If it has a `borderline` of `TRUE` and _isn't_ matched, then consider it out of scope.
+In practice, if a company has a sector code with `borderline` is `TRUE` and *is* matched, then consider the company in scope. If it has a `borderline` value `TRUE` and *is not* matched, then consider it out of scope.
 
-## Calculate targets
+### Optional: Prepare own sector classification mapper
+
+If you can obtain sector codes in any one of those classification systems for your loan book, it is strongly recommended using them. If you do not have your loans mapped to any of these systems, you can either run the matching without a sector classification (see above), or you can use a custom sector classification system.
+
+If you want to use your own custom sector classification system, you will need to create a file that follows the same structure as the sector classification files in `r2dii.data::sector_classifications`, that is, the file needs to contain the following columns (of the following types):
+
+```{r cols_custom_sector_classification, echo = FALSE, results = 'asis'}
+cat(paste0("- `", names(r2dii.data::sector_classifications), "`: ", lapply(r2dii.data::sector_classifications, class),collapse = "\n"))
+```
+
+Please notice that when manually preparing a custom sector classification file, you need to decide for every code of your mapping system which PACTA sector the code maps to. This requires the system to be relatively granular to capture the nuances of the supply chains of the companies in your loan book. As discussed above, any sector code that is not unambiguously in scope or out of scope for a given PACTA sector should be marked `TRUE` in the `borderline` column. Any sector code that is clearly not in scope should be marked `FALSE` and receive the sector value `not in scope`. Any sector code that is clearly in scope should be marked `FALSE` for `borderline` and receive the PACTA sector value that it maps to in the `sector` column.
+
+**ADD EXAMPLE**
+
+### Calculate the Match Success Rate
+
+```{r include=FALSE}
+sector_in_scope <- glue::glue_collapse(
+  unique(abcd$sector), sep = ", ", last = ", and "
+)
+```
+
+`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in
+an asset-based company dataset. However, matching every loan is unlikely -- some
+loan-taking companies may be missing from the asset-based company dataset, or
+they may not operate in the sectors PACTA focuses on (`r sector_in_scope`).
+Thus, you may want to measure how much of the loanbook matched some asset. This
+article shows two ways to calculate such matching coverage:
+
+(1) Calculate the portion of your `loanbook` covered, by dollar value (i.e. using
+one of the `loan_size_*` columns).
+
+(2) Count the number of companies matched.
+
+First we will need to load the additional useful package `{ggplot2}`:
+
+```{r}
+library(ggplot2)
+```
+
+We will use the example datasets created in the previous section. To demonstrate our point, we
+create a `loanbook` dataset with two mismatching loans:
+
+```{r}
+loanbook <- loanbook %>% 
+  mutate(
+    name_ultimate_parent = 
+      ifelse(id_loan == "L1", "unmatched company name", name_ultimate_parent),
+    sector_classification_direct_loantaker = 
+      ifelse(id_loan == "L2", "99", sector_classification_direct_loantaker)
+  )
+```
+
+We will then run the matching algorithm on this loanbook:
+
+```{r}
+matched <- loanbook %>% 
+    match_name(abcd) %>% 
+    prioritize()
+```
+
+Note that this `matched` dataset will contain _only_ loans that were matched successfully. To determine coverage, we need to go back to the original `loanbook` dataset. We must determine the PACTA sectors of each loan, as dictated by the `sector_classification_direct_loantaker` column.
+
+For this, we join the `loanbook` with the `sector_classifications` dataset, which lists all sector classification code standards used by 'PACTA'. Unfortunately we need to work around two caveats (you may ignore them because they are conceptually uninteresting):
+
+* In the two datasets, the columns we want to merge by have different names. We use the argument `by` of `dplyr::left_join()` to merge the columns `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`) with the columns `code_system` and `code` (from `sector_classifications`), respectively. 
+
+* In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before using `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type.
+
+```{r}
+merge_by <- c(
+    sector_classification_system = "code_system",
+    sector_classification_direct_loantaker = "code"
+  )
+
+loanbook_with_sectors <- loanbook %>% 
+  left_join(sector_classifications, by = merge_by) %>% 
+  mutate(sector_classification_direct_loantaker = as.character(sector_classification_direct_loantaker))
+```
+
+We can join these two datasets together, to generate our `coverage` dataset:
+
+``` {r}
+coverage <- left_join(loanbook_with_sectors, matched) %>% 
+  mutate(
+    loan_size_outstanding = as.numeric(loan_size_outstanding),
+    loan_size_credit_limit = as.numeric(loan_size_credit_limit),
+    matched = case_when(
+      score == 1   ~ "Matched", 
+      is.na(score) ~ "Not Matched",
+      TRUE         ~ "Not Matched"
+    ),
+    sector = case_when(
+      borderline == TRUE & matched == "Not Matched" ~ "not in scope",
+      TRUE ~ sector
+    )
+  )
+```
+
+#### 1. Calculate the portion of your loanbook covered by dollar value
+
+From the `coverage` dataset, we can calculate the total loanbook coverage by
+dollar value. Let's create two helper functions, one to calculate dollar-value
+and another one to plot coverage in general.
+
+```{r}
+dollar_value <- function(data, ...) {
+  data %>% 
+    summarize(loan_size_outstanding = sum(loan_size_outstanding), .by = c(matched, ...))
+}
+
+plot_coverage <- function(data, x, y) {
+  ggplot(data) + 
+    geom_col(aes({{x}}, {{y}}, fill = matched)) +
+    # Use more horizontal space -- avoids overlap on x axis text
+    theme(legend.position = "top")
+}
+```
+
+Let's first explore all loans.
+
+```{r}
+coverage %>% 
+  dollar_value() %>% 
+  plot_coverage(matched, loan_size_outstanding)
+```
+
+To calculate the total, in-scope, loanbook coverage: 
+
+```{r}
+coverage %>% 
+  filter(sector != "not in scope") %>% 
+  dollar_value() %>% 
+  plot_coverage(matched, loan_size_outstanding)
+```
+
+#### Break down by sector
+
+You may break-down the plot by sector: 
+
+```{r}
+coverage %>% 
+  dollar_value(sector) %>% 
+  plot_coverage(sector, loan_size_outstanding)
+```
+
+Or even further, by matching level:
+
+```{r}
+coverage %>% 
+  mutate(matched = case_when(
+    matched == "Matched" & level == "direct_loantaker"      ~ "Matched DL",
+    matched == "Matched" & level == "intermediate_parent_1" ~ "Matched IP1",
+    matched == "Matched" & level == "ultimate_parent"       ~ "Matched UP",
+    matched == "Not Matched"                                ~ "Not Matched",
+    TRUE                                                    ~ "Catch unknown"
+  )) %>% 
+  dollar_value(sector) %>% 
+  plot_coverage(sector, loan_size_outstanding)
+```
+
+#### 2. Count the number of companies
+
+You might also be interested in knowing how many companies in your loanbook were
+matched. It probably makes most sense to do this at the `direct_loantaker`
+level:
+
+``` {r}
+companies_matched <- coverage %>% 
+  summarize(no_companies = n_distinct(name_direct_loantaker), .by = c(sector, matched))
+
+companies_matched %>% 
+  plot_coverage(sector, no_companies)
+```
+
+### Optional: Exclude misclassified loans from the analysis
+
+...
+
+
+## Calculate PACTA alignment metrics
 
 You can calculate scenario targets using two different approaches: Market Share Approach, or Sectoral Decarbonization Approach.
 
@@ -201,7 +431,7 @@ market_share_targets_portfolio <-
 market_share_targets_portfolio
 ```
 
-Or at the company level: 
+Or at the company level:
 
 ```{r market-share-targets-company, R.options = list(width = 400)}
 market_share_targets_company <-
@@ -223,6 +453,7 @@ These results can be saved/written to a CSV file for potential input to other mo
 readr::write_csv(x = market_share_targets_portfolio, file = file.path(tempdir(), "market_share_targets_portfolio.csv"))
 readr::write_csv(x = market_share_targets_company, file = file.path(tempdir(), "market_share_targets_company.csv"))
 ```
+
 Remember to replace `tempdir()` with the path to the directory that you wish to save your files in.
 
 ### Sectoral Decarbonization Approach
@@ -245,7 +476,7 @@ sda_targets <-
 sda_targets
 ```
 
-Or at the company level: 
+Or at the company level:
 
 ```{r sda-targets-company, R.options = list(width = 400)}
 sda_targets_company <-
@@ -266,7 +497,66 @@ These results can be saved/written to a CSV file for potential input to other mo
 readr::write_csv(x = sda_targets, file = file.path(tempdir(), "sda_targets.csv"))
 readr::write_csv(x = sda_targets_company, file = file.path(tempdir(), "sda_targets_company.csv"))
 ```
+
 Remember to replace `tempdir()` with the path to the directory that you wish to save your files in.
+
+## Visualize PACTA alignment metrics
+
+There are a large variety of possible visualizations stemming from the outputs 
+of `target_market_share()` and `target_sda()`. Below, we highlight a couple of 
+common plots that can easily be created using the `{pacta.loanbook}` package.
+
+### Market Share: Sector-level technology mix
+
+From the market share output, you can plot the portfolio's exposure to various 
+climate sensitive technologies (`projected`), and compare with the corporate 
+economy, or against various scenario targets.
+
+```{r technoloy-mix-portfolio}
+# Pick the targets you want to plot.
+data <- filter(
+  market_share_targets_portfolio,
+  scenario_source == "demo_2020",
+  sector == "power",
+  region == "global",
+  metric %in% c("projected", "corporate_economy", "target_sds")
+)
+
+# Plot the technology mix
+qplot_techmix(data)
+```
+
+### Market Share: Technology-level volume trajectory
+
+You can also plot the technology-specific volume trend. All starting values are
+normalized to 1, to emphasize that we are comparing the rates of buildout and/or
+retirement. 
+
+```{r trajetory-portfolio}
+data <- filter(
+  market_share_targets_portfolio,
+  sector == "power",
+  technology == "renewablescap",
+  region == "global",
+  scenario_source == "demo_2020"
+)
+
+qplot_trajectory(data)
+```
+
+### SDA Target: Sector-level emission intensity
+
+From the SDA output, we can compare the projected average emission intensity 
+attributed to the portfolio, with the actual emission intensity scenario, and 
+the scenario compliant SDA pathway that the portfolio must follow to achieve 
+the scenario ambition by 2050.
+
+```{r sda plot}
+data <- filter(sda_targets, sector == "cement", region == "global")
+qplot_emission_intensity(data)
+```
+
+**ADD ISNTRUCTIONS** Write to file
 
 **PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
 
