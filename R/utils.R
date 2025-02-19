@@ -9,9 +9,9 @@ inform_startup <- function(msg, ...) {
   rlang::inform(msg, ..., class = "packageStartupMessage")
 }
 
-#' List all packages in pacta.loanbook
+#' List all packages in `{pacta.loanbook}`
 #'
-#' @param include_self Include pacta.loanbook in the list?
+#' @param include_self Include `{pacta.loanbook}` in the list?
 #'
 #' @family utility functions
 #'

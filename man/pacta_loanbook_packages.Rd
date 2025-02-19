@@ -2,15 +2,15 @@
 % Please edit documentation in R/utils.R
 \name{pacta_loanbook_packages}
 \alias{pacta_loanbook_packages}
-\title{List all packages in pacta.loanbook}
+\title{List all packages in \code{{pacta.loanbook}}}
 \usage{
 pacta_loanbook_packages(include_self = TRUE)
 }
 \arguments{
-\item{include_self}{Include pacta.loanbook in the list?}
+\item{include_self}{Include \code{{pacta.loanbook}} in the list?}
 }
 \description{
-List all packages in pacta.loanbook
+List all packages in \code{{pacta.loanbook}}
 }
 \examples{
 pacta_loanbook_packages()

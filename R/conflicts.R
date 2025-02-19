@@ -1,7 +1,7 @@
-#' Conflicts between the pacta.loanbook and other packages
+#' Conflicts between the `{pacta.loanbook}` and other packages
 #'
-#' This function lists all the conflicts between packages in the pacta.loanbook
-#' and other packages that you have loaded.
+#' This function lists all the conflicts between packages in the
+#' `{pacta.loanbook}` and other packages that you have loaded.
 #'
 #' There are four conflicts that are deliberately ignored: \code{intersect},
 #' \code{union}, \code{setequal}, and \code{setdiff} from dplyr. These functions

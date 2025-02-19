@@ -2,7 +2,7 @@
 % Please edit documentation in R/conflicts.R
 \name{pacta_loanbook_conflicts}
 \alias{pacta_loanbook_conflicts}
-\title{Conflicts between the pacta.loanbook and other packages}
+\title{Conflicts between the \code{{pacta.loanbook}} and other packages}
 \usage{
 pacta_loanbook_conflicts(only = NULL)
 }
@@ -11,8 +11,8 @@ pacta_loanbook_conflicts(only = NULL)
 with these packages.}
 }
 \description{
-This function lists all the conflicts between packages in the pacta.loanbook
-and other packages that you have loaded.
+This function lists all the conflicts between packages in the
+\code{{pacta.loanbook}} and other packages that you have loaded.
 }
 \details{
 There are four conflicts that are deliberately ignored: \code{intersect},
