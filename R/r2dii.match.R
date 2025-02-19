@@ -1,4 +1,4 @@
-#' @inherit r2dii.match::crucial_lbk
+#' @inherit r2dii.match::crucial_lbk return title description details seealso sections references examples author source note format
 #' @family matching functions
 #' @export
 
