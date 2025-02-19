@@ -49,7 +49,7 @@ Suggests:
     ggplot2,
     glue,
     gt (>= 0.11.0),
-    knitr,
+    knitr (>= 1.42),
     mockr,
     readr,
     readxl,
