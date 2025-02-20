@@ -146,18 +146,42 @@ covered out of the box.</p>
 <p>The ABCD data set must be an XLSX file and contains the following
 columns:</p>
 <ul>
-<li><code>company_id</code></li>
-<li><code>name_company</code></li>
-<li><code>lei</code></li>
-<li><code>sector</code></li>
-<li><code>technology</code></li>
-<li><code>production_unit</code></li>
-<li><code>year</code></li>
-<li><code>production</code></li>
-<li><code>emission_factor</code></li>
-<li><code>plant_location</code></li>
-<li><code>is_ultimate_owner</code></li>
-<li><code>emission_factor_unit</code></li>
+<li>
+<code>company_id</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>name_company</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>lei</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>sector</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>technology</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>production_unit</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>year</code>: <span class="ansi ansi-color-4">&lt;integer&gt;</span>
+</li>
+<li>
+<code>production</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
+</li>
+<li>
+<code>emission_factor</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
+</li>
+<li>
+<code>plant_location</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>is_ultimate_owner</code>: <span class="ansi ansi-color-4">&lt;logical&gt;</span>
+</li>
+<li>
+<code>emission_factor_unit</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
 </ul>
 <p>For more detail about the necessary structure of this dataset, see
 the data dictionary for <a href="data_abcd.html">abcd</a>.</p>
@@ -188,14 +212,30 @@ for Banks documentation</a>.</p>
 <p>The target market share scenario data set must be a CSV file and
 contains the following columns:</p>
 <ul>
-<li><code>scenario</code></li>
-<li><code>sector</code></li>
-<li><code>technology</code></li>
-<li><code>region</code></li>
-<li><code>year</code></li>
-<li><code>tmsr</code></li>
-<li><code>smsp</code></li>
-<li><code>scenario_source</code></li>
+<li>
+<code>scenario</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>sector</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>technology</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>region</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>year</code>: <span class="ansi ansi-color-4">&lt;integer&gt;</span>
+</li>
+<li>
+<code>tmsr</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
+</li>
+<li>
+<code>smsp</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
+</li>
+<li>
+<code>scenario_source</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
 </ul>
 <p>For more detail about the necessary structure of this dataset, see
 the data dictionary for <a href="data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation">scenario</a>.</p>
@@ -212,13 +252,27 @@ for Banks documentation</a>.</p>
 <p>The SDA scenario data set must be a CSV file and contains the
 following columns:</p>
 <ul>
-<li><code>scenario_source</code></li>
-<li><code>scenario</code></li>
-<li><code>sector</code></li>
-<li><code>region</code></li>
-<li><code>year</code></li>
-<li><code>emission_factor_unit</code></li>
-<li><code>emission_factor</code></li>
+<li>
+<code>scenario_source</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>scenario</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>sector</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>region</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>year</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
+</li>
+<li>
+<code>emission_factor_unit</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>emission_factor</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
+</li>
 </ul>
 <p>For more detail about the necessary structure of this dataset, see
 the data dictionary for <a href="data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach">scenario</a>.</p>
@@ -258,19 +312,45 @@ internal systems.</p>
 <p>The raw loan book must be prepared as CSV files and contain at a
 minimum the following columns:</p>
 <ul>
-<li><code>id_loan</code></li>
-<li><code>id_direct_loantaker</code></li>
-<li><code>name_direct_loantaker</code></li>
-<li><code>id_ultimate_parent</code></li>
-<li><code>name_ultimate_parent</code></li>
-<li><code>loan_size_outstanding</code></li>
-<li><code>loan_size_outstanding_currency</code></li>
-<li><code>loan_size_credit_limit</code></li>
-<li><code>loan_size_credit_limit_currency</code></li>
-<li><code>sector_classification_system</code></li>
-<li><code>sector_classification_direct_loantaker</code></li>
-<li><code>lei_direct_loantaker</code></li>
-<li><code>isin_direct_loantaker</code></li>
+<li>
+<code>id_loan</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>id_direct_loantaker</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>name_direct_loantaker</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>id_ultimate_parent</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>name_ultimate_parent</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>loan_size_outstanding</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
+</li>
+<li>
+<code>loan_size_outstanding_currency</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>loan_size_credit_limit</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
+</li>
+<li>
+<code>loan_size_credit_limit_currency</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>sector_classification_system</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>sector_classification_direct_loantaker</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>lei_direct_loantaker</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>isin_direct_loantaker</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
 </ul>
 <p>For more detail about the necessary structure of this dataset, see
 the data dictionary for <a href="data_loanbook.html">loanbook</a>.</p>
@@ -310,10 +390,18 @@ success rate can really be reached.</p>
 <p>The the manual sector classification data set must be prepared as a
 CSV file and contain the following columns:</p>
 <ul>
-<li><code>sector</code></li>
-<li><code>borderline</code></li>
-<li><code>code</code></li>
-<li><code>code_system</code></li>
+<li>
+<code>sector</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>borderline</code>: <span class="ansi ansi-color-4">&lt;logical&gt;</span>
+</li>
+<li>
+<code>code</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
+<li>
+<code>code_system</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
+</li>
 </ul>
 <p>In case the user cannot obtain sector classification codes of any of
 the classification systems featured in
