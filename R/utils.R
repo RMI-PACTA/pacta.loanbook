@@ -39,10 +39,6 @@ invert <- function(x) {
   tapply(as.character(stacked$ind), stacked$values, list)
 }
 
-#' @noRd
-#' @keywords internal
-#' @export
-
 list_col_names_and_types <- function(dataset) {
   cat(
     cli::ansi_html(
