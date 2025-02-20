@@ -770,11 +770,11 @@ below.</li>
 </ol>
 <p>Let’s assume the the loan with id L255 is falsely classified as a
 steel company. Research shows this company is not a primary steel
-prodcuer, but it makes steel-based products for end use. Hence it is
+producer, but it makes steel-based products for end use. Hence it is
 active downstream in the value chain and cannot be matched to the ABCD.
 If we cannot correct the input sector classification, we instead create
 a csv file with the id of the misclassified loan. In practice, this can
-be done prgramatically or manually.</p>
+be done programmatically or manually.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>id_loan <span class="op">=</span> <span class="st">"L255"</span><span class="op">)</span>,</span>

@@ -13,7 +13,7 @@ articles:
   data_outputs: data_outputs.html
   data_scenario: data_scenario.html
   articles/pacta_loanbook_sit_rep: pacta_loanbook_sit_rep.html
-last_built: 2025-02-19T19:31Z
+last_built: 2025-02-20T08:36Z
 urls:
   reference: https://rmi-pacta.github.io/pacta.loanbook/reference
   article: https://rmi-pacta.github.io/pacta.loanbook/articles
