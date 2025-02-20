@@ -232,7 +232,7 @@ If you can obtain sector codes in any one of those classification systems for yo
 If you want to use your own custom sector classification system, you will need to create a file that follows the same structure as the sector classification files in `sector_classifications`, that is, the file needs to contain the following columns (of the following types):
 
 ```{r cols_custom_sector_classification, echo = FALSE, results = 'asis'}
-cat(paste0("- `", names(sector_classifications), "`: ", lapply(sector_classifications, class),collapse = "\n"))
+pacta.loanbook:::list_col_names_and_types(sector_classifications)
 ```
 
 Please notice that when manually preparing a custom sector classification file, you need to decide for every code of your mapping system which PACTA sector the code maps to. This requires the system to be relatively granular to capture the nuances of the supply chains of the companies in your loan book. As discussed above, any sector code that is not unambiguously in scope or out of scope for a given PACTA sector should be marked `TRUE` in the `borderline` column. Any sector code that is clearly not in scope should be marked `FALSE` and receive the sector value `not in scope`. Any sector code that is clearly in scope should be marked `FALSE` for `borderline` and receive the PACTA sector value that it maps to in the `sector` column.
@@ -424,7 +424,7 @@ readr::write_csv(
 The loans_to_remove.csv file should have just one column, id_loan, and therefore be structured as follows:
 
 ```{r, echo = FALSE, results = 'asis'}
-cat("- `id_loan`: character")
+pacta.loanbook:::list_col_names_and_types(tibble::tibble(id_loan = "x"))
 ```
 
 We then read in the file and remove the misclassified loan from the match success rate calculation. We compare the coverage before and after the removal of the misclassified loan to see the impact of the correction. For demonstration purposes, we artificially increase the loan_size_outstanding of the affected counterparty while focusing on the steel sector only, to see the clear impact.
