@@ -13,6 +13,10 @@ pacta_loanbook_update(recursive = FALSE, repos = getOption("repos"))
 \item{repos}{The repositories to use to check for updates.
 Defaults to \code{getOption("repos")}.}
 }
+\value{
+returns \code{NULL} invisibly. The function is called for its side effect
+of printing the status of locally installed, relevant packages.
+}
 \description{
 This will check to see if all \code{{pacta.loanbook}} packages (and optionally,
 their dependencies) are up-to-date, and will install after an interactive

@@ -9,10 +9,15 @@
 #' @family utility functions
 #'
 #' @export
+#'
+#' @return returns `NULL` invisibly. The function is called for its side effect
+#'   of printing the status of locally installed, relevant packages.
+#'
 #' @examples
 #' \dontrun{
 #' pacta_loanbook_update()
 #' }
+
 pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos")) {
 
   deps <- pacta_loanbook_deps(recursive, repos)
@@ -48,6 +53,15 @@ pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos"))
 #' @family utility functions
 #'
 #' @export
+#'
+#' @return returns `NULL` invisibly. The function is called for its side effect
+#'   of printing a situation report of `{pacta.loanbook}` and its core packages.
+#'
+#' @examples
+#' \dontrun{
+#' pacta_loanbook_sitrep()
+#' }
+
 pacta_loanbook_sitrep <- function() {
   cli::cat_rule("R & RStudio")
   if (rstudioapi::isAvailable()) {
@@ -79,6 +93,15 @@ pacta_loanbook_sitrep <- function() {
 #' @family utility functions
 #'
 #' @export
+#'
+#' @return a `tibble` containing the local and CRAN versions of dependent
+#'   packages.
+#'
+#' @examples
+#' \dontrun{
+#' pacta_loanbook_deps()
+#' }
+
 pacta_loanbook_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)
   deps <- tools::package_dependencies("pacta_loanbook", pkgs, recursive = recursive)

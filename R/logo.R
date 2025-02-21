@@ -1,16 +1,19 @@
-
 #' The `{pacta.loanbook}` logo, using ASCII or Unicode characters
 #'
 #' Use [cli::ansi_strip()] to get rid of the colors.
 #'
-#' @param unicode Whether to use Unicode symbols. Default is `TRUE`
-#'   on UTF-8 platforms.
+#' @param unicode Whether to use Unicode symbols. Default is `TRUE` on UTF-8
+#'   platforms.
 #'
 #' @md
 #'
 #' @family utility functions
 #'
 #' @export
+#'
+#' @return a `pacta_loanbook_logo` classed `cli_ansi_string` which will print
+#' the PACTA logo in the console in interactive sessions.
+#'
 #' @examples
 #' pacta_loanbook_logo()
 
