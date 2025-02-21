@@ -1,0 +1,185 @@
+---
+title: "Metrics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Metrics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Market Share Approach
+
+The Market Share Approach is used for allocating scenario efforts and to show how to calculate the market-share target for a given scenario.
+
+### Scenario market-shares
+
+Say that you want to study how a portfolio would perform in a specific climate scenario. How can you allocate scenario efforts to the production profile of your portfolio? You can do that in two ways -- by technology, or by sector.
+
+#### 1. Market-share by technology
+We define the market-share by technology as: 
+
+$$p_{i}^{tmsr}(t) = p_{i}(t_{0}) +  p_{i}(t_{0}) * \frac{s_i(t) - s_{i}(t_0)}{s_i(t_0)}$$
+
+We can see that this reduces to:
+
+$$p_{i}^{tmsr}(t) = p_{i}(t_{0}) \left(1 + \frac{s_i(t) - s_{i}(t_0)}{s_i(t_0)} \right) \\
+p_{i}^{tmsr}(t) = p_{i}(t_{0}) \left(1 + \frac{s_i(t)}{s_i(t_0)} -1 \right) \\
+p_{i}^{tmsr}(t) = p_{i}(t_{0}) * \frac{s_i(t)}{s_i(t_0)}$$
+
+where:
+
+* $s_i(t)$ is the scenario production for technology $i$ at time $t$,
+* $p_{i}(t_0)$ is the production allocated to the portfolio for some technology, $i$ at time $t_0$, and
+* $p_{i}^{tmsr}(t)$ is the portfolio-specific target production for that technology.
+
+We define the "Technology Market Share Ratio" as:
+
+$$\dfrac{s_i(t)}{s_i(t_0)}$$
+This method is used to set targets for "decreasing" (i.e. brown) technologies. 
+
+#### 2. Market-share by sector
+To calculate the market-share by sector, we use the initial production of both the portfolio and scenario at the sector-level instead. 
+$$p_{i}^{smsp}(t) = p_{i}(t_0) +P(t_0) * \left( \dfrac{s_i(t)-s_i(t_0)}{S(t_0)}\right)$$
+where:
+
+* $P_i(t_0)$ is the portfolio's total production in the sector at $t_0$, and
+* $S(t_0)$ is the scenario total production at $t_0$.
+
+We define the "Sector Market Share Percentage" as:
+
+$$\dfrac{s_i(t)-s_i(t_0)}{S(t_0)}$$
+This method is used to calculate targets for "increasing" (i.e. green) technologies. 
+
+### How to calculate market-share targets for a given scenario
+
+To calculate market-share targets, you need to use the package `{pacta.loanbook}` and a number of datasets, including a "matched" dataset (loanbook + asset-level data) that you can get by following the [Matching Process](cookbook_running_the_analysis.html#matching-process) section of the [Running the Analysis](cookbook_running_the_analysis.html) chapter of the cookbook. The datasets used here are included in the `{pacta.loanbook}` package; they are fake but show how you should structure your own data.
+
+* Load the package.
+
+```{r, message = FALSE}
+library(pacta.loanbook)
+```
+
+* Match the loanbook to asset level data.
+
+```{r}
+loanbook <- loanbook_demo
+abcd <- abcd_demo
+
+matched <- match_name(loanbook, abcd) %>%
+  # WARNING: Remember to validate the output of match_name() before prioritize()
+  prioritize()
+
+matched
+```
+
+* Calculate market-share targets for production at the portfolio level.
+
+```{r}
+# portfolio level targets
+scenario <- scenario_demo_2020
+regions <- region_isos_demo
+
+
+matched %>% target_market_share(abcd, scenario, regions)
+```
+
+* Calculate market-share targets for production at the company level.
+
+```{r}
+matched %>% target_market_share(abcd, scenario, regions, by_company = TRUE)
+```
+
+## Sectoral Decarbonization Approach
+
+The Sectoral Decarbonization Approach (SDA) is a method for setting corporate CO2 emissions intensity reduction targets in line with climate science. This method was developed by the Science-Based Targets Initiative ([SBTI](https://sciencebasedtargets.org/)), an international initiative on science-based target setting for companies initiated by [CDP](https://www.cdp.net/en), the [United Nations Global Compact](https://www.unglobalcompact.org/), the World Resources Institute ([WRI](https://www.wri.org/)), and the Worldwide Fund for Nature ([WWF](https://www.worldwildlife.org/)). 
+
+In the context of PACTA, this methodology is used to calculate emission factor targets for homogenous sectors (i.e. sectors with no technology-level scenario pathways).
+
+First, the distance, $d$, between the company's CO2 emissions intensity per unit production (or emissions factor), $I^{Co}(t)$ at some base year,  $t_0$, and a scenario target intensity in 2050, $I^{Sc}(2050)$ is calculated. The target intensity in 2050 can be taken from any relevant climate scenario:
+
+$$d = I^{Co}(t_0) - I^{Sc}(2050)$$
+
+The company's market share parameter, $m(t)$, is defined as the company's expected future activity, $P^{Co}(t)$ divided by the sector's future activity, $P^{Sc}(t)$ to reflect the expected forward-looking market share of the company. This is given as a ratio to the company's base year market share, derived from its activity, $P^{Co}(t_0)$ divided by the sector's activity in the same year, $P^{Sc}(t_0)$. In both cases the former is calculated per company, and the latter is determined from the climate scenario:
+
+$$m (t) = \dfrac{P^{Co}(t_0) / P^{Sc}(t_0)}{P^{Co}(t) / P^{Sc}(t)}$$
+
+It should be noted that this parameter does not capture the change in the market share of the company but rather the inverse. This is useful as it equates to a decreasing parameter when the company's market share is increasing. This equates to larger reduction efforts when the companies market share is increasing over time. 
+
+The sector decarbonization factor,  $p(t)$ is defined as:
+
+$$ p(t) = \frac{I^{Sc}(t) - I^{Sc}(2050)}{I^{Sc}(t_0) - I^{Sc}(2050)}$$
+
+where $I^{in}(t)$ and $I^{Sc}(t)$ are the average market and scenario emission intensities respectively, at time $t$.
+
+This variable captures the remaining effort needed from the market to meet the target in 2050, per year. Under the SDA assumptions the CO2 intensity for all companies in a sector converge in 2050. Note that $p(t_0) = 1$ and $p(2050) = 0$, indicating that 100% of the expected decarbonization efforts are still to be met at the base year and 0% should be left at 2050.
+
+The company-level emission intensity target is then defined as: 
+$$I^{Target}(t) = \left( d * p (t) * m (t) \right) + I^{Sc}(2050)$$
+
+### PACTA Assumptions
+
+The SDA applied in PACTA differs slightly from the way it is applied by the SBTI. In particular, we must align the top-down approach laid out by climate scenarios with the bottom-up asset-based company data used in the PACTA analysis.
+
+**Assumption: Market share stays constant ($m(t)$ = 1)**
+
+Due to the lack of quantitative data on the expected market share changes throughout the entire time horizon up to 2050. $m(t)$ is set to 1 for all years. Under the SBTI method for calculating $m(t)$, there will be a higher intensity reduction target in cases where the absolute pathway of the sector exceeds the scenario target. This makes sense. However, applying this at company level is counter-intuitive:
+
+> Companies that decrease their market share would be allowed to have a higher CO2-Intensity than the average market actor. While, companies that are increasing their market share are forced to do more in terms of CO2-Intensity than ones whose market share remains constant. It follows that if a company reaches the targeted CO2-Intensity it would not be allowed to increase its share in the market. This is a desirable outcome.
+
+Under this assumption, our target calculation reduces to: 
+
+$$I^{Target}(t) = \left( d * p (t) \right) + I^{Sc}(2050)$$
+
+**Approximation: Adjust base year scenario emission intensity**
+
+In both the SBTI and the PACTA methodology the target emissions for the sector are taken from climate scenarios. These implement a global economy top-down approach which applies an absolute emissions value in the year 2050 and then converts this to yearly emission intensities. However, there may be discrepancies between the Scenario projected emission intensities, and the bottom-up ABCD emission intensities. To reflect this discrepancy, we adjust the scenario projections by the following factor, 
+
+$$\dfrac{I^{ABCD}(t_0)}{I^{Sc}(t_0)}$$
+yielding the adjusted scenario pathway: 
+
+$$I'^{Sc}(t) = \left(\dfrac{I^{ABCD}(t_0)}{I^{Sc}(t_0)}\right) * I^{Sc}(t)$$
+This yields the final PACTA SDA target equation:
+
+$$I^{Target}(t) = \left( d * p (t) \right) + I'^{Sc}(t)$$
+Note: $d$ and $p(t)$ also must be  re-calculated using this adjusted scenario intensity, $I'^{Sc}$. 
+
+### Calculating SDA Targets
+
+To calculate SDA targets you need to use the `{pacta.loanbook}` package and a number of datasets, including a "matched" dataset (loanbook + asset-level data) that you can get get by following the [Matching Process](cookbook_running_the_analysis.html#matching-process) section of the [Running the Analysis](cookbook_running_the_analysis.html) chapter of the cookbook. The datasets used here are included in the `{pacta.loanbook}` package; they are fake but show how you should structure your own data.
+
+* Load the package.
+
+```{r, message = FALSE}
+library(pacta.loanbook)
+```
+
+* Match the loanbook to asset level data.
+
+```{r}
+loanbook <- loanbook_demo
+abcd <- abcd_demo
+
+matched <- match_name(loanbook, abcd) %>%
+  # WARNING: Remember to validate the output of match_name() before prioritize()
+  prioritize()
+
+matched
+```
+
+* Calculate SDA targets for CO2 emissions intensities:
+
+```{r}
+co2_intensity <- co2_intensity_scenario_demo
+
+matched %>% target_sda(abcd, co2_intensity)
+```
+
+**PREVIOUS CHAPTER:** [Advanced Use Cases](cookbook_advanced_use_cases.html)
