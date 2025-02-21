@@ -7,8 +7,12 @@
 pacta_loanbook_logo(unicode = cli::is_utf8_output())
 }
 \arguments{
-\item{unicode}{Whether to use Unicode symbols. Default is \code{TRUE}
-on UTF-8 platforms.}
+\item{unicode}{Whether to use Unicode symbols. Default is \code{TRUE} on UTF-8
+platforms.}
+}
+\value{
+a \code{pacta_loanbook_logo} classed \code{cli_ansi_string} which will print
+the PACTA logo in the console in interactive sessions.
 }
 \description{
 Use \code{\link[cli:ansi_strip]{cli::ansi_strip()}} to get rid of the colors.

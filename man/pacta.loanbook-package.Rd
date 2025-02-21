@@ -4,17 +4,18 @@
 \name{pacta.loanbook-package}
 \alias{pacta.loanbook}
 \alias{pacta.loanbook-package}
-\title{pacta.loanbook: Easily Install and Load PACTA for Banks Packages}
+\title{pacta.loanbook: Easily Install and Load 'PACTA' for Banks Packages}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-PACTA for Banks is a tool that allows banks to calculate the climate alignment of their corporate lending portfolios. This package is designed to make it easy to install and load multiple PACTA for Banks packages in a single step. It also provides thorough documentation - the PACTA for Banks cookbook - on how to run a PACTA for Banks analysis. This covers prerequisites for the analysis, the separate steps of running the analysis, the interpretation of PACTA for Banks results, and advanced use cases.
+'PACTA' for Banks is a tool that allows banks to calculate the climate alignment of their corporate lending portfolios. This package is designed to make it easy to install and load multiple 'PACTA' for Banks packages in a single step. It also provides thorough documentation - the 'PACTA' for Banks cookbook - on how to run a 'PACTA' for Banks analysis. This covers prerequisites for the analysis, the separate steps of running the analysis, the interpretation of 'PACTA' for Banks results, and advanced use cases.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://rmi-pacta.github.io/pacta.loanbook/}
-  \item \url{https://github.com/rmi-pacta/pacta.loanbook}
+  \item \url{https://github.com/RMI-PACTA/pacta.loanbook}
+  \item Report bugs at \url{https://github.com/RMI-PACTA/pacta.loanbook/issues}
 }
 
 }

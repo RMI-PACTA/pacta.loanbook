@@ -10,6 +10,11 @@ pacta_loanbook_conflicts(only = NULL)
 \item{only}{Set this to a character vector to restrict to conflicts only
 with these packages.}
 }
+\value{
+a \code{pacta_loanbook_conflicts} classed list which will print a list of
+conflicts to the console in interactive sessions, or \code{NULL} if no conflicts
+are found.
+}
 \description{
 This function lists all the conflicts between packages in the
 \code{{pacta.loanbook}} and other packages that you have loaded.

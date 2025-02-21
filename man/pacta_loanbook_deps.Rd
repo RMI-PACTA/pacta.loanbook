@@ -13,8 +13,17 @@ pacta_loanbook_deps(recursive = FALSE, repos = getOption("repos"))
 \item{repos}{The repositories to use to check for updates.
 Defaults to \code{getOption("repos")}.}
 }
+\value{
+a \code{tibble} containing the local and CRAN versions of dependent
+packages.
+}
 \description{
 List all \code{{pacta.loanbook}} dependencies
+}
+\examples{
+\dontrun{
+pacta_loanbook_deps()
+}
 }
 \seealso{
 Other utility functions: 

@@ -11,10 +11,17 @@
 #' @family utility functions
 #'
 #' @export
+#'
 #' @param only Set this to a character vector to restrict to conflicts only
 #'   with these packages.
+#'
+#' @return a `pacta_loanbook_conflicts` classed list which will print a list of
+#' conflicts to the console in interactive sessions, or `NULL` if no conflicts
+#' are found.
+#'
 #' @examples
 #' pacta_loanbook_conflicts()
+
 pacta_loanbook_conflicts <- function(only = NULL) {
   envs <- grep("^package:", search(), value = TRUE)
   envs <- purrr::set_names(envs)

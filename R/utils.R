@@ -17,6 +17,9 @@ inform_startup <- function(msg, ...) {
 #'
 #' @export
 #'
+#' @return a character vector containing the name of packages imported by
+#'   `{pacta.loanbook}`.
+#'
 #' @examples
 #' pacta_loanbook_packages()
 
