@@ -58,7 +58,9 @@ pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos"))
 #'   of printing a situation report of `{pacta.loanbook}` and its core packages.
 #'
 #' @examples
+#' \dontrun{
 #' pacta_loanbook_sitrep()
+#' }
 
 pacta_loanbook_sitrep <- function() {
   cli::cat_rule("R & RStudio")
