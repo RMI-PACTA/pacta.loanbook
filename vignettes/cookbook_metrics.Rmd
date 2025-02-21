@@ -94,7 +94,7 @@ matched %>% target_market_share(abcd, scenario, regions)
 * Calculate market-share targets for production at the company level.
 
 ```{r}
-matched %>% target_market_share(abcd, scenario, regions, by_company = TRUE)
+matched %>% target_market_share(abcd, scenario, regions, by_company = TRUE, weight_production = FALSE)
 ```
 
 ## Sectoral Decarbonization Approach
@@ -178,8 +178,9 @@ matched
 
 ```{r}
 co2_intensity <- co2_intensity_scenario_demo
+regions <- region_isos_demo
 
-matched %>% target_sda(abcd, co2_intensity)
+matched %>% target_sda(abcd, co2_intensity, region_isos = regions)
 ```
 
 **PREVIOUS CHAPTER:** [Advanced Use Cases](cookbook_advanced_use_cases.html)
