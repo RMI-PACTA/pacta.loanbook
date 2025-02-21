@@ -21,7 +21,9 @@ packages.
 List all \code{{pacta.loanbook}} dependencies
 }
 \examples{
+\dontrun{
 pacta_loanbook_deps()
+}
 }
 \seealso{
 Other utility functions: 

@@ -14,7 +14,9 @@
 #'   of printing the status of locally installed, relevant packages.
 #'
 #' @examples
+#' \dontrun{
 #' pacta_loanbook_update()
+#' }
 
 pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos")) {
 
@@ -94,7 +96,9 @@ pacta_loanbook_sitrep <- function() {
 #'   packages.
 #'
 #' @examples
+#' \dontrun{
 #' pacta_loanbook_deps()
+#' }
 
 pacta_loanbook_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)
