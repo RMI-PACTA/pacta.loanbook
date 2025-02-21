@@ -10,7 +10,7 @@ pacta_loanbook_packages(include_self = TRUE)
 \item{include_self}{Include \code{{pacta.loanbook}} in the list?}
 }
 \value{
-a character vector containing the name of packages imported by
+a character vector containing the names of packages imported by
 \code{{pacta.loanbook}}.
 }
 \description{
