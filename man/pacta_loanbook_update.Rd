@@ -23,9 +23,7 @@ their dependencies) are up-to-date, and will install after an interactive
 confirmation.
 }
 \examples{
-\dontrun{
 pacta_loanbook_update()
-}
 }
 \seealso{
 Other utility functions: 

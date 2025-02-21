@@ -14,9 +14,7 @@
 #'   of printing the status of locally installed, relevant packages.
 #'
 #' @examples
-#' \dontrun{
 #' pacta_loanbook_update()
-#' }
 
 pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos")) {
 
@@ -58,9 +56,7 @@ pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos"))
 #'   of printing a situation report of `{pacta.loanbook}` and its core packages.
 #'
 #' @examples
-#' \dontrun{
 #' pacta_loanbook_sitrep()
-#' }
 
 pacta_loanbook_sitrep <- function() {
   cli::cat_rule("R & RStudio")
@@ -98,9 +94,7 @@ pacta_loanbook_sitrep <- function() {
 #'   packages.
 #'
 #' @examples
-#' \dontrun{
 #' pacta_loanbook_deps()
-#' }
 
 pacta_loanbook_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)
