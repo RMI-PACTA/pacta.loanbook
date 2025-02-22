@@ -69,7 +69,7 @@ library(pacta.loanbook)
 
 * Match the loanbook to asset level data.
 
-```{r}
+```{r, R.options = list(width = 400)}
 loanbook <- loanbook_demo
 abcd <- abcd_demo
 
@@ -82,7 +82,7 @@ matched
 
 * Calculate market-share targets for production at the portfolio level.
 
-```{r}
+```{r, R.options = list(width = 400)}
 # portfolio level targets
 scenario <- scenario_demo_2020
 regions <- region_isos_demo
@@ -98,7 +98,7 @@ matched %>%
 
 * Calculate market-share targets for production at the company level.
 
-```{r}
+```{r, R.options = list(width = 400)}
 matched %>%
   target_market_share(
     abcd = abcd,
@@ -175,7 +175,7 @@ library(pacta.loanbook)
 
 * Match the loanbook to asset level data.
 
-```{r}
+```{r, R.options = list(width = 400)}
 loanbook <- loanbook_demo
 abcd <- abcd_demo
 
@@ -188,7 +188,7 @@ matched
 
 * Calculate SDA targets for CO2 emissions intensities:
 
-```{r}
+```{r, R.options = list(width = 400)}
 co2_intensity <- co2_intensity_scenario_demo
 regions <- region_isos_demo
 
