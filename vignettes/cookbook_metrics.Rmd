@@ -73,7 +73,7 @@ library(pacta.loanbook)
 loanbook <- loanbook_demo
 abcd <- abcd_demo
 
-matched <- match_name(loanbook, abcd) %>%
+matched <- match_name(loanbook = loanbook, abcd = abcd) %>%
   # WARNING: Remember to validate the output of match_name() before prioritize()
   prioritize()
 
@@ -88,13 +88,25 @@ scenario <- scenario_demo_2020
 regions <- region_isos_demo
 
 
-matched %>% target_market_share(abcd, scenario, regions)
+matched %>%
+  target_market_share(
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions
+  )
 ```
 
 * Calculate market-share targets for production at the company level.
 
 ```{r}
-matched %>% target_market_share(abcd, scenario, regions, by_company = TRUE, weight_production = FALSE)
+matched %>%
+  target_market_share(
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions,
+    by_company = TRUE,
+    weight_production = FALSE
+  )
 ```
 
 ## Sectoral Decarbonization Approach
@@ -167,7 +179,7 @@ library(pacta.loanbook)
 loanbook <- loanbook_demo
 abcd <- abcd_demo
 
-matched <- match_name(loanbook, abcd) %>%
+matched <- match_name(loanbook = loanbook, abcd = abcd) %>%
   # WARNING: Remember to validate the output of match_name() before prioritize()
   prioritize()
 
@@ -180,7 +192,12 @@ matched
 co2_intensity <- co2_intensity_scenario_demo
 regions <- region_isos_demo
 
-matched %>% target_sda(abcd, co2_intensity, region_isos = regions)
+matched %>%
+  target_sda(
+    abcd = abcd,
+    co2_intensity_scenario = co2_intensity,
+    region_isos = regions
+  )
 ```
 
 **PREVIOUS CHAPTER:** [Advanced Use Cases](cookbook_advanced_use_cases.html)
