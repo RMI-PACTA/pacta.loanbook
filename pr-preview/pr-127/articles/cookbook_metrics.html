@@ -208,7 +208,7 @@ should structure your own data.</p>
 <code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook_demo</span></span>
 <span><span class="va">abcd</span> <span class="op">&lt;-</span> <span class="va">abcd_demo</span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span>loanbook <span class="op">=</span> <span class="va">loanbook</span>, abcd <span class="op">=</span> <span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="co"># WARNING: Remember to validate the output of match_name() before prioritize()</span></span>
 <span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -243,7 +243,12 @@ level.</li>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="va">region_isos_demo</span></span>
 <span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span><span class="va">abcd</span>, <span class="va">scenario</span>, <span class="va">regions</span><span class="op">)</span></span>
+<span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
+<span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
+<span>    scenario <span class="op">=</span> <span class="va">scenario</span>,</span>
+<span>    region_isos <span class="op">=</span> <span class="va">regions</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,076 × 10</span></span></span>
 <span><span class="co">#&gt;    sector     technology  year region scenario_source metric     production</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -265,7 +270,14 @@ level.</li>
 level.</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span><span class="va">abcd</span>, <span class="va">scenario</span>, <span class="va">regions</span>, by_company <span class="op">=</span> <span class="cn">TRUE</span>, weight_production <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
+<span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
+<span>    scenario <span class="op">=</span> <span class="va">scenario</span>,</span>
+<span>    region_isos <span class="op">=</span> <span class="va">regions</span>,</span>
+<span>    by_company <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    weight_production <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 14,505 × 11</span></span></span>
 <span><span class="co">#&gt;    sector    technology  year region scenario_source name_abcd metric production</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -425,7 +437,7 @@ should structure your own data.</p>
 <code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook_demo</span></span>
 <span><span class="va">abcd</span> <span class="op">&lt;-</span> <span class="va">abcd_demo</span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span>loanbook <span class="op">=</span> <span class="va">loanbook</span>, abcd <span class="op">=</span> <span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="co"># WARNING: Remember to validate the output of match_name() before prioritize()</span></span>
 <span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -457,7 +469,12 @@ should structure your own data.</p>
 <code class="sourceCode R"><span><span class="va">co2_intensity</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="va">region_isos_demo</span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span><span class="va">abcd</span>, <span class="va">co2_intensity</span>, region_isos <span class="op">=</span> <span class="va">regions</span><span class="op">)</span></span>
+<span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
+<span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
+<span>    co2_intensity_scenario <span class="op">=</span> <span class="va">co2_intensity</span>,</span>
+<span>    region_isos <span class="op">=</span> <span class="va">regions</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removing rows in abcd where `emission_factor` is NA</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 220 × 6</span></span></span>
 <span><span class="co">#&gt;    sector  year region             scenario_source emission_factor_metric</span></span>
