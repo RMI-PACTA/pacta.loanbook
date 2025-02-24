@@ -20,7 +20,7 @@ The Market Share Approach is used for allocating scenario efforts and to show ho
 
 ### Scenario market-shares
 
-Say that you want to study how a portfolio would perform in a specific climate scenario. How can you allocate scenario efforts to the production profile of your portfolio? You can do that in two ways -- by technology, or by sector.
+Say that you want to study how a portfolio would perform in a specific climate scenario. How can you allocate scenario efforts to the production profile of your portfolio? You can do that in at least two ways -- by technology, or by sector.
 
 #### 1. Market-share by technology
 We define the market-share by technology as: 
