@@ -40,7 +40,7 @@ The `target_sda()` function calculates the Sectoral Decarbonization Target metri
 
 [2 or 3 sentences explaining how to read the output]
 
-For detailed information about the table output of the `target_market_share()` function and its columns, see the [data dictionary](data_outputs.html#target_sda-output).
+For detailed information about the table output of the `target_sda()` function and its columns, see the [data dictionary](data_outputs.html#target_sda-output).
 
 For detailed information about the Target Market Share metric and how it is calculated, see the [Metrics appendix](cookbook_metrics.html#sectoral-decarbonization-approach).
 
