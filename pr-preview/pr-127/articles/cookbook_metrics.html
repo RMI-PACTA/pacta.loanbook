@@ -291,11 +291,10 @@ level.</li>
 <h2 id="sectoral-decarbonization-approach">Sectoral Decarbonization Approach<a class="anchor" aria-label="anchor" href="#sectoral-decarbonization-approach"></a>
 </h2>
 <p>The Sectoral Decarbonization Approach (SDA) is a method for setting
-corporate CO2 emissions intensity reduction targets in line with climate
-science. This method was developed by the Science-Based Targets
-Initiative (<a href="https://sciencebasedtargets.org/" class="external-link">SBTI</a>), an
-international initiative on science-based target setting for companies
-initiated by <a href="https://www.cdp.net/en" class="external-link">CDP</a>, the <a href="https://unglobalcompact.org/" class="external-link">United Nations Global Compact</a>,
+corporate CO<sup>2</sup> emissions intensity reduction targets in line
+with climate science. This method was developed by the Science-Based
+Targets Initiative (<a href="https://sciencebasedtargets.org/" class="external-link">SBTI</a>), an international
+initiative on science-based target setting for companies initiated by <a href="https://www.cdp.net/en" class="external-link">CDP</a>, the <a href="https://unglobalcompact.org/" class="external-link">United Nations Global Compact</a>,
 the World Resources Institute (<a href="https://www.wri.org/" class="external-link">WRI</a>),
 and the Worldwide Fund for Nature (<a href="https://www.worldwildlife.org/" class="external-link">WWF</a>).</p>
 <p>In the context of PACTA, this methodology is used to calculate
@@ -303,8 +302,8 @@ emission factor targets for homogenous sectors (i.e. sectors with no
 technology-level scenario pathways).</p>
 <p>First, the distance,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>,
-between the company’s CO2 emissions intensity per unit production (or
-emissions factor),
+between the company’s CO<sup>2</sup> emissions intensity per unit
+production (or emissions factor),
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>I</mi><mrow><mi>C</mi><mi>o</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I^{Co}(t)</annotation></semantics></math>
 at some base year,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>0</mn></msub><annotation encoding="application/x-tex">t_0</annotation></semantics></math>,
@@ -345,8 +344,9 @@ are the average market and scenario emission intensities respectively,
 at time
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>.</p>
 <p>This variable captures the remaining effort needed from the market to
-meet the target in 2050, per year. Under the SDA assumptions the CO2
-intensity for all companies in a sector converge in 2050. Note that
+meet the target in 2050, per year. Under the SDA assumptions the
+CO<sup>2</sup> intensity for all companies in a sector converge in 2050.
+Note that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">p(t_0) = 1</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2050</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">p(2050) = 0</annotation></semantics></math>,
@@ -374,12 +374,12 @@ absolute pathway of the sector exceeds the scenario target. This makes
 sense. However, applying this at company level is counter-intuitive:</p>
 <blockquote>
 <p>Companies that decrease their market share would be allowed to have a
-higher CO2-Intensity than the average market actor. While, companies
-that are increasing their market share are forced to do more in terms of
-CO2-Intensity than ones whose market share remains constant. It follows
-that if a company reaches the targeted CO2-Intensity it would not be
-allowed to increase its share in the market. This is a desirable
-outcome.</p>
+higher CO<sup>2</sup>-Intensity than the average market actor. While,
+companies that are increasing their market share are forced to do more
+in terms of CO<sup>2</sup>-Intensity than ones whose market share
+remains constant. It follows that if a company reaches the targeted
+CO<sup>2</sup>-Intensity it would not be allowed to increase its share
+in the market. This is a desirable outcome.</p>
 </blockquote>
 <p>Under this assumption, our target calculation reduces to:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>I</mi><mrow><mi>T</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mo>*</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msup><mi>I</mi><mrow><mi>S</mi><mi>c</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2050</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I^{Target}(t) = \left( d * p (t) \right) + I^{Sc}(2050)</annotation></semantics></math></p>
@@ -449,7 +449,8 @@ should structure your own data.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 167 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ abbreviated name: ¹​sector_classification_direct_loantaker</span></span></span></code></pre></div>
 <ul>
-<li>Calculate SDA targets for CO2 emissions intensities:</li>
+<li>Calculate SDA targets for CO<sup>2</sup> emissions intensities at
+the portfolio level:</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">co2_intensity</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
