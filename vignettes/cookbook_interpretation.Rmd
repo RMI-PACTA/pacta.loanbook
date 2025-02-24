@@ -14,59 +14,41 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Coverage Diagnostics
+## Target Market Share
 
-### Match Success Rate
+The `target_market_share()` function calculates the Target Market Share metric and outputs a table including the calculated targets at the portfolio level or at the company level, depending on the options selected.
 
-* Name (of metric)
-* Formulae
-* Description
-* Possible action(s)/ impact
-* Use in combination with other metrics
-* Time horizon
-* Geographic relevance
-* Sectoral relevance
-* Plot demo (when applicable)
+### Explanation of Output
 
-## PACTA Target Market Share Metrics
+[2 or 3 sentences explaining how to read the output]
 
-### Sector-level technology mix
+For detailed information about the table output of the `target_market_share()` function and its columns, see the [data dictionary](data_outputs.html#target_market_share-output).
 
-* Name (of metric)
-* Formulae
-* Description
-* Possible action(s)/ impact
-* Use in combination with other metrics
-* Time horizon
-* Geographic relevance
-* Sectoral relevance
-* Plot demo (when applicable)
+For detailed information about the Target Market Share metric and how it is calculated, see the [Metrics appendix](cookbook_metrics.html#market-share-approach).
 
-### Technology-level volume trajectory
+### Interpretation & Intuition
 
-* Name (of metric)
-* Formulae
-* Description
-* Possible action(s)/ impact
-* Use in combination with other metrics
-* Time horizon
-* Geographic relevance
-* Sectoral relevance
-* Plot demo (when applicable)
+[2 or 3 sentences about interpretation]
 
-## PACTA SDA Metric
+[2 or 3 sentences about intuition]
 
-### Sector-level emission intensity
+## Sectoral Decarbonization (SDA) Target
 
-* Name (of metric)
-* Formulae
-* Description
-* Possible action(s)/ impact
-* Use in combination with other metrics
-* Time horizon
-* Geographic relevance
-* Sectoral relevance
-* Plot demo (when applicable)
+The `target_sda()` function calculates the Sectoral Decarbonization Target metric and outputs a table including the calculated targets at the portfolio level or at the company level, depending on the options selected.
+
+### Explanation of Output
+
+[2 or 3 sentences explaining how to read the output]
+
+For detailed information about the table output of the `target_market_share()` function and its columns, see the [data dictionary](data_outputs.html#target_sda-output).
+
+For detailed information about the Target Market Share metric and how it is calculated, see the [Metrics appendix](cookbook_metrics.html#sectoral-decarbonization-approach).
+
+### Interpretation & Intuition
+
+[2 or 3 sentences about interpretation]
+
+[2 or 3 sentences about intuition]
 
 **PREVIOUS CHAPTER:** [Running the Analysis](cookbook_running_the_analysis.html)
 
