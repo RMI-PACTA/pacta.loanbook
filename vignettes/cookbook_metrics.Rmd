@@ -200,4 +200,20 @@ matched %>%
   )
 ```
 
+* Calculate SDA targets for CO^2^ emissions intensities at the company level:
+
+```{r, R.options = list(width = 400)}
+co2_intensity <- co2_intensity_scenario_demo
+regions <- region_isos_demo
+
+matched %>%
+  target_sda(
+    abcd = abcd,
+    co2_intensity_scenario = co2_intensity,
+    region_isos = regions,
+    by_company = TRUE
+  )
+```
+
+
 **PREVIOUS CHAPTER:** [Advanced Use Cases](cookbook_advanced_use_cases.html)
