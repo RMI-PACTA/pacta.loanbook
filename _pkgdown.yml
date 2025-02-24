@@ -53,6 +53,8 @@ navbar:
         href: articles/cookbook_interpretation.html
       - text: Advanced Use Cases
         href: articles/cookbook_advanced_use_cases.html
+      - text: Metrics
+        href: articles/cookbook_metrics.html
     data:
       text: Data Dictionaries
       menu:
