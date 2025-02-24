@@ -477,6 +477,36 @@ the portfolio level:</li>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> cement  <span style="text-decoration: underline;">2</span>022 global             demo_2020       projected                             0.666 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cement  <span style="text-decoration: underline;">2</span>023 advanced economies demo_2020       projected                             0.023<span style="text-decoration: underline;">5</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 210 more rows</span></span></span></code></pre></div>
+<ul>
+<li>Calculate SDA targets for CO<sup>2</sup> emissions intensities at
+the company level:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co2_intensity</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
+<span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="va">region_isos_demo</span></span>
+<span></span>
+<span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
+<span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
+<span>    co2_intensity_scenario <span class="op">=</span> <span class="va">co2_intensity</span>,</span>
+<span>    region_isos <span class="op">=</span> <span class="va">regions</span>,</span>
+<span>    by_company <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removing rows in abcd where `emission_factor` is NA</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 966 × 7</span></span></span>
+<span><span class="co">#&gt;    sector  year region             scenario_source name_abcd                          emission_factor_metric emission_factor_value</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> cement  <span style="text-decoration: underline;">2</span>020 advanced economies demo_2020       Milani, Milani e Milani SPA        projected                              0.714</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> cement  <span style="text-decoration: underline;">2</span>020 developing asia    demo_2020       Heidrich GmbH                      projected                              0.675</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> cement  <span style="text-decoration: underline;">2</span>020 developing asia    demo_2020       Hovel Hovel GmbH &amp; Co. KGaA        projected                              0.622</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Battaglia-Battaglia Group          projected                              0.626</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Bergstrom, Bergstrom and Bergstrom projected                              0.607</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Carsten GmbH &amp; Co. KG              projected                              0.625</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Crist-Crist                        projected                              0.655</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Durgan-Durgan                      projected                              0.702</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Eberhardt Eberhardt GmbH           projected                              0.685</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cement  <span style="text-decoration: underline;">2</span>020 global             demo_2020       Geissler Geissler AG &amp; Co. KGaA    projected                              0.637</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 956 more rows</span></span></span></code></pre></div>
 <p><strong>PREVIOUS CHAPTER:</strong> <a href="cookbook_advanced_use_cases.html">Advanced Use Cases</a></p>
 </div>
 </div>
