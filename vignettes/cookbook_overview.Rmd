@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 # Overview
 
-This cookbook provides a step-by-step guide to running the PACTA for Banks analysis using the `{pacta.loanbook}` package. The analysis is designed to help banks assess the alignment of their loan books with the Paris Agreement goals.
+This cookbook provides a step-by-step guide to running the PACTA for Banks analysis using the `{pacta.loanbook}` R package. The analysis determines alignment with climate scenarios to infer progress toward the Paris Agreement goals.
 
 The sections of the cookbook are as follows:
 
