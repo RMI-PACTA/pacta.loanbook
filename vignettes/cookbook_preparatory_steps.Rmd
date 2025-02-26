@@ -18,7 +18,7 @@ library(pacta.loanbook)
 
 # Preparatory Steps
 
-This section provides an overview of the preparatory steps that need to be taken before running the PACTA for Banks analysis. It includes information on the required input data sets and the required software.
+This section outlines the necessary preparations before running the PACTA for Banks analysis, including required input data sets and software.
 
 ## Required Input Data Sets
 
