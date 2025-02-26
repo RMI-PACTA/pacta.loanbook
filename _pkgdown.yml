@@ -38,7 +38,7 @@ reference:
 navbar:
   structure:
     left:  [intro, cookbook, data, reference, articles, news]
-    right: [search, packages, sit.rep, github]
+    right: [search, packages, github]
   components:
     cookbook:
       text: Cookbook
@@ -66,7 +66,7 @@ navbar:
         href: articles/data_scenario.html
       - text: Sector Classification
         href: articles/data_classification.html
-      - text: Outputs
+      - text: PACTA Outputs
         href: articles/data_outputs.html
     articles:
       text: Articles
@@ -84,9 +84,6 @@ navbar:
         href: https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html
       - text: "Indicator Choices: Weighted Production vs. Weighted Percent Change in Production"
         href: https://rmi-pacta.github.io/r2dii.analysis/articles/production-percent-change.html
-    sit.rep:
-      text: sit.rep
-      href: articles/pacta_loanbook_sit_rep.html
     packages:
       text: Packages
       menu:
@@ -100,3 +97,6 @@ navbar:
         href: https://rmi-pacta.github.io/r2dii.analysis/
       - text: r2dii.plot
         href: https://rmi-pacta.github.io/r2dii.plot/
+      - text: ---
+      - text: sit.rep
+        href: articles/pacta_loanbook_sit_rep.html

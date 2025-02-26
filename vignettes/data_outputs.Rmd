@@ -1,8 +1,8 @@
 ---
-title: "Outputs"
+title: "PACTA Outputs"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Outputs}
+  %\VignetteIndexEntry{PACTA Outputs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
