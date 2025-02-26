@@ -620,6 +620,8 @@ data <- filter(sda_targets, sector == "cement", region == "global")
 qplot_emission_intensity(data)
 ```
 
+### Exporting plots to an image file
+
 All of the functions from `{pacta.loanbook}` that produce plots, e.g. `qplot_techmix()` and `plot_trajectory()`, return a `ggplot` object, which can be saved as an image file using the `ggplot2::ggsave()` function, for example:
 
 ```{r save_plot_to_file}
