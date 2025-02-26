@@ -51,10 +51,10 @@ The results include both tabular outputs and visualizations. Tabular data can be
 The main steps of the analysis are as follows:
 
 1. Data preparation: Prepare the loan book, ABCD and Scenario input data.
-2. Matching process: Match the raw loan book to the ABCD data.
-3. Prioritization of loan book: Prioritize the matched loan book and analyze its coverage.
-4. Run PACTA for Banks analysis: Run the analysis and generate plots.
+2. Matching: Match the raw loan book to the ABCD data.
+3. Match prioritization: Prioritize the matched loan book and analyze its coverage.
+4. Running the analysis: Execute PACTA for Banks and generate visualizations.
 
-This cookbook will guide you through each of the steps of the analysis in detail, explain the required input data sets and software, and provide guidance on how to interpret the results.
+This cookbook provides detailed guidance on each step, including required inputs, software, and result interpretation.
 
 **NEXT CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
