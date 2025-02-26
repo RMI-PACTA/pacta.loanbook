@@ -34,11 +34,17 @@ PACTA for Banks applies the PACTA methodology to assess corporate lending portfo
 
 PACTA for Banks is primarily designed for banks to run independently with minimal guidance. However, it can also be useful for others interested in conducting a transition assessment on a loan book.
 
-## What can the results of the PACTA for Banks analysis be used for?
+## How can the results be used?
 
-Banks can use the results of the analysis to assess the alignment of their loan books with the Paris Agreement goals, to identify sectors where they may need to take action to improve alignment, and to screen for potential climate-related transition risks. The results may additionally be used to identify opportunities for climate-aligned investments, as well as for detecting individual counterparties that may be exposed to climate-related transition risks and may therefore require dedicated focus in the risk management process.
+Banks can use the analysis results to:
 
-Users will be able to obtain both tabular outputs and plots that can be used for any of the above use cases. The tabular output further enables processing of the alignment results in other models or tools, for example as an input into financial risk models, or as a recurring input into internal monitoring systems.
+- Assess loan book alignment to climate scenarios.
+- Identify sectors that need action to improve alignment.
+- Screen for climate-related transition risks.
+- Spot opportunities for climate-aligned investments.
+- Detect counter-parties exposed to transition risks for risk management.
+
+The results include both tabular outputs and visualizations. Tabular data can be further processed in financial risk models or integrated into internal monitoring systems.
 
 ## What are the main steps of the analysis?
 
