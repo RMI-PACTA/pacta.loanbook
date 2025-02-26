@@ -18,14 +18,13 @@ knitr::opts_chunk$set(
 
 This cookbook provides a step-by-step guide to running the PACTA for Banks analysis using the `{pacta.loanbook}` R package. The analysis determines alignment with climate scenarios to infer progress toward the Paris Agreement goals.
 
-The sections of the cookbook are as follows:
+The cookbook is structured as follows:
 
-1. **Overview**: This section provides an overview of the PACTA for Banks analysis and its main steps.
-2. **[Preparatory Steps](cookbook_preparatory_steps.html)**: Prepare the Loanbook, ABCD and Scenario input data.
-3. **[Running the Analysis](cookbook_running_the_analysis.html)**: Match the raw loan books to the ABCD data and run the PACTA for Banks analysis.
-4. **[Interpretation of Results](cookbook_interpretation.html)**: Interpret the results of the analysis and understand the outputs.
-5. **[Advanced Topics](cookbook_advanced_use_cases.html)**: Learn how to adjust the analysis parameters for best results on advanced research questions.
-6. **[Metrics](cookbook_metrics.html)**: Detailed explanations of the metrics used/calculated.
+- **[Preparatory Steps](cookbook_preparatory_steps.html)**: Prepare the loanbook, ABCD and scenario input datasets.
+- **[Running the Analysis](cookbook_running_the_analysis.html)**: Match the raw loanbooks to the ABCD data and run the PACTA for Banks analysis.
+- **[Interpretation of Results](cookbook_interpretation.html)**: Understand the analysis outputs.
+- **[Advanced Topics](cookbook_advanced_use_cases.html)**: Guidance on advanced research questions.
+- **[Metrics](cookbook_metrics.html)**: More detailed explanations and formulae of the key metrics.
 
 ## What is the PACTA for Banks analysis?
 
