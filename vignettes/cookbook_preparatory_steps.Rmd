@@ -22,94 +22,96 @@ This section outlines the necessary preparations before running the PACTA for Ba
 
 ## Required Input Data Sets
 
-The PACTA for Banks analysis requires a number of input data sets to run. Some of these can be obtained from external sources, while others need to be prepared by the user. Furthermore, some of the input data sets are optional. 
+The PACTA for Banks analysis requires several input data sets, some from external sources and others prepared by the user. Certain data sets are optional.
 
-The main input data sets required for the analysis are the following:
+The key required inputs include:
 
-### Asset-based Company Data (ABCD)
+### Asset-Based Company Data (ABCD)
 
-- required input
-- external source
+- Required input
+- External source
 - XLSX file
 
-This data set provides information on the production profiles and emission intensities of companies active in the following real economy sectors: Automotive (light-duty vehicles) manufacturing, aviation, cement production, coal mining, upstream oil & gas extraction, power generation, and steel production. The ABCD is typically obtained from third party data providers. However, it is possible to prepare the ABCD yourself or complement an external data set with entries that may not be covered out of the box.
+This dataset contains production profiles and emission intensities for companies in climate critical economic sectors: automotive (light-duty vehicles), aviation, cement, coal mining, upstream oil & gas, power generation, and steel. Typically sourced from third-party providers, it can also be self-prepared or supplemented with additional entries.
 
-The ABCD data set must be an XLSX file and contains the following columns:
+The ABCD dataset must be a `.xlsx` file that contains the following columns:
 
 ```{r cols_abcd, echo = FALSE, results = 'asis'}
 pacta.loanbook:::list_col_names_and_types(abcd_demo)
 ```
 
-For more detail about the necessary structure of this dataset, see the data dictionary for [abcd](data_abcd.html).
+PACTA is data-agnostic and supports any provider offering data in the correct format. One option is purchasing ABCD from [Asset Impact](https://asset-impact.gresb.com/).
 
-While PACTA is data agnostic and allows using data from any provider that offers the appropriate format, one option to obtain ABCD for this analysis is to buy the data from the data provider Asset Impact. Further information on how to obtain ABCD for PACTA and documentation of the individual sectors and data points can be found on the [Asset Impact website](https://asset-impact.gresb.com/).
+For details on the required structure of this dataset, refer to the [ABCD data dictionary](data_abcd.html).
 
 ### Scenario Data
 
-- required input(s)
-- external source
+- Required input(s)
+- External source
 - CSV file(s)
 
-The scenario data set provides information on the trajectories of technologies/fuel types and of emission intensity pathways for each of (or a subset of) the sectors covered in PACTA.
+For sectors with technology-level trajectories, the dataset provides Sectoral Market Share Percentage (SMSP) and Target Market Share Ratio (TMSR) pathways using the "market share approach". This allocation rule assumes that all companies in a sector must adjust production while maintaining constant market shares to align with the overall climate transition scenario.
 
-For sectors with technology level trajectories, the data set provides the TMSR and SMSP pathways based on the Market Share Approach, an allocation rule that implies all companies active in a sector have to adjust their production in a way that keeps market shares constant and solves for the aggregate climate transition scenario. For more information on how to calculate the TMSR and the SMSP, see the [PACTA for Banks documentation](https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html).
+A more detailed explanation of the market share approach can be found [here](cookbook_metrics.html).
 
-The target market share scenario data set must be a CSV file and contains the following columns:
+The Target Market Share Scenario dataset must be a CSV file and include the following columns:
 
 ```{r cols_tms_scenario, echo = FALSE, results = 'asis'}
 pacta.loanbook:::list_col_names_and_types(scenario_demo_2020)
 ```
 
-For more detail about the necessary structure of this dataset, see the data dictionary for [scenario](data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation).
+For details on the required structure of this dataset, refer to the [market share scenario data dictionary](data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation).
 
-For sectors that do not have technology level pathways, PACTA uses the Sectoral Decarbonization Approach (SDA), an allocation rule that implies that all companies in a sector have to converge their physical emission intensity at a future scenario value - e.g. in the year 2050. This implies that more polluting companies have to reduce their physical emissions intensity more drastically than companies using cleaner technology. It does not have any direct implications on the amount of units produced by any company. For further information on calculating the SDA in PACTA, please see the [PACTA for Banks documentation](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html).
+For sectors without technology-level pathways, PACTA applies the Sectoral Decarbonization Approach (SDA). This method requires all companies in a sector to align their physical emission intensity with a future scenario target (e.g., by 2050). Higher-emission companies must reduce their intensity more drastically than those already using cleaner technologies. However, SDA does not directly affect production volumes.
 
-The SDA scenario data set must be a CSV file and contains the following columns:
+A more detailed explanation of the sectoral decarbonization approach can be found [here](cookbook_metrics.html)
+
+The SDA scenario dataset must be a `.csv` file that contains the following columns:
 
 ```{r cols_sda_scenario, echo = FALSE, results = 'asis'}
 pacta.loanbook:::list_col_names_and_types(co2_intensity_scenario_demo)
 ```
 
-For more detail about the necessary structure of this dataset, see the data dictionary for [scenario](data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach).
+For details on the required structure of this dataset, refer to the [SDA scenario data dictionary](data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach).
 
 While the raw input values of the scenarios are based on models from external third party organisations - such as the [World Energy Outlook](https://www.iea.org/reports/world-energy-outlook-2024) by the [International Energy Agency (IEA)](https://www.iea.org/), the [Global Energy and Climate Outlook by the Joint Research Center of the European Commission (JRC)](https://joint-research-centre.ec.europa.eu/scientific-activities-z/geco_en), or the [One Earth Climate Model by the Institute for Sustainable Futures (ISF)](https://www.uts.edu.au/oecm) - the input data set for PACTA must be prepared using additional steps, which are documented publicly on the following GitHub repositories:
 
 - [pacta.scenario.data.preparation](https://github.com/RMI-PACTA/pacta.scenario.data.preparation)
 - [workflow.scenario.preparation](https://github.com/RMI-PACTA/workflow.scenario.preparation)
 
-Since RMI has taken over stewardship of PACTA, the prepared scenario files can also be accessed as CSV downloads in the ["Methodology and Supporting Documents" section of the PACTA website](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/). The files are usually updated annually based on the latest scenario publications and as a general rule, the year of the publication defines the initial year of the scenario data set. This is commonly also used as the start year of the analysis.
+Prepared scenario files are available for download as CSVs in the [Methodology and Supporting Documents](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/) section of the PACTA website. These files are typically updated annually based on the latest scenario publications. As a general rule, the publication year defines the initial year of the dataset, which is also commonly used as the analysis start year.
 
-### Raw Loan Book
+### Loan Book
 
-- required input
-- self-prepared
+- Required input
+- User-prepared
 - CSV file
 
-The raw loan book is the financial data set that you would like to analyze. It contains information on the loans that you have provided to companies. As a bank, the data required will be available in your internal systems.
+The loan book is the financial dataset to be analyzed, detailing the loans provided to companies. Banks can source this data from their internal systems.
 
-The raw loan book must be prepared as CSV files and contain at a minimum the following columns:
+The raw loan book must be prepared as CSV files and include, at a minimum, the following columns:
 
 ```{r cols_raw_loanbooks, echo = FALSE, results = 'asis'}
 pacta.loanbook:::list_col_names_and_types(loanbook_demo)
 ```
 
-For more detail about the necessary structure of this dataset, see the data dictionary for [loanbook](data_loanbook.html).
+For details on the required structure of this dataset, refer to the [loanbook data dictionary](data_loanbook.html).
  
 For detailed descriptions of how to prepare raw loan books, see the ["Training Materials" section of the PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/). The ["User Guide 2"](https://pacta.rmi.org/wp-content/uploads/2020/10/User-Guide-2..pdf), the ["Data Dictionary"](https://pacta.rmi.org/wp-content/uploads/2020/09/data_dictionary.xlsx), and the ["Loan Book Template"](https://pacta.rmi.org/wp-content/uploads/2020/09/loanbook_demo.xlsx) files can all be helpful in preparing your data.
 
 ### Misclassified Loans (optional)
 
-- optional input
-- self-prepared
+- Optional input
+- User-prepared
 - CSV file
 
-The misclassified loans CSV file should have just one column, id_loan, and therefore be structured as follows:
+The misclassified loans CSV file should contain a single column, `id_loan`, and be structured as follows:
 
 ```{r, echo = FALSE, results = 'asis'}
 pacta.loanbook:::list_col_names_and_types(tibble::tibble(id_loan = "x"))
 ```
 
-The user can provide a list of loans that have been misclassified in the raw loan book. The aim here is specifically to remove false positives, that is, loans that are classified in scope of one of the PACTA sectors, but where manual research shows that the companies do not actually operate within the PACTA scope. Such a false positive may be due to erroneous data entry in the raw loan book, for example. Removing these loans from the falsely indicated sector in the calculation of the match success rate will give a more accurate picture of what match success rate can really be reached.
+Users can provide a list of loans that were misclassified in the raw loan book. The goal is to remove false positives—loans incorrectly classified within a PACTA sector despite manual research confirming the company does not operate in that sector. Misclassification may result from data entry errors, for example. Excluding these loans from sector calculations can help improve the accuracy of the match success rate assessment.
 
 ### Manual Sector Classification (optional)
 
@@ -117,7 +119,7 @@ The user can provide a list of loans that have been misclassified in the raw loa
 - self-prepared
 - CSV file
 
-The the manual sector classification data set must be prepared as a CSV file and contain the following columns:
+The manual sector classification dataset must be prepared as a CSV file and contain the following columns:
 
 ```{r cols_manual_sector_classifications, echo = FALSE, results = 'asis'}
 pacta.loanbook:::list_col_names_and_types(sector_classifications)
