@@ -20,7 +20,11 @@ The `target_market_share()` function calculates the Target Market Share metric a
 
 ### Explanation of Output
 
-[2 or 3 sentences explaining how to read the output]
+The primary columns/variables of interest in the output are the `production` and `metric` variables. What the `production` variable represents depends on the values in all of the columns that precede it, and in particular the `metric` column. If the value in the `metric` column on the same row is `"projected"`, then the value in the `production` variable will represent the production level of your portfolio based on the ABCD data for that sector/technology/year/scenario/etc. If the value in the `metric` column on the same row begins with `"target_"`, e.g. `"target_cps"`, then the value in the `production` variable will represent the target level of production for that sector/technology/year/scenario/etc. based on the ABCD start year production value of your portfolio modified to be relative to the scenario data for the given year. If the value in the `metric` column on the same row is `"corporate_economy"`, then the value in the `production` variable will represent [the total production levels of the entire sector adjusted by the start year production level of your portfolio, which can be used aa a benchmark to compare to your portfolio's production levels].
+
+The `technology_share` and `percentage_of_initial_production_by_scope` variables also contain values of interest, but they are derivatives of the values contained in the `production` variable. The `technology_share` variable tells the share of the row's technology within its sector, relative to the production values of other technologies in the same sector, similar to what is shown in the "technology mix" plots, relative to whatever is defined in the `metric` column in that row. The `percentage_of_initial_production_by_scope` variable shows the percent change of the production value from the prior year.
+
+If you use the `by_company = TRUE` option of the `target_market_share()` function, most of what's said above is true except relative to the company listed in that row in the `name_abcd` column.
 
 For detailed information about the table output of the `target_market_share()` function and its columns, see the [data dictionary](data_outputs.html#target_market_share-output).
 
