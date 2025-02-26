@@ -16,16 +16,16 @@ knitr::opts_chunk$set(
 
 # Running the Analysis
 
-This section provides a brief overview of the main steps required to run the PACTA for Banks analysis. It starts with a high-level overview and elaborates on each step in more detail below. The whole process is demonstrated with code-snippets so that following them in your own environment is as straight-forward as possible.
+This section outlines the key steps for running the PACTA for Banks analysis, beginning with a high-level overview followed by a detailed breakdown of each step. Code snippets are provided to ensure a straightforward implementation in your own R environment.
 
 ## Structure of the Workflow
 
-Assuming you have prepared and/or procured all required input data sets as described in the section ["Preparatory Steps"](cookbook_preparatory_steps.html), implementing the PACTA for Banks analysis now follows the following main steps:
+If you have prepared or obtained all required input datasets as outlined in [Preparatory Steps](cookbook_preparatory_steps.html), you can then proceed with the PACTA for Banks analysis through the following main steps:
 
 1.  **Setup**: Load the necessary packages and import the data.
-2.  **Matching process**: Match the counterparties in the raw input loan book with the companies in the asset-based company data.
-3.  **Calculate PACTA metrics**: Run the PACTA analysis to obtain alignment metrics for the matched loan book relative to benchmarks based on transition scenarios.
-4.  **Plot PACTA metrics**: Visualize the results of the PACTA analysis using the standard PACTA plots to facilitate interpretation.
+2.  **Matching process**: Match counterparties in the loan book to companies in the asset-based company data.
+3.  **Calculate PACTA metrics**: Run the analysis to assess loan book alignment with transition scenario benchmarks.
+4.  **Plot PACTA metrics**: Generate standard PACTA visualizations to support result interpretation.
 
 ```{r workflow_structure, echo=FALSE, fig.cap='Fig. 1: Structure of the Workflow', fig.align='center'}
 DiagrammeR::mermaid('
@@ -42,11 +42,11 @@ DiagrammeR::mermaid('
 ')
 ```
 
-In principle, these steps are sequential. However, in practice it has shown that one rarely ever achieves the best possible match rate in one iteration. Therefore, it may be required to iterate the matching process multiple times. We will cover these steps in more detail now.
+These steps are generally sequential, but achieving the best possible match rate often requires multiple iterations. The matching process may need to be refined and repeated to improve accuracy. The following sections provide a detailed breakdown of each step.
 
 ## Setup
 
-We use the `{pacta.loanbook}` package to access the most important functions you'll learn about. We also use example datasets from the package `{pacta.loanbook}`, and optional but convenient functions from the packages `{dplyr}`, `{readxl}`, and `{readr}`.
+We use the `{pacta.loanbook}` package for key functions and example datasets. Additionally, we leverage `{dplyr}`, `{readxl}`, and `{readr}` for optional but convenient data manipulation and import functions.
 
 ```{r, message=FALSE}
 library(pacta.loanbook)
@@ -89,15 +89,15 @@ abcd
 
 ## Matching Process
 
-The next step after loading all required input files is to run the matching process, where you will match loans from the loanbook data with production data from the abcd.
+The next step after loading all required input files is to run the matching process, where you will match loans from the loanbook data with production data from the ABCD dataset
 
 The matching process is divided into three main steps:
 
--   Apply a matching algorithm to calculate scores of the match precision between the loanbook and abcd datasets
--   Manually validate matches between the loanbook and abcd datasets, including selecting the appropriate match in cases where more than one company in the abcd receives a score higher than the threshold value
--   Prioritize validated matches by level
+- Apply Matching Algorithm – Calculate match precision scores between the loan book and ABCD datasets.
+- Validate Matches – Manually review matches, selecting the correct company when multiple exceed the threshold score.
+- Prioritize Matches – Rank validated matches by priority level.
 
-We will cover each of these steps in the following sections.
+The following sections provide a detailed breakdown of each step.
 
 ### Score the match precision between the loanbook and abcd datasets
 
@@ -105,11 +105,11 @@ We will cover each of these steps in the following sections.
 
 The raw names are internally transformed applying best-practices commonly used in name matching algorithms, such as:
 
--   Remove special characters
--   Replace language specific characters
--   Abbreviate certain names to reduce their importance in the matching
--   Remove corporate suffixes when necessary
--   Spell out numbers to increase their importance
+- Remove special characters
+- Replace language specific characters
+- Abbreviate certain names to reduce their importance in the matching
+- Remove corporate suffixes when necessary
+- Spell out numbers to increase their importance
 
 The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
 
@@ -121,7 +121,7 @@ matched <- match_name(loanbook, abcd)
 matched
 ```
 
-`match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown if the names in the loanbook and the abcd are sufficiently similar AND the loan is classified in the same sector as the company activity in the abcd. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
+`match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown if the names in the loanbook and the ABCD are sufficiently similar AND the loan is classified in the same sector as the company activity in the ABCD Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
 
 ```{r}
 match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
