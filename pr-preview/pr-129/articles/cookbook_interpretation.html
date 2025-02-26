@@ -122,7 +122,42 @@ selected.</p>
 <div class="section level3">
 <h3 id="explanation-of-output">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output"></a>
 </h3>
-<p>[2 or 3 sentences explaining how to read the output]</p>
+<p>The primary columns/variables of interest in the output are the
+<code>production</code> and <code>metric</code> variables. What the
+<code>production</code> variable represents depends on the values in all
+of the columns that precede it, and in particular the
+<code>metric</code> column. If the value in the <code>metric</code>
+column on the same row is <code>"projected"</code>, then the value in
+the <code>production</code> variable will represent the production level
+of your portfolio based on the ABCD data for that
+sector/technology/year/scenario/etc. If the value in the
+<code>metric</code> column on the same row begins with
+<code>"target_"</code>, e.g. <code>"target_cps"</code>, then the value
+in the <code>production</code> variable will represent the target level
+of production for that sector/technology/year/scenario/etc. based on the
+ABCD start year production value of your portfolio modified to be
+relative to the scenario data for the given year. If the value in the
+<code>metric</code> column on the same row is
+<code>"corporate_economy"</code>, then the value in the
+<code>production</code> variable will represent [the total production
+levels of the entire sector adjusted by the start year production level
+of your portfolio, which can be used aa a benchmark to compare to your
+portfolio’s production levels].</p>
+<p>The <code>technology_share</code> and
+<code>percentage_of_initial_production_by_scope</code> variables also
+contain values of interest, but they are derivatives of the values
+contained in the <code>production</code> variable. The
+<code>technology_share</code> variable tells the share of the row’s
+technology within its sector, relative to the production values of other
+technologies in the same sector, similar to what is shown in the
+“technology mix” plots, relative to whatever is defined in the
+<code>metric</code> column in that row. The
+<code>percentage_of_initial_production_by_scope</code> variable shows
+the percent change of the production value from the prior year.</p>
+<p>If you use the <code>by_company = TRUE</code> option of the
+<code><a href="../reference/target_market_share.html">target_market_share()</a></code> function, most of what’s said above
+is true except relative to the company listed in that row in the
+<code>name_abcd</code> column.</p>
 <p>For detailed information about the table output of the
 <code><a href="../reference/target_market_share.html">target_market_share()</a></code> function and its columns, see the <a href="data_outputs.html#target_market_share-output">data
 dictionary</a>.</p>
