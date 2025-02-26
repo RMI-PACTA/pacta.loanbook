@@ -140,7 +140,13 @@ match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
 match_name(loanbook, abcd, by_sector = TRUE) %>% nrow()
 ```
 
-The `min_score` argument allows you to set a minimum threshold score. This is useful when you either want to filter out potential matches that are not precise enough, or want to add additional potential matches because the given suggestions do not seem to provide sufficient matching coverage. The default value is 0.8, but you can set it to any value between 0 and 1. Since a higher score implies a closer match between company names in the loanbook and the abcd, fewer potential matches will usually be shown. The following code shows how to set the threshold to 0.9:
+The `min_score` argument sets a minimum threshold score for matching precision. This helps by:
+- Filtering out imprecise matches by setting a higher threshold.
+- Adding more potential matches if the default suggestions don’t provide enough coverage.
+
+The default value is 0.8, but you can adjust it between 0 and 1. A higher score means stricter matching, resulting in fewer potential matches.
+
+The example below sets the threshold to 0.9:
 
 ```{r}
 match_name(loanbook, abcd, min_score = 0.9) %>%
@@ -150,28 +156,30 @@ match_name(loanbook, abcd, min_score = 0.9) %>%
 
 ### Manually validate matches
 
-After the initial calculation of scores for potential matches, you will manually have to inspect the suggested matches and decide which ones to keep or remove. This is especially important when using text-based matching because there is no guarantee that similar company names as identified by the algorithm actually refer to the same companies. The manual validation step is therefore crucial, it ensures data quality in the remainder of the analysis.
+After calculating initial match scores, you must manually review the suggested matches to decide which to keep or remove. This step is critical for ensuring a high quality match result, especially in text-based matching, where similar company names may not actually refer to the same entity.
 
-The validation process is not automated and requires some time and effort on your part. This is often the most time-consuming part of the analysis, especially when trying to improve the matching coverage in multiple iterations.
+Manual validation helps to:
+- Prevent incorrect matches from affecting the analysis.
+- Ensure accuracy in linking loan book data to the ABCD dataset.
+- Improve overall match precision, especially when iterating to enhance coverage.
 
-Below you will find a brief description of the manual validation process:
+Since this step isn’t automated, it requires effort, often making it the most time-consuming part of the process.
 
-Write the output of `match_name()` into a .csv file, for example using `{readr}` to save a CSV file:
+To begin, save the output of match_name() to a CSV file for review. For example, using {readr}:
 
 ```{r}
 readr::write_csv(x = matched, file = file.path(tempdir(), "matched.csv"))
 ```
 
-Compare, edit, and save the data manually:
+After exporting the match results, you must manually review, edit, and save the data:
+- **Open the file** – Load `matched.csv` in a spreadsheet editor (Excel, Google Sheets, etc.).
+- **Compare matches** – Verify if the `name` (loan book) and `name_abcd` (ABCD) correspond to the same entity. Use additional details (sector, company structure, internal data) to improve accuracy.
+- **Edit the data**:
+  - If the match is valid, set the `score` value to `1`.
+  - If the match is incorrect or uncertain, leave the `score` as-is or set it to a value other than `1`.
+- **Save the edited file**: as `valid_matches.csv`.
 
--   Open `matched.csv` with any spreadsheet editor (Excel, Google Sheets, etc.).
--   Compare the columns `name` and `name_abcd` manually to determine if the match is valid. Other information can be used in conjunction with just the names to ensure the two entities match (sector, internal information on the company structure, etc.)
--   Edit the data:
-    -   If you are happy with the match, set the `score` value to `1`.
-    -   Otherwise set or leave the `score` value to anything other than `1`.
--   Save the edited file as, for example, `valid_matches.csv`.
-
-Re-import the edited file (validated), for example using `{readr}` to read a CSV file:
+Once validated, re-import the edited file into R, for example, using `{readr}`:
 
 ```{r echo=FALSE, results='hide', message=FALSE}
 # simulating that the user did the above process and saved a new valid_matches.csv
@@ -257,12 +265,7 @@ sector_in_scope <- glue::glue_collapse(
 )
 ```
 
-`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in
-an asset-based company dataset. However, matching every loan is unlikely -- some
-loan-taking companies may be missing from the asset-based company dataset, or
-they may not operate in the sectors PACTA focuses on (`r sector_in_scope`).
-Thus, you may want to measure how much of the loanbook matched some asset. This
-article shows two ways to calculate such matching coverage:
+`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in an asset-based company dataset. However, matching every loan is unlikely -- some loan-taking companies may be missing from the asset-based company dataset, or they may not operate in the sectors PACTA focuses on (`r sector_in_scope`). Thus, you may want to measure how much of the loanbook matched some asset. This article shows two ways to calculate such matching coverage:
 
 (1) Calculate the portion of your `loanbook` covered, by dollar value (i.e. using
 one of the `loan_size_*` columns).
