@@ -28,7 +28,7 @@ The cookbook is structured as follows:
 
 ## What is the PACTA for Banks analysis?
 
-PACTA for Banks is based on the PACTA methodology, which assesses the alignment of financial portfolios with climate goals utilizing forward-looking asset-based company data (ABCD) that is linked to financial assets and compares the production profiles of those companies with technology and emissions pathways from climate transition scenarios at the sector and/or technology level.
+PACTA for Banks applies the PACTA methodology to assess corporate lending portfolios' alignment with climate goals. It uses forward-looking asset-based company data (ABCD) linked to financial assets to compare companies' production profiles with sector- and technology-level climate transition scenarios.
 
 ## Who are these tools built for?
 
