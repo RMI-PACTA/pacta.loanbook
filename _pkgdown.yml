@@ -37,7 +37,7 @@ reference:
 
 navbar:
   structure:
-    left:  [intro, reference, cookbook, data, articles, news]
+    left:  [intro, cookbook, data, reference, articles, news]
     right: [search, packages, sit.rep, github]
   components:
     cookbook:
