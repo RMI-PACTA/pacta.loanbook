@@ -123,6 +123,16 @@ matched
 
 `match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown if the names in the loanbook and the ABCD are sufficiently similar AND the loan is classified in the same sector as the company activity in the ABCD Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
 
+The `match_name()` function, by default, scores matches between name strings within the same sector. This means a potential match is shown only if:
+- The names in the loan book and ABCD dataset are sufficiently similar.
+- The loan is classified in the same sector as the company activity in the ABCD dataset.
+
+Setting by_sector = FALSE removes this restriction, which:
+- Increases computation time.
+- Increases the number of potential (but possibly incorrect) matches requiring manual validation.
+
+In most cases, keeping by_sector = TRUE is recommended. However, disabling the sector restriction can be useful when sector classifications in the loan book are unreliable or missing. Below, you can see how removing the restriction increases the number of potential matches.
+
 ```{r}
 match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
 
