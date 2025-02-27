@@ -625,11 +625,11 @@ qplot_emission_intensity(data)
 All of the functions from `{pacta.loanbook}` that produce plots, e.g. `qplot_techmix()` and `plot_trajectory()`, return a `ggplot` object, which can be saved as an image file using the `ggplot2::ggsave()` function, for example:
 
 ```{r save_plot_to_file}
-techmix_plot <- qplot_emission_intensity(data)
+emission_intensity_plot <- qplot_emission_intensity(data)
 
 ggplot2::ggsave(
-  filename = file.path(tempdir(), "techmix_plot.png"),
-  plot = techmix_plot
+  filename = file.path(tempdir(), "emission_intensity_plot.png"),
+  plot = emission_intensity_plot
 )
 ```
 
