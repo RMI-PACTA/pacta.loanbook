@@ -14,7 +14,8 @@
 Useful links:
 \itemize{
   \item \url{https://rmi-pacta.github.io/pacta.loanbook/}
-  \item \url{https://github.com/rmi-pacta/pacta.loanbook}
+  \item \url{https://github.com/RMI-PACTA/pacta.loanbook}
+  \item Report bugs at \url{https://github.com/RMI-PACTA/pacta.loanbook/issues}
 }
 
 }
