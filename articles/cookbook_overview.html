@@ -117,69 +117,60 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p>This cookbook provides a step-by-step guide to running the PACTA for
-Banks analysis using the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> package. The
-analysis is designed to help banks assess the alignment of their loan
-books with the Paris Agreement goals.</p>
-<p>The sections of the cookbook are as follows:</p>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Overview</strong>: This section provides an overview of the
-PACTA for Banks analysis and its main steps.</li>
+Banks analysis using the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> R package. The
+analysis determines alignment with climate scenarios to infer progress
+toward the Paris Agreement goals.</p>
+<p>The cookbook is structured as follows:</p>
+<ul>
 <li>
 <strong><a href="cookbook_preparatory_steps.html">Preparatory
-Steps</a></strong>: Prepare the Loanbook, ABCD and Scenario input
-data.</li>
+Steps</a></strong>: Prepare the loanbook, ABCD and scenario input
+datasets.</li>
 <li>
 <strong><a href="cookbook_running_the_analysis.html">Running the
-Analysis</a></strong>: Match the raw loan books to the ABCD data and run
+Analysis</a></strong>: Match the raw loanbooks to the ABCD data and run
 the PACTA for Banks analysis.</li>
 <li>
 <strong><a href="cookbook_interpretation.html">Interpretation of
-Results</a></strong>: Interpret the results of the analysis and
-understand the outputs.</li>
+Results</a></strong>: Understand the analysis outputs.</li>
 <li>
 <strong><a href="cookbook_advanced_use_cases.html">Advanced
-Topics</a></strong>: Learn how to adjust the analysis parameters for
-best results on advanced research questions.</li>
+Topics</a></strong>: Guidance on advanced research questions.</li>
 <li>
-<strong><a href="cookbook_metrics.html">Metrics</a></strong>:
-Detailed explanations of the metrics used/calculated.</li>
-</ol>
+<strong><a href="cookbook_metrics.html">Metrics</a></strong>: More
+detailed explanations and formulae of the key metrics.</li>
+</ul>
 <div class="section level3">
 <h3 id="what-is-the-pacta-for-banks-analysis">What is the PACTA for Banks analysis?<a class="anchor" aria-label="anchor" href="#what-is-the-pacta-for-banks-analysis"></a>
 </h3>
-<p>PACTA for Banks is based on the PACTA methodology, which assesses the
-alignment of financial portfolios with climate goals utilizing
-forward-looking asset-based company data (ABCD) that is linked to
-financial assets and compares the production profiles of those companies
-with technology and emissions pathways from climate transition scenarios
-at the sector and/or technology level.</p>
+<p>PACTA for Banks applies the PACTA methodology to assess corporate
+lending portfolios’ alignment with climate goals. It uses
+forward-looking asset-based company data (ABCD) linked to financial
+assets to compare companies’ production profiles with sector- and
+technology-level climate transition scenarios.</p>
 </div>
 <div class="section level3">
-<h3 id="who-are-these-tools-built-for">Who are these tools built for?<a class="anchor" aria-label="anchor" href="#who-are-these-tools-built-for"></a>
+<h3 id="who-are-these-tools-for">Who are these tools for?<a class="anchor" aria-label="anchor" href="#who-are-these-tools-for"></a>
 </h3>
-<p>The PACTA for Banks analysis is primarily designed to be run by banks
-on their own, with minimal additional guidance. However, it can also be
-a useful tool for any other user, in case they would like to run a PACTA
-analysis on a loan book.</p>
+<p>PACTA for Banks is primarily designed for banks to run independently
+with minimal guidance. However, it can also be useful for others
+interested in conducting a transition assessment on a loan book.</p>
 </div>
 <div class="section level3">
-<h3 id="what-can-the-results-of-the-pacta-for-banks-analysis-be-used-for">What can the results of the PACTA for Banks analysis be used
-for?<a class="anchor" aria-label="anchor" href="#what-can-the-results-of-the-pacta-for-banks-analysis-be-used-for"></a>
+<h3 id="how-can-the-results-be-used">How can the results be used?<a class="anchor" aria-label="anchor" href="#how-can-the-results-be-used"></a>
 </h3>
-<p>Banks can use the results of the analysis to assess the alignment of
-their loan books with the Paris Agreement goals, to identify sectors
-where they may need to take action to improve alignment, and to screen
-for potential climate-related transition risks. The results may
-additionally be used to identify opportunities for climate-aligned
-investments, as well as for detecting individual counterparties that may
-be exposed to climate-related transition risks and may therefore require
-dedicated focus in the risk management process.</p>
-<p>Users will be able to obtain both tabular outputs and plots that can
-be used for any of the above use cases. The tabular output further
-enables processing of the alignment results in other models or tools,
-for example as an input into financial risk models, or as a recurring
-input into internal monitoring systems.</p>
+<p>Banks can use the analysis results to:</p>
+<ul>
+<li>Assess loan book alignment to climate scenarios.</li>
+<li>Identify sectors that need action to improve alignment.</li>
+<li>Screen for climate-related transition risks.</li>
+<li>Spot opportunities for climate-aligned investments.</li>
+<li>Detect counter-parties exposed to transition risks for risk
+management.</li>
+</ul>
+<p>The results include both tabular outputs and visualizations. Tabular
+data can be further processed in financial risk models or integrated
+into internal monitoring systems.</p>
 </div>
 <div class="section level3">
 <h3 id="what-are-the-main-steps-of-the-analysis">What are the main steps of the analysis?<a class="anchor" aria-label="anchor" href="#what-are-the-main-steps-of-the-analysis"></a>
@@ -188,15 +179,14 @@ input into internal monitoring systems.</p>
 <ol style="list-style-type: decimal">
 <li>Data preparation: Prepare the loan book, ABCD and Scenario input
 data.</li>
-<li>Matching process: Match the raw loan book to the ABCD data.</li>
-<li>Prioritization of loan book: Prioritize the matched loan book and
-analyze its coverage.</li>
-<li>Run PACTA for Banks analysis: Run the analysis and generate
-plots.</li>
+<li>Matching: Match the raw loan book to the ABCD data.</li>
+<li>Match prioritization: Prioritize the matched loan book and analyze
+its coverage.</li>
+<li>Running the analysis: Execute PACTA for Banks and generate
+visualizations.</li>
 </ol>
-<p>This cookbook will guide you through each of the steps of the
-analysis in detail, explain the required input data sets and software,
-and provide guidance on how to interpret the results.</p>
+<p>This cookbook provides detailed guidance on each step, including
+required inputs, software, and result interpretation.</p>
 <p><strong>NEXT CHAPTER:</strong> <a href="cookbook_preparatory_steps.html">Preparatory Steps</a></p>
 </div>
 </div>
