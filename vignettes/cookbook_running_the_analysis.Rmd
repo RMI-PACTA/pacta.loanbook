@@ -620,7 +620,20 @@ data <- filter(sda_targets, sector == "cement", region == "global")
 qplot_emission_intensity(data)
 ```
 
-**ADD INSTRUCTIONS** Write to file
+### Exporting plots to an image file
+
+All of the functions from `{pacta.loanbook}` that produce plots, e.g. `qplot_techmix()` and `plot_trajectory()`, return a `ggplot` object, which can be saved as an image file using the `ggplot2::ggsave()` function, for example:
+
+```{r save_plot_to_file}
+techmix_plot <- qplot_emission_intensity(data)
+
+ggplot2::ggsave(
+  filename = file.path(tempdir(), "techmix_plot.png"),
+  plot = techmix_plot
+)
+```
+
+Further customization of the image file characteristics can be tweaked using the arguments of `ggplot2::ggsave()`, e.g. `device` (filetype), `width`, `height`, and `dpi` (resolution). See the `ggplot2::ggsave()` documentation for more detail about the options available.
 
 **PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
 
