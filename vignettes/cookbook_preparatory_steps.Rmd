@@ -224,6 +224,8 @@ Before running the PACTA for Banks analysis, you should make sure that you have 
   - [ ] `{pacta.loanbook}` R package
   - [ ] [set up git and GitHub](#connecting-to-github-from-rstudio) (optional)
 
+---
+
 **PREVIOUS CHAPTER:** [Overview](cookbook_overview.html)
 
 **NEXT CHAPTER:** [Running the Analysis](cookbook_running_the_analysis.html)
