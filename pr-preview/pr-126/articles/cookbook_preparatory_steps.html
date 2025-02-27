@@ -114,37 +114,32 @@
 <div class="section level2">
 <h2 id="preparatory-steps">Preparatory Steps<a class="anchor" aria-label="anchor" href="#preparatory-steps"></a>
 </h2>
-<p>This section provides an overview of the preparatory steps that need
-to be taken before running the PACTA for Banks analysis. It includes
-information on the required input data sets and the required
-software.</p>
+<p>This section outlines the preparations that are necessary before
+running the PACTA for Banks analysis, including sourcing the required
+input data sets and software.</p>
 <div class="section level3">
 <h3 id="required-input-data-sets">Required Input Data Sets<a class="anchor" aria-label="anchor" href="#required-input-data-sets"></a>
 </h3>
-<p>The PACTA for Banks analysis requires a number of input data sets to
-run. Some of these can be obtained from external sources, while others
-need to be prepared by the user. Furthermore, some of the input data
-sets are optional.</p>
-<p>The main input data sets required for the analysis are the
-following:</p>
+<p>The PACTA for Banks analysis requires several input data sets, some
+from external sources and others prepared by the user. Certain data sets
+are optional.</p>
+<p>The key required inputs include:</p>
 <div class="section level4">
-<h4 id="asset-based-company-data-abcd">Asset-based Company Data (ABCD)<a class="anchor" aria-label="anchor" href="#asset-based-company-data-abcd"></a>
+<h4 id="asset-based-company-data-abcd">Asset-Based Company Data (ABCD)<a class="anchor" aria-label="anchor" href="#asset-based-company-data-abcd"></a>
 </h4>
 <ul>
-<li>required input</li>
-<li>external source</li>
+<li>Required input</li>
+<li>External source</li>
 <li>XLSX file</li>
 </ul>
-<p>This data set provides information on the production profiles and
-emission intensities of companies active in the following real economy
-sectors: Automotive (light-duty vehicles) manufacturing, aviation,
-cement production, coal mining, upstream oil &amp; gas extraction, power
-generation, and steel production. The ABCD is typically obtained from
-third party data providers. However, it is possible to prepare the ABCD
-yourself or complement an external data set with entries that may not be
-covered out of the box.</p>
-<p>The ABCD data set must be an XLSX file and contains the following
-columns:</p>
+<p>This dataset contains production profiles and emission intensities
+for companies in climate critical economic sectors: automotive
+(light-duty vehicles), aviation, cement, coal mining, upstream oil &amp;
+gas, power generation, and steel. Typically sourced from third-party
+providers, it can also be self-prepared or supplemented with additional
+entries.</p>
+<p>The ABCD dataset must be a <code>.xlsx</code> file that contains the
+following columns:</p>
 <ul>
 <li>
 <code>company_id</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
@@ -183,34 +178,29 @@ columns:</p>
 <code>emission_factor_unit</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
 </li>
 </ul>
-<p>For more detail about the necessary structure of this dataset, see
-the data dictionary for <a href="data_abcd.html">abcd</a>.</p>
-<p>While PACTA is data agnostic and allows using data from any provider
-that offers the appropriate format, one option to obtain ABCD for this
-analysis is to buy the data from the data provider Asset Impact. Further
-information on how to obtain ABCD for PACTA and documentation of the
-individual sectors and data points can be found on the <a href="https://asset-impact.gresb.com/" class="external-link">Asset Impact website</a>.</p>
+<p>PACTA is data-agnostic and supports any provider offering data in the
+correct format. One option is purchasing ABCD from <a href="https://asset-impact.gresb.com/" class="external-link">Asset Impact</a>.</p>
+<p>For details on the required structure of this dataset, refer to the
+<a href="data_abcd.html">ABCD data dictionary</a>.</p>
 </div>
 <div class="section level4">
 <h4 id="scenario-data">Scenario Data<a class="anchor" aria-label="anchor" href="#scenario-data"></a>
 </h4>
 <ul>
-<li>required input(s)</li>
-<li>external source</li>
+<li>Required input(s)</li>
+<li>External source</li>
 <li>CSV file(s)</li>
 </ul>
-<p>The scenario data set provides information on the trajectories of
-technologies/fuel types and of emission intensity pathways for each of
-(or a subset of) the sectors covered in PACTA.</p>
-<p>For sectors with technology level trajectories, the data set provides
-the TMSR and SMSP pathways based on the Market Share Approach, an
-allocation rule that implies all companies active in a sector have to
-adjust their production in a way that keeps market shares constant and
-solves for the aggregate climate transition scenario. For more
-information on how to calculate the TMSR and the SMSP, see the <a href="https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html" class="external-link">PACTA
-for Banks documentation</a>.</p>
-<p>The target market share scenario data set must be a CSV file and
-contains the following columns:</p>
+<p>For sectors with technology-level trajectories, the dataset provides
+Sectoral Market Share Percentage (SMSP) and Target Market Share Ratio
+(TMSR) pathways using the “market share approach”. This allocation rule
+assumes that all companies in a sector must adjust production while
+maintaining constant market shares within a sector to align with the
+overall climate transition scenario.</p>
+<p>A more detailed explanation of the market share approach can be found
+<a href="cookbook_metrics.html">here</a>.</p>
+<p>The Target Market Share Scenario dataset must be a CSV file and
+include the following columns:</p>
 <ul>
 <li>
 <code>scenario</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
@@ -237,20 +227,20 @@ contains the following columns:</p>
 <code>scenario_source</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
 </li>
 </ul>
-<p>For more detail about the necessary structure of this dataset, see
-the data dictionary for <a href="data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation">scenario</a>.</p>
-<p>For sectors that do not have technology level pathways, PACTA uses
-the Sectoral Decarbonization Approach (SDA), an allocation rule that
-implies that all companies in a sector have to converge their physical
-emission intensity at a future scenario value - e.g. in the year 2050.
-This implies that more polluting companies have to reduce their physical
-emissions intensity more drastically than companies using cleaner
-technology. It does not have any direct implications on the amount of
-units produced by any company. For further information on calculating
-the SDA in PACTA, please see the <a href="https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html" class="external-link">PACTA
-for Banks documentation</a>.</p>
-<p>The SDA scenario data set must be a CSV file and contains the
-following columns:</p>
+<p>For details on the required structure of this dataset, refer to the
+<a href="data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation">market
+share scenario data dictionary</a>.</p>
+<p>For sectors without technology-level pathways, PACTA applies the
+Sectoral Decarbonization Approach (SDA). This method requires all
+companies in a sector to align their physical emission intensity with a
+future scenario target (e.g., by 2050). Higher-emission companies must
+reduce their intensity more drastically than those already using cleaner
+technologies. However, SDA does not directly affect production
+volumes.</p>
+<p>A more detailed explanation of the sectoral decarbonization approach
+can be found <a href="cookbook_metrics.html">here</a></p>
+<p>The SDA scenario dataset must be a <code>.csv</code> file that
+contains the following columns:</p>
 <ul>
 <li>
 <code>scenario_source</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
@@ -274,8 +264,9 @@ following columns:</p>
 <code>emission_factor</code>: <span class="ansi ansi-color-4">&lt;numeric&gt;</span>
 </li>
 </ul>
-<p>For more detail about the necessary structure of this dataset, see
-the data dictionary for <a href="data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach">scenario</a>.</p>
+<p>For details on the required structure of this dataset, refer to the
+<a href="data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach">SDA
+scenario data dictionary</a>.</p>
 <p>While the raw input values of the scenarios are based on models from
 external third party organisations - such as the <a href="https://www.iea.org/reports/world-energy-outlook-2024" class="external-link">World
 Energy Outlook</a> by the <a href="https://www.iea.org/" class="external-link">International
@@ -289,28 +280,26 @@ which are documented publicly on the following GitHub repositories:</p>
 <li><a href="https://github.com/RMI-PACTA/pacta.scenario.data.preparation" class="external-link">pacta.scenario.data.preparation</a></li>
 <li><a href="https://github.com/RMI-PACTA/workflow.scenario.preparation" class="external-link">workflow.scenario.preparation</a></li>
 </ul>
-<p>Since RMI has taken over stewardship of PACTA, the prepared scenario
-files can also be accessed as CSV downloads in the <a href="https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/" class="external-link">“Methodology
-and Supporting Documents” section of the PACTA website</a>. The files
-are usually updated annually based on the latest scenario publications
-and as a general rule, the year of the publication defines the initial
-year of the scenario data set. This is commonly also used as the start
-year of the analysis.</p>
+<p>Prepared scenario files are available for download as CSVs in the <a href="https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/" class="external-link">Methodology
+and Supporting Documents</a> section of the PACTA website. These files
+are typically updated annually based on the latest scenario
+publications. As a general rule, the publication year defines the
+initial year of the dataset, which is also commonly used as the analysis
+start year.</p>
 </div>
 <div class="section level4">
-<h4 id="raw-loan-book">Raw Loan Book<a class="anchor" aria-label="anchor" href="#raw-loan-book"></a>
+<h4 id="loan-book">Loan Book<a class="anchor" aria-label="anchor" href="#loan-book"></a>
 </h4>
 <ul>
-<li>required input</li>
-<li>self-prepared</li>
+<li>Required input</li>
+<li>User-prepared</li>
 <li>CSV file</li>
 </ul>
-<p>The raw loan book is the financial data set that you would like to
-analyze. It contains information on the loans that you have provided to
-companies. As a bank, the data required will be available in your
+<p>The loan book is the financial dataset to be analyzed, detailing the
+loans provided to companies. Banks can source this data from their
 internal systems.</p>
-<p>The raw loan book must be prepared as CSV files and contain at a
-minimum the following columns:</p>
+<p>The raw loan book must be prepared as CSV files and include, at a
+minimum, the following columns:</p>
 <ul>
 <li>
 <code>id_loan</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
@@ -352,8 +341,8 @@ minimum the following columns:</p>
 <code>isin_direct_loantaker</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
 </li>
 </ul>
-<p>For more detail about the necessary structure of this dataset, see
-the data dictionary for <a href="data_loanbook.html">loanbook</a>.</p>
+<p>For details on the required structure of this dataset, refer to the
+<a href="data_loanbook.html">loanbook data dictionary</a>.</p>
 <p>For detailed descriptions of how to prepare raw loan books, see the
 <a href="https://pacta.rmi.org/pacta-for-banks-2020/training-materials/" class="external-link">“Training
 Materials” section of the PACTA for Banks documentation</a>. The <a href="https://pacta.rmi.org/wp-content/uploads/2020/10/User-Guide-2..pdf" class="external-link">“User
@@ -365,26 +354,24 @@ Book Template”</a> files can all be helpful in preparing your data.</p>
 <h4 id="misclassified-loans-optional">Misclassified Loans (optional)<a class="anchor" aria-label="anchor" href="#misclassified-loans-optional"></a>
 </h4>
 <ul>
-<li>optional input</li>
-<li>self-prepared</li>
+<li>Optional input</li>
+<li>User-prepared</li>
 <li>CSV file</li>
 </ul>
-<p>The misclassified loans CSV file should have just one column,
-id_loan, and therefore be structured as follows:</p>
+<p>The misclassified loans CSV file should contain a single column,
+<code>id_loan</code>, and be structured as follows:</p>
 <ul>
 <li>
 <code>id_loan</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
 </li>
 </ul>
-<p>The user can provide a list of loans that have been misclassified in
-the raw loan book. The aim here is specifically to remove false
-positives, that is, loans that are classified in scope of one of the
-PACTA sectors, but where manual research shows that the companies do not
-actually operate within the PACTA scope. Such a false positive may be
-due to erroneous data entry in the raw loan book, for example. Removing
-these loans from the falsely indicated sector in the calculation of the
-match success rate will give a more accurate picture of what match
-success rate can really be reached.</p>
+<p>Users can provide a list of loans that were misclassified in the raw
+loan book. The goal is to remove false positives—loans incorrectly
+classified within a PACTA sector despite manual research confirming the
+company does not operate in that sector. Misclassification may result
+from data entry errors, for example. Excluding these loans from sector
+calculations can help improve the accuracy of the match success rate
+assessment.</p>
 </div>
 <div class="section level4">
 <h4 id="manual-sector-classification-optional">Manual Sector Classification (optional)<a class="anchor" aria-label="anchor" href="#manual-sector-classification-optional"></a>
@@ -394,8 +381,8 @@ success rate can really be reached.</p>
 <li>self-prepared</li>
 <li>CSV file</li>
 </ul>
-<p>The the manual sector classification data set must be prepared as a
-CSV file and contain the following columns:</p>
+<p>The manual sector classification dataset must be prepared as a CSV
+file and contain the following columns:</p>
 <ul>
 <li>
 <code>sector</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
