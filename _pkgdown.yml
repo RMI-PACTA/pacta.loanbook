@@ -37,8 +37,8 @@ reference:
 
 navbar:
   structure:
-    left:  [intro, reference, cookbook, data, articles, news]
-    right: [search, packages, sit.rep, github]
+    left:  [intro, cookbook, data, reference, news]
+    right: [search, packages, github]
   components:
     cookbook:
       text: Cookbook
@@ -66,27 +66,8 @@ navbar:
         href: articles/data_scenario.html
       - text: Sector Classification
         href: articles/data_classification.html
-      - text: Outputs
+      - text: PACTA Outputs
         href: articles/data_outputs.html
-    articles:
-      text: Articles
-      menu:
-      - text: r2dii.match
-      - text: Calculating Matching Coverage
-        href: https://rmi-pacta.github.io/r2dii.match/articles/matching-coverage.html
-      - text: Using match_name() with large loanbooks
-        href: https://rmi-pacta.github.io/r2dii.match/articles/chunk-your-data.html
-      - text: ---
-      - text: r2dii.analysis
-      - text: Sectoral Decarbonization Approach (SDA)
-        href: https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html
-      - text: Market Share Approach
-        href: https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html
-      - text: "Indicator Choices: Weighted Production vs. Weighted Percent Change in Production"
-        href: https://rmi-pacta.github.io/r2dii.analysis/articles/production-percent-change.html
-    sit.rep:
-      text: sit.rep
-      href: articles/pacta_loanbook_sit_rep.html
     packages:
       text: Packages
       menu:
@@ -100,3 +81,21 @@ navbar:
         href: https://rmi-pacta.github.io/r2dii.analysis/
       - text: r2dii.plot
         href: https://rmi-pacta.github.io/r2dii.plot/
+      - text: ---
+      - text: sit.rep
+        href: articles/pacta_loanbook_sit_rep.html
+      - text: ---
+      - text: Articles
+      - text: r2dii.match
+      - text: Calculating Matching Coverage
+        href: https://rmi-pacta.github.io/r2dii.match/articles/matching-coverage.html
+      - text: Using match_name() with large loanbooks
+        href: https://rmi-pacta.github.io/r2dii.match/articles/chunk-your-data.html
+      - text: ---
+      - text: r2dii.analysis
+      - text: Sectoral Decarbonization Approach (SDA)
+        href: https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html
+      - text: Market Share Approach
+        href: https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html
+      - text: "Indicator Choices: Weighted Production vs. Weighted Percent Change in Production"
+        href: https://rmi-pacta.github.io/r2dii.analysis/articles/production-percent-change.html
