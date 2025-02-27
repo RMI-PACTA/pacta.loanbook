@@ -16,40 +16,45 @@ knitr::opts_chunk$set(
 
 # Overview
 
-This cookbook provides a step-by-step guide to running the PACTA for Banks analysis using the `{pacta.loanbook}` package. The analysis is designed to help banks assess the alignment of their loan books with the Paris Agreement goals.
+This cookbook provides a step-by-step guide to running the PACTA for Banks analysis using the `{pacta.loanbook}` R package. The analysis determines alignment with climate scenarios to infer progress toward the Paris Agreement goals.
 
-The sections of the cookbook are as follows:
+The cookbook is structured as follows:
 
-1. **Overview**: This section provides an overview of the PACTA for Banks analysis and its main steps.
-2. **[Preparatory Steps](cookbook_preparatory_steps.html)**: Prepare the Loanbook, ABCD and Scenario input data.
-3. **[Running the Analysis](cookbook_running_the_analysis.html)**: Match the raw loan books to the ABCD data and run the PACTA for Banks analysis.
-4. **[Interpretation of Results](cookbook_interpretation.html)**: Interpret the results of the analysis and understand the outputs.
-5. **[Advanced Topics](cookbook_advanced_use_cases.html)**: Learn how to adjust the analysis parameters for best results on advanced research questions.
-6. **[Metrics](cookbook_metrics.html)**: Detailed explanations of the metrics used/calculated.
+- **[Preparatory Steps](cookbook_preparatory_steps.html)**: Prepare the loanbook, ABCD and scenario input datasets.
+- **[Running the Analysis](cookbook_running_the_analysis.html)**: Match the raw loanbooks to the ABCD data and run the PACTA for Banks analysis.
+- **[Interpretation of Results](cookbook_interpretation.html)**: Understand the analysis outputs.
+- **[Advanced Topics](cookbook_advanced_use_cases.html)**: Guidance on advanced research questions.
+- **[Metrics](cookbook_metrics.html)**: More detailed explanations and formulae of the key metrics.
 
 ## What is the PACTA for Banks analysis?
 
-PACTA for Banks is based on the PACTA methodology, which assesses the alignment of financial portfolios with climate goals utilizing forward-looking asset-based company data (ABCD) that is linked to financial assets and compares the production profiles of those companies with technology and emissions pathways from climate transition scenarios at the sector and/or technology level.
+PACTA for Banks applies the PACTA methodology to assess corporate lending portfolios' alignment with climate goals. It uses forward-looking asset-based company data (ABCD) linked to financial assets to compare companies' production profiles with sector- and technology-level climate transition scenarios.
 
-## Who are these tools built for?
+## Who are these tools for?
 
-The PACTA for Banks analysis is primarily designed to be run by banks on their own, with minimal additional guidance. However, it can also be a useful tool for any other user, in case they would like to run a PACTA analysis on a loan book.
+PACTA for Banks is primarily designed for banks to run independently with minimal guidance. However, it can also be useful for others interested in conducting a transition assessment on a loan book.
 
-## What can the results of the PACTA for Banks analysis be used for?
+## How can the results be used?
 
-Banks can use the results of the analysis to assess the alignment of their loan books with the Paris Agreement goals, to identify sectors where they may need to take action to improve alignment, and to screen for potential climate-related transition risks. The results may additionally be used to identify opportunities for climate-aligned investments, as well as for detecting individual counterparties that may be exposed to climate-related transition risks and may therefore require dedicated focus in the risk management process.
+Banks can use the analysis results to:
 
-Users will be able to obtain both tabular outputs and plots that can be used for any of the above use cases. The tabular output further enables processing of the alignment results in other models or tools, for example as an input into financial risk models, or as a recurring input into internal monitoring systems.
+- Assess loan book alignment to climate scenarios.
+- Identify sectors that need action to improve alignment.
+- Screen for climate-related transition risks.
+- Spot opportunities for climate-aligned investments.
+- Detect counter-parties exposed to transition risks for risk management.
+
+The results include both tabular outputs and visualizations. Tabular data can be further processed in financial risk models or integrated into internal monitoring systems.
 
 ## What are the main steps of the analysis?
 
 The main steps of the analysis are as follows:
 
 1. Data preparation: Prepare the loan book, ABCD and Scenario input data.
-2. Matching process: Match the raw loan book to the ABCD data.
-3. Prioritization of loan book: Prioritize the matched loan book and analyze its coverage.
-4. Run PACTA for Banks analysis: Run the analysis and generate plots.
+2. Matching: Match the raw loan book to the ABCD data.
+3. Match prioritization: Prioritize the matched loan book and analyze its coverage.
+4. Running the analysis: Execute PACTA for Banks and generate visualizations.
 
-This cookbook will guide you through each of the steps of the analysis in detail, explain the required input data sets and software, and provide guidance on how to interpret the results.
+This cookbook provides detailed guidance on each step, including required inputs, software, and result interpretation.
 
 **NEXT CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
