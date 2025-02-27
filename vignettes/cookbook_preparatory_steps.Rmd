@@ -50,7 +50,7 @@ For details on the required structure of this dataset, refer to the [ABCD data d
 - External source
 - CSV file(s)
 
-For sectors with technology-level trajectories, the dataset provides Sectoral Market Share Percentage (SMSP) and Target Market Share Ratio (TMSR) pathways using the "market share approach". This allocation rule assumes that all companies in a sector must adjust production while maintaining constant market shares to align with the overall climate transition scenario.
+For sectors with technology-level trajectories, the dataset provides Sectoral Market Share Percentage (SMSP) and Target Market Share Ratio (TMSR) pathways using the "market share approach". This allocation rule assumes that all companies in a sector must adjust production while maintaining constant market shares within a sector to align with the overall climate transition scenario.
 
 A more detailed explanation of the market share approach can be found [here](cookbook_metrics.html).
 
