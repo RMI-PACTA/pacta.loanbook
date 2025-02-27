@@ -1064,11 +1064,11 @@ plots, e.g. <code><a href="../reference/qplot_techmix.html">qplot_techmix()</a>
 which can be saved as an image file using the
 <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> function, for example:</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">techmix_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">emission_intensity_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span></span>
-<span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"techmix_plot.png"</span><span class="op">)</span>,</span>
-<span>  plot <span class="op">=</span> <span class="va">techmix_plot</span></span>
+<span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"emission_intensity_plot.png"</span><span class="op">)</span>,</span>
+<span>  plot <span class="op">=</span> <span class="va">emission_intensity_plot</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Saving 7.29 x 4.51 in image</span></span></code></pre></div>
 <p>Further customization of the image file characteristics can be
