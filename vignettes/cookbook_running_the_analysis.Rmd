@@ -635,6 +635,8 @@ ggplot2::ggsave(
 
 Further customization of the image file characteristics can be tweaked using the arguments of `ggplot2::ggsave()`, e.g. `device` (filetype), `width`, `height`, and `dpi` (resolution). See the `ggplot2::ggsave()` documentation for more detail about the options available.
 
+---
+
 **PREVIOUS CHAPTER:** [Preparatory Steps](cookbook_preparatory_steps.html)
 
 **NEXT CHAPTER:** [Interpretation of Results](cookbook_interpretation.html)

@@ -215,5 +215,6 @@ matched %>%
   )
 ```
 
+---
 
 **PREVIOUS CHAPTER:** [Advanced Use Cases](cookbook_advanced_use_cases.html)
