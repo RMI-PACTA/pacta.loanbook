@@ -54,6 +54,89 @@ For detailed information about the Target Market Share metric and how it is calc
 
 [2 or 3 sentences about intuition]
 
+## Technoloy Mix Plot
+
+### Explanation of Output
+
+### Interpretation & Intuition
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(pacta.loanbook)
+
+market_share_targets_portfolio <-
+  target_market_share(
+    data = prioritize(match_name(loanbook_demo, abcd_demo)),
+    abcd = abcd_demo,
+    scenario = scenario_demo_2020,
+    region_isos = region_isos_demo
+  )
+
+qplot_techmix(
+  dplyr::filter(
+    market_share_targets_portfolio,
+    scenario_source == "demo_2020",
+    sector == "power",
+    region == "global",
+    metric %in% c("projected", "corporate_economy", "target_sds")
+  )
+)
+
+```
+
+## Trajectory Plot
+
+### Explanation of Output
+
+### Interpretation & Intuition
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(pacta.loanbook)
+
+market_share_targets_portfolio <-
+  target_market_share(
+    data = prioritize(match_name(loanbook_demo, abcd_demo)),
+    abcd = abcd_demo,
+    scenario = scenario_demo_2020,
+    region_isos = region_isos_demo
+  )
+
+qplot_trajectory(
+  dplyr::filter(
+    market_share_targets_portfolio,
+    sector == "power",
+    technology == "renewablescap",
+    region == "global",
+    scenario_source == "demo_2020"
+  )
+)
+```
+
+## Emission Intensity Plot
+
+### Explanation of Output
+
+### Interpretation & Intuition
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(pacta.loanbook)
+
+sda_targets <-
+  target_sda(
+    data = prioritize(match_name(loanbook_demo, abcd_demo)),
+    abcd = abcd_demo,
+    co2_intensity_scenario = co2_intensity_scenario_demo,
+    region_isos = region_isos_demo
+  )
+
+qplot_emission_intensity(
+  dplyr::filter(
+    sda_targets,
+    sector == "cement",
+    region == "global"
+  )
+)
+```
+
 ---
 
 **PREVIOUS CHAPTER:** [Running the Analysis](cookbook_running_the_analysis.html)
