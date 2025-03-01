@@ -107,6 +107,20 @@ The `{pacta.loanbook}` package provides a NACE version 2.1 classification datase
 nace_classification
 ```
 
+## NAICS (North American Industry Classification System) classification dataset
+
+This dataset serves as a translation key between the NAICS sector-classification system and sector scopes used in the 'PACTA' software.
+
+```{r, echo = FALSE}
+plot_table("naics_classification")
+```
+
+The `{pacta.loanbook}` package provides a NAICS classification dataset `naics_classification`.
+
+```{r, R.options = list(width = 400)}
+naics_classification
+```
+
 ## PSIC classification dataset
 
 This dataset serves as a translation key between the PSIC sector-classification system and sector scopes used in the 'PACTA' software.
