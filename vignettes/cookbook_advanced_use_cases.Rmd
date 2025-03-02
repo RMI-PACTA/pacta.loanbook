@@ -14,8 +14,59 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+Suppose I have a loanbook containing a loan to "Acme Co."
+
+```{r, message = FALSE, R.options = list(width = 400)}
 library(pacta.loanbook)
+
+loanbook <- 
+  data.frame(
+    id_loan = "L1",
+    id_direct_loantaker = "C123",
+    name_direct_loantaker = "Acme Co.",
+    id_ultimate_parent = "C45",
+    name_ultimate_parent = "Acme Holdings",
+    loan_size_outstanding = 1e7,
+    loan_size_outstanding_currency = "USD",
+    loan_size_credit_limit = 1e8,
+    loan_size_credit_limit_currency = "USD",
+    sector_classification_system = "NACE",
+    sector_classification_direct_loantaker = "D35.12"
+  )
+
+loanbook
+```
+
+When I try to match it, there are no results because the ABCD data does not have any data associated with a "Acme Co."
+
+```{r, message = FALSE, R.options = list(width = 400)}
+match_name(loanbook = loanbook, abcd = abcd_demo)
+```
+
+If I had data for Acme Co. from a different source, I could supplement my ABCD data with this information, and with the combined ABCD, I get a matched loan.
+
+```{r, message = FALSE, R.options = list(width = 400)}
+abcd_addition <-
+  data.frame(
+    company_id = rep("175", 5),
+    name_company = rep("Acme Co.", 5),
+    lei = rep("18500033XH6RG332SX57", 5),
+    sector = rep("power", 5),
+    technology = rep("hydrocap", 5),
+    production_unit = rep("MW", 5),
+    year = 2020L:2024L,
+    production = c(12000, 12000, 12375, 13000, 13000),
+    emission_factor = rep(NA, 5),
+    plant_location = rep("MY", 5),
+    is_ultimate_owner = rep(TRUE, 5),
+    emission_factor_unit = rep("tonnes of CO2 per per hour per MW", 5)
+  )
+
+abcd_addition
+
+abcd_combined <- rbind(abcd_demo, abcd_addition)
+
+match_name(loanbook = loanbook, abcd = abcd_combined)
 ```
 
 ---
