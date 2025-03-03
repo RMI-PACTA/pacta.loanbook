@@ -544,25 +544,24 @@ receive the PACTA sector value that it maps to in the
 </h4>
 <p><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> allows you to match loans from your
 loanbook to the companies in an asset-based company dataset. However,
-matching every loan is unlikely – some loan-taking companies may be
-missing from the asset-based company dataset, or they may not operate in
-the sectors PACTA focuses on (power, cement, oil and gas, aviation,
-coal, automotive, steel, and hdv). Thus, you may want to measure how
-much of the loanbook matched some asset. This article shows two ways to
-calculate such matching coverage:</p>
+not all loans will have a match – some companies may be missing from the
+ABCD dataset, or they may operate outisde the PACTA focus sectors
+(power, cement, oil and gas, aviation, coal, automotive, steel, and
+hdv).</p>
+<p>To assess how much of your loan book is successfully matched, you can
+circulate matching coverage in two ways:</p>
 <ol style="list-style-type: decimal">
-<li><p>Calculate the portion of your <code>loanbook</code> covered, by
-dollar value (i.e. using one of the <code>loan_size_*</code>
-columns).</p></li>
-<li><p>Count the number of companies matched.</p></li>
+<li><p>By dollar value: Measure the portion of your loan book covered,
+using one of the <code>loan_size_*</code> columns.</p></li>
+<li><p>By company count: Count the number of companies matched.</p></li>
 </ol>
-<p>First we will need to load the additional useful package
-<a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>:</p>
+<p>To visualize matching coverage, first load the <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>
+package:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <p>We will use the example datasets created in the previous section. To
-demonstrate our point, we create a <code>loanbook</code> dataset with
-two mismatching loans:</p>
+illustrate the point, we create a <code>loanbook</code> dataset with two
+mismatched loans:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
@@ -581,32 +580,38 @@ two mismatching loans:</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> https://github.com/RMI-PACTA/r2dii.data/issues</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Or contact the PACTA team here:</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> pacta4banks@rmi.org</span></span></code></pre></div>
-<p>Note that this <code>matched</code> dataset will contain
-<em>only</em> loans that were matched successfully. To determine
-coverage, we need to go back to the original <code>loanbook</code>
-dataset. We must determine the PACTA sectors of each loan, as dictated
-by the <code>sector_classification_direct_loantaker</code> column.</p>
-<p>For this, we join the <code>loanbook</code> with the
-<code>sector_classifications</code> dataset, which lists all sector
-classification code standards used by ‘PACTA’. Unfortunately we need to
-work around two caveats (you may ignore them because they are
-conceptually uninteresting):</p>
+<p>The <code>matched</code> dataset contains <em>only</em> successfully
+matched loans. To determine coverage, we need to refer back to the
+original loanbook dataset and classify each loan according to the PACTA
+sectors using the <code>sector_classification_direct_loantaker</code>
+column.</p>
+<p>To achieve this, we merge loanbook with the
+<code>sector_classifications</code> dataset, which includes all sector
+classification standards used by PACTA. However, there are two technical
+caveats to consider:</p>
+<ol style="list-style-type: decimal">
+<li>Column name differences: The datasets use different column names for
+sector classifications. We use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> with the
+<code>by</code> argument to merge:</li>
+</ol>
 <ul>
-<li><p>In the two datasets, the columns we want to merge by have
-different names. We use the argument <code>by</code> of
-<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> to merge the columns
+<li>
 <code>sector_classification_system</code> and
 <code>sector_classification_direct_loantaker</code> (from
-<code>loanbook</code>) with the columns <code>code_system</code> and
-<code>code</code> (from <code>sector_classifications</code>),
-respectively.</p></li>
-<li><p>In the two datasets, the sector classification codes are
-represented with different data-types. We modify the column
-<code>sector_classification_direct_loantaker</code> before using
-<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> so it has the same type as the
-corresponding column <code>code</code> (otherwise
-<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> throws an error), and again after
-<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> to restore its original type.</p></li>
+<code>loanbook</code>)</li>
+<li>
+<code>code_system</code> and <code>code</code> (from
+<code>sector_classifications</code>)</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Data type mismatch: The sector classification codes have different
+data types in the two datasets. To prevent errors in
+<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code>:</li>
+</ol>
+<ul>
+<li>We convert <code>sector_classification_direct_loantaker</code> to
+match the type of <code>code</code> before merging.</li>
+<li>After merging, we restore its original type.</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">merge_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -617,8 +622,8 @@ corresponding column <code>code</code> (otherwise
 <span><span class="va">loanbook_with_sectors</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sector_classifications</span>, by <span class="op">=</span> <span class="va">merge_by</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sector_classification_direct_loantaker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">sector_classification_direct_loantaker</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>We can join these two datasets together, to generate our
-<code>coverage</code> dataset:</p>
+<p>To generate the <code>coverage</code> dataset, we merge these two
+datasets together:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">loanbook_with_sectors</span>, <span class="va">matched</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
@@ -641,13 +646,15 @@ corresponding column <code>code</code> (otherwise
 <span><span class="co">#&gt; sector_classification_direct_loantaker, lei_direct_loantaker,</span></span>
 <span><span class="co">#&gt; isin_direct_loantaker, sector, borderline)`</span></span></code></pre></div>
 <div class="section level5">
-<h5 id="calculate-the-portion-of-your-loanbook-covered-by-dollar-value">1. Calculate the portion of your loanbook covered by dollar
-value<a class="anchor" aria-label="anchor" href="#calculate-the-portion-of-your-loanbook-covered-by-dollar-value"></a>
+<h5 id="calculate-loanbook-coverage-by-dollar-value">1. Calculate loanbook coverage by dollar value<a class="anchor" aria-label="anchor" href="#calculate-loanbook-coverage-by-dollar-value"></a>
 </h5>
-<p>From the <code>coverage</code> dataset, we can calculate the total
-loanbook coverage by dollar value. Let’s create two helper functions,
-one to calculate dollar-value and another one to plot coverage in
-general.</p>
+<p>Using the <code>coverage</code> dataset, we can measure total loan
+book coverage based on dollar value. To facilitate this, we define two
+helper functions:</p>
+<ol style="list-style-type: decimal">
+<li>A function to calculate coverage by dollar value.</li>
+<li>A plotting function to visualize coverage.</li>
+</ol>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dollar_value</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -673,10 +680,6 @@ general.</p>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">matched</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
-</div>
-<div class="section level5">
-<h5 id="break-down-by-sector">Break down by sector<a class="anchor" aria-label="anchor" href="#break-down-by-sector"></a>
-</h5>
 <p>You may break-down the plot by sector:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -698,11 +701,11 @@ general.</p>
 <p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
 </div>
 <div class="section level5">
-<h5 id="count-the-number-of-companies">2. Count the number of companies<a class="anchor" aria-label="anchor" href="#count-the-number-of-companies"></a>
+<h5 id="count-the-number-of-companies-matched">2. Count the number of companies matched<a class="anchor" aria-label="anchor" href="#count-the-number-of-companies-matched"></a>
 </h5>
-<p>You might also be interested in knowing how many companies in your
-loanbook were matched. It probably makes most sense to do this at the
-<code>direct_loantaker</code> level:</p>
+<p>Another useful metric is the number of companies in your loan book
+that were successfully matched. The most relevant level for this
+analysis is likely the <code>direct_loantaker</code> level.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">companies_matched</span> <span class="op">&lt;-</span> <span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>no_companies <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">name_direct_loantaker</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sector</span>, <span class="va">matched</span><span class="op">)</span><span class="op">)</span></span>
@@ -715,68 +718,72 @@ loanbook were matched. It probably makes most sense to do this at the
 <div class="section level4">
 <h4 id="optional-handling-misclassified-loans">Optional: Handling misclassified loans<a class="anchor" aria-label="anchor" href="#optional-handling-misclassified-loans"></a>
 </h4>
-<p>A loan is considered misclassified, if it is identified as in-scope
-of a PACTA sector based on the sector classification in the input loan
-book, but if it turns out that this classification is incorrect based on
-the counterparty’s activities. For example, if a counterparty is
-classified as a fully in-scope power company, but in reality it is a
-power distribution company or even active in another sector altogether,
-such as upstream gas production, the counterparty is misclassified.
-Misclassification is a problem, because it leads to exaggeratedly low
-match success rates, that cannot be improved by iterating the matching
-process. You can search as long as you want, but a company that in
-reality does not operate any power plants will not be found in the ABCD
-regardless of how the settings of the matching algorithm are tweaked.
-The match success rate can only be a useful metric if the denominator,
-that is the classification in the loan book, is solid. This is also
-important to understand which loans are truly not matched. This category
-should only be companies that actually are active in a given in-scope
-sector, but were not found in the ABCD.</p>
-<p>Identifying misclassified loans is usually a manual process, where
-counterparties that have not been matched are researched to determine if
-they should be in scope or not. Depending on the size of the loan book,
-this can be a time-consuming process. It is recommended to start with
-the unmatched counterparties with the largest loans, as these have the
-largest impact on the match success rate. You may then have to decide
-for yourself, if you want to research all unmatched loans or set a
-cutoff point, e.g. based on the size of the loan.</p>
+<p>A misclassified loan occurs when a counterparty is incorrectly
+identified as belonging to a PACTA sector based on the sector
+classification in the loan book.</p>
+<p>Why does misclassification matter? - It artificially lowers match
+success rates by expecting matches that don’t exist in the ABCD dataset.
+- Iterating the matching process won’t help—if a company doesn’t operate
+in an in-scope sector, no adjustments will create a valid match. - A
+reliable match success rate requires an accurate denominator, meaning
+only loans truly within an in-scope sector should be included.</p>
+<p>Misclassification is typically identified manually by reviewing
+unmatched counterparties to determine if they should be in scope. Since
+this process can be time-consuming, it’s best to prioritize unmatched
+loans with the largest amounts, as they have the greatest impact on the
+match success rate.</p>
+<p>Since misclassified loans cannot be matched, leaving them in the
+dataset skews results. While correction isn’t mandatory, adjusting large
+misclassified loans is strongly recommended for more accurate
+analysis.</p>
+<div class="section level5">
+<h5 id="options-for-handling-misclassified-loans">Options for Handling Misclassified Loans<a class="anchor" aria-label="anchor" href="#options-for-handling-misclassified-loans"></a>
+</h5>
+<p>Once misclassified loans have been identified, there are two
+options:</p>
+<ol style="list-style-type: decimal">
+<li>Correct the classification in the loanbook:</li>
+</ol>
+<ul>
+<li>Update the raw loanbook to reflect the correct sector.</li>
+<li>Re-run the matching process to ensure the loan is matched
+appropriately</li>
+<li>Keep documentation of changes for replicability</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Adjust match success rate calculation:</li>
+</ol>
+<ul>
+<li>If modifying the raw loanbook isn’t possible, exclude misclassified
+loans from the success rate calculation.</li>
+<li>Create a <code>loans_to_remove.csv</code> file containing a single
+column, <code>id_loan</code>, listing the misclassified loans.</li>
+<li>Remove these loans from the match success calculation to avoid
+misleading results.</li>
+</ul>
+<p>The first option is generally preferred, as it ensures loans are
+assigned to the correct sector.</p>
 <p>Once the list of misclassified loans is identified, there are two
 broad options to appropriately these cases.</p>
-<ol style="list-style-type: decimal">
-<li>Correct the classification in the raw loan book and re-run the
-matching process. If the loan was clearly misclassified, this may be the
-most appropriate way to handle the issue. It may be a good idea to keep
-notes on any such changes made in the input data though, to ensure the
-result is fully replicable. The upside of this approach is that the loan
-will now either be matched correctly, as it will be assigned the sector
-that the company should have and therefore find an entry in the ABCD
-data set to match against. Or, if there is still no match to be found in
-the ABCD, the loan will correctly be missing in the appropriate sector
-and therefore indicate a lower match success rate where it should.
-Lastly, if it should have been <code>"not in scope"</code>, it will not
-inflate the denominator of the match success rate anymore.</li>
-<li>If a manual re-classification of the raw loan book is not possible
-or desired, the calculation of the match success rate can be corrected
-by creating a file <code>loans_to_remove.csv</code>, which should
-include the column <code>id_loan</code> to indicate the precise
-misclassified loan that was identified. This loan then needs to be
-explicitly removed from the match success calculation, as shown
-below.</li>
-</ol>
-<p>Let’s assume the the loan with id L255 is falsely classified as a
-steel company. Research shows this company is not a primary steel
-producer, but it makes steel-based products for end use. Hence it is
-active downstream in the value chain and cannot be matched to the ABCD.
-If we cannot correct the input sector classification, we instead create
-a csv file with the id of the misclassified loan. In practice, this can
-be done programmatically or manually.</p>
+</div>
+<div class="section level5">
+<h5 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h5>
+<p>Suppose a loan with ID L255 is falsely classified as a steel company
+but actually produces steel-based products, making it part of the
+downstream value chain rather than primary steel production. Since it
+cannot be matched to ABCD, but the sector classification cannot be
+changed, we handle it by creating a CSV file with its ID.</p>
+<p>This correction process can be done programmatically or manually,
+ensuring more accurate match success rate reporting.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>id_loan <span class="op">=</span> <span class="st">"L255"</span><span class="op">)</span>,</span>
 <span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"loans_to_remove.csv"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The loans_to_remove.csv file should have just one column, id_loan,
-and therefore be structured as follows:</p>
+<p>The <code>loans_to_remove.csv</code> file should have just one
+column, <code>id_loan</code>, and therefore be structured as
+follows:</p>
 <ul>
 <li>
 <code>id_loan</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
@@ -824,16 +831,7 @@ steel sector only, to see the clear impact.</p>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-29-2.png" width="700"></p>
-<p>The reason why it is a good idea to either correct misclassified
-loans or disregard them in the calculation of the match success rate is
-that a misclassified loan cannot possibly be matched in a given sector.
-Therefore, no amount of work would be sufficient to improve the sector
-match success rate, because it is calculated against an incorrect
-baseline. Technically, the user is not forced to correct
-misclassifications, and there may be a limit to how much time should be
-spent on this, but it is recommended to at least correct large
-misclassified loans.</p>
-<p>…</p>
+</div>
 </div>
 </div>
 <div class="section level3">
