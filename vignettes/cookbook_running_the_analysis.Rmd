@@ -505,11 +505,11 @@ coverage_corrected %>%
 
 ## Calculate PACTA alignment metrics
 
-You can calculate scenario targets using two different approaches: Market Share Approach, or Sectoral Decarbonization Approach.
+PACTA alignment metrics can be calculated using two approaches: the Market Share Approach and the Sectoral Decarbonization Approach.
 
 ### Market Share Approach
 
-The [Market Share Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html) is used to calculate scenario targets for the `production` of a technology in a sector. For example, we can use this approach to set targets for the production of electric vehicles in the automotive sector. This approach is recommended for sectors where a granular technology scenario roadmap exists.
+The [Market Share Approach](cookbook_metrics.html#market-share-approach) sets scenario targets based on the production of a technology within a sector. For example, it can define targets for electric vehicle production in the automotive sector. This approach is recommended for sectors with detailed technology roadmaps.
 
 Targets can be set at the portfolio level:
 
@@ -529,7 +529,7 @@ market_share_targets_portfolio <-
 market_share_targets_portfolio
 ```
 
-Or at the company level:
+or at the company level:
 
 ```{r market-share-targets-company, R.options = list(width = 400)}
 market_share_targets_company <-
@@ -556,7 +556,8 @@ Remember to replace `tempdir()` with the path to the directory that you wish to 
 
 ### Sectoral Decarbonization Approach
 
-The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html) is used to calculate scenario targets for the `emission_factor` of a sector. For example, you can use this approach to set targets for the average emission factor of the cement sector. This approach is recommended for sectors lacking technology roadmaps.
+The [Sectoral Decarbonization Approach](cookbook_metrics.html#sectoral-decarbonization-approach) sets scenario targets based on a sector's emission factor. For example, it can define targets for the average emission factor in the cement sector. This approach is recommended for sectors without detailed technology roadmaps.
+
 
 ```{r sda-targets, R.options = list(width = 400)}
 # Use this dataset to practice but eventually you should use your own data.
@@ -574,7 +575,7 @@ sda_targets <-
 sda_targets
 ```
 
-Or at the company level:
+or at the company level:
 
 ```{r sda-targets-company, R.options = list(width = 400)}
 sda_targets_company <-
@@ -600,9 +601,7 @@ Remember to replace `tempdir()` with the path to the directory that you wish to 
 
 ## Visualize PACTA alignment metrics
 
-There are a large variety of possible visualizations stemming from the outputs 
-of `target_market_share()` and `target_sda()`. Below, we highlight a couple of 
-common plots that can easily be created using the `{pacta.loanbook}` package.
+A variety of visualizations can be generated from the outputs of `target_market_share()` and `target_sda()`. Below, we highlight a few common plots that can be easily created using the `{pacta.loanbook}` package.
 
 ### Market Share: Sector-level technology mix
 
@@ -627,7 +626,7 @@ qplot_techmix(data)
 ### Market Share: Technology-level volume trajectory
 
 You can also plot the technology-specific volume trend. All starting values are
-normalized to 1, to emphasize that we are comparing the rates of buildout and/or
+normalized to 1, to emphasize that we are comparing the rates of build-out and/or
 retirement. 
 
 ```{r trajetory-portfolio}
