@@ -265,21 +265,21 @@ sector_in_scope <- glue::glue_collapse(
 )
 ```
 
-`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in an asset-based company dataset. However, matching every loan is unlikely -- some loan-taking companies may be missing from the asset-based company dataset, or they may not operate in the sectors PACTA focuses on (`r sector_in_scope`). Thus, you may want to measure how much of the loanbook matched some asset. This article shows two ways to calculate such matching coverage:
+`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in an asset-based company dataset. However, not all loans will have a match -- some companies may be missing from the ABCD dataset, or they may operate outisde the PACTA focus sectors (`r sector_in_scope`).
 
-(1) Calculate the portion of your `loanbook` covered, by dollar value (i.e. using
-one of the `loan_size_*` columns).
+To assess how much of your loan book is successfully matched, you can circulate matching coverage in two ways:
 
-(2) Count the number of companies matched.
+(1) By dollar value: Measure the portion of your loan book covered, using one of the `loan_size_*` columns. 
 
-First we will need to load the additional useful package `{ggplot2}`:
+(2) By company count: Count the number of companies matched. 
+
+To visualize matching coverage, first load the `{ggplot2}` package:
 
 ```{r}
 library(ggplot2)
 ```
 
-We will use the example datasets created in the previous section. To demonstrate our point, we
-create a `loanbook` dataset with two mismatching loans:
+We will use the example datasets created in the previous section. To illustrate the point, we create a `loanbook` dataset with two mismatched loans:
 
 ```{r}
 loanbook <- loanbook %>% 
@@ -299,13 +299,18 @@ matched <- loanbook %>%
     prioritize()
 ```
 
-Note that this `matched` dataset will contain _only_ loans that were matched successfully. To determine coverage, we need to go back to the original `loanbook` dataset. We must determine the PACTA sectors of each loan, as dictated by the `sector_classification_direct_loantaker` column.
+The `matched` dataset contains _only_ successfully matched loans. To determine coverage, we need to refer back to the original loanbook dataset and classify each loan according to the PACTA sectors using the `sector_classification_direct_loantaker` column.
 
-For this, we join the `loanbook` with the `sector_classifications` dataset, which lists all sector classification code standards used by 'PACTA'. Unfortunately we need to work around two caveats (you may ignore them because they are conceptually uninteresting):
+To achieve this, we merge loanbook with the `sector_classifications` dataset, which includes all sector classification standards used by PACTA. However, there are two technical caveats to consider:
 
-* In the two datasets, the columns we want to merge by have different names. We use the argument `by` of `dplyr::left_join()` to merge the columns `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`) with the columns `code_system` and `code` (from `sector_classifications`), respectively. 
+(1) Column name differences: The datasets use different column names for sector classifications. We use `dplyr::left_join()` with the `by` argument to merge:
 
-* In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before using `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type.
+- `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`)
+- `code_system` and `code` (from `sector_classifications`)
+
+(2) Data type mismatch: The sector classification codes have different data types in the two datasets. To prevent errors in `dplyr::left_join()`:
+- We convert `sector_classification_direct_loantaker` to match the type of `code` before merging.
+- After merging, we restore its original type.
 
 ```{r}
 merge_by <- c(
@@ -318,7 +323,7 @@ loanbook_with_sectors <- loanbook %>%
   mutate(sector_classification_direct_loantaker = as.character(sector_classification_direct_loantaker))
 ```
 
-We can join these two datasets together, to generate our `coverage` dataset:
+To generate the `coverage` dataset, we merge these two datasets together:
 
 ``` {r}
 coverage <- left_join(loanbook_with_sectors, matched) %>% 
@@ -337,11 +342,12 @@ coverage <- left_join(loanbook_with_sectors, matched) %>%
   )
 ```
 
-#### 1. Calculate the portion of your loanbook covered by dollar value
+#### 1. Calculate loanbook coverage by dollar value
 
-From the `coverage` dataset, we can calculate the total loanbook coverage by
-dollar value. Let's create two helper functions, one to calculate dollar-value
-and another one to plot coverage in general.
+Using the `coverage` dataset, we can measure total loan book coverage based on dollar value. To facilitate this, we define two helper functions:
+
+(1) A function to calculate coverage by dollar value.
+(2) A plotting function to visualize coverage.
 
 ```{r}
 dollar_value <- function(data, ...) {
@@ -374,8 +380,6 @@ coverage %>%
   plot_coverage(matched, loan_size_outstanding)
 ```
 
-#### Break down by sector
-
 You may break-down the plot by sector: 
 
 ```{r}
@@ -399,11 +403,9 @@ coverage %>%
   plot_coverage(sector, loan_size_outstanding)
 ```
 
-#### 2. Count the number of companies
+#### 2. Count the number of companies matched
 
-You might also be interested in knowing how many companies in your loanbook were
-matched. It probably makes most sense to do this at the `direct_loantaker`
-level:
+Another useful metric is the number of companies in your loan book that were successfully matched. The most relevant level for this analysis is likely the `direct_loantaker` level.
 
 ``` {r}
 companies_matched <- coverage %>% 
@@ -415,16 +417,40 @@ companies_matched %>%
 
 ### Optional: Handling misclassified loans
 
-A loan is considered misclassified, if it is identified as in-scope of a PACTA sector based on the sector classification in the input loan book, but if it turns out that this classification is incorrect based on the counterparty's activities. For example, if a counterparty is classified as a fully in-scope power company, but in reality it is a power distribution company or even active in another sector altogether, such as upstream gas production, the counterparty is misclassified. Misclassification is a problem, because it leads to exaggeratedly low match success rates, that cannot be improved by iterating the matching process. You can search as long as you want, but a company that in reality does not operate any power plants will not be found in the ABCD regardless of how the settings of the matching algorithm are tweaked. The match success rate can only be a useful metric if the denominator, that is the classification in the loan book, is solid. This is also important to understand which loans are truly not matched. This category should only be companies that actually are active in a given in-scope sector, but were not found in the ABCD.
+A misclassified loan occurs when a counterparty is incorrectly identified as belonging to a PACTA sector based on the sector classification in the loan book.
 
-Identifying misclassified loans is usually a manual process, where counterparties that have not been matched are researched to determine if they should be in scope or not. Depending on the size of the loan book, this can be a time-consuming process. It is recommended to start with the unmatched counterparties with the largest loans, as these have the largest impact on the match success rate. You may then have to decide for yourself, if you want to research all unmatched loans or set a cutoff point, e.g. based on the size of the loan.
+Why does misclassification matter?
+- It artificially lowers match success rates by expecting matches that don’t exist in the ABCD dataset.
+- Iterating the matching process won’t help—if a company doesn’t operate in an in-scope sector, no adjustments will create a valid match.
+- A reliable match success rate requires an accurate denominator, meaning only loans truly within an in-scope sector should be included.
+
+Misclassification is typically identified manually by reviewing unmatched counterparties to determine if they should be in scope. Since this process can be time-consuming, it’s best to prioritize unmatched loans with the largest amounts, as they have the greatest impact on the match success rate.
+
+Since misclassified loans cannot be matched, leaving them in the dataset skews results. While correction isn’t mandatory, adjusting large misclassified loans is strongly recommended for more accurate analysis.
+
+#### Options for Handling Misclassified Loans
+
+Once misclassified loans have been identified, there are two options:
+
+(1) Correct the classification in the loanbook:
+- Update the raw loanbook to reflect the correct sector.
+- Re-run the matching process to ensure the loan is matched appropriately
+- Keep documentation of changes for replicability
+
+(2) Adjust match success rate calculation:
+- If modifying the raw loanbook isn't possible, exclude misclassified loans from the success rate calculation.
+- Create a `loans_to_remove.csv` file containing a single column, `id_loan`, listing the misclassified loans. 
+- Remove these loans from the match success calculation to avoid misleading results. 
+
+The first option is generally preferred, as it ensures loans are assigned to the correct sector.
 
 Once the list of misclassified loans is identified, there are two broad options to appropriately these cases. 
 
-1. Correct the classification in the raw loan book and re-run the matching process. If the loan was clearly misclassified, this may be the most appropriate way to handle the issue. It may be a good idea to keep notes on any such changes made in the input data though, to ensure the result is fully replicable. The upside of this approach is that the loan will now either be matched correctly, as it will be assigned the sector that the company should have and therefore find an entry in the ABCD data set to match against. Or, if there is still no match to be found in the ABCD, the loan will correctly be missing in the appropriate sector and therefore indicate a lower match success rate where it should. Lastly, if it should have been `"not in scope"`, it will not inflate the denominator of the match success rate anymore.
-2. If a manual re-classification of the raw loan book is not possible or desired, the calculation of the match success rate can be corrected by creating a file `loans_to_remove.csv`, which should include the column `id_loan` to indicate the precise misclassified loan that was identified. This loan then needs to be explicitly removed from the match success calculation, as shown below.
+#### Example
 
-Let's assume the the loan with id L255 is falsely classified as a steel company. Research shows this company is not a primary steel producer, but it makes steel-based products for end use. Hence it is active downstream in the value chain and cannot be matched to the ABCD. If we cannot correct the input sector classification, we instead create a csv file with the id of the misclassified loan. In practice, this can be done programmatically or manually.
+Suppose a loan with ID L255 is falsely classified as a steel company but actually produces steel-based products, making it part of the downstream value chain rather than primary steel production. Since it cannot be matched to ABCD, but the sector classification cannot be changed, we handle it by creating a CSV file with its ID.
+
+This correction process can be done programmatically or manually, ensuring more accurate match success rate reporting.
 
 ```{r}
 readr::write_csv(
@@ -434,7 +460,7 @@ readr::write_csv(
 
 ```
 
-The loans_to_remove.csv file should have just one column, id_loan, and therefore be structured as follows:
+The `loans_to_remove.csv` file should have just one column, `id_loan`, and therefore be structured as follows:
 
 ```{r, echo = FALSE, results = 'asis'}
 pacta.loanbook:::list_col_names_and_types(tibble::tibble(id_loan = "x"))
@@ -476,11 +502,6 @@ coverage_corrected %>%
   dollar_value(sector) %>% 
   plot_coverage(sector, loan_size_outstanding)
 ```
-
-The reason why it is a good idea to either correct misclassified loans or disregard them in the calculation of the match success rate is that a misclassified loan cannot possibly be matched in a given sector. Therefore, no amount of work would be sufficient to improve the sector match success rate, because it is calculated against an incorrect baseline. Technically, the user is not forced to correct misclassifications, and there may be a limit to how much time should be spent on this, but it is recommended to at least correct large misclassified loans.
-
-...
-
 
 ## Calculate PACTA alignment metrics
 
