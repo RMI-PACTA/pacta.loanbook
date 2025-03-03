@@ -837,17 +837,16 @@ steel sector only, to see the clear impact.</p>
 <div class="section level3">
 <h3 id="calculate-pacta-alignment-metrics">Calculate PACTA alignment metrics<a class="anchor" aria-label="anchor" href="#calculate-pacta-alignment-metrics"></a>
 </h3>
-<p>You can calculate scenario targets using two different approaches:
-Market Share Approach, or Sectoral Decarbonization Approach.</p>
+<p>PACTA alignment metrics can be calculated using two approaches: the
+Market Share Approach and the Sectoral Decarbonization Approach.</p>
 <div class="section level4">
 <h4 id="market-share-approach">Market Share Approach<a class="anchor" aria-label="anchor" href="#market-share-approach"></a>
 </h4>
-<p>The <a href="https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html" class="external-link">Market
-Share Approach</a> is used to calculate scenario targets for the
-<code>production</code> of a technology in a sector. For example, we can
-use this approach to set targets for the production of electric vehicles
-in the automotive sector. This approach is recommended for sectors where
-a granular technology scenario roadmap exists.</p>
+<p>The <a href="cookbook_metrics.html#market-share-approach">Market
+Share Approach</a> sets scenario targets based on the production of a
+technology within a sector. For example, it can define targets for
+electric vehicle production in the automotive sector. This approach is
+recommended for sectors with detailed technology roadmaps.</p>
 <p>Targets can be set at the portfolio level:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use these datasets to practice but eventually you should use your own data.</span></span>
@@ -877,7 +876,7 @@ a granular technology scenario roadmap exists.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       projected     <span style="text-decoration: underline;">149</span>310.            0.165 sector                                  0.001<span style="text-decoration: underline;">48</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       target_cps    <span style="text-decoration: underline;">148</span>155.            0.164 sector                                  0.001<span style="text-decoration: underline;">01</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,066 more rows</span></span></span></code></pre></div>
-<p>Or at the company level:</p>
+<p>or at the company level:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">market_share_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
@@ -915,12 +914,11 @@ directory that you wish to save your files in.</p>
 <div class="section level4">
 <h4 id="sectoral-decarbonization-approach">Sectoral Decarbonization Approach<a class="anchor" aria-label="anchor" href="#sectoral-decarbonization-approach"></a>
 </h4>
-<p>The <a href="https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html" class="external-link">Sectoral
-Decarbonization Approach</a> is used to calculate scenario targets for
-the <code>emission_factor</code> of a sector. For example, you can use
-this approach to set targets for the average emission factor of the
-cement sector. This approach is recommended for sectors lacking
-technology roadmaps.</p>
+<p>The <a href="cookbook_metrics.html#sectoral-decarbonization-approach">Sectoral
+Decarbonization Approach</a> sets scenario targets based on a sector’s
+emission factor. For example, it can define targets for the average
+emission factor in the cement sector. This approach is recommended for
+sectors without detailed technology roadmaps.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use this dataset to practice but eventually you should use your own data.</span></span>
 <span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
@@ -950,7 +948,7 @@ technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> cement  <span style="text-decoration: underline;">2</span>022 global             demo_2020       projected                             0.666 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cement  <span style="text-decoration: underline;">2</span>023 advanced economies demo_2020       projected                             0.023<span style="text-decoration: underline;">5</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 100 more rows</span></span></span></code></pre></div>
-<p>Or at the company level:</p>
+<p>or at the company level:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sda_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
@@ -989,11 +987,10 @@ directory that you wish to save your files in.</p>
 <div class="section level3">
 <h3 id="visualize-pacta-alignment-metrics">Visualize PACTA alignment metrics<a class="anchor" aria-label="anchor" href="#visualize-pacta-alignment-metrics"></a>
 </h3>
-<p>There are a large variety of possible visualizations stemming from
-the outputs of <code><a href="../reference/target_market_share.html">target_market_share()</a></code> and
-<code><a href="../reference/target_sda.html">target_sda()</a></code>. Below, we highlight a couple of common plots
-that can easily be created using the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a>
-package.</p>
+<p>A variety of visualizations can be generated from the outputs of
+<code><a href="../reference/target_market_share.html">target_market_share()</a></code> and <code><a href="../reference/target_sda.html">target_sda()</a></code>. Below,
+we highlight a few common plots that can be easily created using the
+<a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> package.</p>
 <div class="section level4">
 <h4 id="market-share-sector-level-technology-mix">Market Share: Sector-level technology mix<a class="anchor" aria-label="anchor" href="#market-share-sector-level-technology-mix"></a>
 </h4>
@@ -1024,7 +1021,7 @@ targets.</p>
 </h4>
 <p>You can also plot the technology-specific volume trend. All starting
 values are normalized to 1, to emphasize that we are comparing the rates
-of buildout and/or retirement.</p>
+of build-out and/or retirement.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">market_share_targets_portfolio</span>,</span>
