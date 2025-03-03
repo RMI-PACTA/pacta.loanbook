@@ -1,13 +1,3 @@
-# if no packages, shows nothing
-
-    Code
-      cat(pacta_loanbook_attach_message(character()))
-
-# message lists all core pacta.loanbook packages
-
-    Code
-      cat(pacta_loanbook_attach_message(core))
-
 # highlights dev versions in red
 
     Code
