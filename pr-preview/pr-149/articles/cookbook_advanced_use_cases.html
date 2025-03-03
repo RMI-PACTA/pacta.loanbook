@@ -140,33 +140,115 @@ does not have any data associated with a “Acme Co.”</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 20</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 variables: id_loan &lt;chr&gt;, id_direct_loantaker &lt;chr&gt;, name_direct_loantaker &lt;chr&gt;, id_ultimate_parent &lt;chr&gt;, name_ultimate_parent &lt;chr&gt;, loan_size_outstanding &lt;dbl&gt;, loan_size_outstanding_currency &lt;chr&gt;, loan_size_credit_limit &lt;dbl&gt;, loan_size_credit_limit_currency &lt;chr&gt;, sector_classification_system &lt;chr&gt;, sector_classification_direct_loantaker &lt;chr&gt;, id_2dii &lt;lgl&gt;, level &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   sector &lt;lgl&gt;, sector_abcd &lt;lgl&gt;, name &lt;lgl&gt;, name_abcd &lt;lgl&gt;, score &lt;lgl&gt;, source &lt;lgl&gt;, borderline &lt;lgl&gt;</span></span></span></code></pre></div>
-<p>If I had data for Acme Co. from a different source, I could
-supplement my ABCD data with this information, and with the combined
-ABCD, I get a matched loan.</p>
+<p>Say I had data for Acme Co. from a different source in a
+<code>my_custom_abcd.xlsx</code> file, e.g.</p>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="7%">
+<col width="12%">
+<col width="4%">
+<col width="6%">
+<col width="9%">
+<col width="3%">
+<col width="6%">
+<col width="9%">
+<col width="9%">
+<col width="10%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th>company_id</th>
+<th>name_company</th>
+<th>lei</th>
+<th>sector</th>
+<th>technology</th>
+<th>production_unit</th>
+<th>year</th>
+<th>production</th>
+<th>emission_factor</th>
+<th>plant_location</th>
+<th>is_ultimate_owner</th>
+<th>emission_factor_unit</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>175</td>
+<td>Acme Co.</td>
+<td>18500033XH6RG332SX57</td>
+<td>power</td>
+<td>hydrocap</td>
+<td>MW</td>
+<td>2020</td>
+<td>12000</td>
+<td></td>
+<td>MY</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>175</td>
+<td>Acme Co.</td>
+<td>18500033XH6RG332SX57</td>
+<td>power</td>
+<td>hydrocap</td>
+<td>MW</td>
+<td>2021</td>
+<td>12000</td>
+<td></td>
+<td>MY</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>175</td>
+<td>Acme Co.</td>
+<td>18500033XH6RG332SX57</td>
+<td>power</td>
+<td>hydrocap</td>
+<td>MW</td>
+<td>2022</td>
+<td>12375</td>
+<td></td>
+<td>MY</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>175</td>
+<td>Acme Co.</td>
+<td>18500033XH6RG332SX57</td>
+<td>power</td>
+<td>hydrocap</td>
+<td>MW</td>
+<td>2023</td>
+<td>13000</td>
+<td></td>
+<td>MY</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>175</td>
+<td>Acme Co.</td>
+<td>18500033XH6RG332SX57</td>
+<td>power</td>
+<td>hydrocap</td>
+<td>MW</td>
+<td>2024</td>
+<td>13000</td>
+<td></td>
+<td>MY</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>I could read in this XLSX file, merge the imported data with my
+existing ABCD data, and with the combined ABCD, I get a matched
+loan.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">abcd_addition</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>    company_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"175"</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    name_company <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Acme Co."</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    lei <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"18500033XH6RG332SX57"</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    sector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"power"</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    technology <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"hydrocap"</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    production_unit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"MW"</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    year <span class="op">=</span> <span class="fl">2020L</span><span class="op">:</span><span class="fl">2024L</span>,</span>
-<span>    production <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12000</span>, <span class="fl">12000</span>, <span class="fl">12375</span>, <span class="fl">13000</span>, <span class="fl">13000</span><span class="op">)</span>,</span>
-<span>    emission_factor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    plant_location <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"MY"</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    is_ultimate_owner <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    emission_factor_unit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"tonnes of CO2 per per hour per MW"</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="va">abcd_addition</span></span>
-<span><span class="co">#&gt;   company_id name_company                  lei sector technology production_unit year production emission_factor plant_location is_ultimate_owner              emission_factor_unit</span></span>
-<span><span class="co">#&gt; 1        175     Acme Co. 18500033XH6RG332SX57  power   hydrocap              MW 2020      12000              NA             MY              TRUE tonnes of CO2 per per hour per MW</span></span>
-<span><span class="co">#&gt; 2        175     Acme Co. 18500033XH6RG332SX57  power   hydrocap              MW 2021      12000              NA             MY              TRUE tonnes of CO2 per per hour per MW</span></span>
-<span><span class="co">#&gt; 3        175     Acme Co. 18500033XH6RG332SX57  power   hydrocap              MW 2022      12375              NA             MY              TRUE tonnes of CO2 per per hour per MW</span></span>
-<span><span class="co">#&gt; 4        175     Acme Co. 18500033XH6RG332SX57  power   hydrocap              MW 2023      13000              NA             MY              TRUE tonnes of CO2 per per hour per MW</span></span>
-<span><span class="co">#&gt; 5        175     Acme Co. 18500033XH6RG332SX57  power   hydrocap              MW 2024      13000              NA             MY              TRUE tonnes of CO2 per per hour per MW</span></span>
+<code class="sourceCode R"><span><span class="va">abcd_addition</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"my_custom_abcd.xlsx"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">abcd_combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">abcd_demo</span>, <span class="va">abcd_addition</span><span class="op">)</span></span>
 <span></span>
