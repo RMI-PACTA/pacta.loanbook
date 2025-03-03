@@ -43,10 +43,20 @@ When I try to match it, there are no results because the ABCD data does not have
 match_name(loanbook = loanbook, abcd = abcd_demo)
 ```
 
-If I had data for Acme Co. from a different source, I could supplement my ABCD data with this information, and with the combined ABCD, I get a matched loan.
+Say I had data for Acme Co. from a different source in a `my_custom_abcd.xlsx` file, e.g.
 
-```{r, message = FALSE, R.options = list(width = 400)}
-abcd_addition <-
+| company_id | name_company | lei                  | sector | technology | production_unit | year | production | emission_factor | plant_location | is_ultimate_owner | emission_factor_unit |
+|------------|--------------|----------------------|--------|------------|-----------------|------|------------|-----------------|----------------|-------------------|----------------------|
+| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2020 | 12000      |                 | MY             | TRUE              |                      |
+| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2021 | 12000      |                 | MY             | TRUE              |                      |
+| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2022 | 12375      |                 | MY             | TRUE              |                      |
+| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2023 | 13000      |                 | MY             | TRUE              |                      |
+| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2024 | 13000      |                 | MY             | TRUE              |                      |
+
+I could read in this XLSX file, merge the imported data with my existing ABCD data, and with the combined ABCD, I get a matched loan.
+
+```{r, include = FALSE}
+custom_abcd <-
   data.frame(
     company_id = rep("175", 5),
     name_company = rep("Acme Co.", 5),
@@ -56,13 +66,17 @@ abcd_addition <-
     production_unit = rep("MW", 5),
     year = 2020L:2024L,
     production = c(12000, 12000, 12375, 13000, 13000),
-    emission_factor = rep(NA, 5),
+    emission_factor = rep(NA_real_, 5),
     plant_location = rep("MY", 5),
     is_ultimate_owner = rep(TRUE, 5),
-    emission_factor_unit = rep("tonnes of CO2 per per hour per MW", 5)
+    emission_factor_unit = rep(NA_character_, 5)
   )
 
-abcd_addition
+writexl::write_xlsx(x = custom_abcd, path = file.path(tempdir(), "my_custom_abcd.xlsx"))
+```
+
+```{r, message = FALSE, R.options = list(width = 400)}
+abcd_addition <- readxl::read_excel(path = file.path(tempdir(), "my_custom_abcd.xlsx"))
 
 abcd_combined <- rbind(abcd_demo, abcd_addition)
 
