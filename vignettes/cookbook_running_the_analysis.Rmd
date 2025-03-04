@@ -426,7 +426,7 @@ Why does misclassification matter?
 
 Misclassification is typically identified manually by reviewing unmatched counterparties to determine if they should be in scope. Since this process can be time-consuming, it is best to prioritize unmatched loans with the largest credit amounts, as they have the greatest impact on the match success rate.
 
-Since misclassified loans cannot be matched, leaving them in the dataset skews results. While correction isn’t mandatory, adjusting large misclassified loans is strongly recommended for more accurate analysis.
+Since misclassified loans cannot be matched, leaving them in the dataset skews results. While correction is not mandatory, adjusting large misclassified loans is strongly recommended for more accurate analysis.
 
 #### Options for Handling Misclassified Loans
 
