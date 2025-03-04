@@ -142,7 +142,7 @@ match_name(loanbook, abcd, by_sector = TRUE) %>% nrow()
 
 The `min_score` argument sets a minimum threshold score for matching precision. This helps by:
 - Filtering out imprecise matches by setting a higher threshold.
-- Adding more potential matches if the default suggestions don’t provide enough coverage.
+- Adding more potential matches if the default suggestions do not provide enough coverage.
 
 The default value is 0.8, but you can adjust it between 0 and 1. A higher score means stricter matching, resulting in fewer potential matches.
 
