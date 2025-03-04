@@ -163,7 +163,7 @@ Manual validation helps to:
 - Ensure accuracy in linking loan book data to the ABCD dataset.
 - Improve overall match precision, especially when iterating to enhance coverage.
 
-Since this step isn’t automated, it requires effort, often making it the most time-consuming part of the process.
+Since this step is not automated, it requires effort, often making it the most time-consuming part of the process.
 
 To begin, save the output of match_name() to a CSV file for review. For example, using {readr}:
 
