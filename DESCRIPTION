@@ -1,7 +1,7 @@
 Package: pacta.loanbook
 Title: Easily Install and Load 'PACTA' for Banks Packages
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     c(
       person(
         given = "Jacob",
@@ -30,37 +30,21 @@ Authors@R:
         email = "PACTA4banks@rmi.org"
       )
     )
-Description: 'PACTA' for Banks is a tool that allows banks to calculate the
-  climate alignment of their corporate lending portfolios. This package is
-  designed to make it easy to install and load multiple 'PACTA' for Banks
-  packages in a single step. It also provides thorough documentation - the
-  'PACTA' for Banks cookbook - on how to run a 'PACTA' for Banks analysis. This
-  covers prerequisites for the analysis, the separate steps of running the
-  analysis, the interpretation of 'PACTA' for Banks results, and advanced use
-  cases.
+Description: 'PACTA' (Paris Agreement Capital Transition Assessment) for Banks
+  is a tool that allows banks to calculate the climate alignment of their
+  corporate lending portfolios. This package is designed to make it easy to
+  install and load multiple 'PACTA' for Banks packages in a single step. It also
+  provides thorough documentation - the 'PACTA' for Banks cookbook - on how to
+  run a 'PACTA' for Banks analysis. This covers prerequisites for the analysis,
+  the separate steps of running the analysis, the interpretation of 'PACTA' for
+  Banks results, and advanced use cases.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+URL: https://rmi-pacta.github.io/pacta.loanbook/,
+    https://github.com/RMI-PACTA/pacta.loanbook
+BugReports: https://github.com/RMI-PACTA/pacta.loanbook/issues
 Depends:
     R (>= 4.0.0)
-Suggests: 
-    covr,
-    DiagrammeR,
-    ggplot2,
-    glue,
-    gt (>= 0.11.0),
-    knitr (>= 1.42),
-    mockr,
-    readr,
-    readxl,
-    rmarkdown (>= 2.19),
-    spelling,
-    testthat (>= 3.2.2),
-    writexl
-Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate, rmarkdown
-URL: https://rmi-pacta.github.io/pacta.loanbook/, https://github.com/rmi-pacta/pacta.loanbook
-Imports: 
+Imports:
     cli,
     dplyr,
     ggrepel,
@@ -75,6 +59,24 @@ Imports:
     scales,
     tibble,
     tidyselect
+Suggests:
+    covr,
+    DiagrammeR,
+    ggplot2,
+    glue,
+    gt (>= 0.11.0),
+    knitr (>= 1.42),
+    mockr,
+    readr,
+    readxl,
+    rmarkdown (>= 2.19),
+    spelling,
+    testthat (>= 3.2.2),
+    writexl
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate, rmarkdown
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-Language: en-US
