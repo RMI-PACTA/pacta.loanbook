@@ -307,9 +307,9 @@ between name strings within the same sector. This means a potential
 match is shown only if: - The names in the loan book and ABCD dataset
 are sufficiently similar. - The loan is classified in the same sector as
 the company activity in the ABCD dataset.</p>
-<p>Setting by_sector = FALSE removes this restriction, which: -
-Increases computation time. - Increases the number of potential (but
-possibly incorrect) matches requiring manual validation.</p>
+<p>Setting <code>by_sector = FALSE</code> removes this restriction,
+which: - Increases computation time. - Increases the number of potential
+(but possibly incorrect) matches requiring manual validation.</p>
 <p>In most cases, keeping <code>by_sector = TRUE</code> is recommended.
 However, disabling the sector restriction can be useful when sector
 classifications in the loan book are unreliable or missing. Below, you
@@ -325,7 +325,7 @@ matches.</p>
 <p>The <code>min_score</code> argument sets a minimum threshold score
 for matching precision. This helps by: - Filtering out imprecise matches
 by setting a higher threshold. - Adding more potential matches if the
-default suggestions don’t provide enough coverage.</p>
+default suggestions do not provide enough coverage.</p>
 <p>The default value is 0.8, but you can adjust it between 0 and 1. A
 higher score means stricter matching, resulting in fewer potential
 matches.</p>
@@ -348,7 +348,7 @@ to the same entity.</p>
 affecting the analysis. - Ensure accuracy in linking loan book data to
 the ABCD dataset. - Improve overall match precision, especially when
 iterating to enhance coverage.</p>
-<p>Since this step isn’t automated, it requires effort, often making it
+<p>Since this step is not automated, it requires effort, often making it
 the most time-consuming part of the process.</p>
 <p>To begin, save the output of match_name() to a CSV file for review.
 For example, using {readr}:</p>
@@ -549,7 +549,7 @@ ABCD dataset, or they may operate outisde the PACTA focus sectors
 (power, cement, oil and gas, aviation, coal, automotive, steel, and
 hdv).</p>
 <p>To assess how much of your loan book is successfully matched, you can
-circulate matching coverage in two ways:</p>
+calculate matching coverage in two ways:</p>
 <ol style="list-style-type: decimal">
 <li><p>By dollar value: Measure the portion of your loan book covered,
 using one of the <code>loan_size_*</code> columns.</p></li>
@@ -722,19 +722,20 @@ analysis is likely the <code>direct_loantaker</code> level.</p>
 identified as belonging to a PACTA sector based on the sector
 classification in the loan book.</p>
 <p>Why does misclassification matter? - It artificially lowers match
-success rates by expecting matches that don’t exist in the ABCD dataset.
-- Iterating the matching process won’t help—if a company doesn’t operate
-in an in-scope sector, no adjustments will create a valid match. - A
-reliable match success rate requires an accurate denominator, meaning
-only loans truly within an in-scope sector should be included.</p>
+success rates by expecting matches that do not exist in the ABCD
+dataset. - Iterating the matching process will not help—if a company
+does not operate in an in-scope sector, no adjustments will create a
+valid match. - A reliable match success rate requires an accurate
+denominator, meaning only loans truly within an in-scope sector should
+be included.</p>
 <p>Misclassification is typically identified manually by reviewing
 unmatched counterparties to determine if they should be in scope. Since
-this process can be time-consuming, it’s best to prioritize unmatched
-loans with the largest amounts, as they have the greatest impact on the
-match success rate.</p>
+this process can be time-consuming, it is best to prioritize unmatched
+loans with the largest credit amounts, as they have the greatest impact
+on the match success rate.</p>
 <p>Since misclassified loans cannot be matched, leaving them in the
-dataset skews results. While correction isn’t mandatory, adjusting large
-misclassified loans is strongly recommended for more accurate
+dataset skews results. While correction is not mandatory, adjusting
+large misclassified loans is strongly recommended for more accurate
 analysis.</p>
 <div class="section level5">
 <h5 id="options-for-handling-misclassified-loans">Options for Handling Misclassified Loans<a class="anchor" aria-label="anchor" href="#options-for-handling-misclassified-loans"></a>
@@ -754,7 +755,7 @@ appropriately</li>
 <li>Adjust match success rate calculation:</li>
 </ol>
 <ul>
-<li>If modifying the raw loanbook isn’t possible, exclude misclassified
+<li>If modifying the raw loanbook is not possible, exclude misclassified
 loans from the success rate calculation.</li>
 <li>Create a <code>loans_to_remove.csv</code> file containing a single
 column, <code>id_loan</code>, listing the misclassified loans.</li>
