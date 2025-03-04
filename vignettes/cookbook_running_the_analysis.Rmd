@@ -438,7 +438,7 @@ Once misclassified loans have been identified, there are two options:
 - Keep documentation of changes for replicability
 
 (2) Adjust match success rate calculation:
-- If modifying the raw loanbook isn't possible, exclude misclassified loans from the success rate calculation.
+- If modifying the raw loanbook is not possible, exclude misclassified loans from the success rate calculation.
 - Create a `loans_to_remove.csv` file containing a single column, `id_loan`, listing the misclassified loans. 
 - Remove these loans from the match success calculation to avoid misleading results. 
 
