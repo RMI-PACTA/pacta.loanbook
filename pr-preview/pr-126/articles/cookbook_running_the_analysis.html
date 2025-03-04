@@ -116,34 +116,30 @@
 <div class="section level2">
 <h2 id="running-the-analysis">Running the Analysis<a class="anchor" aria-label="anchor" href="#running-the-analysis"></a>
 </h2>
-<p>This section provides a brief overview of the main steps required to
-run the PACTA for Banks analysis. It starts with a high-level overview
-and elaborates on each step in more detail below. The whole process is
-demonstrated with code-snippets so that following them in your own
-environment is as straight-forward as possible.</p>
+<p>This section outlines the key steps for running the PACTA for Banks
+analysis, beginning with a high-level overview followed by a detailed
+breakdown of each step. Code snippets are provided to ensure a
+straightforward implementation in your own R environment.</p>
 <div class="section level3">
 <h3 id="structure-of-the-workflow">Structure of the Workflow<a class="anchor" aria-label="anchor" href="#structure-of-the-workflow"></a>
 </h3>
-<p>Assuming you have prepared and/or procured all required input data
-sets as described in the section <a href="cookbook_preparatory_steps.html">“Preparatory Steps”</a>,
-implementing the PACTA for Banks analysis now follows the following main
-steps:</p>
+<p>If you have prepared or obtained all required input datasets as
+outlined in <a href="cookbook_preparatory_steps.html">Preparatory
+Steps</a>, you can then proceed with the PACTA for Banks analysis
+through the following main steps:</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Setup</strong>: Load the necessary packages and import the
 data.</li>
 <li>
-<strong>Matching process</strong>: Match the counterparties in the
-raw input loan book with the companies in the asset-based company
-data.</li>
+<strong>Matching process</strong>: Match counterparties in the loan
+book to companies in the asset-based company data.</li>
 <li>
-<strong>Calculate PACTA metrics</strong>: Run the PACTA analysis to
-obtain alignment metrics for the matched loan book relative to
-benchmarks based on transition scenarios.</li>
+<strong>Calculate PACTA metrics</strong>: Run the analysis to assess
+loan book alignment with transition scenario benchmarks.</li>
 <li>
-<strong>Plot PACTA metrics</strong>: Visualize the results of the
-PACTA analysis using the standard PACTA plots to facilitate
-interpretation.</li>
+<strong>Plot PACTA metrics</strong>: Generate standard PACTA
+visualizations to support result interpretation.</li>
 </ol>
 <div class="figure" style="text-align: center">
 <div class="DiagrammeR html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
@@ -151,19 +147,18 @@ interpretation.</li>
 Fig. 1: Structure of the Workflow
 </p>
 </div>
-<p>In principle, these steps are sequential. However, in practice it has
-shown that one rarely ever achieves the best possible match rate in one
-iteration. Therefore, it may be required to iterate the matching process
-multiple times. We will cover these steps in more detail now.</p>
+<p>These steps are generally sequential, but achieving the best possible
+match rate often requires multiple iterations. The matching process may
+need to be refined and repeated to improve accuracy. The following
+sections provide a detailed breakdown of each step.</p>
 </div>
 <div class="section level3">
 <h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h3>
-<p>We use the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> package to access the most
-important functions you’ll learn about. We also use example datasets
-from the package <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a>, and optional but
-convenient functions from the packages <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>,
-<a href="https://readxl.tidyverse.org" class="external-link">readxl</a>, and <a href="https://readr.tidyverse.org" class="external-link">readr</a>.</p>
+<p>We use the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> package for key functions
+and example datasets. Additionally, we leverage <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>,
+<a href="https://readxl.tidyverse.org" class="external-link">readxl</a>, and <a href="https://readr.tidyverse.org" class="external-link">readr</a> for optional but
+convenient data manipulation and import functions.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -240,18 +235,16 @@ after importing.</p>
 </h3>
 <p>The next step after loading all required input files is to run the
 matching process, where you will match loans from the loanbook data with
-production data from the abcd.</p>
+production data from the ABCD dataset</p>
 <p>The matching process is divided into three main steps:</p>
 <ul>
-<li>Apply a matching algorithm to calculate scores of the match
-precision between the loanbook and abcd datasets</li>
-<li>Manually validate matches between the loanbook and abcd datasets,
-including selecting the appropriate match in cases where more than one
-company in the abcd receives a score higher than the threshold
-value</li>
-<li>Prioritize validated matches by level</li>
+<li>Apply Matching Algorithm – Calculate match precision scores between
+the loan book and ABCD datasets.</li>
+<li>Validate Matches – Manually review matches, selecting the correct
+company when multiple exceed the threshold score.</li>
+<li>Prioritize Matches – Rank validated matches by priority level.</li>
 </ul>
-<p>We will cover each of these steps in the following sections.</p>
+<p>The following sections provide a detailed breakdown of each step.</p>
 <div class="section level4">
 <h4 id="score-the-match-precision-between-the-loanbook-and-abcd-datasets">Score the match precision between the loanbook and abcd
 datasets<a class="anchor" aria-label="anchor" href="#score-the-match-precision-between-the-loanbook-and-abcd-datasets"></a>
@@ -300,9 +293,9 @@ information on the scoring algorithm used, see
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 316 more rows</span></span></span></code></pre></div>
 <p><code><a href="../reference/match_name.html">match_name()</a></code> defaults to scoring matches between name
 strings that belong to the same sector. This implies that a potential
-match will only be shown if the names in the loanbook and the abcd are
+match will only be shown if the names in the loanbook and the ABCD are
 sufficiently similar AND the loan is classified in the same sector as
-the company activity in the abcd. Using <code>by_sector = FALSE</code>
+the company activity in the ABCD Using <code>by_sector = FALSE</code>
 removes this limitation – increasing computation time, and the number of
 potentially incorrect matches to manually validate. In most cases, it is
 recommended to keep <code>by_sector = TRUE</code>. However, lifting the
@@ -310,6 +303,19 @@ restriction can be helpful in cases where the sector classification in
 the loanbook is not reliable or no sector classification is available at
 all. Below you can see that the removal of the restriction increases the
 number of potential matches.</p>
+<p>The <code><a href="../reference/match_name.html">match_name()</a></code> function, by default, scores matches
+between name strings within the same sector. This means a potential
+match is shown only if: - The names in the loan book and ABCD dataset
+are sufficiently similar. - The loan is classified in the same sector as
+the company activity in the ABCD dataset.</p>
+<p>Setting <code>by_sector = FALSE</code> removes this restriction,
+which: - Increases computation time. - Increases the number of potential
+(but possibly incorrect) matches requiring manual validation.</p>
+<p>In most cases, keeping <code>by_sector = TRUE</code> is recommended.
+However, disabling the sector restriction can be useful when sector
+classifications in the loan book are unreliable or missing. Below, you
+can see how removing the restriction increases the number of potential
+matches.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 656</span></span>
@@ -317,15 +323,14 @@ number of potential matches.</p>
 <span><span class="co"># Compare to</span></span>
 <span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, by_sector <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 326</span></span></code></pre></div>
-<p>The <code>min_score</code> argument allows you to set a minimum
-threshold score. This is useful when you either want to filter out
-potential matches that are not precise enough, or want to add additional
-potential matches because the given suggestions do not seem to provide
-sufficient matching coverage. The default value is 0.8, but you can set
-it to any value between 0 and 1. Since a higher score implies a closer
-match between company names in the loanbook and the abcd, fewer
-potential matches will usually be shown. The following code shows how to
-set the threshold to 0.9:</p>
+<p>The <code>min_score</code> argument sets a minimum threshold score
+for matching precision. This helps by: - Filtering out imprecise matches
+by setting a higher threshold. - Adding more potential matches if the
+default suggestions do not provide enough coverage.</p>
+<p>The default value is 0.8, but you can adjust it between 0 and 1. A
+higher score means stricter matching, resulting in fewer potential
+matches.</p>
+<p>The example below sets the threshold to 0.9:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">loanbook</span>, <span class="va">abcd</span>, min_score <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -335,44 +340,35 @@ set the threshold to 0.9:</p>
 <div class="section level4">
 <h4 id="manually-validate-matches">Manually validate matches<a class="anchor" aria-label="anchor" href="#manually-validate-matches"></a>
 </h4>
-<p>After the initial calculation of scores for potential matches, you
-will manually have to inspect the suggested matches and decide which
-ones to keep or remove. This is especially important when using
-text-based matching because there is no guarantee that similar company
-names as identified by the algorithm actually refer to the same
-companies. The manual validation step is therefore crucial, it ensures
-data quality in the remainder of the analysis.</p>
-<p>The validation process is not automated and requires some time and
-effort on your part. This is often the most time-consuming part of the
-analysis, especially when trying to improve the matching coverage in
-multiple iterations.</p>
-<p>Below you will find a brief description of the manual validation
-process:</p>
-<p>Write the output of <code><a href="../reference/match_name.html">match_name()</a></code> into a .csv file, for
-example using <a href="https://readr.tidyverse.org" class="external-link">readr</a> to save a CSV file:</p>
+<p>After calculating initial match scores, you must manually review the
+suggested matches to decide which to keep or remove. This step is
+critical for ensuring a high quality match result, especially in
+text-based matching, where similar company names may not actually refer
+to the same entity.</p>
+<p>Manual validation helps to: - Prevent incorrect matches from
+affecting the analysis. - Ensure accuracy in linking loan book data to
+the ABCD dataset. - Improve overall match precision, especially when
+iterating to enhance coverage.</p>
+<p>Since this step is not automated, it requires effort, often making it
+the most time-consuming part of the process.</p>
+<p>To begin, save the output of match_name() to a CSV file for review.
+For example, using {readr}:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">matched</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"matched.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Compare, edit, and save the data manually:</p>
-<ul>
-<li>Open <code>matched.csv</code> with any spreadsheet editor (Excel,
-Google Sheets, etc.).</li>
-<li>Compare the columns <code>name</code> and <code>name_abcd</code>
-manually to determine if the match is valid. Other information can be
-used in conjunction with just the names to ensure the two entities match
-(sector, internal information on the company structure, etc.)</li>
-<li>Edit the data:
-<ul>
-<li>If you are happy with the match, set the <code>score</code> value to
-<code>1</code>.</li>
-<li>Otherwise set or leave the <code>score</code> value to anything
-other than <code>1</code>.</li>
-</ul>
-</li>
-<li>Save the edited file as, for example,
-<code>valid_matches.csv</code>.</li>
-</ul>
-<p>Re-import the edited file (validated), for example using
-<a href="https://readr.tidyverse.org" class="external-link">readr</a> to read a CSV file:</p>
+<p>After exporting the match results, you must manually review, edit,
+and save the data: - <strong>Open the file</strong> – Load
+<code>matched.csv</code> in a spreadsheet editor (Excel, Google Sheets,
+etc.). - <strong>Compare matches</strong> – Verify if the
+<code>name</code> (loan book) and <code>name_abcd</code> (ABCD)
+correspond to the same entity. Use additional details (sector, company
+structure, internal data) to improve accuracy. - <strong>Edit the
+data</strong>: - If the match is valid, set the <code>score</code> value
+to <code>1</code>. - If the match is incorrect or uncertain, leave the
+<code>score</code> as-is or set it to a value other than <code>1</code>.
+- <strong>Save the edited file</strong>: as
+<code>valid_matches.csv</code>.</p>
+<p>Once validated, re-import the edited file into R, for example, using
+<a href="https://readr.tidyverse.org" class="external-link">readr</a>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"valid_matches.csv"</span><span class="op">)</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>You can find more detailed information about the matching process
@@ -549,25 +545,24 @@ receive the PACTA sector value that it maps to in the
 </h4>
 <p><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> allows you to match loans from your
 loanbook to the companies in an asset-based company dataset. However,
-matching every loan is unlikely – some loan-taking companies may be
-missing from the asset-based company dataset, or they may not operate in
-the sectors PACTA focuses on (power, cement, oil and gas, aviation,
-coal, automotive, steel, and hdv). Thus, you may want to measure how
-much of the loanbook matched some asset. This article shows two ways to
-calculate such matching coverage:</p>
+not all loans will have a match – some companies may be missing from the
+ABCD dataset, or they may operate outisde the PACTA focus sectors
+(power, cement, oil and gas, aviation, coal, automotive, steel, and
+hdv).</p>
+<p>To assess how much of your loan book is successfully matched, you can
+calculate matching coverage in two ways:</p>
 <ol style="list-style-type: decimal">
-<li><p>Calculate the portion of your <code>loanbook</code> covered, by
-dollar value (i.e. using one of the <code>loan_size_*</code>
-columns).</p></li>
-<li><p>Count the number of companies matched.</p></li>
+<li><p>By dollar value: Measure the portion of your loan book covered,
+using one of the <code>loan_size_*</code> columns.</p></li>
+<li><p>By company count: Count the number of companies matched.</p></li>
 </ol>
-<p>First we will need to load the additional useful package
-<a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>:</p>
+<p>To visualize matching coverage, first load the <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>
+package:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <p>We will use the example datasets created in the previous section. To
-demonstrate our point, we create a <code>loanbook</code> dataset with
-two mismatching loans:</p>
+illustrate the point, we create a <code>loanbook</code> dataset with two
+mismatched loans:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
@@ -586,32 +581,38 @@ two mismatching loans:</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> https://github.com/RMI-PACTA/r2dii.data/issues</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Or contact the PACTA team here:</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> pacta4banks@rmi.org</span></span></code></pre></div>
-<p>Note that this <code>matched</code> dataset will contain
-<em>only</em> loans that were matched successfully. To determine
-coverage, we need to go back to the original <code>loanbook</code>
-dataset. We must determine the PACTA sectors of each loan, as dictated
-by the <code>sector_classification_direct_loantaker</code> column.</p>
-<p>For this, we join the <code>loanbook</code> with the
-<code>sector_classifications</code> dataset, which lists all sector
-classification code standards used by ‘PACTA’. Unfortunately we need to
-work around two caveats (you may ignore them because they are
-conceptually uninteresting):</p>
+<p>The <code>matched</code> dataset contains <em>only</em> successfully
+matched loans. To determine coverage, we need to refer back to the
+original loanbook dataset and classify each loan according to the PACTA
+sectors using the <code>sector_classification_direct_loantaker</code>
+column.</p>
+<p>To achieve this, we merge loanbook with the
+<code>sector_classifications</code> dataset, which includes all sector
+classification standards used by PACTA. However, there are two technical
+caveats to consider:</p>
+<ol style="list-style-type: decimal">
+<li>Column name differences: The datasets use different column names for
+sector classifications. We use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> with the
+<code>by</code> argument to merge:</li>
+</ol>
 <ul>
-<li><p>In the two datasets, the columns we want to merge by have
-different names. We use the argument <code>by</code> of
-<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> to merge the columns
+<li>
 <code>sector_classification_system</code> and
 <code>sector_classification_direct_loantaker</code> (from
-<code>loanbook</code>) with the columns <code>code_system</code> and
-<code>code</code> (from <code>sector_classifications</code>),
-respectively.</p></li>
-<li><p>In the two datasets, the sector classification codes are
-represented with different data-types. We modify the column
-<code>sector_classification_direct_loantaker</code> before using
-<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> so it has the same type as the
-corresponding column <code>code</code> (otherwise
-<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> throws an error), and again after
-<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> to restore its original type.</p></li>
+<code>loanbook</code>)</li>
+<li>
+<code>code_system</code> and <code>code</code> (from
+<code>sector_classifications</code>)</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Data type mismatch: The sector classification codes have different
+data types in the two datasets. To prevent errors in
+<code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code>:</li>
+</ol>
+<ul>
+<li>We convert <code>sector_classification_direct_loantaker</code> to
+match the type of <code>code</code> before merging.</li>
+<li>After merging, we restore its original type.</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">merge_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -622,8 +623,8 @@ corresponding column <code>code</code> (otherwise
 <span><span class="va">loanbook_with_sectors</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sector_classifications</span>, by <span class="op">=</span> <span class="va">merge_by</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sector_classification_direct_loantaker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">sector_classification_direct_loantaker</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>We can join these two datasets together, to generate our
-<code>coverage</code> dataset:</p>
+<p>To generate the <code>coverage</code> dataset, we merge these two
+datasets together:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">loanbook_with_sectors</span>, <span class="va">matched</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
@@ -646,13 +647,15 @@ corresponding column <code>code</code> (otherwise
 <span><span class="co">#&gt; sector_classification_direct_loantaker, lei_direct_loantaker,</span></span>
 <span><span class="co">#&gt; isin_direct_loantaker, sector, borderline)`</span></span></code></pre></div>
 <div class="section level5">
-<h5 id="calculate-the-portion-of-your-loanbook-covered-by-dollar-value">1. Calculate the portion of your loanbook covered by dollar
-value<a class="anchor" aria-label="anchor" href="#calculate-the-portion-of-your-loanbook-covered-by-dollar-value"></a>
+<h5 id="calculate-loanbook-coverage-by-dollar-value">1. Calculate loanbook coverage by dollar value<a class="anchor" aria-label="anchor" href="#calculate-loanbook-coverage-by-dollar-value"></a>
 </h5>
-<p>From the <code>coverage</code> dataset, we can calculate the total
-loanbook coverage by dollar value. Let’s create two helper functions,
-one to calculate dollar-value and another one to plot coverage in
-general.</p>
+<p>Using the <code>coverage</code> dataset, we can measure total loan
+book coverage based on dollar value. To facilitate this, we define two
+helper functions:</p>
+<ol style="list-style-type: decimal">
+<li>A function to calculate coverage by dollar value.</li>
+<li>A plotting function to visualize coverage.</li>
+</ol>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dollar_value</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -678,10 +681,6 @@ general.</p>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">matched</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
-</div>
-<div class="section level5">
-<h5 id="break-down-by-sector">Break down by sector<a class="anchor" aria-label="anchor" href="#break-down-by-sector"></a>
-</h5>
 <p>You may break-down the plot by sector:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -703,11 +702,11 @@ general.</p>
 <p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
 </div>
 <div class="section level5">
-<h5 id="count-the-number-of-companies">2. Count the number of companies<a class="anchor" aria-label="anchor" href="#count-the-number-of-companies"></a>
+<h5 id="count-the-number-of-companies-matched">2. Count the number of companies matched<a class="anchor" aria-label="anchor" href="#count-the-number-of-companies-matched"></a>
 </h5>
-<p>You might also be interested in knowing how many companies in your
-loanbook were matched. It probably makes most sense to do this at the
-<code>direct_loantaker</code> level:</p>
+<p>Another useful metric is the number of companies in your loan book
+that were successfully matched. The most relevant level for this
+analysis is likely the <code>direct_loantaker</code> level.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">companies_matched</span> <span class="op">&lt;-</span> <span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>no_companies <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">name_direct_loantaker</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sector</span>, <span class="va">matched</span><span class="op">)</span><span class="op">)</span></span>
@@ -720,68 +719,73 @@ loanbook were matched. It probably makes most sense to do this at the
 <div class="section level4">
 <h4 id="optional-handling-misclassified-loans">Optional: Handling misclassified loans<a class="anchor" aria-label="anchor" href="#optional-handling-misclassified-loans"></a>
 </h4>
-<p>A loan is considered misclassified, if it is identified as in-scope
-of a PACTA sector based on the sector classification in the input loan
-book, but if it turns out that this classification is incorrect based on
-the counterparty’s activities. For example, if a counterparty is
-classified as a fully in-scope power company, but in reality it is a
-power distribution company or even active in another sector altogether,
-such as upstream gas production, the counterparty is misclassified.
-Misclassification is a problem, because it leads to exaggeratedly low
-match success rates, that cannot be improved by iterating the matching
-process. You can search as long as you want, but a company that in
-reality does not operate any power plants will not be found in the ABCD
-regardless of how the settings of the matching algorithm are tweaked.
-The match success rate can only be a useful metric if the denominator,
-that is the classification in the loan book, is solid. This is also
-important to understand which loans are truly not matched. This category
-should only be companies that actually are active in a given in-scope
-sector, but were not found in the ABCD.</p>
-<p>Identifying misclassified loans is usually a manual process, where
-counterparties that have not been matched are researched to determine if
-they should be in scope or not. Depending on the size of the loan book,
-this can be a time-consuming process. It is recommended to start with
-the unmatched counterparties with the largest loans, as these have the
-largest impact on the match success rate. You may then have to decide
-for yourself, if you want to research all unmatched loans or set a
-cutoff point, e.g. based on the size of the loan.</p>
+<p>A misclassified loan occurs when a counterparty is incorrectly
+identified as belonging to a PACTA sector based on the sector
+classification in the loan book.</p>
+<p>Why does misclassification matter? - It artificially lowers match
+success rates by expecting matches that do not exist in the ABCD
+dataset. - Iterating the matching process will not help—if a company
+does not operate in an in-scope sector, no adjustments will create a
+valid match. - A reliable match success rate requires an accurate
+denominator, meaning only loans truly within an in-scope sector should
+be included.</p>
+<p>Misclassification is typically identified manually by reviewing
+unmatched counterparties to determine if they should be in scope. Since
+this process can be time-consuming, it is best to prioritize unmatched
+loans with the largest credit amounts, as they have the greatest impact
+on the match success rate.</p>
+<p>Since misclassified loans cannot be matched, leaving them in the
+dataset skews results. While correction is not mandatory, adjusting
+large misclassified loans is strongly recommended for more accurate
+analysis.</p>
+<div class="section level5">
+<h5 id="options-for-handling-misclassified-loans">Options for Handling Misclassified Loans<a class="anchor" aria-label="anchor" href="#options-for-handling-misclassified-loans"></a>
+</h5>
+<p>Once misclassified loans have been identified, there are two
+options:</p>
+<ol style="list-style-type: decimal">
+<li>Correct the classification in the loanbook:</li>
+</ol>
+<ul>
+<li>Update the raw loanbook to reflect the correct sector.</li>
+<li>Re-run the matching process to ensure the loan is matched
+appropriately</li>
+<li>Keep documentation of changes for replicability</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Adjust match success rate calculation:</li>
+</ol>
+<ul>
+<li>If modifying the raw loanbook is not possible, exclude misclassified
+loans from the success rate calculation.</li>
+<li>Create a <code>loans_to_remove.csv</code> file containing a single
+column, <code>id_loan</code>, listing the misclassified loans.</li>
+<li>Remove these loans from the match success calculation to avoid
+misleading results.</li>
+</ul>
+<p>The first option is generally preferred, as it ensures loans are
+assigned to the correct sector.</p>
 <p>Once the list of misclassified loans is identified, there are two
 broad options to appropriately these cases.</p>
-<ol style="list-style-type: decimal">
-<li>Correct the classification in the raw loan book and re-run the
-matching process. If the loan was clearly misclassified, this may be the
-most appropriate way to handle the issue. It may be a good idea to keep
-notes on any such changes made in the input data though, to ensure the
-result is fully replicable. The upside of this approach is that the loan
-will now either be matched correctly, as it will be assigned the sector
-that the company should have and therefore find an entry in the ABCD
-data set to match against. Or, if there is still no match to be found in
-the ABCD, the loan will correctly be missing in the appropriate sector
-and therefore indicate a lower match success rate where it should.
-Lastly, if it should have been <code>"not in scope"</code>, it will not
-inflate the denominator of the match success rate anymore.</li>
-<li>If a manual re-classification of the raw loan book is not possible
-or desired, the calculation of the match success rate can be corrected
-by creating a file <code>loans_to_remove.csv</code>, which should
-include the column <code>id_loan</code> to indicate the precise
-misclassified loan that was identified. This loan then needs to be
-explicitly removed from the match success calculation, as shown
-below.</li>
-</ol>
-<p>Let’s assume the the loan with id L255 is falsely classified as a
-steel company. Research shows this company is not a primary steel
-producer, but it makes steel-based products for end use. Hence it is
-active downstream in the value chain and cannot be matched to the ABCD.
-If we cannot correct the input sector classification, we instead create
-a csv file with the id of the misclassified loan. In practice, this can
-be done programmatically or manually.</p>
+</div>
+<div class="section level5">
+<h5 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h5>
+<p>Suppose a loan with ID L255 is falsely classified as a steel company
+but actually produces steel-based products, making it part of the
+downstream value chain rather than primary steel production. Since it
+cannot be matched to ABCD, but the sector classification cannot be
+changed, we handle it by creating a CSV file with its ID.</p>
+<p>This correction process can be done programmatically or manually,
+ensuring more accurate match success rate reporting.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>id_loan <span class="op">=</span> <span class="st">"L255"</span><span class="op">)</span>,</span>
 <span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"loans_to_remove.csv"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The loans_to_remove.csv file should have just one column, id_loan,
-and therefore be structured as follows:</p>
+<p>The <code>loans_to_remove.csv</code> file should have just one
+column, <code>id_loan</code>, and therefore be structured as
+follows:</p>
 <ul>
 <li>
 <code>id_loan</code>: <span class="ansi ansi-color-4">&lt;character&gt;</span>
@@ -829,32 +833,22 @@ steel sector only, to see the clear impact.</p>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-29-2.png" width="700"></p>
-<p>The reason why it is a good idea to either correct misclassified
-loans or disregard them in the calculation of the match success rate is
-that a misclassified loan cannot possibly be matched in a given sector.
-Therefore, no amount of work would be sufficient to improve the sector
-match success rate, because it is calculated against an incorrect
-baseline. Technically, the user is not forced to correct
-misclassifications, and there may be a limit to how much time should be
-spent on this, but it is recommended to at least correct large
-misclassified loans.</p>
-<p>…</p>
+</div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="calculate-pacta-alignment-metrics">Calculate PACTA alignment metrics<a class="anchor" aria-label="anchor" href="#calculate-pacta-alignment-metrics"></a>
 </h3>
-<p>You can calculate scenario targets using two different approaches:
-Market Share Approach, or Sectoral Decarbonization Approach.</p>
+<p>PACTA alignment metrics can be calculated using two approaches: the
+Market Share Approach and the Sectoral Decarbonization Approach.</p>
 <div class="section level4">
 <h4 id="market-share-approach">Market Share Approach<a class="anchor" aria-label="anchor" href="#market-share-approach"></a>
 </h4>
-<p>The <a href="https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html" class="external-link">Market
-Share Approach</a> is used to calculate scenario targets for the
-<code>production</code> of a technology in a sector. For example, we can
-use this approach to set targets for the production of electric vehicles
-in the automotive sector. This approach is recommended for sectors where
-a granular technology scenario roadmap exists.</p>
+<p>The <a href="cookbook_metrics.html#market-share-approach">Market
+Share Approach</a> sets scenario targets based on the production of a
+technology within a sector. For example, it can define targets for
+electric vehicle production in the automotive sector. This approach is
+recommended for sectors with detailed technology roadmaps.</p>
 <p>Targets can be set at the portfolio level:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use these datasets to practice but eventually you should use your own data.</span></span>
@@ -884,7 +878,7 @@ a granular technology scenario roadmap exists.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       projected     <span style="text-decoration: underline;">149</span>310.            0.165 sector                                  0.001<span style="text-decoration: underline;">48</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       target_cps    <span style="text-decoration: underline;">148</span>155.            0.164 sector                                  0.001<span style="text-decoration: underline;">01</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,066 more rows</span></span></span></code></pre></div>
-<p>Or at the company level:</p>
+<p>or at the company level:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">market_share_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
@@ -922,12 +916,11 @@ directory that you wish to save your files in.</p>
 <div class="section level4">
 <h4 id="sectoral-decarbonization-approach">Sectoral Decarbonization Approach<a class="anchor" aria-label="anchor" href="#sectoral-decarbonization-approach"></a>
 </h4>
-<p>The <a href="https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html" class="external-link">Sectoral
-Decarbonization Approach</a> is used to calculate scenario targets for
-the <code>emission_factor</code> of a sector. For example, you can use
-this approach to set targets for the average emission factor of the
-cement sector. This approach is recommended for sectors lacking
-technology roadmaps.</p>
+<p>The <a href="cookbook_metrics.html#sectoral-decarbonization-approach">Sectoral
+Decarbonization Approach</a> sets scenario targets based on a sector’s
+emission factor. For example, it can define targets for the average
+emission factor in the cement sector. This approach is recommended for
+sectors without detailed technology roadmaps.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use this dataset to practice but eventually you should use your own data.</span></span>
 <span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
@@ -957,7 +950,7 @@ technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> cement  <span style="text-decoration: underline;">2</span>022 global             demo_2020       projected                             0.666 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cement  <span style="text-decoration: underline;">2</span>023 advanced economies demo_2020       projected                             0.023<span style="text-decoration: underline;">5</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 100 more rows</span></span></span></code></pre></div>
-<p>Or at the company level:</p>
+<p>or at the company level:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sda_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
@@ -996,11 +989,10 @@ directory that you wish to save your files in.</p>
 <div class="section level3">
 <h3 id="visualize-pacta-alignment-metrics">Visualize PACTA alignment metrics<a class="anchor" aria-label="anchor" href="#visualize-pacta-alignment-metrics"></a>
 </h3>
-<p>There are a large variety of possible visualizations stemming from
-the outputs of <code><a href="../reference/target_market_share.html">target_market_share()</a></code> and
-<code><a href="../reference/target_sda.html">target_sda()</a></code>. Below, we highlight a couple of common plots
-that can easily be created using the <a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a>
-package.</p>
+<p>A variety of visualizations can be generated from the outputs of
+<code><a href="../reference/target_market_share.html">target_market_share()</a></code> and <code><a href="../reference/target_sda.html">target_sda()</a></code>. Below,
+we highlight a few common plots that can be easily created using the
+<a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> package.</p>
 <div class="section level4">
 <h4 id="market-share-sector-level-technology-mix">Market Share: Sector-level technology mix<a class="anchor" aria-label="anchor" href="#market-share-sector-level-technology-mix"></a>
 </h4>
@@ -1031,7 +1023,7 @@ targets.</p>
 </h4>
 <p>You can also plot the technology-specific volume trend. All starting
 values are normalized to 1, to emphasize that we are comparing the rates
-of buildout and/or retirement.</p>
+of build-out and/or retirement.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">market_share_targets_portfolio</span>,</span>
