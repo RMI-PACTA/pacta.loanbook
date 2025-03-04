@@ -420,7 +420,7 @@ companies_matched %>%
 A misclassified loan occurs when a counterparty is incorrectly identified as belonging to a PACTA sector based on the sector classification in the loan book.
 
 Why does misclassification matter?
-- It artificially lowers match success rates by expecting matches that don’t exist in the ABCD dataset.
+- It artificially lowers match success rates by expecting matches that do not exist in the ABCD dataset.
 - Iterating the matching process won’t help—if a company doesn’t operate in an in-scope sector, no adjustments will create a valid match.
 - A reliable match success rate requires an accurate denominator, meaning only loans truly within an in-scope sector should be included.
 
