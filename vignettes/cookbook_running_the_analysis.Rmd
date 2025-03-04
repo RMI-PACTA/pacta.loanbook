@@ -127,7 +127,7 @@ The `match_name()` function, by default, scores matches between name strings wit
 - The names in the loan book and ABCD dataset are sufficiently similar.
 - The loan is classified in the same sector as the company activity in the ABCD dataset.
 
-Setting by_sector = FALSE removes this restriction, which:
+Setting `by_sector = FALSE` removes this restriction, which:
 - Increases computation time.
 - Increases the number of potential (but possibly incorrect) matches requiring manual validation.
 
