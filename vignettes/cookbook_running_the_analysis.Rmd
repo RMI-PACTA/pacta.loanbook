@@ -16,16 +16,16 @@ knitr::opts_chunk$set(
 
 # Running the Analysis
 
-This section provides a brief overview of the main steps required to run the PACTA for Banks analysis. It starts with a high-level overview and elaborates on each step in more detail below. The whole process is demonstrated with code-snippets so that following them in your own environment is as straight-forward as possible.
+This section outlines the key steps for running the PACTA for Banks analysis, beginning with a high-level overview followed by a detailed breakdown of each step. Code snippets are provided to ensure a straightforward implementation in your own R environment.
 
 ## Structure of the Workflow
 
-Assuming you have prepared and/or procured all required input data sets as described in the section ["Preparatory Steps"](cookbook_preparatory_steps.html), implementing the PACTA for Banks analysis now follows the following main steps:
+If you have prepared or obtained all required input datasets as outlined in [Preparatory Steps](cookbook_preparatory_steps.html), you can then proceed with the PACTA for Banks analysis through the following main steps:
 
 1.  **Setup**: Load the necessary packages and import the data.
-2.  **Matching process**: Match the counterparties in the raw input loan book with the companies in the asset-based company data.
-3.  **Calculate PACTA metrics**: Run the PACTA analysis to obtain alignment metrics for the matched loan book relative to benchmarks based on transition scenarios.
-4.  **Plot PACTA metrics**: Visualize the results of the PACTA analysis using the standard PACTA plots to facilitate interpretation.
+2.  **Matching process**: Match counterparties in the loan book to companies in the asset-based company data.
+3.  **Calculate PACTA metrics**: Run the analysis to assess loan book alignment with transition scenario benchmarks.
+4.  **Plot PACTA metrics**: Generate standard PACTA visualizations to support result interpretation.
 
 ```{r workflow_structure, echo=FALSE, fig.cap='Fig. 1: Structure of the Workflow', fig.align='center'}
 DiagrammeR::mermaid('
@@ -42,11 +42,11 @@ DiagrammeR::mermaid('
 ')
 ```
 
-In principle, these steps are sequential. However, in practice it has shown that one rarely ever achieves the best possible match rate in one iteration. Therefore, it may be required to iterate the matching process multiple times. We will cover these steps in more detail now.
+These steps are generally sequential, but achieving the best possible match rate often requires multiple iterations. The matching process may need to be refined and repeated to improve accuracy. The following sections provide a detailed breakdown of each step.
 
 ## Setup
 
-We use the `{pacta.loanbook}` package to access the most important functions you'll learn about. We also use example datasets from the package `{pacta.loanbook}`, and optional but convenient functions from the packages `{dplyr}`, `{readxl}`, and `{readr}`.
+We use the `{pacta.loanbook}` package for key functions and example datasets. Additionally, we leverage `{dplyr}`, `{readxl}`, and `{readr}` for optional but convenient data manipulation and import functions.
 
 ```{r, message=FALSE}
 library(pacta.loanbook)
@@ -89,15 +89,15 @@ abcd
 
 ## Matching Process
 
-The next step after loading all required input files is to run the matching process, where you will match loans from the loanbook data with production data from the abcd.
+The next step after loading all required input files is to run the matching process, where you will match loans from the loanbook data with production data from the ABCD dataset
 
 The matching process is divided into three main steps:
 
--   Apply a matching algorithm to calculate scores of the match precision between the loanbook and abcd datasets
--   Manually validate matches between the loanbook and abcd datasets, including selecting the appropriate match in cases where more than one company in the abcd receives a score higher than the threshold value
--   Prioritize validated matches by level
+- Apply Matching Algorithm – Calculate match precision scores between the loan book and ABCD datasets.
+- Validate Matches – Manually review matches, selecting the correct company when multiple exceed the threshold score.
+- Prioritize Matches – Rank validated matches by priority level.
 
-We will cover each of these steps in the following sections.
+The following sections provide a detailed breakdown of each step.
 
 ### Score the match precision between the loanbook and abcd datasets
 
@@ -105,11 +105,11 @@ We will cover each of these steps in the following sections.
 
 The raw names are internally transformed applying best-practices commonly used in name matching algorithms, such as:
 
--   Remove special characters
--   Replace language specific characters
--   Abbreviate certain names to reduce their importance in the matching
--   Remove corporate suffixes when necessary
--   Spell out numbers to increase their importance
+- Remove special characters
+- Replace language specific characters
+- Abbreviate certain names to reduce their importance in the matching
+- Remove corporate suffixes when necessary
+- Spell out numbers to increase their importance
 
 The similarity is then scored between the internally-transformed names of the loanbook against the names in the abcd. For more information on the scoring algorithm used, see `stringdist::stringsim()`.
 
@@ -121,7 +121,17 @@ matched <- match_name(loanbook, abcd)
 matched
 ```
 
-`match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown if the names in the loanbook and the abcd are sufficiently similar AND the loan is classified in the same sector as the company activity in the abcd. Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
+`match_name()` defaults to scoring matches between name strings that belong to the same sector. This implies that a potential match will only be shown if the names in the loanbook and the ABCD are sufficiently similar AND the loan is classified in the same sector as the company activity in the ABCD Using `by_sector = FALSE` removes this limitation -- increasing computation time, and the number of potentially incorrect matches to manually validate. In most cases, it is recommended to keep `by_sector = TRUE`. However, lifting the restriction can be helpful in cases where the sector classification in the loanbook is not reliable or no sector classification is available at all. Below you can see that the removal of the restriction increases the number of potential matches.
+
+The `match_name()` function, by default, scores matches between name strings within the same sector. This means a potential match is shown only if:
+- The names in the loan book and ABCD dataset are sufficiently similar.
+- The loan is classified in the same sector as the company activity in the ABCD dataset.
+
+Setting `by_sector = FALSE` removes this restriction, which:
+- Increases computation time.
+- Increases the number of potential (but possibly incorrect) matches requiring manual validation.
+
+In most cases, keeping `by_sector = TRUE` is recommended. However, disabling the sector restriction can be useful when sector classifications in the loan book are unreliable or missing. Below, you can see how removing the restriction increases the number of potential matches.
 
 ```{r}
 match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
@@ -130,7 +140,13 @@ match_name(loanbook, abcd, by_sector = FALSE) %>% nrow()
 match_name(loanbook, abcd, by_sector = TRUE) %>% nrow()
 ```
 
-The `min_score` argument allows you to set a minimum threshold score. This is useful when you either want to filter out potential matches that are not precise enough, or want to add additional potential matches because the given suggestions do not seem to provide sufficient matching coverage. The default value is 0.8, but you can set it to any value between 0 and 1. Since a higher score implies a closer match between company names in the loanbook and the abcd, fewer potential matches will usually be shown. The following code shows how to set the threshold to 0.9:
+The `min_score` argument sets a minimum threshold score for matching precision. This helps by:
+- Filtering out imprecise matches by setting a higher threshold.
+- Adding more potential matches if the default suggestions do not provide enough coverage.
+
+The default value is 0.8, but you can adjust it between 0 and 1. A higher score means stricter matching, resulting in fewer potential matches.
+
+The example below sets the threshold to 0.9:
 
 ```{r}
 match_name(loanbook, abcd, min_score = 0.9) %>%
@@ -140,28 +156,30 @@ match_name(loanbook, abcd, min_score = 0.9) %>%
 
 ### Manually validate matches
 
-After the initial calculation of scores for potential matches, you will manually have to inspect the suggested matches and decide which ones to keep or remove. This is especially important when using text-based matching because there is no guarantee that similar company names as identified by the algorithm actually refer to the same companies. The manual validation step is therefore crucial, it ensures data quality in the remainder of the analysis.
+After calculating initial match scores, you must manually review the suggested matches to decide which to keep or remove. This step is critical for ensuring a high quality match result, especially in text-based matching, where similar company names may not actually refer to the same entity.
 
-The validation process is not automated and requires some time and effort on your part. This is often the most time-consuming part of the analysis, especially when trying to improve the matching coverage in multiple iterations.
+Manual validation helps to:
+- Prevent incorrect matches from affecting the analysis.
+- Ensure accuracy in linking loan book data to the ABCD dataset.
+- Improve overall match precision, especially when iterating to enhance coverage.
 
-Below you will find a brief description of the manual validation process:
+Since this step is not automated, it requires effort, often making it the most time-consuming part of the process.
 
-Write the output of `match_name()` into a .csv file, for example using `{readr}` to save a CSV file:
+To begin, save the output of match_name() to a CSV file for review. For example, using {readr}:
 
 ```{r}
 readr::write_csv(x = matched, file = file.path(tempdir(), "matched.csv"))
 ```
 
-Compare, edit, and save the data manually:
+After exporting the match results, you must manually review, edit, and save the data:
+- **Open the file** – Load `matched.csv` in a spreadsheet editor (Excel, Google Sheets, etc.).
+- **Compare matches** – Verify if the `name` (loan book) and `name_abcd` (ABCD) correspond to the same entity. Use additional details (sector, company structure, internal data) to improve accuracy.
+- **Edit the data**:
+  - If the match is valid, set the `score` value to `1`.
+  - If the match is incorrect or uncertain, leave the `score` as-is or set it to a value other than `1`.
+- **Save the edited file**: as `valid_matches.csv`.
 
--   Open `matched.csv` with any spreadsheet editor (Excel, Google Sheets, etc.).
--   Compare the columns `name` and `name_abcd` manually to determine if the match is valid. Other information can be used in conjunction with just the names to ensure the two entities match (sector, internal information on the company structure, etc.)
--   Edit the data:
-    -   If you are happy with the match, set the `score` value to `1`.
-    -   Otherwise set or leave the `score` value to anything other than `1`.
--   Save the edited file as, for example, `valid_matches.csv`.
-
-Re-import the edited file (validated), for example using `{readr}` to read a CSV file:
+Once validated, re-import the edited file into R, for example, using `{readr}`:
 
 ```{r echo=FALSE, results='hide', message=FALSE}
 # simulating that the user did the above process and saved a new valid_matches.csv
@@ -247,26 +265,21 @@ sector_in_scope <- glue::glue_collapse(
 )
 ```
 
-`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in
-an asset-based company dataset. However, matching every loan is unlikely -- some
-loan-taking companies may be missing from the asset-based company dataset, or
-they may not operate in the sectors PACTA focuses on (`r sector_in_scope`).
-Thus, you may want to measure how much of the loanbook matched some asset. This
-article shows two ways to calculate such matching coverage:
+`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in an asset-based company dataset. However, not all loans will have a match -- some companies may be missing from the ABCD dataset, or they may operate outisde the PACTA focus sectors (`r sector_in_scope`).
 
-(1) Calculate the portion of your `loanbook` covered, by dollar value (i.e. using
-one of the `loan_size_*` columns).
+To assess how much of your loan book is successfully matched, you can calculate matching coverage in two ways:
 
-(2) Count the number of companies matched.
+(1) By dollar value: Measure the portion of your loan book covered, using one of the `loan_size_*` columns. 
 
-First we will need to load the additional useful package `{ggplot2}`:
+(2) By company count: Count the number of companies matched. 
+
+To visualize matching coverage, first load the `{ggplot2}` package:
 
 ```{r}
 library(ggplot2)
 ```
 
-We will use the example datasets created in the previous section. To demonstrate our point, we
-create a `loanbook` dataset with two mismatching loans:
+We will use the example datasets created in the previous section. To illustrate the point, we create a `loanbook` dataset with two mismatched loans:
 
 ```{r}
 loanbook <- loanbook %>% 
@@ -286,13 +299,18 @@ matched <- loanbook %>%
     prioritize()
 ```
 
-Note that this `matched` dataset will contain _only_ loans that were matched successfully. To determine coverage, we need to go back to the original `loanbook` dataset. We must determine the PACTA sectors of each loan, as dictated by the `sector_classification_direct_loantaker` column.
+The `matched` dataset contains _only_ successfully matched loans. To determine coverage, we need to refer back to the original loanbook dataset and classify each loan according to the PACTA sectors using the `sector_classification_direct_loantaker` column.
 
-For this, we join the `loanbook` with the `sector_classifications` dataset, which lists all sector classification code standards used by 'PACTA'. Unfortunately we need to work around two caveats (you may ignore them because they are conceptually uninteresting):
+To achieve this, we merge loanbook with the `sector_classifications` dataset, which includes all sector classification standards used by PACTA. However, there are two technical caveats to consider:
 
-* In the two datasets, the columns we want to merge by have different names. We use the argument `by` of `dplyr::left_join()` to merge the columns `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`) with the columns `code_system` and `code` (from `sector_classifications`), respectively. 
+(1) Column name differences: The datasets use different column names for sector classifications. We use `dplyr::left_join()` with the `by` argument to merge:
 
-* In the two datasets, the sector classification codes are represented with different data-types. We modify the column `sector_classification_direct_loantaker` before using `dplyr::left_join()` so it has the same type as the corresponding column `code` (otherwise `dplyr::left_join()` throws an error), and again after `dplyr::left_join()` to restore its original type.
+- `sector_classification_system` and `sector_classification_direct_loantaker` (from `loanbook`)
+- `code_system` and `code` (from `sector_classifications`)
+
+(2) Data type mismatch: The sector classification codes have different data types in the two datasets. To prevent errors in `dplyr::left_join()`:
+- We convert `sector_classification_direct_loantaker` to match the type of `code` before merging.
+- After merging, we restore its original type.
 
 ```{r}
 merge_by <- c(
@@ -305,7 +323,7 @@ loanbook_with_sectors <- loanbook %>%
   mutate(sector_classification_direct_loantaker = as.character(sector_classification_direct_loantaker))
 ```
 
-We can join these two datasets together, to generate our `coverage` dataset:
+To generate the `coverage` dataset, we merge these two datasets together:
 
 ``` {r}
 coverage <- left_join(loanbook_with_sectors, matched) %>% 
@@ -324,11 +342,12 @@ coverage <- left_join(loanbook_with_sectors, matched) %>%
   )
 ```
 
-#### 1. Calculate the portion of your loanbook covered by dollar value
+#### 1. Calculate loanbook coverage by dollar value
 
-From the `coverage` dataset, we can calculate the total loanbook coverage by
-dollar value. Let's create two helper functions, one to calculate dollar-value
-and another one to plot coverage in general.
+Using the `coverage` dataset, we can measure total loan book coverage based on dollar value. To facilitate this, we define two helper functions:
+
+(1) A function to calculate coverage by dollar value.
+(2) A plotting function to visualize coverage.
 
 ```{r}
 dollar_value <- function(data, ...) {
@@ -361,8 +380,6 @@ coverage %>%
   plot_coverage(matched, loan_size_outstanding)
 ```
 
-#### Break down by sector
-
 You may break-down the plot by sector: 
 
 ```{r}
@@ -386,11 +403,9 @@ coverage %>%
   plot_coverage(sector, loan_size_outstanding)
 ```
 
-#### 2. Count the number of companies
+#### 2. Count the number of companies matched
 
-You might also be interested in knowing how many companies in your loanbook were
-matched. It probably makes most sense to do this at the `direct_loantaker`
-level:
+Another useful metric is the number of companies in your loan book that were successfully matched. The most relevant level for this analysis is likely the `direct_loantaker` level.
 
 ``` {r}
 companies_matched <- coverage %>% 
@@ -402,16 +417,40 @@ companies_matched %>%
 
 ### Optional: Handling misclassified loans
 
-A loan is considered misclassified, if it is identified as in-scope of a PACTA sector based on the sector classification in the input loan book, but if it turns out that this classification is incorrect based on the counterparty's activities. For example, if a counterparty is classified as a fully in-scope power company, but in reality it is a power distribution company or even active in another sector altogether, such as upstream gas production, the counterparty is misclassified. Misclassification is a problem, because it leads to exaggeratedly low match success rates, that cannot be improved by iterating the matching process. You can search as long as you want, but a company that in reality does not operate any power plants will not be found in the ABCD regardless of how the settings of the matching algorithm are tweaked. The match success rate can only be a useful metric if the denominator, that is the classification in the loan book, is solid. This is also important to understand which loans are truly not matched. This category should only be companies that actually are active in a given in-scope sector, but were not found in the ABCD.
+A misclassified loan occurs when a counterparty is incorrectly identified as belonging to a PACTA sector based on the sector classification in the loan book.
 
-Identifying misclassified loans is usually a manual process, where counterparties that have not been matched are researched to determine if they should be in scope or not. Depending on the size of the loan book, this can be a time-consuming process. It is recommended to start with the unmatched counterparties with the largest loans, as these have the largest impact on the match success rate. You may then have to decide for yourself, if you want to research all unmatched loans or set a cutoff point, e.g. based on the size of the loan.
+Why does misclassification matter?
+- It artificially lowers match success rates by expecting matches that do not exist in the ABCD dataset.
+- Iterating the matching process will not help—if a company does not operate in an in-scope sector, no adjustments will create a valid match.
+- A reliable match success rate requires an accurate denominator, meaning only loans truly within an in-scope sector should be included.
+
+Misclassification is typically identified manually by reviewing unmatched counterparties to determine if they should be in scope. Since this process can be time-consuming, it is best to prioritize unmatched loans with the largest credit amounts, as they have the greatest impact on the match success rate.
+
+Since misclassified loans cannot be matched, leaving them in the dataset skews results. While correction is not mandatory, adjusting large misclassified loans is strongly recommended for more accurate analysis.
+
+#### Options for Handling Misclassified Loans
+
+Once misclassified loans have been identified, there are two options:
+
+(1) Correct the classification in the loanbook:
+- Update the raw loanbook to reflect the correct sector.
+- Re-run the matching process to ensure the loan is matched appropriately
+- Keep documentation of changes for replicability
+
+(2) Adjust match success rate calculation:
+- If modifying the raw loanbook is not possible, exclude misclassified loans from the success rate calculation.
+- Create a `loans_to_remove.csv` file containing a single column, `id_loan`, listing the misclassified loans. 
+- Remove these loans from the match success calculation to avoid misleading results. 
+
+The first option is generally preferred, as it ensures loans are assigned to the correct sector.
 
 Once the list of misclassified loans is identified, there are two broad options to appropriately these cases. 
 
-1. Correct the classification in the raw loan book and re-run the matching process. If the loan was clearly misclassified, this may be the most appropriate way to handle the issue. It may be a good idea to keep notes on any such changes made in the input data though, to ensure the result is fully replicable. The upside of this approach is that the loan will now either be matched correctly, as it will be assigned the sector that the company should have and therefore find an entry in the ABCD data set to match against. Or, if there is still no match to be found in the ABCD, the loan will correctly be missing in the appropriate sector and therefore indicate a lower match success rate where it should. Lastly, if it should have been `"not in scope"`, it will not inflate the denominator of the match success rate anymore.
-2. If a manual re-classification of the raw loan book is not possible or desired, the calculation of the match success rate can be corrected by creating a file `loans_to_remove.csv`, which should include the column `id_loan` to indicate the precise misclassified loan that was identified. This loan then needs to be explicitly removed from the match success calculation, as shown below.
+#### Example
 
-Let's assume the the loan with id L255 is falsely classified as a steel company. Research shows this company is not a primary steel producer, but it makes steel-based products for end use. Hence it is active downstream in the value chain and cannot be matched to the ABCD. If we cannot correct the input sector classification, we instead create a csv file with the id of the misclassified loan. In practice, this can be done programmatically or manually.
+Suppose a loan with ID L255 is falsely classified as a steel company but actually produces steel-based products, making it part of the downstream value chain rather than primary steel production. Since it cannot be matched to ABCD, but the sector classification cannot be changed, we handle it by creating a CSV file with its ID.
+
+This correction process can be done programmatically or manually, ensuring more accurate match success rate reporting.
 
 ```{r}
 readr::write_csv(
@@ -421,7 +460,7 @@ readr::write_csv(
 
 ```
 
-The loans_to_remove.csv file should have just one column, id_loan, and therefore be structured as follows:
+The `loans_to_remove.csv` file should have just one column, `id_loan`, and therefore be structured as follows:
 
 ```{r, echo = FALSE, results = 'asis'}
 pacta.loanbook:::list_col_names_and_types(tibble::tibble(id_loan = "x"))
@@ -464,18 +503,13 @@ coverage_corrected %>%
   plot_coverage(sector, loan_size_outstanding)
 ```
 
-The reason why it is a good idea to either correct misclassified loans or disregard them in the calculation of the match success rate is that a misclassified loan cannot possibly be matched in a given sector. Therefore, no amount of work would be sufficient to improve the sector match success rate, because it is calculated against an incorrect baseline. Technically, the user is not forced to correct misclassifications, and there may be a limit to how much time should be spent on this, but it is recommended to at least correct large misclassified loans.
-
-...
-
-
 ## Calculate PACTA alignment metrics
 
-You can calculate scenario targets using two different approaches: Market Share Approach, or Sectoral Decarbonization Approach.
+PACTA alignment metrics can be calculated using two approaches: the Market Share Approach and the Sectoral Decarbonization Approach.
 
 ### Market Share Approach
 
-The [Market Share Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html) is used to calculate scenario targets for the `production` of a technology in a sector. For example, we can use this approach to set targets for the production of electric vehicles in the automotive sector. This approach is recommended for sectors where a granular technology scenario roadmap exists.
+The [Market Share Approach](cookbook_metrics.html#market-share-approach) sets scenario targets based on the production of a technology within a sector. For example, it can define targets for electric vehicle production in the automotive sector. This approach is recommended for sectors with detailed technology roadmaps.
 
 Targets can be set at the portfolio level:
 
@@ -495,7 +529,7 @@ market_share_targets_portfolio <-
 market_share_targets_portfolio
 ```
 
-Or at the company level:
+or at the company level:
 
 ```{r market-share-targets-company, R.options = list(width = 400)}
 market_share_targets_company <-
@@ -522,7 +556,8 @@ Remember to replace `tempdir()` with the path to the directory that you wish to 
 
 ### Sectoral Decarbonization Approach
 
-The [Sectoral Decarbonization Approach](https://rmi-pacta.github.io/r2dii.analysis/articles/target-sda.html) is used to calculate scenario targets for the `emission_factor` of a sector. For example, you can use this approach to set targets for the average emission factor of the cement sector. This approach is recommended for sectors lacking technology roadmaps.
+The [Sectoral Decarbonization Approach](cookbook_metrics.html#sectoral-decarbonization-approach) sets scenario targets based on a sector's emission factor. For example, it can define targets for the average emission factor in the cement sector. This approach is recommended for sectors without detailed technology roadmaps.
+
 
 ```{r sda-targets, R.options = list(width = 400)}
 # Use this dataset to practice but eventually you should use your own data.
@@ -540,7 +575,7 @@ sda_targets <-
 sda_targets
 ```
 
-Or at the company level:
+or at the company level:
 
 ```{r sda-targets-company, R.options = list(width = 400)}
 sda_targets_company <-
@@ -566,9 +601,7 @@ Remember to replace `tempdir()` with the path to the directory that you wish to 
 
 ## Visualize PACTA alignment metrics
 
-There are a large variety of possible visualizations stemming from the outputs 
-of `target_market_share()` and `target_sda()`. Below, we highlight a couple of 
-common plots that can easily be created using the `{pacta.loanbook}` package.
+A variety of visualizations can be generated from the outputs of `target_market_share()` and `target_sda()`. Below, we highlight a few common plots that can be easily created using the `{pacta.loanbook}` package.
 
 ### Market Share: Sector-level technology mix
 
@@ -593,7 +626,7 @@ qplot_techmix(data)
 ### Market Share: Technology-level volume trajectory
 
 You can also plot the technology-specific volume trend. All starting values are
-normalized to 1, to emphasize that we are comparing the rates of buildout and/or
+normalized to 1, to emphasize that we are comparing the rates of build-out and/or
 retirement. 
 
 ```{r trajetory-portfolio}
