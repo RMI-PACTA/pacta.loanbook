@@ -267,7 +267,7 @@ sector_in_scope <- glue::glue_collapse(
 
 `{pacta.loanbook}` allows you to match loans from your loanbook to the companies in an asset-based company dataset. However, not all loans will have a match -- some companies may be missing from the ABCD dataset, or they may operate outisde the PACTA focus sectors (`r sector_in_scope`).
 
-To assess how much of your loan book is successfully matched, you can circulate matching coverage in two ways:
+To assess how much of your loan book is successfully matched, you can calculate matching coverage in two ways:
 
 (1) By dollar value: Measure the portion of your loan book covered, using one of the `loan_size_*` columns. 
 
