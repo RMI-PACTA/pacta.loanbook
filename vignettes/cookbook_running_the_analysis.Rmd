@@ -421,7 +421,7 @@ A misclassified loan occurs when a counterparty is incorrectly identified as bel
 
 Why does misclassification matter?
 - It artificially lowers match success rates by expecting matches that do not exist in the ABCD dataset.
-- Iterating the matching process won’t help—if a company doesn’t operate in an in-scope sector, no adjustments will create a valid match.
+- Iterating the matching process will not help—if a company does not operate in an in-scope sector, no adjustments will create a valid match.
 - A reliable match success rate requires an accurate denominator, meaning only loans truly within an in-scope sector should be included.
 
 Misclassification is typically identified manually by reviewing unmatched counterparties to determine if they should be in scope. Since this process can be time-consuming, it’s best to prioritize unmatched loans with the largest amounts, as they have the greatest impact on the match success rate.
