@@ -14,12 +14,54 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo = FALSE}
+```{r setup, warning = FALSE, message = FALSE}
 library(dplyr)
 library(tidyr)
 library(pacta.loanbook)
 library(writexl)
+```
 
+```{r function_for_output_tables, echo = FALSE}
+result_table <- function(data, title, subtitle = NULL) {
+  table_data <- gt::gt(data)
+  
+  table_data <- gt::tab_header(
+    data = table_data,
+    title = title,
+    subtitle = subtitle
+  )
+
+  # table_data <-
+  #   gt::cols_width(
+  #     .data = table_data,
+  #     year ~ gt::px(100),
+  #     technology_share ~ gt::px(100)
+  #   )
+    
+  table_data <-
+    gt::tab_style(
+      data = table_data,
+      style = gt::cell_text(size = "smaller"),
+      locations = gt::cells_body(columns = everything())
+    )
+  
+  table_data <-
+    gt::tab_options(
+      data = table_data,
+      ihtml.active = TRUE,
+      ihtml.use_pagination = FALSE,
+      ihtml.use_sorting = TRUE,
+      ihtml.use_highlight = TRUE
+    )
+  
+  table_data <- gt::fmt_passthrough(table_data)
+  
+  table_data
+}
+
+```
+
+```{r prepare_data, echo = FALSE, warning = FALSE, message = FALSE}
 writexl::write_xlsx(
   x = loanbook_demo,
   path = file.path(tempdir(), "loanbook.xlsx")
@@ -145,7 +187,7 @@ Financial regulators across a variety of jurisdictions in the world have introdu
 
 Assuming the user operates under regulation that matches the scope of PACTA at least for parts of the reporting, the following could be an imaginable scenario of reporting. For a materiality assessment of loan book exposures to climate relevant sectors, users may want to map the loans in their loan book to PACTA sectors. For example, for a bank that lends to clients in PACTA scope in power generation and steel manufacturing, and  has some additional clients that are not in scope of any of the PACTA sectors, the materiality assessment could be based on the following calculation:
 
-```{r use_case_one_materiality}
+```{r use_case_one_materiality_calculation}
 materiality <- coverage %>% 
   mutate(sector = if_else(!sector %in% c("power", "cement"), "not in scope", sector)) %>% # we assume this bank only lends to cement, power, and not-in-scope companies
   summarise(
@@ -155,8 +197,10 @@ materiality <- coverage %>%
   mutate(
     sector_share_loan_size_outstanding = round(sector_sum_loan_size_outstanding / sum(sector_sum_loan_size_outstanding), 2)
   )
+```
 
-materiality
+```{r use_case_one_materiality_result, echo = FALSE}
+result_table(materiality, title = "Materiality assessment", subtitle = "loan book exposures to climate relevant sectors")
 ```
 
 The bank might report to the supervisor along the lines of:
@@ -171,7 +215,7 @@ Beyond reporting on exposures and materiality, regulation may in some cases requ
 
 An example could be that a regulator asks the FIs to report the physical emission intensity (for SDA sectors) or the high-carbon share (for market share sectors) of their loan book by sector, compared to the sectoral values of scenario XY in year 2030 and compared to the FI’s own target value in 2030. In such cases, the user could use the portfolio weighted emission intensity from their PACTA for Banks loan book level result and compare it against the 2030 value of the appropriate scenario XY from the same result file. If the FI has set targets for that sector, the value it has set should be added to the reporting.
 
-```{r use_case_one_alignment_targets, warning = FALSE}
+```{r use_case_one_alignment_targets_calculation, warning = FALSE}
 tech_mix_power_current <- market_share_targets_portfolio %>% 
   filter(
     sector == "power",
@@ -194,8 +238,6 @@ tech_mix_power_target <- market_share_targets_portfolio %>%
 
 tech_mix_power <- tech_mix_power_current %>% 
   bind_rows(tech_mix_power_target)
-
-tech_mix_power
 
 ei_cement_current <- sda_targets_portfolio %>% 
   filter(
@@ -230,11 +272,17 @@ ei_cement_scenario <- sda_targets_portfolio %>%
 ei_cement <- ei_cement_current %>% 
   bind_rows(ei_cement_target) %>% 
   bind_rows(ei_cement_scenario)
-
-ei_cement
 ```
 
-In this case, the bank might report:
+The outcome would look as follows:
+
+```{r use_case_one_alignment_targets_result, echo = FALSE, warning = FALSE}
+result_table(tech_mix_power, title = "Power sector alignment and targets", subtitle = "high-carbon share")
+
+result_table(ei_cement, title = "Cement sector alignment and targets", subtitle = "emission intensity")
+```
+
+And accordingly, the bank might report:
 
 - The current high-carbon share (coal-fired, gas-fired and oil-fired power plants) of the companies the bank lends to in the power sector is: `r sum(filter(tech_mix_power_current, technology %in% c("coalcap", "gascap", "oilcap"))$technology_share, na.rm = TRUE) * 100`%
 - The target high-carbon share in the power sector that the bank has set itself based in the "target_sda" scenario for 2030 is: `r sum(filter(tech_mix_power_target, technology %in% c("coalcap", "gascap", "oilcap"))$technology_share, na.rm = TRUE) * 100`%
@@ -261,6 +309,7 @@ Internally set sectoral decarbonization targets at the institutional level
 ### Level of analysis
 
 Financial institutions may want to set decarbonization targets for their scope 3 emissions. For a commercial bank, a large share of these will come from the exposure to clients in their loan books. Effectively managing decarbonization of said exposure can be done by setting sectoral targets, to account for the large variations between companies operating in different sectors, including the types of changes companies can implement to reduce GHG emissions and expected timelines of when certain sectors may be able to significantly reduce emissions.
+
 For the financial institution that is setting targets for its loan book, it therefore makes sense to apply a sectoral approach. Doing so at the loan book level is sufficiently granular for institute-wide targets. Company-level targets can be set by or with individual clients and may consider additional levels of details that cannot be covered by PACTA for Banks.
 
 ### Potential application
@@ -299,10 +348,10 @@ available_sectors <- unique(pull(filter(matched, sector %in% c(unique(scenario$s
 ```
 In this example, we set targets for a bank, based on its loan book composition in `r min(scenario$year, na.rm = TRUE)`. The loan book contains exposures to the following PACTA sectors, for which trajectories are available in the scenarios: `r paste(available_sectors, collapse = ", ")`. The bank wants to set targets for the year 2030. The bank has decided to use the "target_sda" scenario as a benchmark for setting targets based on the market share approach and "target_demo" for setting targets based on the sectoral decarbonization approach. Targets are set based on global scenario benchmarks. The following two tables show how targets are set for sectors based on PACTA.
 
-```{r use_case_two_sector_targets_results, warning = FALSE}
-tech_mix_sector_targets
+```{r use_case_two_sector_targets_results, echo = FALSE, warning = FALSE}
+result_table(tech_mix_sector_targets, title = "Sector targets", subtitle = "high-carbon share")
 
-ei_sector_targets
+result_table(ei_sector_targets, title = "Sector targets", subtitle = "emission intensity")
 ```
 
 The sector targets for 2030 based on this loan book are as follows:
@@ -341,6 +390,7 @@ When managing transition risk at the client level, financial institutions will n
 **Overview**
 
 Running a company-level PACTA for Banks analysis provides the bank with an overview of how company-level production (or emission intensity) is expected to develop in the medium term and how that compares to external benchmarks - derived from climate transition scenarios and scaled to the company level using the market share approach or the sectoral decarbonization approach. Banks can use deviations of company plans from those benchmarks as indicators of risk that they may want to manage.
+
 This is only one way of supplementing company level risk information. Other options can be to use the PACTA company level calculations for augmenting existing financial risk models, such as net present value calculations or probability of default calculations. Since such applications are not part of the PACTA scope, we will only cover production based indicators.
 
 When engaging with a client that was identified for risk management, many approaches may lead to reducing risk. Two of the main ones are (1) to engage with the client and try to help them reduce risk and (2) to assess the relationship with the client and potentially reduce exposure.
@@ -393,70 +443,12 @@ misaligned_cement <- cement_company_future_risk %>%
 
 The bank determines the three most misaligned power and cement companies are the following, each of which it intends to engage with directly.
 
-```{r use_case_three_risk_mangement_result, warning = FALSE}
+```{r use_case_three_risk_mangement_result, echo = FALSE}
 # misaligned_coal
-table_misaligned_coal <- gt::gt(misaligned_coal)
-
-table_misaligned_coal <-
-  gt::cols_width(
-    .data = table_misaligned_coal,
-    year ~ gt::px(100),
-    projected ~ gt::px(100),
-    target_sds ~ gt::px(100),
-    deviation ~ gt::px(100)
-  )
-  
-table_misaligned_coal <-
-  gt::tab_style(
-    data = table_misaligned_coal,
-    style = gt::cell_text(size = "smaller"),
-    locations = gt::cells_body(columns = 1:3)
-  )
-
-table_misaligned_coal <-
-  gt::tab_options(
-    data = table_misaligned_coal,
-    ihtml.active = TRUE,
-    ihtml.use_pagination = FALSE,
-    ihtml.use_sorting = TRUE,
-    ihtml.use_highlight = TRUE
-  )
-
-table_misaligned_coal <- gt::fmt_passthrough(table_misaligned_coal)
-
-table_misaligned_coal
+result_table(misaligned_coal, title = "Most misaligned power companies", subtitle = "coal-fired power capacity")
 
 # misaligned_cement
-table_misaligned_cement <- gt::gt(misaligned_cement)
-
-table_misaligned_cement <-
-  gt::cols_width(
-    .data = table_misaligned_cement,
-    year ~ gt::px(100),
-    projected ~ gt::px(100),
-    target_demo ~ gt::px(100),
-    deviation ~ gt::px(100)
-  )
-  
-table_misaligned_cement <-
-  gt::tab_style(
-    data = table_misaligned_cement,
-    style = gt::cell_text(size = "smaller"),
-    locations = gt::cells_body(columns = 1:2)
-  )
-
-table_misaligned_cement <-
-  gt::tab_options(
-    data = table_misaligned_cement,
-    ihtml.active = TRUE,
-    ihtml.use_pagination = FALSE,
-    ihtml.use_sorting = TRUE,
-    ihtml.use_highlight = TRUE
-  )
-
-table_misaligned_cement <- gt::fmt_passthrough(table_misaligned_cement)
-
-table_misaligned_cement
+result_table(misaligned_cement, title = "Most misaligned cement companies", subtitle = "emission intensity")
 
 ```
 
@@ -475,17 +467,58 @@ Assess the credibility of transition plans proposed by clients
 
 ### Level of analysis
 
-Company level analysis of PACTA for Banks can be used to obtain company-level production plans for the medium term. These can be used for credibility assessments of transition plans.
+Company level analysis of PACTA for Banks can be used to obtain client production plans for the medium term. These can be used for credibility assessments of transition plans.
 
 ### Potential application
 
 **Overview**
 
-Clients of financial institutions may develop transition plans for a variety of reasons. One of them can be to demonstrate to the bank that they are actively managing the transition of their business to a low-carbon economy and/or to request transition financing to fund some of the proposed changes. If such a client transition plan includes the currently projected production plans of the company and/or the corresponding production-based emission intensity, the bank can compare the company's projections with the production trajectory based on PACTA for banks. A credible transition plan should have credible projections. The company's current projections should at least mostly line up with those projections. If there are major discrepancies, the bank and the client should engage to understand the root of these deviations. Possible reasons may include data gaps on either side, but differences in asset role up methodologies can lead to differences too. The bank and the company should then agree on an appropriate way of attributing asset-based production values to the company, for example by using an equity ownership consolidation approach. Once both data gaps and consolidation method have been accounted for, any remaining deviations should be inspected in detail, as they may point to problems in the transition plan.
+Clients of financial institutions may develop transition plans for a variety of reasons. One of them can be to demonstrate to the bank that they are actively managing the transition of their business to a low-carbon economy and/or to request transition financing to fund some of the proposed changes. If such a client transition plan includes the currently projected production plans of the company and/or the corresponding production-based emission intensity, the bank can compare the company's projections with the production trajectory based on PACTA for banks. A credible transition plan should have credible projections of future production by technology and/or emission intensities.
+
+The company's current projections should mostly align with projections from PACTA for Banks. If there are major discrepancies, the bank and the client should engage to understand the root of these deviations. Possible reasons may include data gaps on either side or imprecise modelling of certain assets. But differences in consolidation methods can lead to differences too. For example, while PACTA uses an equity ownership approach which assigns the share of production of an asset to a company based on that company's ownership stake, the client might use another method to roll up production - for example a financial control method. The bank and the company should then agree on an appropriate way of attributing asset-based production values to the company. Once both data gaps and consolidation method have been accounted for, any remaining deviations should be inspected in detail, as they may point to problems in the transition plan.
 
 **Example**
 
-...
+Suppose a bank has a client in the power sector that has developed a transition plan to reduce the share of coal-fired power plants in its production mix. The bank has obtained the company's projections for the  total level and share of coal-fired power capacity in its technology mix until 2025 and wants to compare these projections with the PACTA for Banks projections for the same time frame.
+
+```{r use_case_four_transition_plan_calculation}
+power_company_coal_plan <- market_share_targets_company %>% 
+  filter(
+    region == "global",
+    sector == "power",
+    metric == "projected",
+    technology == "coalcap"
+  )
+
+company_select <- power_company_coal_plan$name_abcd[1]
+
+pacta_power_company_coal_plan <- power_company_coal_plan %>% 
+  filter(name_abcd == company_select) %>%
+  select(name_abcd, sector, technology, metric, year, production, technology_share) %>%
+  mutate(
+    production = round(production),
+    technology_share = round(technology_share, 3)
+  )
+
+```
+
+The comparison between the two datasets reveals a significantly lower reported coal power share and level of capacity starting in 2023, compared to the PACTA for Banks projections.
+
+```{r use_case_four_transition_plan_result, echo = FALSE}
+company_provided_power_company_coal_plan <- pacta_power_company_coal_plan %>% 
+  mutate(
+    production_total = production / technology_share,
+    technology_share = if_else(year >= 2023, technology_share - 0.1, technology_share),
+    production = round(production_total * technology_share)
+  ) %>% 
+  select(-production_total)
+
+result_table(company_provided_power_company_coal_plan, title = "Company provided coal power projections")
+
+result_table(pacta_power_company_coal_plan, title = "PACTA-based coal power projections")
+```
+
+Upon engaging with the client `r company_select`, it is determined that the client had already deducted the capacity of a coal-fired power plant from the total capacity in their current projections for which initial plans of an early retirement in 2023 were discussed. However, no final deal had been signed at this stage, so the bank and the client agree that the banks projections should be used as the baseline and the client's projections more accurately describe an aspirational step in the transition plan. With these clarifications, the bank and the client can now assess if their is a role to play for the bank in the early retirement of the coal plant or in other yet-to-be-determined transition activities.
 
 ### Notes and caveats
 
