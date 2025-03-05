@@ -113,7 +113,20 @@
 <div class="section level2">
 <h2 id="target-market-share">Target Market Share<a class="anchor" aria-label="anchor" href="#target-market-share"></a>
 </h2>
-<p>[brief description of Target Market Share metric]</p>
+<p>The target market share approach is used to calculate PACTA alignment
+metrics for the automotive, coal mining, oil &amp; gas and power
+sectors. The commonality of these sectors is that there are production
+pathways by technology or fuel type available for each of them and the
+asset-based company data is available at the same level of technological
+granularity as the pathways. As long as these preconditions are
+fulfilled, the target market share approach could be extended to other
+sectors. The principle idea of the target market share approach is that
+every actor in a sector maintains their market share in terms of output
+units and that each actor reduces their use of high-carbon technologies
+proportionally, while expanding their use of low carbon technologies so
+that their market share remains constant, assuming all other actors
+follow the same approach. In aggregate, this will solve for the scenario
+changes at the sector level.</p>
 <p>For detailed information about the Target Market Share metric and how
 it is calculated, see the <a href="cookbook_metrics.html#market-share-approach">Metrics
 appendix</a>.</p>
@@ -189,13 +202,57 @@ to a low-carbon economy.</p>
 <div class="section level4">
 <h4 id="explanation-of-output-1">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output-1"></a>
 </h4>
-<p>[2 or 3 sentence explanation on plot output]</p>
+<p>The technology mix plot shows how large a share of each technology
+the portfolio or company is exposed to in the sector - both at the time
+of the start of the analysis as well as five years into the future. This
+projected technology mix of the portfolio is compared to the technology
+mix in the benchmark region at the same two points in time. And it is
+compared to the technology mix that the portfolio would have to display
+five years in the future in order to be aligned with the selected
+transition scenario. All three types of technology mixes are shown based
+on assets from the same geographic region, as selected in the
+analysis.</p>
 </div>
 <div class="section level4">
 <h4 id="interpretation-intuition-1">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-1"></a>
 </h4>
-<p>[2 or 3 sentences about interpretation]</p>
-<p>[2 or 3 sentences about intuition]</p>
+<p>For any sector with low-carbon alternatives that can substitute
+high-carbon products or technologies, the technology mix plot shows the
+required relative effort to achieve technology shares in line with
+climate targets. If the low carbon shares of the portfolio/company are
+larger than those of the benchmark in a given year, then the
+portfolio/company can be a leader in the sector. If they are smaller
+than those of the benchmark, then the portfolio/company is a
+laggard.</p>
+<p>In terms of alignment, a portfolio/company is aligned with the
+scenario if the technology shares of the low-carbon alternatives in the
+future are at least as large as those of the low-carbon alternatives
+shown in the technology mix of the climate scenario.</p>
+<p>The overall intuition behind the technology mix plot is that all
+technologies or fuel types in a sector produce equivalent outputs
+(e.g. a MWh of electricity has the same use for the end user, regardless
+of whether it was generated from a coal-fired power plant or a solar
+panel). Given that the outputs are substitutes and with all else being
+equal, from an impact angle it can be said that the higher the share of
+low carbon technologies in the portfolio, the better the result from a
+climate perspective. From a financial risk angle, the intuition depends
+a lot on what the user expects the future of the market of a given
+sector to look like. If the user assumes that transition risk will
+primarily materialize in the form of carbon pricing, then it is again
+possible to say that the higher the share of low-carbon technologies in
+the portfolio, the lower the transition risk. If the user thinks that
+other, potentially opposing factors could be at play in the sector
+transition that shape the future of the market, it may be best to pick a
+scenario that closely resembles that expected future, such that a
+portfolio technology mix similar to the future scenario technology mix
+should reduce transition risk.</p>
+<p>Generally, it is required to assess the alignment of a
+portfolio/company not only by the technology mix, but also by the
+production volume trajectory of the individual technologies of a given
+sector. This is because the technology mix plot cannot show if the
+overall output of the portfolio/company grows or declines, even thought
+he scenario may prescribe an overall production trend for the
+sector.</p>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 </div>
@@ -217,13 +274,52 @@ with the trends set as targets in climate scenarios.</p>
 <div class="section level4">
 <h4 id="explanation-of-output-2">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output-2"></a>
 </h4>
-<p>[2 or 3 sentence explanation on plot output]</p>
+<p>The production volume trajectory plot shows the production volume of
+the portfolio or company for one technology (or fuel type) at a time.
+The plot shows relative changes over a time fame between the start year
+of the analysis and five years into the future (solid black line). This
+projected production volume of the portfolio is compared to the
+production volume in the benchmark region over the same period of time
+(dashed black line). Finally the background of the plot is shaded in a
+color scale from red to yellow and green. The lines between the shaded
+areas represent the relative changes for the technology based on the
+scenario, using the market share approach. For low-carbon technologies,
+anything above the most ambitious scenario will be displayed in green,
+anything below the least ambitious scenario will be displayed in red.
+For high-carbon technologies, anything below the most ambitious scenario
+will be displayed in green, anything above the least ambitious scenario
+will be displayed in red. Generally, the production volume trajectory
+plot shows multiple scenarios from the same scenario publication,
+although it also works when comparing the portfolio to a single scenario
+(the scenario line would split the background in two shaded areas in
+that case).</p>
 </div>
 <div class="section level4">
 <h4 id="interpretation-intuition-2">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-2"></a>
 </h4>
-<p>[2 or 3 sentences about interpretation]</p>
-<p>[2 or 3 sentences about intuition]</p>
+<p>For a technology in a portfolio/company to be perfectly aligned with
+a climate transition scenario, the production pathway (solid black line)
+would have to exactly follow the scenario line (the line separating two
+shaded areas). Low carbon technologies will usually have increasing
+scenario lines for the more ambitious scenarios. Business-as-usual
+scenarios for low-carbon technologies can have scenario lines in either
+direction. For a low-carbon technology, a portfolio/company is aligned
+with any scenario below the production plans. For a high-carbon
+technology, a portfolio/company is aligned with any scenario above the
+production plans.</p>
+<p>The intuition is that low-carbon technologies must be scaled up to
+reach more ambitious climate targets, whereas high-carbon technologies
+have to be scaled down or, in some cases, even phased out. Therefore, if
+the production plan of a portfolio/company scales up a low carbon
+technology faster than the scenario, it contributes strongly to reaching
+the scenario outcome. conversely, if the portfolio/company does not
+scale up low-carbon technologies at the scenario pace, it contributes to
+slowing down the transition below the scenario ambition.</p>
+<p>Another aspect about the intuition behind the more ambitious
+scenarios is that a higher ambition in transitioning to a low-carbon
+economy (scaling up low-carbon technologies and scaling down high-carbon
+technologies) correlates with a lower expected global heating
+outcome.</p>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 </div>
@@ -231,7 +327,36 @@ with the trends set as targets in climate scenarios.</p>
 <div class="section level2">
 <h2 id="sectoral-decarbonization-sda-target">Sectoral Decarbonization (SDA) Target<a class="anchor" aria-label="anchor" href="#sectoral-decarbonization-sda-target"></a>
 </h2>
-<p>[brief description of SDA metric]</p>
+<p>The sectoral decarbonization approach (SDA) is used to calculate
+PACTA alignment metrics for the aviation, cement and steel sectors. The
+commonality of these sectors is that there are no market ready
+production-pathways at the technology level (or fuel type level)
+available yet that can be used to describe how to decarbonize the sector
+activities. They are currently considered “hard-to-abate” sectors. Since
+there are no market-ready low-carbon alternatives available in these
+sectors at the moment, that can be scaled up fast, the SDA approach is
+used to calculate sector-level metrics instead of the technology level
+metrics available for sectors that use the market share approach. These
+sector level metrics are production-based emission intensities, such as
+tonnes of CO<sup>2</sup> per tonne of cement or tonnes of CO<sup>2</sup>
+per tonne of steel. Regardless of how the output unit is produced, this
+is a comparable measure for the entire sector. The principle idea of the
+SDA approach is that the required carbon intensity that a sector needs
+to reach in the future, given assumptions around future production
+volumes, can be derived by dividing a sector specific carbon budget by
+the expected production volume. The current GHG emissions divided by the
+current aggregate sector production volume gives the starting point of
+the emission intensity. If the actors in a sector decarbonize the
+production in a way that follows the average emission intensity of the
+sector, then the scenario assumptions will be solved for in aggregate.
+At the portfolio/company level, the SDA approach requires every actor to
+decarbonize their production following their individual trajectory that
+starts at their current emission intensity and converges on a common
+emission intensity that is the same for all actors in a sector at the
+end of the scenario time frame (for example in 2050). This means that a
+company with an already lower emission intensity will not have to reduce
+their emission intensity as much as a company that lags the current
+sector average.</p>
 <p>For detailed information about the Sectoral Decarbonization (SDA)
 metric and how it is calculated, see the <a href="cookbook_metrics.html#sectoral-decarbonization-approach">Metrics
 appendix</a>.</p>
