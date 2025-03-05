@@ -365,8 +365,8 @@ The sector targets for 2030 based on this loan book are as follows:
   - share of oil-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "oilcap")$technology_share, na.rm = TRUE) * 100`%
   - share of renewable power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "renewablescap")$technology_share, na.rm = TRUE) * 100`%
   - share of hydro power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "hydrocap")$technology_share, na.rm = TRUE) * 100`%
-- The target emission intensity in the cement sector is: `r pull(filter(ei_sector_targets, sector == "cement"), emission_factor_value)` tCO2/t cement
-- The target emission intensity in the steel sector is: `r pull(filter(ei_sector_targets, sector == "steel"), emission_factor_value)` tCO2/t steel
+- The target emission intensity in the cement sector is: `r pull(filter(ei_sector_targets, sector == "cement"), emission_factor_value)` tonnes of CO^2^/tonne of cement
+- The target emission intensity in the steel sector is: `r pull(filter(ei_sector_targets, sector == "steel"), emission_factor_value)` tonnes of CO^2^/tonne of steel
 
 
 ### Notes and caveats
