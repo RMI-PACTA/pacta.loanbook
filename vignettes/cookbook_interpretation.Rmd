@@ -16,7 +16,9 @@ knitr::opts_chunk$set(
 
 ## Target Market Share
 
-[brief description of Target Market Share metric and link to the detail methodology description?]
+[brief description of Target Market Share metric]
+
+For detailed information about the Target Market Share metric and how it is calculated, see the [Metrics appendix](cookbook_metrics.html#market-share-approach).
 
 ### `target_market_share()` function
 
@@ -31,8 +33,6 @@ The `technology_share` and `percentage_of_initial_production_by_scope` variables
 If you use the `by_company = TRUE` option of the `target_market_share()` function, most of what's said above is true except relative to the company listed in that row in the `name_abcd` column.
 
 For detailed information about the table output of the `target_market_share()` function and its columns, see the [data dictionary](data_outputs.html#target_market_share-output).
-
-For detailed information about the Target Market Share metric and how it is calculated, see the [Metrics appendix](cookbook_metrics.html#market-share-approach).
 
 #### Interpretation & Intuition
 
@@ -99,7 +99,9 @@ qplot_trajectory(
 
 ## Sectoral Decarbonization (SDA) Target
 
-[brief description of SDA metric and link to the detail methodology description?]
+[brief description of SDA metric]
+
+For detailed information about the Sectoral Decarbonization (SDA) metric and how it is calculated, see the [Metrics appendix](cookbook_metrics.html#sectoral-decarbonization-approach).
 
 ### `target_sda()` function
 
@@ -107,11 +109,9 @@ The `target_sda()` function calculates the Sectoral Decarbonization Target metri
 
 #### Explanation of Output
 
-[2 or 3 sentences explaining how to read the output]
+The primary column/variable of interest in the output is the `emission_factor_value` variable. What the `emission_factor_value` variable represents depends on the values in all of the other columns, and in particular the `emission_factor_metric` column. If the value in the `emission_factor_metric` column on the same row is `"projected"`, then the value in the `emission_factor_value` variable will represent the physical emission intensity level of your portfolio based on the ABCD data for that sector/year/region/scenario/etc. If the value in the `emission_factor_metric` column on the same row begins with `"target_"`, e.g. `"target_cps"`, then the value in the `emission_factor_value` variable will represent the target level of physical emission intensity for that sector/year/region/scenario/etc. based on the ABCD start year production value of your portfolio modified to be relative to the scenario data for the given year. If the value in the `emission_factor_metric` column on the same row is `"corporate_economy"`, then the value in the `emission_factor_value` variable will represent [the total physical emission intensity levels of the entire sector adjusted by the start year physical emission intensity level of your portfolio, which can be used aa a benchmark to compare to your portfolio's production levels].
 
 For detailed information about the table output of the `target_sda()` function and its columns, see the [data dictionary](data_outputs.html#target_sda-output).
-
-For detailed information about the Target Market Share metric and how it is calculated, see the [Metrics appendix](cookbook_metrics.html#sectoral-decarbonization-approach).
 
 #### Interpretation & Intuition
 
