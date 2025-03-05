@@ -158,21 +158,21 @@ ABCD start year production value of your portfolio modified to be
 relative to the scenario data for the given year. If the value in the
 <code>metric</code> column on the same row is
 <code>"corporate_economy"</code>, then the value in the
-<code>production</code> variable will represent [the total production
-levels of the entire sector adjusted by the start year production level
-of your portfolio, which can be used aa a benchmark to compare to your
-portfolio’s production levels].</p>
+<code>production</code> variable will represent the total production
+levels of the entire sector based on the ABCD for a given region, which
+can be used as a benchmark to compare to your portfolio’s technology mix
+or production volume trajectory.</p>
 <p>The <code>technology_share</code> and
 <code>percentage_of_initial_production_by_scope</code> variables also
 contain values of interest, but they are derivatives of the values
-contained in the <code>production</code> variable. The
-<code>technology_share</code> variable tells the share of the row’s
-technology within its sector, relative to the production values of other
-technologies in the same sector, similar to what is shown in the <a href="cookbook_interpretation.html#technoloy-mix-plot">technology mix
-plots</a>, relative to whatever is defined in the <code>metric</code>
-column in that row. The
-<code>percentage_of_initial_production_by_scope</code> variable shows
-the percent change of the production value from the prior year.</p>
+contained in the <code>production</code> variable. For each
+<code>metric</code>, the <code>technology_share</code> variable
+represents the share of the row’s technology within its sector, relative
+to the production values of other technologies in the same sector,
+similar to what is shown in the <a href="cookbook_interpretation.html#technoloy-mix-plot">technology mix
+plots</a>. The <code>percentage_of_initial_production_by_scope</code>
+variable shows the percent change of the production value from the prior
+year.</p>
 <p>If you use the <code>by_company = TRUE</code> and the
 <code>weight_production = FALSE</code> options of the
 <code><a href="../reference/target_market_share.html">target_market_share()</a></code> function, most of what’s said above
