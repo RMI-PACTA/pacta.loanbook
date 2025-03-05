@@ -139,7 +139,7 @@ For detailed information about the table output of the `target_sda()` function a
 
 ### Emission Intensity Plot
 
-The emission intensity metric measures the average CO2 intensity of the portfolio in the steel and cement sector. This emission intensity is given as CO2/economic unit of output (for example, CO2/per ton of steel produced). This is then compared to an emission intensity reference point set by a climate scenario.
+The emission intensity metric measures the average CO^2^ intensity of the portfolio in the steel and cement sector. This emission intensity is given as CO^2^/economic unit of output (for example, CO^2^/per ton of steel produced). This is then compared to an emission intensity reference point set by a climate scenario.
 
 While this is not the main metric of choice for the largest sectors tackled in this methodology, the emission intensity of the activities financed by the portfolio is nonetheless the first metric in sectors for which no clear technology pathways have been set out (namely, steel and cement). Put differently, for these sectors, no zero-carbon alternative yet exists. As such, it is not possible to use the technology mix metric or the volume production volume trajectory metric to measure alignment. However, it is still imperative to steer capital in a way that aims to decrease carbon emissions in these sectors – hence the emission intensity metric is used.
 
