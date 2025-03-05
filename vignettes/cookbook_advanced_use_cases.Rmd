@@ -206,8 +206,8 @@ result_table(materiality, title = "Materiality assessment", subtitle = "loan boo
 The bank might report to the supervisor along the lines of:
 
 -	`r pull(filter(materiality, sector == "power"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r as.character(pull(filter(materiality, sector == "power"), sector_sum_loan_size_outstanding))` USD) go towards power generation
--	`r pull(filter(materiality, sector == "cement"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r pull(filter(materiality, sector == "cement"), sector_sum_loan_size_outstanding)` USD) go towards cement production
--	`r pull(filter(materiality, sector == "not in scope"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r pull(filter(materiality, sector == "not in scope"), sector_sum_loan_size_outstanding)` USD) go towards other sectors that are not climate relevant
+-	`r pull(filter(materiality, sector == "cement"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r as.character(pull(filter(materiality, sector == "cement"), sector_sum_loan_size_outstanding))` USD) go towards cement production
+-	`r pull(filter(materiality, sector == "not in scope"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r as.character(pull(filter(materiality, sector == "not in scope"), sector_sum_loan_size_outstanding))` USD) go towards other sectors that are not climate relevant
 
 This can be a direct outcome based on the matched and prioritized data set compared with values in the raw loan book data set. (((Note that if sectors in adjacent parts of the value chain are required too, it may be an idea to include loans with both flags: borderline TRUE and FALSE.)))
 For any sectors that the regulation requires disclosure on that are not in PACTA scope, the user would have to review the “not in scope” loans and determine if the sector classifications of those loans match additional sectors the regulation may ask for.
