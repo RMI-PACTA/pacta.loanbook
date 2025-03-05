@@ -167,7 +167,7 @@ sda_targets <-
 qplot_emission_intensity(
   dplyr::filter(
     sda_targets,
-    sector == "cement",
+    sector == "steel",
     region == "global"
   )
 )
