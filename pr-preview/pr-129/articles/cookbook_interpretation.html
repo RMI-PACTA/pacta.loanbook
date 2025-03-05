@@ -113,8 +113,10 @@
 <div class="section level2">
 <h2 id="target-market-share">Target Market Share<a class="anchor" aria-label="anchor" href="#target-market-share"></a>
 </h2>
-<p>[brief description of Target Market Share metric and link to the
-detail methodology description?]</p>
+<p>[brief description of Target Market Share metric]</p>
+<p>For detailed information about the Target Market Share metric and how
+it is calculated, see the <a href="cookbook_metrics.html#market-share-approach">Metrics
+appendix</a>.</p>
 <div class="section level3">
 <h3 id="target_market_share-function">
 <code>target_market_share()</code> function<a class="anchor" aria-label="anchor" href="#target_market_share-function"></a>
@@ -165,9 +167,6 @@ is true except relative to the company listed in that row in the
 <p>For detailed information about the table output of the
 <code><a href="../reference/target_market_share.html">target_market_share()</a></code> function and its columns, see the <a href="data_outputs.html#target_market_share-output">data
 dictionary</a>.</p>
-<p>For detailed information about the Target Market Share metric and how
-it is calculated, see the <a href="cookbook_metrics.html#market-share-approach">Metrics
-appendix</a>.</p>
 </div>
 <div class="section level4">
 <h4 id="interpretation-intuition">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition"></a>
@@ -206,8 +205,10 @@ appendix</a>.</p>
 <div class="section level2">
 <h2 id="sectoral-decarbonization-sda-target">Sectoral Decarbonization (SDA) Target<a class="anchor" aria-label="anchor" href="#sectoral-decarbonization-sda-target"></a>
 </h2>
-<p>[brief description of SDA metric and link to the detail methodology
-description?]</p>
+<p>[brief description of SDA metric]</p>
+<p>For detailed information about the Sectoral Decarbonization (SDA)
+metric and how it is calculated, see the <a href="cookbook_metrics.html#sectoral-decarbonization-approach">Metrics
+appendix</a>.</p>
 <div class="section level3">
 <h3 id="target_sda-function">
 <code>target_sda()</code> function<a class="anchor" aria-label="anchor" href="#target_sda-function"></a>
@@ -219,12 +220,31 @@ depending on the options selected.</p>
 <div class="section level4">
 <h4 id="explanation-of-output-3">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output-3"></a>
 </h4>
-<p>[2 or 3 sentences explaining how to read the output]</p>
+<p>The primary column/variable of interest in the output is the
+<code>emission_factor_value</code> variable. What the
+<code>emission_factor_value</code> variable represents depends on the
+values in all of the other columns, and in particular the
+<code>emission_factor_metric</code> column. If the value in the
+<code>emission_factor_metric</code> column on the same row is
+<code>"projected"</code>, then the value in the
+<code>emission_factor_value</code> variable will represent the physical
+emission intensity level of your portfolio based on the ABCD data for
+that sector/year/region/scenario/etc. If the value in the
+<code>emission_factor_metric</code> column on the same row begins with
+<code>"target_"</code>, e.g. <code>"target_cps"</code>, then the value
+in the <code>emission_factor_value</code> variable will represent the
+target level of physical emission intensity for that
+sector/year/region/scenario/etc. based on the ABCD start year production
+value of your portfolio modified to be relative to the scenario data for
+the given year. If the value in the <code>emission_factor_metric</code>
+column on the same row is <code>"corporate_economy"</code>, then the
+value in the <code>emission_factor_value</code> variable will represent
+[the total physical emission intensity levels of the entire sector
+adjusted by the start year physical emission intensity level of your
+portfolio, which can be used aa a benchmark to compare to your
+portfolio’s production levels].</p>
 <p>For detailed information about the table output of the
 <code><a href="../reference/target_sda.html">target_sda()</a></code> function and its columns, see the <a href="data_outputs.html#target_sda-output">data dictionary</a>.</p>
-<p>For detailed information about the Target Market Share metric and how
-it is calculated, see the <a href="cookbook_metrics.html#sectoral-decarbonization-approach">Metrics
-appendix</a>.</p>
 </div>
 <div class="section level4">
 <h4 id="interpretation-intuition-3">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-3"></a>
