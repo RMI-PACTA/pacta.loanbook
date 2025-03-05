@@ -42,6 +42,8 @@ For detailed information about the table output of the `target_market_share()` f
 
 ### Technoloy Mix Plot
 
+The technology mix metric focuses on technology shifts within the power, fossil fuels and automotive sectors, namely: (i) the changes in the technological processes by which outputs are produced (e.g. shift from coal-fueled to renewable-fueled power capacity), and (ii) changes in the nature of the output itself (e.g. shift from internal combustion engines to electric vehicles). This metric measures the bank’s relative exposure to the economic activities that are impacted by the transition to a low-carbon economy.
+
 #### Explanation of Output
 
 #### Interpretation & Intuition
@@ -70,6 +72,8 @@ qplot_techmix(
 ```
 
 ### Trajectory Plot
+
+The production volume trajectory metric aims to measure the alignment of a portfolio’s projected production volumes, based on the five-year capital plans of companies, to those given in climate scenarios. It is used for the fossil fuels, power, and automotive sectors. Changes in production volumes result either from transfer of production from one technology to another (e.g. internal combustion engines to electric vehicles) or from sheer expansion or contraction in the production coming from the technology/fuel (e.g. a company brings a new coal-fired power plant online). Projected production volumes at a 5-year horizon are considered at the individual client level at the technology level. The resulting volume trajectories are then compared with the trends set as targets in climate scenarios.
 
 #### Explanation of Output
 
@@ -120,6 +124,10 @@ For detailed information about the table output of the `target_sda()` function a
 [2 or 3 sentences about intuition]
 
 ### Emission Intensity Plot
+
+The emission intensity metric measures the average CO2 intensity of the portfolio in the steel and cement sector. This emission intensity is given as CO2/economic unit of output (for example, CO2/per ton of steel produced). This is then compared to an emission intensity reference point set by a climate scenario.
+
+While this is not the main metric of choice for the largest sectors tackled in this methodology, the emission intensity of the activities financed by the portfolio is nonetheless the first metric in sectors for which no clear technology pathways have been set out (namely, steel and cement). Put differently, for these sectors, no zero-carbon alternative yet exists. As such, it is not possible to use the technology mix metric or the volume production volume trajectory metric to measure alignment. However, it is still imperative to steer capital in a way that aims to decrease carbon emissions in these sectors – hence the emission intensity metric is used.
 
 #### Explanation of Output
 
