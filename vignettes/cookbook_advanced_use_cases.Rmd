@@ -205,7 +205,7 @@ result_table(materiality, title = "Materiality assessment", subtitle = "loan boo
 
 The bank might report to the supervisor along the lines of:
 
--	`r pull(filter(materiality, sector == "power"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r pull(filter(materiality, sector == "power"), sector_sum_loan_size_outstanding)` USD) go towards power generation
+-	`r pull(filter(materiality, sector == "power"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r as.character(pull(filter(materiality, sector == "power"), sector_sum_loan_size_outstanding))` USD) go towards power generation
 -	`r pull(filter(materiality, sector == "cement"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r pull(filter(materiality, sector == "cement"), sector_sum_loan_size_outstanding)` USD) go towards cement production
 -	`r pull(filter(materiality, sector == "not in scope"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r pull(filter(materiality, sector == "not in scope"), sector_sum_loan_size_outstanding)` USD) go towards other sectors that are not climate relevant
 
