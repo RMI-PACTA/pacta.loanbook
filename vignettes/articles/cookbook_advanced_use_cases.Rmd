@@ -355,11 +355,23 @@ The sector targets for 2030 based on this loan book are as follows:
 - The target high-carbon share in the automotive sector is: `r sum(filter(tech_mix_sector_targets, sector == "automotive", technology == "ice")$technology_share, na.rm = TRUE) * 100`% - which coincides with the technology level target for light-duty vehicles with internal combustion engines (ice)
 - The target high-carbon share in the power sector is: `r sum(filter(tech_mix_sector_targets, sector == "power", technology %in% c("coalcap", "gascap", "oilcap"))$technology_share, na.rm = TRUE) * 100`%
 - If targets are set by technology in the power sector, the targets would look as follows:
-  - share of coal-fired power plants: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "coalcap")$technology_share, na.rm = TRUE) * 100`%
-  - share of gas-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "gascap")$technology_share, na.rm = TRUE) * 100`%
-  - share of oil-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "oilcap")$technology_share, na.rm = TRUE) * 100`%
-  - share of renewable power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "renewablescap")$technology_share, na.rm = TRUE) * 100`%
-  - share of hydro power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "hydrocap")$technology_share, na.rm = TRUE) * 100`%
+
+```{r share_table_data_prep, echo = FALSE, warning = FALSE}
+coal_share <- sum(filter(tech_mix_sector_targets, technology == "coalcap")$technology_share, na.rm = TRUE)
+gas_share <- sum(filter(tech_mix_sector_targets, technology == "gascap")$technology_share, na.rm = TRUE)
+oil_share <- sum(filter(tech_mix_sector_targets, technology == "oilcap")$technology_share, na.rm = TRUE)
+renewable_share <- sum(filter(tech_mix_sector_targets, technology == "renewablescap")$technology_share, na.rm = TRUE)
+hydro_share <- sum(filter(tech_mix_sector_targets, technology == "hydrocap")$technology_share, na.rm = TRUE)
+```
+
+|                                  |                            |
+|----------------------------------|---------------------------:|
+| share of coal-fired power plants | `r coal_share * 100`%      |
+| share of gas-fired power         | `r gas_share * 100`%       |
+| share of oil-fired power         | `r oil_share * 100`%       |
+| share of renewable power         | `r renewable_share * 100`% |
+| share of hydro power             | `r hydro_share * 100`%     |
+
 - The target emission intensity in the cement sector is: `r pull(filter(ei_sector_targets, sector == "cement"), emission_factor_value)` tonnes of CO^2^/tonne of cement
 - The target emission intensity in the steel sector is: `r pull(filter(ei_sector_targets, sector == "steel"), emission_factor_value)` tonnes of CO^2^/tonne of steel
 
