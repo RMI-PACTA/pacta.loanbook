@@ -126,12 +126,6 @@ If you use the `by_company = TRUE` option of the `target_sda()` function, most o
 
 For detailed information about the table output of the `target_sda()` function and its columns, see the [data dictionary](data_outputs.html#target_sda-output).
 
-#### Interpretation & Intuition
-
-[2 or 3 sentences about interpretation]
-
-[2 or 3 sentences about intuition]
-
 ### Emission Intensity Plot
 
 The emission intensity metric measures the average CO~2~ intensity of the portfolio in the `r cli::format_inline("{unique(co2_intensity_scenario_demo$sector)} sector{?s}")`. This projected emission intensity of a portfolio or company is given as CO~2~/economic unit of output (for example, CO~2~ per ton of steel produced). This five year forward-looking trajectory of the emission intensity is then compared to an emission intensity reference trend over the same period of time based on a climate transition scenario.
