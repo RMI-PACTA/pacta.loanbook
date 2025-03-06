@@ -31,13 +31,6 @@ result_table <- function(data, title, subtitle = NULL) {
     subtitle = subtitle
   )
 
-  # table_data <-
-  #   gt::cols_width(
-  #     .data = table_data,
-  #     year ~ gt::px(100),
-  #     technology_share ~ gt::px(100)
-  #   )
-    
   table_data <-
     gt::tab_style(
       data = table_data,
