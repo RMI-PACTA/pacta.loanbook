@@ -30,7 +30,7 @@ The `target_market_share()` function calculates the Target Market Share metric a
 
 The primary columns/variables of interest in the output are the `production` and `metric` variables. What the `production` variable represents depends on the values in all of the columns that precede it, and in particular the `metric` column. If the value in the `metric` column on the same row is `"projected"`, then the value in the `production` variable will represent the production level of your portfolio based on the ABCD data for that sector/technology/year/scenario/etc. If the value in the `metric` column on the same row begins with `"target_"`, e.g. `"target_cps"`, then the value in the `production` variable will represent the target level of production for that sector/technology/year/scenario/etc. based on the ABCD start year production value of your portfolio modified to be relative to the scenario data for the given year. If the value in the `metric` column on the same row is `"corporate_economy"`, then the value in the `production` variable will represent the total production levels of the entire sector based on the ABCD for a given region, which can be used as a benchmark to compare to your portfolio's technology mix or production volume trajectory.
 
-For example, the output table could be filtered to view the projected coal power production values for of your portfolio with:
+For example, the output table could be filtered to view the projected coal power production values for your portfolio with:
 
 ```{r, message = FALSE, warning = FALSE, R.options = list(width = 400)}
 dplyr::filter(
