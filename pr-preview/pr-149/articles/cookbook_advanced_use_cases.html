@@ -4920,108 +4920,462 @@ does not have any data associated with a “Acme Co.”</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   sector &lt;lgl&gt;, sector_abcd &lt;lgl&gt;, name &lt;lgl&gt;, name_abcd &lt;lgl&gt;, score &lt;lgl&gt;, source &lt;lgl&gt;, borderline &lt;lgl&gt;</span></span></span></code></pre></div>
 <p>Say I had data for Acme Co. from a different source in a
 <code>my_custom_abcd.xlsx</code> file, e.g.</p>
-<table class="table">
-<colgroup>
-<col width="6%">
-<col width="7%">
-<col width="12%">
-<col width="4%">
-<col width="6%">
-<col width="9%">
-<col width="3%">
-<col width="6%">
-<col width="9%">
-<col width="9%">
-<col width="10%">
-<col width="12%">
-</colgroup>
-<thead><tr class="header">
-<th>company_id</th>
-<th>name_company</th>
-<th>lei</th>
-<th>sector</th>
-<th>technology</th>
-<th>production_unit</th>
-<th>year</th>
-<th>production</th>
-<th>emission_factor</th>
-<th>plant_location</th>
-<th>is_ultimate_owner</th>
-<th>emission_factor_unit</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>175</td>
-<td>Acme Co.</td>
-<td>18500033XH6RG332SX57</td>
-<td>power</td>
-<td>hydrocap</td>
-<td>MW</td>
-<td>2020</td>
-<td>12000</td>
-<td></td>
-<td>MY</td>
-<td>TRUE</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>175</td>
-<td>Acme Co.</td>
-<td>18500033XH6RG332SX57</td>
-<td>power</td>
-<td>hydrocap</td>
-<td>MW</td>
-<td>2021</td>
-<td>12000</td>
-<td></td>
-<td>MY</td>
-<td>TRUE</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>175</td>
-<td>Acme Co.</td>
-<td>18500033XH6RG332SX57</td>
-<td>power</td>
-<td>hydrocap</td>
-<td>MW</td>
-<td>2022</td>
-<td>12375</td>
-<td></td>
-<td>MY</td>
-<td>TRUE</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>175</td>
-<td>Acme Co.</td>
-<td>18500033XH6RG332SX57</td>
-<td>power</td>
-<td>hydrocap</td>
-<td>MW</td>
-<td>2023</td>
-<td>13000</td>
-<td></td>
-<td>MY</td>
-<td>TRUE</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>175</td>
-<td>Acme Co.</td>
-<td>18500033XH6RG332SX57</td>
-<td>power</td>
-<td>hydrocap</td>
-<td>MW</td>
-<td>2024</td>
-<td>13000</td>
-<td></td>
-<td>MY</td>
-<td>TRUE</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div id="egslqeqmfa" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#egslqeqmfa table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#egslqeqmfa thead, #egslqeqmfa tbody, #egslqeqmfa tfoot, #egslqeqmfa tr, #egslqeqmfa td, #egslqeqmfa th {
+  border-style: none;
+}
+
+#egslqeqmfa p {
+  margin: 0;
+  padding: 0;
+}
+
+#egslqeqmfa .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#egslqeqmfa .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#egslqeqmfa .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#egslqeqmfa .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#egslqeqmfa .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#egslqeqmfa .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#egslqeqmfa .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#egslqeqmfa .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#egslqeqmfa .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#egslqeqmfa .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#egslqeqmfa .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#egslqeqmfa .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#egslqeqmfa .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#egslqeqmfa .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#egslqeqmfa .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#egslqeqmfa .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#egslqeqmfa .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#egslqeqmfa .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#egslqeqmfa .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#egslqeqmfa .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#egslqeqmfa .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#egslqeqmfa .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#egslqeqmfa .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#egslqeqmfa .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#egslqeqmfa .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#egslqeqmfa .gt_left {
+  text-align: left;
+}
+
+#egslqeqmfa .gt_center {
+  text-align: center;
+}
+
+#egslqeqmfa .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#egslqeqmfa .gt_font_normal {
+  font-weight: normal;
+}
+
+#egslqeqmfa .gt_font_bold {
+  font-weight: bold;
+}
+
+#egslqeqmfa .gt_font_italic {
+  font-style: italic;
+}
+
+#egslqeqmfa .gt_super {
+  font-size: 65%;
+}
+
+#egslqeqmfa .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#egslqeqmfa .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#egslqeqmfa .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#egslqeqmfa .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#egslqeqmfa .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#egslqeqmfa .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#egslqeqmfa .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#egslqeqmfa .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#egslqeqmfa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div style="font-family:system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;border-top-style:solid;border-top-width:2px;border-top-color:#D3D3D3;">
+<div class="gt_heading gt_title gt_font_normal" style="text-size:bigger;">my_custom_abcd.xlsx</div>
+<div class="gt_heading gt_subtitle "></div>
+</div>
+<div id="egslqeqmfa" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="egslqeqmfa">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"company_id":["175","175","175","175","175"],"name_company":["Acme Co.","Acme Co.","Acme Co.","Acme Co.","Acme Co."],"lei":["18500033XH6RG332SX57","18500033XH6RG332SX57","18500033XH6RG332SX57","18500033XH6RG332SX57","18500033XH6RG332SX57"],"sector":["power","power","power","power","power"],"technology":["hydrocap","hydrocap","hydrocap","hydrocap","hydrocap"],"production_unit":["MW","MW","MW","MW","MW"],"year":[2020,2021,2022,2023,2024],"production":[12000,12000,12375,13000,13000],"emission_factor":["NA","NA","NA","NA","NA"],"plant_location":["MY","MY","MY","MY","MY"],"is_ultimate_owner":[true,true,true,true,true],"emission_factor_unit":[null,null,null,null,null]},"columns":[{"id":"company_id","name":"company_id","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["175","175","175","175","175"],"html":true,"align":"right"},{"id":"name_company","name":"name_company","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["Acme Co.","Acme Co.","Acme Co.","Acme Co.","Acme Co."],"html":true,"align":"left"},{"id":"lei","name":"lei","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["18500033XH6RG332SX57","18500033XH6RG332SX57","18500033XH6RG332SX57","18500033XH6RG332SX57","18500033XH6RG332SX57"],"html":true,"align":"left"},{"id":"sector","name":"sector","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["power","power","power","power","power"],"html":true,"align":"left"},{"id":"technology","name":"technology","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["hydrocap","hydrocap","hydrocap","hydrocap","hydrocap"],"html":true,"align":"left"},{"id":"production_unit","name":"production_unit","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["MW","MW","MW","MW","MW"],"html":true,"align":"left"},{"id":"year","name":"year","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["2020","2021","2022","2023","2024"],"html":true,"align":"right"},{"id":"production","name":"production","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["12000","12000","12375","13000","13000"],"html":true,"align":"right"},{"id":"emission_factor","name":"emission_factor","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["NA","NA","NA","NA","NA"],"html":true,"align":"right"},{"id":"plant_location","name":"plant_location","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["MY","MY","MY","MY","MY"],"html":true,"align":"left"},{"id":"is_ultimate_owner","name":"is_ultimate_owner","type":"logical","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["TRUE","TRUE","TRUE","TRUE","TRUE"],"html":true,"align":"center"},{"id":"emission_factor_unit","name":"emission_factor_unit","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'company_id' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'company_id' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'name_company' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'lei' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'year' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'production' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'plant_location' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'is_ultimate_owner' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'emission_factor_unit' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["NA","NA","NA","NA","NA"],"html":true,"align":"left"}],"pagination":false,"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":false,"showPageInfo":true,"minRows":1,"highlight":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"16px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"egslqeqmfa","dataKey":"c61bf2c2b001baa9b3f8eddbd99bce94"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style","tag.attribs.columns.2.style","tag.attribs.columns.3.style","tag.attribs.columns.4.style","tag.attribs.columns.5.style","tag.attribs.columns.6.style","tag.attribs.columns.7.style","tag.attribs.columns.8.style","tag.attribs.columns.9.style","tag.attribs.columns.10.style","tag.attribs.columns.11.style"],"jsHooks":[]}</script>
+</div>
 <p>I could read in this XLSX file, merge the imported data with my
 existing ABCD data, and with the combined ABCD, I get a matched
 loan.</p>
