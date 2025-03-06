@@ -7,11 +7,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include = FALSE, message = FALSE, warning = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+library(pacta.loanbook)
 ```
 
 ## Target Market Share
@@ -27,6 +29,16 @@ The `target_market_share()` function calculates the Target Market Share metric a
 #### Explanation of Output
 
 The primary columns/variables of interest in the output are the `production` and `metric` variables. What the `production` variable represents depends on the values in all of the columns that precede it, and in particular the `metric` column. If the value in the `metric` column on the same row is `"projected"`, then the value in the `production` variable will represent the production level of your portfolio based on the ABCD data for that sector/technology/year/scenario/etc. If the value in the `metric` column on the same row begins with `"target_"`, e.g. `"target_cps"`, then the value in the `production` variable will represent the target level of production for that sector/technology/year/scenario/etc. based on the ABCD start year production value of your portfolio modified to be relative to the scenario data for the given year. If the value in the `metric` column on the same row is `"corporate_economy"`, then the value in the `production` variable will represent the total production levels of the entire sector based on the ABCD for a given region, which can be used as a benchmark to compare to your portfolio's technology mix or production volume trajectory.
+
+For example, the output table could be filtered to view the projected coal power production values for of your portfolio with:
+
+```{r, message = FALSE, warning = FALSE, R.options = list(width = 400)}
+dplyr::filter(
+  market_share,
+  metric == "projected",
+  technology == "coalcap"
+)
+```
 
 The `technology_share` and `percentage_of_initial_production_by_scope` variables also contain values of interest, but they are derivatives of the values contained in the `production` variable. For each `metric`, the `technology_share` variable represents the share of the row's technology within its sector, relative to the production values of other technologies in the same sector, similar to what is shown in the [technology mix plots](cookbook_interpretation.html#technoloy-mix-plot). The `percentage_of_initial_production_by_scope` variable shows the percent change of the production value from the prior year.
 
