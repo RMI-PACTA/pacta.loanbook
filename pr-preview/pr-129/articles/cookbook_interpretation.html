@@ -162,6 +162,28 @@ relative to the scenario data for the given year. If the value in the
 levels of the entire sector based on the ABCD for a given region, which
 can be used as a benchmark to compare to your portfolio’s technology mix
 or production volume trajectory.</p>
+<p>For example, the output table could be filtered to view the projected
+coal power production values for of your portfolio with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
+<span>  <span class="va">market_share</span>,</span>
+<span>  <span class="va">metric</span> <span class="op">==</span> <span class="st">"projected"</span>,</span>
+<span>  <span class="va">technology</span> <span class="op">==</span> <span class="st">"coalcap"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 21 × 10</span></span></span>
+<span><span class="co">#&gt;    sector technology  year region scenario_source metric    production technology_share scope      percentage_of_initial_production_by_scope</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> power  coalcap     <span style="text-decoration: underline;">2</span>020 global demo_2020       projected     <span style="text-decoration: underline;">21</span>766.            0.132 technology                                   0      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> power  coalcap     <span style="text-decoration: underline;">2</span>021 global demo_2020       projected     <span style="text-decoration: underline;">21</span>957.            0.132 technology                                   0.008<span style="text-decoration: underline;">78</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> power  coalcap     <span style="text-decoration: underline;">2</span>022 global demo_2020       projected     <span style="text-decoration: underline;">22</span>148.            0.132 technology                                   0.017<span style="text-decoration: underline;">6</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> power  coalcap     <span style="text-decoration: underline;">2</span>023 global demo_2020       projected     <span style="text-decoration: underline;">22</span>340.            0.129 technology                                   0.026<span style="text-decoration: underline;">3</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> power  coalcap     <span style="text-decoration: underline;">2</span>024 global demo_2020       projected     <span style="text-decoration: underline;">22</span>531.            0.129 technology                                   0.035<span style="text-decoration: underline;">1</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> power  coalcap     <span style="text-decoration: underline;">2</span>025 global demo_2020       projected     <span style="text-decoration: underline;">20</span>104.            0.124 technology                                  -<span style="color: #BB0000;">0.076</span><span style="color: #BB0000; text-decoration: underline;">4</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> power  coalcap     <span style="text-decoration: underline;">2</span>026 global demo_2020       projected     <span style="text-decoration: underline;">20</span>266.            0.125 technology                                  -<span style="color: #BB0000;">0.068</span><span style="color: #BB0000; text-decoration: underline;">9</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> power  coalcap     <span style="text-decoration: underline;">2</span>027 global demo_2020       projected     <span style="text-decoration: underline;">20</span>427.            0.126 technology                                  -<span style="color: #BB0000;">0.061</span><span style="color: #BB0000; text-decoration: underline;">5</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> power  coalcap     <span style="text-decoration: underline;">2</span>028 global demo_2020       projected     <span style="text-decoration: underline;">20</span>589.            0.126 technology                                  -<span style="color: #BB0000;">0.054</span><span style="color: #BB0000; text-decoration: underline;">1</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> power  coalcap     <span style="text-decoration: underline;">2</span>029 global demo_2020       projected     <span style="text-decoration: underline;">20</span>751.            0.128 technology                                  -<span style="color: #BB0000;">0.046</span><span style="color: #BB0000; text-decoration: underline;">6</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more rows</span></span></span></code></pre></div>
 <p>The <code>technology_share</code> and
 <code>percentage_of_initial_production_by_scope</code> variables also
 contain values of interest, but they are derivatives of the values
@@ -254,7 +276,7 @@ sector. This is because the technology mix plot cannot show if the
 overall output of the portfolio/company grows or declines, even thought
 he scenario may prescribe an overall production trend for the
 sector.</p>
-<p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 </div>
 <div class="section level3">
@@ -321,7 +343,7 @@ scenarios is that a higher ambition in transitioning to a low-carbon
 economy (scaling up low-carbon technologies and scaling down high-carbon
 technologies) correlates with a lower expected global heating
 outcome.</p>
-<p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 </div>
 </div>
@@ -480,7 +502,7 @@ from a climate perspective. This is because, assuming the overall
 production of the sector remains constant, the absolute emissions of the
 sector are lower when the emission intensity is lower which, in turn,
 leads to less GHG emissions and finally to less global heating.</p>
-<p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <hr>
 <p><strong>PREVIOUS CHAPTER:</strong> <a href="cookbook_running_the_analysis.html">Running the Analysis</a></p>
 <p><strong>NEXT CHAPTER:</strong> <a href="cookbook_advanced_use_cases.html">Advanced Use Cases</a></p>
