@@ -116,11 +116,6 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropensci.r-universe.dev/writexl" class="external-link">writexl</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="potential-follow-up-actions-based-on-pacta-for-banks-analysis">Potential Follow-up Actions based on PACTA for Banks analysis<a class="anchor" aria-label="anchor" href="#potential-follow-up-actions-based-on-pacta-for-banks-analysis"></a>
 </h2>
@@ -204,7 +199,7 @@ lends to clients in PACTA scope in power generation and steel
 manufacturing, and has some additional clients that are not in scope of
 any of the PACTA sectors, the materiality assessment could be based on
 the following calculation:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">materiality</span> <span class="op">&lt;-</span> <span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sector <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="op">!</span><span class="va">sector</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"power"</span>, <span class="st">"cement"</span><span class="op">)</span>, <span class="st">"not in scope"</span>, <span class="va">sector</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># we assume this bank only lends to cement, power, and not-in-scope companies</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
@@ -704,7 +699,7 @@ weighted emission intensity from their PACTA for Banks loan book level
 result and compare it against the 2030 value of the appropriate scenario
 XY from the same result file. If the FI has set targets for that sector,
 the value it has set should be added to the reporting.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tech_mix_power_current</span> <span class="op">&lt;-</span> <span class="va">market_share_targets_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>    <span class="va">sector</span> <span class="op">==</span> <span class="st">"power"</span>,</span>
@@ -1824,7 +1819,7 @@ which has as its first year the year that is meant to be used as the
 baseline. The ABCD must include that same year and the loan book
 structure should reflect the composition of the loan book at that same
 year, too.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tech_mix_sector_targets</span> <span class="op">&lt;-</span> <span class="va">market_share_targets_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>    <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span>,</span>
@@ -2907,7 +2902,7 @@ scenarios that the bank uses for its sector level targets. The analysis
 is run in 2020 and the bank aims to assess the deviation five years into
 the future, to understand which companies are planning to take action,
 and which ones do not.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">power_company_future_risk</span> <span class="op">&lt;-</span> <span class="va">market_share_targets_company</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>    <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span>,</span>
@@ -2918,7 +2913,7 @@ and which ones do not.</p>
 <span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name_abcd</span>, <span class="va">sector</span>, <span class="va">technology</span>, <span class="va">metric</span>, <span class="va">year</span>, <span class="va">technology_share</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>technology_share <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">technology_share</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"metric"</span>, values_from <span class="op">=</span> <span class="st">"technology_share"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"metric"</span>, values_from <span class="op">=</span> <span class="st">"technology_share"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>deviation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">projected</span> <span class="op">-</span> <span class="va">target_sds</span><span class="op">)</span> <span class="op">/</span> <span class="va">target_sds</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">misaligned_coal</span> <span class="op">&lt;-</span> <span class="va">power_company_future_risk</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -2934,7 +2929,7 @@ and which ones do not.</p>
 <span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name_abcd</span>, <span class="va">sector</span>, <span class="va">emission_factor_metric</span>, <span class="va">year</span>, <span class="va">emission_factor_value</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>emission_factor_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">emission_factor_value</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"emission_factor_metric"</span>, values_from <span class="op">=</span> <span class="st">"emission_factor_value"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"emission_factor_metric"</span>, values_from <span class="op">=</span> <span class="st">"emission_factor_value"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>deviation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">projected</span> <span class="op">-</span> <span class="va">target_demo</span><span class="op">)</span> <span class="op">/</span> <span class="va">target_demo</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">misaligned_cement</span> <span class="op">&lt;-</span> <span class="va">cement_company_future_risk</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -3933,7 +3928,7 @@ production mix. The bank has obtained the company’s projections for the
 total level and share of coal-fired power capacity in its technology mix
 until 2025 and wants to compare these projections with the PACTA for
 Banks projections for the same time frame.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">power_company_coal_plan</span> <span class="op">&lt;-</span> <span class="va">market_share_targets_company</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>    <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span>,</span>
