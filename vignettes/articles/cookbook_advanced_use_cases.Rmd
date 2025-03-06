@@ -14,9 +14,515 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, warning = FALSE, message = FALSE}
+library(dplyr)
+library(tidyr)
 library(pacta.loanbook)
+library(writexl)
 ```
+
+```{r function_for_output_tables, echo = FALSE}
+result_table <- function(data, title, subtitle = NULL) {
+  table_data <- gt::gt(data)
+  
+  table_data <- gt::tab_header(
+    data = table_data,
+    title = title,
+    subtitle = subtitle
+  )
+
+  table_data <-
+    gt::tab_style(
+      data = table_data,
+      style = gt::cell_text(size = "smaller"),
+      locations = gt::cells_body(columns = everything())
+    )
+  
+  table_data <-
+    gt::tab_options(
+      data = table_data,
+      ihtml.active = TRUE,
+      ihtml.use_pagination = FALSE,
+      ihtml.use_sorting = TRUE,
+      ihtml.use_highlight = TRUE
+    )
+  
+  table_data <- gt::fmt_passthrough(table_data)
+  
+  table_data
+}
+
+```
+
+```{r prepare_data, echo = FALSE, warning = FALSE, message = FALSE}
+writexl::write_xlsx(
+  x = loanbook_demo,
+  path = file.path(tempdir(), "loanbook.xlsx")
+)
+
+writexl::write_xlsx(
+  x = abcd_demo,
+  path = file.path(tempdir(), "abcd.xlsx")
+)
+
+loanbook <- readxl::read_excel(path = file.path(tempdir(), "loanbook.xlsx"))
+
+# loanbook
+
+abcd <- readxl::read_excel(path = file.path(tempdir(), "abcd.xlsx"))
+
+# abcd
+
+
+loanbook <- loanbook %>% 
+  mutate(
+    name_ultimate_parent = 
+      ifelse(id_loan == "L1", "unmatched company name", name_ultimate_parent),
+    sector_classification_direct_loantaker = 
+      ifelse(id_loan == "L2", "99", sector_classification_direct_loantaker)
+  )
+
+matched <- loanbook %>% 
+    match_name(abcd) %>% 
+    prioritize()
+
+merge_by <- c(
+    sector_classification_system = "code_system",
+    sector_classification_direct_loantaker = "code"
+  )
+
+loanbook_with_sectors <- loanbook %>% 
+  left_join(sector_classifications, by = merge_by) %>% 
+  mutate(sector_classification_direct_loantaker = as.character(sector_classification_direct_loantaker))
+
+coverage <- left_join(loanbook_with_sectors, matched) %>% 
+  mutate(
+    loan_size_outstanding = as.numeric(loan_size_outstanding),
+    loan_size_credit_limit = as.numeric(loan_size_credit_limit),
+    matched = case_when(
+      score == 1   ~ "Matched", 
+      is.na(score) ~ "Not Matched",
+      TRUE         ~ "Not Matched"
+    ),
+    sector = case_when(
+      borderline == TRUE & matched == "Not Matched" ~ "not in scope",
+      TRUE ~ sector
+    )
+  )
+
+regions <- region_isos_demo
+scenario <- scenario_demo_2020
+
+market_share_targets_portfolio <-
+  target_market_share(
+    data = matched,
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions
+  )
+
+market_share_targets_company <-
+  target_market_share(
+    data = matched,
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions,
+    by_company = TRUE,
+    weight_production = FALSE
+  )
+
+co2 <- co2_intensity_scenario_demo
+
+sda_targets_portfolio <-
+  target_sda(
+    data = matched,
+    abcd = abcd,
+    co2_intensity_scenario = co2,
+    region_isos = regions
+  )
+
+sda_targets_company <-
+  target_sda(
+    data = matched,
+    abcd = abcd,
+    co2_intensity_scenario = co2,
+    region_isos = regions,
+    by_company = TRUE
+  )
+
+```
+
+# Potential Follow-up Actions based on PACTA for Banks analysis
+
+PACTA for Banks analyses can be useful across a diverse set of real-life applications. In this section, we aim to highlight some of the use cases that we consider particularly suitable for the type of analysis at hand. All these use cases are currently either being used or explored by PACTA users.
+
+The types of use cases we explore in this section all build on the standard PACTA for Banks outputs – that is they use results based on the market share approach or the sectoral decarbonization approach – either at loan book level or at company level. They vary by the intended target audience – generally either an internal audience (another department in the FI or management) or an external audience (often either a client or a regulator/supervisor, sometimes the broader public). Additionally, the use cases vary by type, where some are focused more on communicating/reporting and others are more focused on implementing change or informing internal decisions.
+
+We will explain in some detail some of the most established use cases in this cookbook, but we will mention others only briefly, especially ones that have not been explored in quite as much detail yet and that would therefore require additional research before describing potential ways to implement them.
+
+You may notice that none of the example use cases below make use of the three standard PACTA plots - or of any plots for that matter. This is intentional. While we do believe that all plots showcased in this cookbook are useful for interpreting PACTA results and really understanding the intricacies of the results, we believe that further analysis and reporting will almost always be based on precise numbers. This is why we showcase how such use cases make use of the output result tables rather than the plots. An obvious exception would be a public facing analysis or report, but that is not considered an advanced use case in need of a detailed explanation.
+
+## Use Case 1: Regulatory compliance
+
+### Description
+
+Report or disclose loan book alignment or targets to a financial supervisor or regulator
+
+### Level of analysis
+
+Regulators will normally not mandate reporting on individual clients and normally leave the choice of clients up to the financial institution. Instead, rules and regulations apply to the structure of the overall loan book. Hence, in most cases, calculating PACTA for Banks results at the loan book level will be the appropriate depth of analysis for this use case.
+
+### Potential application
+
+**Overview**
+
+Financial regulators across a variety of jurisdictions in the world have introduced regulations to account for climate-related financial risks in recent years. The exact specifications of regulatory requirements differ on a case-by-case basis. But in many cases, the regulations involve reporting on the materiality of climate-relevant exposures and in some cases they include reporting on forward-looking metrics, such as alignment of emissions or production to an external benchmark or emissions/production targets of the financial institution to ensure climate transition trends are accounted for by financial institutions. In all cases, requirements can vary by type of climate metric to report on (e.g. absolute emissions, financed emissions, production-based emission intensity, production volumes), sectoral scope and granularity (financial scope and granularity: all exposures combined at the loan book level, aggregate exposures to clients in climate-relevant sectors only, sector-level exposures to climate relevant sectors; sectoral scope: reporting on all parts of the value chain or on the ones most relevant for emissions).
+
+**Example**
+
+Assuming the user operates under regulation that matches the scope of PACTA at least for parts of the reporting, the following could be an imaginable scenario of reporting. For a materiality assessment of loan book exposures to climate relevant sectors, users may want to map the loans in their loan book to PACTA sectors. For example, for a bank that lends to clients in PACTA scope in power generation and steel manufacturing, and  has some additional clients that are not in scope of any of the PACTA sectors, the materiality assessment could be based on the following calculation:
+
+```{r use_case_one_materiality_calculation}
+materiality <- coverage %>% 
+  mutate(sector = if_else(!sector %in% c("power", "cement"), "not in scope", sector)) %>% # we assume this bank only lends to cement, power, and not-in-scope companies
+  summarise(
+    sector_sum_loan_size_outstanding = sum(loan_size_outstanding),
+    .by = sector
+  ) %>%
+  mutate(
+    sector_share_loan_size_outstanding = round(sector_sum_loan_size_outstanding / sum(sector_sum_loan_size_outstanding), 2)
+  )
+```
+
+```{r use_case_one_materiality_result, echo = FALSE}
+result_table(materiality, title = "Materiality assessment", subtitle = "loan book exposures to climate relevant sectors")
+```
+
+The bank might report to the supervisor along the lines of:
+
+-	`r pull(filter(materiality, sector == "power"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r as.character(pull(filter(materiality, sector == "power"), sector_sum_loan_size_outstanding))` USD) go towards power generation
+-	`r pull(filter(materiality, sector == "cement"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r as.character(pull(filter(materiality, sector == "cement"), sector_sum_loan_size_outstanding))` USD) go towards cement production
+-	`r pull(filter(materiality, sector == "not in scope"), sector_share_loan_size_outstanding) * 100`% of the loan book (`r as.character(pull(filter(materiality, sector == "not in scope"), sector_sum_loan_size_outstanding))` USD) go towards other sectors that are not climate relevant
+
+This can be a direct outcome based on the matched and prioritized data set compared with values in the raw loan book data set.
+
+Beyond reporting on exposures and materiality, regulation may in some cases request alignment values and/or sector targets. This is again something that PACTA can provide. Note that forward-looking metrics often require a comparison against an external benchmark value. Such values are often derived from climate transition scenarios. In case such benchmarks are to be used, it is recommended to check if the regulation prescribes one particular data source or if it leaves the choice to the user. In any case, the user should be able to explain why a certain benchmark was chosen. Such reasons can be that for a given sector, there is only one data provider that matches the sectoral granularity required. In other cases, it may be that the scenario assumptions in one scenario are deemed more realistic than in another one or even that the regulator specifically prescribes the use of one source for credibility and comparability reasons. In theory, the regulator may provide explicit benchmark values against which to measure the alignment or targets.
+
+An example could be that a regulator asks the FIs to report the physical emission intensity (for SDA sectors) or the high-carbon share (for market share sectors) of their loan book by sector, compared to the sectoral values of scenario XY in year 2030 and compared to the FI’s own target value in 2030. In such cases, the user could use the portfolio weighted emission intensity from their PACTA for Banks loan book level result and compare it against the 2030 value of the appropriate scenario XY from the same result file. If the FI has set targets for that sector, the value it has set should be added to the reporting.
+
+```{r use_case_one_alignment_targets_calculation, warning = FALSE}
+tech_mix_power_current <- market_share_targets_portfolio %>% 
+  filter(
+    sector == "power",
+    region == "global",
+    metric == "projected",
+    year == 2020
+  ) %>% 
+  select(sector, technology, metric, year, technology_share) %>% 
+  mutate(technology_share = round(technology_share, 3))
+
+tech_mix_power_target <- market_share_targets_portfolio %>% 
+  filter(
+    sector == "power",
+    region == "global",
+    metric == "target_sds",
+    year == 2030
+  ) %>% 
+  select(sector, technology, metric, year, technology_share) %>% 
+  mutate(technology_share = round(technology_share, 3))
+
+tech_mix_power <- tech_mix_power_current %>% 
+  bind_rows(tech_mix_power_target)
+
+ei_cement_current <- sda_targets_portfolio %>% 
+  filter(
+    sector == "cement",
+    region == "global",
+    emission_factor_metric == "projected",
+    year == 2020
+  ) %>% 
+  select(sector, emission_factor_metric, year, emission_factor_value) %>% 
+  mutate(emission_factor_value = round(emission_factor_value, 3))
+
+ei_cement_target <- sda_targets_portfolio %>% 
+  filter(
+    sector == "cement",
+    region == "global",
+    emission_factor_metric == "target_demo",
+    year == 2030
+  ) %>% 
+  select(sector, emission_factor_metric, year, emission_factor_value) %>% 
+  mutate(emission_factor_value = round(emission_factor_value, 3))
+
+ei_cement_scenario <- sda_targets_portfolio %>% 
+  filter(
+    sector == "cement",
+    region == "global",
+    emission_factor_metric == "adjusted_scenario_demo",
+    year == 2030
+  ) %>% 
+  select(sector, emission_factor_metric, year, emission_factor_value) %>% 
+  mutate(emission_factor_value = round(emission_factor_value, 3))
+
+ei_cement <- ei_cement_current %>% 
+  bind_rows(ei_cement_target) %>% 
+  bind_rows(ei_cement_scenario)
+```
+
+The outcome would look as follows:
+
+```{r use_case_one_alignment_targets_result, echo = FALSE, warning = FALSE}
+result_table(tech_mix_power, title = "Power sector alignment and targets", subtitle = "high-carbon share")
+
+result_table(ei_cement, title = "Cement sector alignment and targets", subtitle = "emission intensity")
+```
+
+And accordingly, the bank might report:
+
+- The current high-carbon share (coal-fired, gas-fired and oil-fired power plants) of the companies the bank lends to in the power sector is: `r sum(filter(tech_mix_power_current, technology %in% c("coalcap", "gascap", "oilcap"))$technology_share, na.rm = TRUE) * 100`%
+- The target high-carbon share in the power sector that the bank has set itself based in the "target_sda" scenario for 2030 is: `r sum(filter(tech_mix_power_target, technology %in% c("coalcap", "gascap", "oilcap"))$technology_share, na.rm = TRUE) * 100`%
+- The current emission intensity of the companies the bank lends to in the cement sector is: `r pull(ei_cement_current, emission_factor_value)` tonnes of CO^2^/tonne of cement
+- The target emission intensity in the cement sector that the bank has set itself based in the "target_demo" scenario for 2030 is: `r pull(ei_cement_target, emission_factor_value)` tonnes of CO^2^/tonne of cement
+- The scenario value of the emission intensity in the cement sector in the "adjusted_scenario_demo" scenario for 2030 is: `r pull(ei_cement_scenario, emission_factor_value)` tonnes of CO^2^/tonne of cement
+
+This would be an indication that the bank has not reached its 2030 targets in either of the two sectors, as of 2020, the start year of the analysis.
+
+The bank would also report that their target for the cement sector is slightly more ambitious than the scenario value. For sectors using a market share approach, the PACTA calculations do not directly return the technology share of the scenario. Users would have to derive this value based on the input scenario data, if needed.
+
+### Notes and caveats
+
+- Some design choices of the PACTA methodology make it useful for reporting in specific cases. Where regulation requires a sectoral decomposition of exposures and climate metrics are either production-based emission intensity or absolute production volumes, PACTA may be a useful approach. Note that the sector scope in PACTA focuses on specific parts of sectoral value chains, that are the main sources of GHG emissions. If regulation allows reporting on those sections of the value chain, PACTA may be a good fit. If full value chains are required, PACTA may not be ideal. For example, in the power sector, PACTA covers power generation, but not transmission or services. This is because by far the majority of the GHG emissions come from the generation process. If the regulation were to require alignment or target values for power transmission, then PACTA would not apply. In our experience, it may be good to reach out to the regulatory body and validate the expectations.
+- For any sectors that the regulation requires disclosure on that are not in PACTA scope, the user would have to review the “not in scope” loans and determine if the sector classifications of those loans match additional sectors the regulation may ask for. Similarly, for sections in the value chain of in-scope sectors that are upstream or downstream of what PACTA covers, reviewing loans that end up not being matched may be required.
+- Regulatory requirements vary by jurisdiction. This means that individual considerations have to be accounted for in each case and we cannot provide country-specific guidance on how to use PACTA for Banks to fulfill any specific regulatory requirements in this cookbook. We encourage the user to check how the relevant dimensions of PACTA fit the regulation they operate under and – in case of uncertainty – to reach out to their supervisory authority to validate their approach to reporting.
+- Another important note is that the design of PACTA implies that scenarios used in the PACTA for Banks calculation must have sectoral pathways that can be mapped to PACTA scopes and that the pathways must be production-based. This is in contrast to scenarios that are – for example – restricted to absolute emission pathways, sectoral financial projections, or lack sectoral granularity. Hence, not all climate transition scenarios will be usable with PACTA. If the regulator requires using a scenario that does not match the inherent requirements of PACTA, then users may have to use other types of analyses for reporting.
+
+## Use Case 2: Sectoral target setting
+
+### Description
+
+Internally set sectoral decarbonization targets at the institutional level
+
+### Level of analysis
+
+Financial institutions may want to set decarbonization targets for their scope 3 emissions. For a commercial bank, a large share of these will come from the exposure to clients in their loan books. Effectively managing decarbonization of said exposure can be done by setting sectoral targets, to account for the large variations between companies operating in different sectors, including the types of changes companies can implement to reduce GHG emissions and expected timelines of when certain sectors may be able to significantly reduce emissions.
+
+For the financial institution that is setting targets for its loan book, it therefore makes sense to apply a sectoral approach. Doing so at the loan book level is sufficiently granular for institute-wide targets. Company-level targets can be set by or with individual clients and may consider additional levels of details that cannot be covered by PACTA for Banks.
+
+### Potential application
+
+**Overview**
+
+Financial institutions may want to set sectoral decarbonization targets for a variety of reasons. They may be mandated by law or regulation, The financial institution may want to set targets and demonstrate progress to disclose its activities to the broader public for reputational reasons, or it may want to set targets for strategic business reasons, e.g. to ensure it follows market trends and/or exploits new business opportunities. sectoral targets can vary in terms of metric and scope. For example, a financial institution may decide to set targets based on the absolute emissions associated with their clients or based on financed emissions. Both these metrics have their use cases, but they are not covered in PACTA. Alternatively, financial institutions may set targets based on production pathways or production based-emission intensities. These types of metrics are particularly closely tied to the main sources of GHG emissions and PACTA can be a tool to help set such targets. Targets are calculated using the [market share approach](cookbook_metrics.html#market-share-approach) for sectors with technology-level production pathways or using the [sectoral decarbonization approach](cookbook_metrics.html#sectoral-decarbonization-approach) for sectors with production-based emission intensities. Both approaches calculate targets based on the initial composition of the loan book and aim to distribute the burden of decarbonizing equally across all actors in the sector.
+
+In terms of scope, financial institutions may want to cover all sectors their clients operate in or they may be satisfied with setting targets for the most climate-relevant sectors. They may want to use the same approach for all sectors, or they may be open to using different approaches for different sectors, based on what is most appropriate for the sector in question. PACTA for Banks can be used to set targets for some of the most climate-relevant sectors, among them oil and gas extraction, coal mining, automotive manufacturing, power generation, cement production, steel manufacturing, and aviation. It is particularly useful in focusing on the parts of the value chain of each of these sectors that needs to change most to reduce GHG emissions and thus provides target metrics that are actionable for helping reduce real world GHG emissions.
+
+**Example**
+
+When calculating sector-level targets for a loan book, users can use portfolio-level PACTA for Banks results and filter them for the year for which they wish to set targets, the scenario which should be used as a benchmark against which to set targets and the region for which the scenario benchmark should be used. Note that it is important to ensure that targets will differ based on a change of the baseline year. Users determine that baseline year by choosing a scenario file as an input which has as its first year the year that is meant to be used as the baseline. The ABCD must include that same year and the loan book structure should reflect the composition of the loan book at that same year, too.
+
+```{r use_case_two_sector_targets_calculation, warning = FALSE}
+tech_mix_sector_targets <- market_share_targets_portfolio %>% 
+  filter(
+    region == "global",
+    metric == "target_sds",
+    year == 2030
+  ) %>% 
+  select(sector, technology, metric, year, technology_share) %>% 
+  mutate(technology_share = round(technology_share, 3))
+
+ei_sector_targets <- sda_targets_portfolio %>% 
+  filter(
+    region == "global",
+    emission_factor_metric == "target_demo",
+    year == 2030
+  ) %>% 
+  select(sector, emission_factor_metric, year, emission_factor_value) %>% 
+  mutate(emission_factor_value = round(emission_factor_value, 3))
+
+available_sectors <- unique(pull(filter(matched, sector %in% c(unique(scenario$sector), unique(co2$sector))), sector))
+
+```
+In this example, we set targets for a bank, based on its loan book composition in `r min(scenario$year, na.rm = TRUE)`. The loan book contains exposures to the following PACTA sectors, for which trajectories are available in the scenarios: `r paste(available_sectors, collapse = ", ")`. The bank wants to set targets for the year 2030. The bank has decided to use the "target_sda" scenario as a benchmark for setting targets based on the market share approach and "target_demo" for setting targets based on the sectoral decarbonization approach. Targets are set based on global scenario benchmarks. The following two tables show how targets are set for sectors based on PACTA.
+
+```{r use_case_two_sector_targets_results, echo = FALSE, warning = FALSE}
+result_table(tech_mix_sector_targets, title = "Sector targets", subtitle = "high-carbon share")
+
+result_table(ei_sector_targets, title = "Sector targets", subtitle = "emission intensity")
+```
+
+The sector targets for 2030 based on this loan book are as follows:
+
+- The target high-carbon share in the automotive sector is: `r sum(filter(tech_mix_sector_targets, sector == "automotive", technology == "ice")$technology_share, na.rm = TRUE) * 100`% - which coincides with the technology level target for light-duty vehicles with internal combustion engines (ice)
+- The target high-carbon share in the power sector is: `r sum(filter(tech_mix_sector_targets, sector == "power", technology %in% c("coalcap", "gascap", "oilcap"))$technology_share, na.rm = TRUE) * 100`%
+- If targets are set by technology in the power sector, the targets would look as follows:
+  - share of coal-fired power plants: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "coalcap")$technology_share, na.rm = TRUE) * 100`%
+  - share of gas-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "gascap")$technology_share, na.rm = TRUE) * 100`%
+  - share of oil-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "oilcap")$technology_share, na.rm = TRUE) * 100`%
+  - share of renewable power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "renewablescap")$technology_share, na.rm = TRUE) * 100`%
+  - share of hydro power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "hydrocap")$technology_share, na.rm = TRUE) * 100`%
+- The target emission intensity in the cement sector is: `r pull(filter(ei_sector_targets, sector == "cement"), emission_factor_value)` tonnes of CO^2^/tonne of cement
+- The target emission intensity in the steel sector is: `r pull(filter(ei_sector_targets, sector == "steel"), emission_factor_value)` tonnes of CO^2^/tonne of steel
+
+
+### Notes and caveats
+
+- If the financial institution wants to set production-based targets and is comfortable focusing on those parts of sectoral value chains that have the highest impact on sectoral GHG emissions, PACTA may be appropriate. If the financial institution wants to set targets based on absolute emissions or financed emissions, PACTA for Banks is not the right tool. If the financial institution wants to set targets for all sectors their clients operate in, PACTA for Banks can only cover a part of that and may have to be complemented with other tools. If, however,  the financial institution wants to use the same approach for all sectors, PACTA for Banks will not be able to serve their purposes.
+- Full sectoral coverage of all economic sectors that a financial institution's clients operate in, cannot be achieved with PACTA, as PACTA is designed to focus on parts of value chains that are especially relevant to GHG reductions and for which climate transition scenarios must exist that either provide sector level production-based emission intensities or technology-level production pathways. Depending on the metric and granularity, PACTA will be able to provide target values based on the market share approach for sectors with technology level production pathways or based on the sectoral decarbonization approach for sectors with production-based emission intensities.
+- The financial institute may want to set targets based on regional benchmarks, especially where the transition is expected to lag behind the global average. This is sometimes the case in EMDCs for a variety of reasons, such as limited access to capital for financing transition technologies or due to economic development considerations. Not all scenarios will have a granular regional breakdown available for every sector that a financial institution may want to set targets for.
+- Sector targets are initially set based on the composition of the loan book in the baseline year. It may make sense to rebaseline the targets later on, if the composition of the loan book changes in terms of the relative weight of the individual exposures in the loan book. Financial institutions could recalculate the targets using the same baseline and target years by using an updated version of the loan book composition to obtain the targets that would have been set, had the loan book already had the current composition when the targets were initially calculated.
+
+## Use Case 3: Risk management (client-side)
+
+### Description
+
+Engage clients to manage climate transition risk
+
+### Level of analysis
+
+When managing transition risk at the client level, financial institutions will need client level information which can be obtained from running PACTA for Banks at the company level. This type of analysis will rarely be the only information used to manage transition risk, but it can play an important role.
+
+### Potential application
+
+**Overview**
+
+Running a company-level PACTA for Banks analysis provides the bank with an overview of how company-level production (or emission intensity) is expected to develop in the medium term and how that compares to external benchmarks - derived from climate transition scenarios and scaled to the company level using the market share approach or the sectoral decarbonization approach. Banks can use deviations of company plans from those benchmarks as indicators of risk that they may want to manage.
+
+This is only one way of supplementing company level risk information. Other options can be to use the PACTA company level calculations for augmenting existing financial risk models, such as net present value calculations or probability of default calculations. Since such applications are not part of the PACTA scope, we will only cover production based indicators.
+
+When engaging with a client that was identified for risk management, many approaches may lead to reducing risk. Two of the main ones are (1) to engage with the client and try to help them reduce risk and (2) to assess the relationship with the client and potentially reduce exposure.
+
+The first approach can include providing the client with information on how their production plans compare to external benchmarks and what the implications of that are for their risk profile. This can be used as an impulse to work on a transition plan for the client to help reduce their exposure to high-carbon activities and increase their exposure to low-carbon activities. Some of these actions can be relatively easy to implement by the client autonomously. Other actions may require dedicated funding, for example to develop new technologies or to scale up existing low-carbon technologies, possible while decommissioning high-carbon assets. Such activities are related to the broader topic of client transition assessments and transition finance, which are not covered in detail in this cookbook. But thorough additional information on both can be found in other RMI resources, such as the Transition Finance Hub (**LINK**) and ... **LINK TO CTA**.
+
+If a client turns out to be unwilling or incapable to engage and manage their transition risk, another route may be taken by the financial institution. In such a scenario, the financial institution may decide to reduce its exposure to the client, including the possible termination of the relationship at maturity.
+
+**Example**
+
+Suppose a bank aims to reduce the transition risk in their loan book in order to align its risk exposure with the organizationally defined level of risk appetite and it has determined that transition risk in its loanbook predominantly emanates from the power and cement sectors. In the power sector, it has additionally determined that the best way to reduce transition risk is for companies to reduce the share of he highest emitting fuel type used in power generation, coal. 
+
+The bank can now use PACTA for banks results at company level to determine the deviation of the production plans of its counterparties from the company-level benchmarks, based on the same transition scenarios that the bank uses for its sector level targets. The analysis is run in 2020 and the bank aims to assess the deviation five years into the future, to understand which companies are planning to take action, and which ones do not.
+
+```{r use_case_three_risk_mangement_calculation, warning = FALSE}
+power_company_future_risk <- market_share_targets_company %>% 
+  filter(
+    region == "global",
+    sector == "power",
+    metric %in% c("projected", "target_sds"),
+    year == 2025,
+    technology == "coalcap"
+  ) %>% 
+  select(name_abcd, sector, technology, metric, year, technology_share) %>%
+  mutate(technology_share = round(technology_share, 3)) %>% 
+  pivot_wider(names_from = "metric", values_from = "technology_share") %>% 
+  mutate(deviation = round((projected - target_sds) / target_sds, 3))
+
+misaligned_coal <- power_company_future_risk %>% 
+  arrange(desc(deviation)) %>% 
+  head(3)
+
+cement_company_future_risk <- sda_targets_company %>% 
+  filter(
+    region == "global",
+    sector == "cement",
+    emission_factor_metric %in% c("projected", "target_demo"),
+    year == 2025
+  ) %>% 
+  select(name_abcd, sector, emission_factor_metric, year, emission_factor_value) %>% 
+  mutate(emission_factor_value = round(emission_factor_value, 3)) %>% 
+  pivot_wider(names_from = "emission_factor_metric", values_from = "emission_factor_value") %>% 
+  mutate(deviation = round((projected - target_demo) / target_demo, 3))
+
+misaligned_cement <- cement_company_future_risk %>% 
+  arrange(desc(deviation)) %>% 
+  head(3)
+
+```
+
+The bank determines the three most misaligned power and cement companies are the following, each of which it intends to engage with directly.
+
+```{r use_case_three_risk_mangement_result, echo = FALSE}
+# misaligned_coal
+result_table(misaligned_coal, title = "Most misaligned power companies", subtitle = "coal-fired power capacity")
+
+# misaligned_cement
+result_table(misaligned_cement, title = "Most misaligned cement companies", subtitle = "emission intensity")
+
+```
+
+The bank can now engage with these companies to understand the reasons for the deviation and to help them develop a transition plan to reduce their exposure to high-carbon activities. In the power sector, their highest priority is to engage with `r head(misaligned_coal, 1)[["name_abcd"]]` and in the cement sector, their top priority is `r head(misaligned_cement, 1)[["name_abcd"]]`. If either of these companies turns out to be unwilling to or incapable to manage their transition risk, the bank can also use this information to assess the relationship with these companies and potentially reduce the financial exposure.
+
+
+### Notes and caveats
+
+- PACTA for Banks will most likely not be the only piece of information that banks will use to determine client transition risk. Nonetheless it provides an insight that can be very helpful to ensure counterparties are aligned with what the bank considers acceptable climate transition risk. It can be a good idea to compare clients to the same scenario benchmark that a bank uses to set its own sector level targets, if that target is considered to align with a likely direction of the wider market. All of that said, banks should always ensure they consider every relevant piece of information in assessing client risk and PACTA is not designed to provide this comprehensive overview on its own.
+
+## Use Case 4: Transition planning (client-side)
+
+### Description
+
+Assess the credibility of transition plans proposed by clients
+
+### Level of analysis
+
+Company level analysis of PACTA for Banks can be used to obtain client production plans for the medium term. These can be used for credibility assessments of transition plans.
+
+### Potential application
+
+**Overview**
+
+Clients of financial institutions may develop transition plans for a variety of reasons. One of them can be to demonstrate to the bank that they are actively managing the transition of their business to a low-carbon economy and/or to request transition financing to fund some of the proposed changes. If such a client transition plan includes the currently projected production plans of the company and/or the corresponding production-based emission intensity, the bank can compare the company's projections with the production trajectory based on PACTA for banks. A credible transition plan should have credible projections of future production by technology and/or emission intensities.
+
+The company's current projections should mostly align with projections from PACTA for Banks. If there are major discrepancies, the bank and the client should engage to understand the root of these deviations. Possible reasons may include data gaps on either side or imprecise modelling of certain assets. But differences in consolidation methods can lead to differences too. For example, while PACTA uses an equity ownership approach which assigns the share of production of an asset to a company based on that company's ownership stake, the client might use another method to roll up production - for example a financial control method. The bank and the company should then agree on an appropriate way of attributing asset-based production values to the company. Once both data gaps and consolidation method have been accounted for, any remaining deviations should be inspected in detail, as they may point to problems in the transition plan.
+
+**Example**
+
+Suppose a bank has a client in the power sector that has developed a transition plan to reduce the share of coal-fired power plants in its production mix. The bank has obtained the company's projections for the  total level and share of coal-fired power capacity in its technology mix until 2025 and wants to compare these projections with the PACTA for Banks projections for the same time frame.
+
+```{r use_case_four_transition_plan_calculation}
+power_company_coal_plan <- market_share_targets_company %>% 
+  filter(
+    region == "global",
+    sector == "power",
+    metric == "projected",
+    technology == "coalcap"
+  )
+
+company_select <- power_company_coal_plan$name_abcd[1]
+
+pacta_power_company_coal_plan <- power_company_coal_plan %>% 
+  filter(name_abcd == company_select) %>%
+  select(name_abcd, sector, technology, metric, year, production, technology_share) %>%
+  mutate(
+    production = round(production),
+    technology_share = round(technology_share, 3)
+  )
+
+```
+
+The comparison between the two datasets reveals a significantly lower reported coal power share and level of capacity starting in 2023, compared to the PACTA for Banks projections.
+
+```{r use_case_four_transition_plan_result, echo = FALSE}
+company_provided_power_company_coal_plan <- pacta_power_company_coal_plan %>% 
+  mutate(
+    production_total = production / technology_share,
+    technology_share = if_else(year >= 2023, technology_share - 0.1, technology_share),
+    production = round(production_total * technology_share)
+  ) %>% 
+  select(-production_total)
+
+result_table(company_provided_power_company_coal_plan, title = "Company provided coal power projections")
+
+result_table(pacta_power_company_coal_plan, title = "PACTA-based coal power projections")
+```
+
+Upon engaging with the client `r company_select`, it is determined that the client had already deducted the capacity of a coal-fired power plant from the total capacity in their current projections for which initial plans of an early retirement in 2023 were discussed. However, no final deal had been signed at this stage, so the bank and the client agree that the banks projections should be used as the baseline and the client's projections more accurately describe an aspirational step in the transition plan. With these clarifications, the bank and the client can now assess if their is a role to play for the bank in the early retirement of the coal plant or in other yet-to-be-determined transition activities.
+
+### Notes and caveats
+
+- Past experience shows that companies will not always use the same consolidation methods as used in PACTA. Any production values provided by a company should therefore be checked thoroughly. In case the discrepancies cannot be resolved, it may be necessary to reach out to the provider of the ABCD used in the PACTA analysis to help understand such differences. They should be able to provide additional methodological documentation for how data is handled for each sector and can pinpoint issues at the asset level. Since RMI is not a data provider, the user will have to engage with the data provider directly. In case the data provider is Asset Impact, the following website contains information on how to reach out **LINK**.
+
+## Other Use Cases
+
+A variety of other use cases are conceivable and could benefit from PACTA for Banks analysis. These could include additional components of risk management, such as taking steps internally to adapt the risk position based on PACTA analyses; using PACTA to identify opportunities to expand into certain sectors/fields, possibly identifying clients that are well positioned to make this step; informing the development of new products or services in the realm of transition finance (**ADD LINK to TF Hub**). With additional research, these use cases may be part of future iterations of this cookbook.
 
 ---
 
