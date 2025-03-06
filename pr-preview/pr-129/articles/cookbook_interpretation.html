@@ -204,12 +204,6 @@ is true except relative to the company listed in that row in the
 <code><a href="../reference/target_market_share.html">target_market_share()</a></code> function and its columns, see the <a href="data_outputs.html#target_market_share-output">data
 dictionary</a>.</p>
 </div>
-<div class="section level4">
-<h4 id="interpretation-intuition">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition"></a>
-</h4>
-<p>[2 or 3 sentences about interpretation]</p>
-<p>[2 or 3 sentences about intuition]</p>
-</div>
 </div>
 <div class="section level3">
 <h3 id="technoloy-mix-plot">Technoloy Mix Plot<a class="anchor" aria-label="anchor" href="#technoloy-mix-plot"></a>
@@ -237,7 +231,7 @@ on assets from the same geographic region, as selected in the
 analysis.</p>
 </div>
 <div class="section level4">
-<h4 id="interpretation-intuition-1">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-1"></a>
+<h4 id="interpretation-intuition">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition"></a>
 </h4>
 <p>For any sector with low-carbon alternatives that can substitute
 high-carbon products or technologies, the technology mix plot shows the
@@ -318,7 +312,7 @@ although it also works when comparing the portfolio to a single scenario
 that case).</p>
 </div>
 <div class="section level4">
-<h4 id="interpretation-intuition-2">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-2"></a>
+<h4 id="interpretation-intuition-1">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-1"></a>
 </h4>
 <p>For a technology in a portfolio/company to be perfectly aligned with
 a climate transition scenario, the production pathway (solid black line)
@@ -408,30 +402,25 @@ that sector/year/region/scenario/etc. If the value in the
 <code>"target_"</code>, e.g. <code>"target_cps"</code>, then the value
 in the <code>emission_factor_value</code> variable will represent the
 target level of physical emission intensity for that
-sector/year/region/scenario/etc. based on the ABCD start year production
-value of your portfolio modified to be relative to the scenario data for
-the given year. If the value in the <code>emission_factor_metric</code>
-column on the same row is <code>"corporate_economy"</code>, then the
-value in the <code>emission_factor_value</code> variable will represent
-[the total physical emission intensity levels of the entire sector
-adjusted by the start year physical emission intensity level of your
-portfolio, which can be used aa a benchmark to compare to your
-portfolio’s production levels]. If the value in the
-<code>emission_factor_metric</code> column on the same row starts with
-<code>"adjusted_"</code>, then the value in the
-<code>emission_factor_value</code> variable will represent [?].</p>
+sector/year/region/scenario/etc. This target level is derived based on
+the ABCD emission intensity value of your portfolio in the start year
+and converging with the emission intensity of the scenario in the final
+year. If the value in the <code>emission_factor_metric</code> column on
+the same row is <code>"corporate_economy"</code>, then the value in the
+<code>emission_factor_value</code> variable will represent the weighted
+average physical emission intensity of the entire sector, which can be
+used as a benchmark to compare to your portfolio’s emission intensity
+levels. If the value in the <code>emission_factor_metric</code> column
+on the same row starts with <code>"adjusted_"</code>, then the value in
+the <code>emission_factor_value</code> variable will represent the
+scenario trajectory of the emission intensity, adjusted for differences
+between the sector totals in the ABCD and the scenario data.</p>
 <p>If you use the <code>by_company = TRUE</code> option of the
 <code><a href="../reference/target_sda.html">target_sda()</a></code> function, most of what’s said above is true
 except relative to the company listed in that row in the
 <code>name_abcd</code> column.</p>
 <p>For detailed information about the table output of the
 <code><a href="../reference/target_sda.html">target_sda()</a></code> function and its columns, see the <a href="data_outputs.html#target_sda-output">data dictionary</a>.</p>
-</div>
-<div class="section level4">
-<h4 id="interpretation-intuition-3">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-3"></a>
-</h4>
-<p>[2 or 3 sentences about interpretation]</p>
-<p>[2 or 3 sentences about intuition]</p>
 </div>
 </div>
 <div class="section level3">
@@ -474,7 +463,7 @@ at the end of the scenario time frame (often 2050 and not always shown
 in the plot).</p>
 </div>
 <div class="section level4">
-<h4 id="interpretation-intuition-4">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-4"></a>
+<h4 id="interpretation-intuition-2">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-2"></a>
 </h4>
 <p>The start value of the portfolio or company relative to the benchmark
 tells us if the portfolio or company is a leader or a laggard in the
