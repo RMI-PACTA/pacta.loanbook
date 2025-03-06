@@ -160,6 +160,8 @@ The types of use cases we explore in this section all build on the standard PACT
 
 We will explain in some detail some of the most established use cases in this cookbook, but we will mention others only briefly, especially ones that have not been explored in quite as much detail yet and that would therefore require additional research before describing potential ways to implement them.
 
+You may notice that none of the example use cases below make use of the three standard PACTA plots - or of any plots for that matter. This is intentional. While we do believe that all plots showcased in this cookbook are useful for interpreting PACTA results and really understanding the intricacies of the results, we believe that further analysis and reporting will almost always be based on precise numbers. This is why we showcase how such use cases make use of the output result tables rather than the plots. An obvious exception would be a public facing analysis or report, but that is not considered an advanced use case in need of a detailed explanation.
+
 ## Use Case 1: Regulatory compliance
 
 ### Description
