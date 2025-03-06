@@ -2,20 +2,24 @@
 % Please edit documentation in R/update.R
 \name{pacta_loanbook_update}
 \alias{pacta_loanbook_update}
-\title{Update pacta.loanbook packages}
+\title{Update \code{{pacta.loanbook}} packages}
 \usage{
 pacta_loanbook_update(recursive = FALSE, repos = getOption("repos"))
 }
 \arguments{
 \item{recursive}{If \code{TRUE}, will also list all dependencies of
-pacta.loanbook packages.}
+\code{{pacta.loanbook}} packages.}
 
 \item{repos}{The repositories to use to check for updates.
 Defaults to \code{getOption("repos")}.}
 }
+\value{
+returns \code{NULL} invisibly. The function is called for its side effect
+of printing the status of locally installed, relevant packages.
+}
 \description{
-This will check to see if all pacta.loanbook packages (and optionally, their
-dependencies) are up-to-date, and will install after an interactive
+This will check to see if all \code{{pacta.loanbook}} packages (and optionally,
+their dependencies) are up-to-date, and will install after an interactive
 confirmation.
 }
 \examples{
@@ -23,3 +27,12 @@ confirmation.
 pacta_loanbook_update()
 }
 }
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_conflicts}()},
+\code{\link{pacta_loanbook_deps}()},
+\code{\link{pacta_loanbook_logo}()},
+\code{\link{pacta_loanbook_packages}()},
+\code{\link{pacta_loanbook_sitrep}()}
+}
+\concept{utility functions}

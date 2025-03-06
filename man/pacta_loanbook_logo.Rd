@@ -2,13 +2,17 @@
 % Please edit documentation in R/logo.R
 \name{pacta_loanbook_logo}
 \alias{pacta_loanbook_logo}
-\title{The pacta_loanbook logo, using ASCII or Unicode characters}
+\title{The \code{{pacta.loanbook}} logo, using ASCII or Unicode characters}
 \usage{
 pacta_loanbook_logo(unicode = cli::is_utf8_output())
 }
 \arguments{
-\item{unicode}{Whether to use Unicode symbols. Default is \code{TRUE}
-on UTF-8 platforms.}
+\item{unicode}{Whether to use Unicode symbols. Default is \code{TRUE} on UTF-8
+platforms.}
+}
+\value{
+a \code{pacta_loanbook_logo} classed \code{cli_ansi_string} which will print
+the PACTA logo in the console in interactive sessions.
 }
 \description{
 Use \code{\link[cli:ansi_strip]{cli::ansi_strip()}} to get rid of the colors.
@@ -16,3 +20,12 @@ Use \code{\link[cli:ansi_strip]{cli::ansi_strip()}} to get rid of the colors.
 \examples{
 pacta_loanbook_logo()
 }
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_conflicts}()},
+\code{\link{pacta_loanbook_deps}()},
+\code{\link{pacta_loanbook_packages}()},
+\code{\link{pacta_loanbook_sitrep}()},
+\code{\link{pacta_loanbook_update}()}
+}
+\concept{utility functions}

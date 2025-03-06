@@ -2,13 +2,31 @@
 % Please edit documentation in R/update.R
 \name{pacta_loanbook_sitrep}
 \alias{pacta_loanbook_sitrep}
-\title{Get a situation report on pacta.loanbook}
+\title{Get a situation report on \code{{pacta.loanbook}}}
 \usage{
 pacta_loanbook_sitrep()
 }
-\description{
-This function gives a quick overview of the versions of R and RStudio as
-well as all pacta.loanbook packages. It's primarily designed to help you get
-a quick idea of what's going on when you're helping someone else debug
-a problem.
+\value{
+returns \code{NULL} invisibly. The function is called for its side effect
+of printing a situation report of \code{{pacta.loanbook}} and its core packages.
 }
+\description{
+This function gives a quick overview of the versions of R and RStudio as well
+as the \code{{pacta.loanbook}} package. It's primarily designed to help you get a
+quick idea of what's going on when you're helping someone else debug a
+problem.
+}
+\examples{
+\dontrun{
+pacta_loanbook_sitrep()
+}
+}
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_conflicts}()},
+\code{\link{pacta_loanbook_deps}()},
+\code{\link{pacta_loanbook_logo}()},
+\code{\link{pacta_loanbook_packages}()},
+\code{\link{pacta_loanbook_update}()}
+}
+\concept{utility functions}

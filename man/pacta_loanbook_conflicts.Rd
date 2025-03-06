@@ -2,7 +2,7 @@
 % Please edit documentation in R/conflicts.R
 \name{pacta_loanbook_conflicts}
 \alias{pacta_loanbook_conflicts}
-\title{Conflicts between the pacta.loanbook and other packages}
+\title{Conflicts between the \code{{pacta.loanbook}} and other packages}
 \usage{
 pacta_loanbook_conflicts(only = NULL)
 }
@@ -10,9 +10,14 @@ pacta_loanbook_conflicts(only = NULL)
 \item{only}{Set this to a character vector to restrict to conflicts only
 with these packages.}
 }
+\value{
+a \code{pacta_loanbook_conflicts} classed list which will print a list of
+conflicts to the console in interactive sessions, or \code{NULL} if no conflicts
+are found.
+}
 \description{
-This function lists all the conflicts between packages in the pacta.loanbook
-and other packages that you have loaded.
+This function lists all the conflicts between packages in the
+\code{{pacta.loanbook}} and other packages that you have loaded.
 }
 \details{
 There are four conflicts that are deliberately ignored: \code{intersect},
@@ -23,3 +28,12 @@ existing code.
 \examples{
 pacta_loanbook_conflicts()
 }
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_deps}()},
+\code{\link{pacta_loanbook_logo}()},
+\code{\link{pacta_loanbook_packages}()},
+\code{\link{pacta_loanbook_sitrep}()},
+\code{\link{pacta_loanbook_update}()}
+}
+\concept{utility functions}

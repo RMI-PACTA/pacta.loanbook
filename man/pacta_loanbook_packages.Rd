@@ -2,16 +2,29 @@
 % Please edit documentation in R/utils.R
 \name{pacta_loanbook_packages}
 \alias{pacta_loanbook_packages}
-\title{List all packages in pacta.loanbook}
+\title{List all packages in \code{{pacta.loanbook}}}
 \usage{
 pacta_loanbook_packages(include_self = TRUE)
 }
 \arguments{
-\item{include_self}{Include pacta.loanbook in the list?}
+\item{include_self}{Include \code{{pacta.loanbook}} in the list?}
+}
+\value{
+a character vector containing the names of packages imported by
+\code{{pacta.loanbook}}.
 }
 \description{
-List all packages in pacta.loanbook
+List all packages in \code{{pacta.loanbook}}
 }
 \examples{
 pacta_loanbook_packages()
 }
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_conflicts}()},
+\code{\link{pacta_loanbook_deps}()},
+\code{\link{pacta_loanbook_logo}()},
+\code{\link{pacta_loanbook_sitrep}()},
+\code{\link{pacta_loanbook_update}()}
+}
+\concept{utility functions}

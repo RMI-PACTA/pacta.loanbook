@@ -5,10 +5,40 @@ template:
 development:
   mode: auto
 
+reference:
+- title: Utility functions
+  contents: has_concept("utility functions")
+- title: Matching functions
+  contents: has_concept("matching functions")
+- title: Analysis functions
+  contents: has_concept("analysis functions")
+- title: Plotting functions
+- subtitle: Preparing data
+  contents: starts_with("prep_")
+- subtitle: Quick plots
+  contents: starts_with("qplot_")
+- subtitle: Plots
+  contents: starts_with("plot_")
+- subtitle: Styling functions
+  contents:
+  - starts_with("theme_")
+  - starts_with("scale_")
+- subtitle: Convert labels
+  contents:
+  - starts_with("recode_")
+  - starts_with("spell_out_")
+  - starts_with("to_title")
+- title: Datasets
+  contents: has_concept("datasets")
+- title: Demo data
+  contents: has_concept("demo data")
+- title: Data dictionary
+  contents: has_concept("data dictionary")
+
 navbar:
   structure:
-    left:  [intro, reference, cookbook, data, articles, news]
-    right: [search, packages, sit.rep, github]
+    left:  [intro, cookbook, data, reference, news]
+    right: [search, packages, github]
   components:
     cookbook:
       text: Cookbook
@@ -23,6 +53,8 @@ navbar:
         href: articles/cookbook_interpretation.html
       - text: Advanced Use Cases
         href: articles/cookbook_advanced_use_cases.html
+      - text: Metrics
+        href: articles/cookbook_metrics.html
     data:
       text: Data Dictionaries
       menu:
@@ -32,13 +64,28 @@ navbar:
         href: articles/data_abcd.html
       - text: Scenario
         href: articles/data_scenario.html
-      - text: Classification
+      - text: Sector Classification
         href: articles/data_classification.html
-      - text: Outputs
+      - text: PACTA Outputs
         href: articles/data_outputs.html
-    articles:
-      text: Articles
+    packages:
+      text: Packages
       menu:
+      - text: pacta.loanbook
+        href: https://rmi-pacta.github.io/pacta.loanbook/
+      - text: r2dii.data
+        href: https://rmi-pacta.github.io/r2dii.data/
+      - text: r2dii.match
+        href: https://rmi-pacta.github.io/r2dii.match/
+      - text: r2dii.analysis
+        href: https://rmi-pacta.github.io/r2dii.analysis/
+      - text: r2dii.plot
+        href: https://rmi-pacta.github.io/r2dii.plot/
+      - text: ---
+      - text: sit.rep
+        href: articles/pacta_loanbook_sit_rep.html
+      - text: ---
+      - text: Articles
       - text: r2dii.match
       - text: Calculating Matching Coverage
         href: https://rmi-pacta.github.io/r2dii.match/articles/matching-coverage.html
@@ -52,19 +99,3 @@ navbar:
         href: https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html
       - text: "Indicator Choices: Weighted Production vs. Weighted Percent Change in Production"
         href: https://rmi-pacta.github.io/r2dii.analysis/articles/production-percent-change.html
-    sit.rep:
-      text: sit.rep
-      href: articles/pacta_loanbook_sit_rep.html
-    packages:
-      text: Packages
-      menu:
-      - text: pacta.loanbook
-        href: https://rmi-pacta.github.io/pacta.loanbook/
-      - text: r2dii.data
-        href: https://rmi-pacta.github.io/r2dii.data
-      - text: r2dii.match
-        href: https://rmi-pacta.github.io/r2dii.match
-      - text: r2dii.analysis
-        href: https://rmi-pacta.github.io/r2dii.analysis
-      - text: r2dii.plot
-        href: https://rmi-pacta.github.io/r2dii.plot

@@ -14,10 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
+library(pacta.loanbook)
+
 plot_table <- function(dataset_name) {
-  library(r2dii.data)
-  table <- r2dii.data::data_dictionary
+  table <- data_dictionary
   table <- dplyr::filter(table, .data[["dataset"]] == dataset_name)
   table <- dplyr::arrange(table, match(column, names(get(dataset_name))))
   table_plot <- gt::gt(dplyr::select(table, -"dataset"))
@@ -57,10 +58,10 @@ Climate transition scenario dataset, prepared for the PACTA for Banks software, 
 plot_table("scenario_demo_2020")
 ```
 
-The `{r2dii.data}` package provides an example climate transition scenario dataset `r2dii.data::scenario_demo_2020`.
+The `{pacta.loanbook}` package provides an example climate transition scenario dataset `scenario_demo_2020`.
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::scenario_demo_2020
+scenario_demo_2020
 ```
 
 ## Climate transition scenario dataset (CO^2^ intensity pathways for sectoral decarbonization approach)
@@ -71,8 +72,8 @@ CO^2^ intensity climate transition scenario dataset, prepared for the PACTA for 
 plot_table("co2_intensity_scenario_demo")
 ```
 
-The `{r2dii.data}` package provides an example CO^2^ intensity climate transition scenario dataset `r2dii.data::co2_intensity_scenario_demo`.
+The `{pacta.loanbook}` package provides an example CO^2^ intensity climate transition scenario dataset `co2_intensity_scenario_demo`.
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::co2_intensity_scenario_demo
+co2_intensity_scenario_demo
 ```

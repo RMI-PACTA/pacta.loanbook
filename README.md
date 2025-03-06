@@ -13,16 +13,18 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 ## Overview
 
-The goal of pacta.loanbook is to provide and easy way to load and
-install all packages needed for running PACTA for Banks.
+`{pacta.loanbook}` supports the PACTA analysis of corporate lending
+portfolios—loanbooks—by providing an easy way to install, load and run
+the necessary underlying R packages.
 
-It also serves as a space to provide thorough and comprehensive
-documentation for running PACTA for Banks, in the form of a
-[cookbook](https://rmi-pacta.github.io/pacta.loanbook/articles/cookbook_overview.html).
+In addition to simplifying package management, `{pacta.loanbook}` serves
+as a central resource for documentation. The
+[cookbook](https://rmi-pacta.github.io/pacta.loanbook/articles/cookbook_overview.html)
+explains in detail how you can run a PACTA analysis.
 
 ## Installation
 
-You can install the development version of pacta.loanbook from
+You can install the development version of `{pacta.loanbook}` from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -30,9 +32,10 @@ You can install the development version of pacta.loanbook from
 pak::pak("RMI-PACTA/pacta.loanbook")
 ```
 
-## Usage (WIP!)
+## Usage
 
-`library(pacta.loanbook)` will load the core pacta.loanbook packages:
+`library(pacta.loanbook)` will load all the functions and datasets from
+the underlying packages:
 
 - [r2dii.data](https://rmi-pacta.github.io/r2dii.data/), for input data
   sets used in PACTA for Banks (e.g. sector classification systems,
@@ -45,3 +48,7 @@ pak::pak("RMI-PACTA/pacta.loanbook")
   climate transition scenarios.
 - [r2dii.plot](https://rmi-pacta.github.io/r2dii.plot/), for plotting
   the results of the alignment analysis in standard PACTA plot format.
+
+Refer to the
+[cookbook](https://rmi-pacta.github.io/pacta.loanbook/articles/cookbook_overview.html)
+for a detailed explanation on how to use the software.

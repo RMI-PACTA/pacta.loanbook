@@ -92,6 +92,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: 'github-actions[bot]'
+          body-includes: R CMD check CRAN incoming feasibility check notes found
 
       - name: Create or update comment
         if: steps.rcmdcheck.outputs.notes > 0 && github.event_name == 'pull_request'

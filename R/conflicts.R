@@ -1,18 +1,27 @@
-#' Conflicts between the pacta.loanbook and other packages
+#' Conflicts between the `{pacta.loanbook}` and other packages
 #'
-#' This function lists all the conflicts between packages in the pacta.loanbook
-#' and other packages that you have loaded.
+#' This function lists all the conflicts between packages in the
+#' `{pacta.loanbook}` and other packages that you have loaded.
 #'
 #' There are four conflicts that are deliberately ignored: \code{intersect},
 #' \code{union}, \code{setequal}, and \code{setdiff} from dplyr. These functions
 #' make the base equivalents generic, so shouldn't negatively affect any
 #' existing code.
 #'
+#' @family utility functions
+#'
 #' @export
+#'
 #' @param only Set this to a character vector to restrict to conflicts only
 #'   with these packages.
+#'
+#' @return a `pacta_loanbook_conflicts` classed list which will print a list of
+#' conflicts to the console in interactive sessions, or `NULL` if no conflicts
+#' are found.
+#'
 #' @examples
 #' pacta_loanbook_conflicts()
+
 pacta_loanbook_conflicts <- function(only = NULL) {
   envs <- grep("^package:", search(), value = TRUE)
   envs <- purrr::set_names(envs)

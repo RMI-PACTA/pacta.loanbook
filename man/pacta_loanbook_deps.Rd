@@ -2,17 +2,35 @@
 % Please edit documentation in R/update.R
 \name{pacta_loanbook_deps}
 \alias{pacta_loanbook_deps}
-\title{List all pacta.loanbook dependencies}
+\title{List all \code{{pacta.loanbook}} dependencies}
 \usage{
 pacta_loanbook_deps(recursive = FALSE, repos = getOption("repos"))
 }
 \arguments{
 \item{recursive}{If \code{TRUE}, will also list all dependencies of
-pacta.loanbook packages.}
+\code{{pacta.loanbook}} packages.}
 
 \item{repos}{The repositories to use to check for updates.
 Defaults to \code{getOption("repos")}.}
 }
-\description{
-List all pacta.loanbook dependencies
+\value{
+a \code{tibble} containing the local and CRAN versions of dependent
+packages.
 }
+\description{
+List all \code{{pacta.loanbook}} dependencies
+}
+\examples{
+\dontrun{
+pacta_loanbook_deps()
+}
+}
+\seealso{
+Other utility functions: 
+\code{\link{pacta_loanbook_conflicts}()},
+\code{\link{pacta_loanbook_logo}()},
+\code{\link{pacta_loanbook_packages}()},
+\code{\link{pacta_loanbook_sitrep}()},
+\code{\link{pacta_loanbook_update}()}
+}
+\concept{utility functions}

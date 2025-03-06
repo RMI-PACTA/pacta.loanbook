@@ -14,10 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
+library(pacta.loanbook)
+
 plot_table <- function(dataset_name) {
-  library(r2dii.data)
-  table <- r2dii.data::data_dictionary
+  table <- data_dictionary
   table <- dplyr::filter(table, .data[["dataset"]] == dataset_name)
   table <- dplyr::arrange(table, match(column, names(get(dataset_name))))
   table_plot <- gt::gt(dplyr::select(table, -"dataset"))
@@ -57,8 +58,8 @@ An asset-based company dataset (ABCD) about physical assets (e.g. a wind turbine
 plot_table("abcd_demo")
 ```
 
-The `{r2dii.data}` package provides an example loanbook dataset `r2dii.data::abcd_demo`.
+The `{pacta.loanbook}` package provides an example abcd dataset `abcd_demo`.
 
 ```{r, R.options = list(width = 400)}
-r2dii.data::abcd_demo
+abcd_demo
 ```
