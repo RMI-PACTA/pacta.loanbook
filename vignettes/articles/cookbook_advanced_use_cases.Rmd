@@ -520,9 +520,19 @@ Upon engaging with the client `r company_select`, it is determined that the clie
 
 - Past experience shows that companies will not always use the same consolidation methods as used in PACTA. Any production values provided by a company should therefore be checked thoroughly. In case the discrepancies cannot be resolved, it may be necessary to reach out to the provider of the ABCD used in the PACTA analysis to help understand such differences. They should be able to provide additional methodological documentation for how data is handled for each sector and can pinpoint issues at the asset level. Since RMI is not a data provider, the user will have to engage with the data provider directly. In case the data provider is Asset Impact, the following website contains information on how to reach out **LINK**.
 
-## Use Case 5: Supplementing ABCD data (client-side)
+## Other Use Cases
 
-Suppose I have a loanbook containing a loan to "Acme Co."
+A variety of other use cases are conceivable and could benefit from PACTA for Banks analysis. These could include additional components of risk management, such as taking steps internally to adapt the risk position based on PACTA analyses; using PACTA to identify opportunities to expand into certain sectors/fields, possibly identifying clients that are well positioned to make this step; informing the development of new products or services in the realm of transition finance (**ADD LINK to TF Hub**). With additional research, these use cases may be part of future iterations of this cookbook.
+
+# Supplementing ABCD data
+
+When running a PACTA for Banks analysis, it may not always be possible to find matches for in-scope companies from the loan book in the ABCD. The coverage of ABCD data sets should not expected to be perfect and in some cases it may miss companies that account for a significant exposure in a loan book. If you have validated that the respective company is indeed in scope and none of the steps described in the [matching section](cookbook_running_the_analysis.html#matching-process) have yielded a result, you can consider supplementing the ABCD data set manually instead.
+
+Please be advised that supplementing the ABCD can be a rather complex and time consuming research task and should therefore not be used as the default method if an initial matching run has not immediately yielded a clear match for a company in the loan book. Running a few iterations of the matching process with adjusted parameters is still recommended.
+
+## Example
+
+Suppose you have a loanbook containing a loan to the power company "Acme Co.". information on "Acme Co." from a different source.
 
 ```{r, message = FALSE, R.options = list(width = 400)}
 library(pacta.loanbook)
@@ -545,13 +555,17 @@ loanbook <-
 loanbook
 ```
 
-When I try to match it, there are no results because the ABCD data does not have any data associated with a "Acme Co."
+You have not been able to find a match in the ABCD after running multiple iterations of the matching algorithm.
 
 ```{r, message = FALSE, R.options = list(width = 400)}
 match_name(loanbook = loanbook, abcd = abcd_demo)
+match_name(loanbook = loanbook, abcd = abcd_demo, min_score = 0.7)
+match_name(loanbook = loanbook, abcd = abcd_demo, method = "cosine")
 ```
 
-Say I had data for Acme Co. from a different source in a `my_custom_abcd.xlsx` file, e.g.
+Next, you have validated that "Acme Co." is indeed in scope. Given the financial exposure to this company is highly relevant for running a meaningful PACTA analysis of your loanbook, you have now decided to supplement the ABCD data set with additional data from a different source.
+
+Suppose you manage to compile the relevant data for Acme Co. from a different source in a `my_custom_abcd.xlsx` file, e.g.
 
 ```{r, include = FALSE}
 custom_abcd <-
@@ -577,7 +591,7 @@ writexl::write_xlsx(x = custom_abcd, path = file.path(tempdir(), "my_custom_abcd
 result_table(custom_abcd, title = "my_custom_abcd.xlsx")
 ```
 
-I could read in this XLSX file, merge the imported data with my existing ABCD data, and with the combined ABCD, I get a matched loan.
+You could now read in this XLSX file, merge the imported data with my existing ABCD data by adding the rows to the bottom of the ABCD table, and with the combined ABCD, you can now get a matched loan, when re-running the matching process.
 
 ```{r, message = FALSE, R.options = list(width = 400)}
 abcd_addition <- readxl::read_excel(path = file.path(tempdir(), "my_custom_abcd.xlsx"))
@@ -587,9 +601,13 @@ abcd_combined <- rbind(abcd_demo, abcd_addition)
 match_name(loanbook = loanbook, abcd = abcd_combined)
 ```
 
-## Other Use Cases
+## Note on adding manually researched data to the ABCD
 
-A variety of other use cases are conceivable and could benefit from PACTA for Banks analysis. These could include additional components of risk management, such as taking steps internally to adapt the risk position based on PACTA analyses; using PACTA to identify opportunities to expand into certain sectors/fields, possibly identifying clients that are well positioned to make this step; informing the development of new products or services in the realm of transition finance (**ADD LINK to TF Hub**). With additional research, these use cases may be part of future iterations of this cookbook.
+While the technical implementation shown in the example above is very straightforward, it makes some assumptions that should be validated while doing the research:
+
+- The production data or emission intensity data supplemented to the ABCD should have the same scopes as the existing data in the ABCD. I.e. it should only contain data based on the correct part of the value chain that is actually in scope. And any technology split that may be required should follow the same definitions as the existing data. For example, in the power sector, hydro power is treated as a separate category from renewable power. In the automotive sector, plug-in hybrids are considered actual hybrids, whereas wheras no-plug or mild hybrids are considered internal combustion engine vehicles.
+- If the company for which data is supplemented does not fully own all of the production assets considered, the consolidation method from the physical production unit to the company level should be consistent with that used in the ABCD. For example, if the company only owns 50% of a power plant, then under an equity ownership consolidation method, the company should only be attributed 50% of the capacity of that power plant. Similarly, if the company is partial owner of subsidiary companies, the production owned by the subsidiary companies should only be rolled up according to the ownership share. Some companies may also report production or capacity of assets that they operate but that they have no ownership stake in. This would have to be disregarded. Different allocation rules may apply in case another consolidation method is used in the original ABCD data, such as financial control. This should be documented in the materials provided by the third party data provider of the ABCD.
+- To ensure that the process of supplementing the ABCD works seamlessly, you should add all relevant columns to the data you are reading in. Refer to the [ABCD data dictionary](data_abcd.html). for more information.
 
 ---
 
