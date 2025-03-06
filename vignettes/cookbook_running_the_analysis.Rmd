@@ -165,7 +165,7 @@ Manual validation helps to:
 
 Since this step is not automated, it requires effort, often making it the most time-consuming part of the process.
 
-To begin, save the output of match_name() to a CSV file for review. For example, using {readr}:
+To begin, save the output of match_name() to a CSV file for review. For example, using `{readr}`:
 
 ```{r}
 readr::write_csv(x = matched, file = file.path(tempdir(), "matched.csv"))
@@ -265,7 +265,7 @@ sector_in_scope <- glue::glue_collapse(
 )
 ```
 
-`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in an asset-based company dataset. However, not all loans will have a match -- some companies may be missing from the ABCD dataset, or they may operate outisde the PACTA focus sectors (`r sector_in_scope`).
+`{pacta.loanbook}` allows you to match loans from your loanbook to the companies in an asset-based company dataset. However, not all loans will have a match -- some companies may be missing from the ABCD dataset, or they may operate outside the PACTA focus sectors (`r sector_in_scope`).
 
 To assess how much of your loan book is successfully matched, you can calculate matching coverage in two ways:
 
