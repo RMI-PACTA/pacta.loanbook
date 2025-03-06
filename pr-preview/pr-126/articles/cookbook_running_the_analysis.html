@@ -352,7 +352,7 @@ iterating to enhance coverage.</p>
 <p>Since this step is not automated, it requires effort, often making it
 the most time-consuming part of the process.</p>
 <p>To begin, save the output of match_name() to a CSV file for review.
-For example, using {readr}:</p>
+For example, using <a href="https://readr.tidyverse.org" class="external-link">readr</a>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">matched</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"matched.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>After exporting the match results, you must manually review, edit,
@@ -546,7 +546,7 @@ receive the PACTA sector value that it maps to in the
 <p><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> allows you to match loans from your
 loanbook to the companies in an asset-based company dataset. However,
 not all loans will have a match – some companies may be missing from the
-ABCD dataset, or they may operate outisde the PACTA focus sectors
+ABCD dataset, or they may operate outside the PACTA focus sectors
 (power, cement, oil and gas, aviation, coal, automotive, steel, and
 hdv).</p>
 <p>To assess how much of your loan book is successfully matched, you can
