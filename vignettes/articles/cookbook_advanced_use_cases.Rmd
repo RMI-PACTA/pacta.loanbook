@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, warning = FALSE, message = FALSE}
+```{r setup, warning = FALSE, message = FALSE, echo = FALSE}
 library(dplyr)
 library(tidyr)
 library(pacta.loanbook)
