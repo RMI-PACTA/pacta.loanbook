@@ -553,16 +553,6 @@ match_name(loanbook = loanbook, abcd = abcd_demo)
 
 Say I had data for Acme Co. from a different source in a `my_custom_abcd.xlsx` file, e.g.
 
-| company_id | name_company | lei                  | sector | technology | production_unit | year | production | emission_factor | plant_location | is_ultimate_owner | emission_factor_unit |
-|------------|--------------|----------------------|--------|------------|-----------------|------|------------|-----------------|----------------|-------------------|----------------------|
-| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2020 | 12000      |                 | MY             | TRUE              |                      |
-| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2021 | 12000      |                 | MY             | TRUE              |                      |
-| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2022 | 12375      |                 | MY             | TRUE              |                      |
-| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2023 | 13000      |                 | MY             | TRUE              |                      |
-| 175        | Acme Co.     | 18500033XH6RG332SX57 | power  | hydrocap   | MW              | 2024 | 13000      |                 | MY             | TRUE              |                      |
-
-I could read in this XLSX file, merge the imported data with my existing ABCD data, and with the combined ABCD, I get a matched loan.
-
 ```{r, include = FALSE}
 custom_abcd <-
   data.frame(
@@ -582,6 +572,12 @@ custom_abcd <-
 
 writexl::write_xlsx(x = custom_abcd, path = file.path(tempdir(), "my_custom_abcd.xlsx"))
 ```
+
+```{r custom_abcd_table, echo = FALSE}
+result_table(custom_abcd, title = "my_custom_abcd.xlsx")
+```
+
+I could read in this XLSX file, merge the imported data with my existing ABCD data, and with the combined ABCD, I get a matched loan.
 
 ```{r, message = FALSE, R.options = list(width = 400)}
 abcd_addition <- readxl::read_excel(path = file.path(tempdir(), "my_custom_abcd.xlsx"))
