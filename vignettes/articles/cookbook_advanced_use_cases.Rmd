@@ -591,7 +591,7 @@ writexl::write_xlsx(x = custom_abcd, path = file.path(tempdir(), "my_custom_abcd
 result_table(custom_abcd, title = "my_custom_abcd.xlsx")
 ```
 
-You could now read in this XLSX file, merge the imported data with my existing ABCD data by adding the rows to the bottom of the ABCD table, and with the combined ABCD, you can now get a matched loan, when re-running the matching process.
+You could now read in this XLSX file, merge the imported data with your existing ABCD data by adding the rows to the bottom of the ABCD table, and with the combined ABCD, you can now get a matched loan, when re-running the matching process.
 
 ```{r, message = FALSE, R.options = list(width = 400)}
 abcd_addition <- readxl::read_excel(path = file.path(tempdir(), "my_custom_abcd.xlsx"))
