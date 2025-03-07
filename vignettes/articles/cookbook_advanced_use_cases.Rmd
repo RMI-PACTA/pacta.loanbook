@@ -152,9 +152,9 @@ sda_targets_company <-
 
 ```
 
-# Potential Follow-up Actions based on PACTA for Banks analysis
+PACTA for Banks analyses support a wide range of real-world applications. This section highlights key use cases that are particularly suited to this type of analysis, all of which are either actively used or currently being explored by PACTA users.
 
-PACTA for Banks analyses can be useful across a diverse set of real-life applications. In this section, we aim to highlight some of the use cases that we consider particularly suitable for the type of analysis at hand. All these use cases are currently either being used or explored by PACTA users.
+# Potential Follow-up Actions based on PACTA for Banks analysis
 
 The types of use cases we explore in this section all build on the standard PACTA for Banks outputs – that is they use results based on the [market share approach](cookbook_metrics.html#market-share-approach) or the [sectoral decarbonization approach](cookbook_metrics.html#sectoral-decarbonization-approach) – either at loan book level or at company level. They vary by the intended target audience – generally either an internal audience (another department in the FI or management) or an external audience (often either a client or a regulator/supervisor, sometimes the broader public). Additionally, the use cases vary by type, where some are focused more on communicating/reporting and others are more focused on implementing change or informing internal decisions.
 
