@@ -356,7 +356,7 @@ In this example, we set targets for a bank, based on its loan book composition i
 result_table(high_carbon_share_sector_targets, title = "Sector targets", subtitle = "high-carbon share")
 ```
 
-For ssectors with technology pathways, the banks could set targets based on the high-carbon share of technologies in the sector. Alternatively it could break down the targets by individual technologies.
+For sectors with technology pathways, the banks could set targets based on the high-carbon share of technologies in the sector. Alternatively it could break down the targets by individual technologies.
 
 ```{r use_case_two_sector_targets_tech_mix, echo = FALSE, warning = FALSE}
 result_table(tech_mix_sector_targets, title = "Sector targets", subtitle = "technology share")
