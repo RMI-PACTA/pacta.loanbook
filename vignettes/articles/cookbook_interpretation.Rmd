@@ -47,11 +47,11 @@ dplyr::filter(
 )
 ```
 
-The `technology_share` and `percentage_of_initial_production_by_scope` variables also contain values of interest, but they are derivatives of the values contained in the `production` variable. For each `metric`, the `technology_share` variable represents the share of the row's technology within its sector, relative to the production values of other technologies in the same sector, similar to what is shown in the [technology mix plots](cookbook_interpretation.html#technoloy-mix-plot). The `percentage_of_initial_production_by_scope` variable shows the percent change of the production value from the prior year.
+Additional variables include `technology_share`, which represents the share of a given technology within the sector, and `percentage_of_initial_production_by_scope`, which shows the percent change in `production` from the previous year. Both are derived from the `production` variable. The `technology_share` values can be visualized in the [technology mix plots](cookbook_interpretation.html#technoloy-mix-plot). 
 
-If you use the `by_company = TRUE` and the `weight_production = FALSE` options of the `target_market_share()` function, most of what's said above is true except relative to the company listed in that row in the `name_abcd` column.
+If `by_company = TRUE` and `weight_production = FALSE` are used in `target_market_share()`, the output is interpreted relative to the company listed in the `name_abcd` column.
 
-For detailed information about the table output of the `target_market_share()` function and its columns, see the [data dictionary](data_outputs.html#target_market_share-output).
+For a detailed breakdown of `target_market_share()`'s output table and its columns, see the [data dictionary](data_outputs.html#target_market_share-output).
 
 ### Technoloy Mix Plot
 
