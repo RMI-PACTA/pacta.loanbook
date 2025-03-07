@@ -131,7 +131,7 @@ The `target_sda()` function calculates the Sectoral Decarbonization Target metri
 
 #### Explanation of Output
 
-The primary variable of interest in the output is `emission_factor_value`, which represents an emission intensity depending on the possible values of the `emission_factor_metric` column:
+The primary variable of interest in the output is `emission_factor_value`, which represents an emission intensity depending on the possible values of the `emission_factor_metric` column`:
 
 - `"projected"`: The portfolio’s physical emission intensity based on ABCD data for the sector, year, region, and scenario.
 - `"target_*"` (e.g., `"target_cps"`): The scenario-aligned target emission intensity, starting from the portfolio’s initial intensity and converging with the sector-level scenario target by the final year.
@@ -144,9 +144,9 @@ For detailed information about the table output of the `target_sda()` function a
 
 ### Emission Intensity Plot
 
-The emission intensity metric measures the average CO~2~ intensity of the portfolio in the `r cli::format_inline("{unique(co2_intensity_scenario_demo$sector)} sector{?s}")`. This projected emission intensity of a portfolio or company is given as CO~2~/economic unit of output (for example, CO~2~ per ton of steel produced). This five year forward-looking trajectory of the emission intensity is then compared to an emission intensity reference trend over the same period of time based on a climate transition scenario.
+The emission intensity metric measures the average CO~2~ intensity of a portfolio in the `r cli::format_inline("{unique(co2_intensity_scenario_demo$sector)} sector{?s}")`, expressed as CO~2~ per unit of economic output (e.g., CO2 per ton of steel produced). This five-year forward-looking trajectory is compared to an emission intensity reference trend based on a climate transition scenario.
 
-The emission intensity of the activities financed by the portfolio is the metric of choice in sectors for which no clear technology pathways have been set out (namely, `r cli::format_inline("{unique(co2_intensity_scenario_demo$sector)}")`). Put differently, for these sectors, no scalable zero-carbon alternative yet exists. As such, it is not possible to use the technology mix metric or the production volume trajectory metric to measure alignment. However, it is still imperative to steer capital in a way that aims to decrease carbon emissions in these sectors – hence the emission intensity metric is used.
+This metric is used for sectors without clear technology pathways or scalable zero-carbon alternatives (namely, `r cli::format_inline("{unique(co2_intensity_scenario_demo$sector)}")`). Since technology mix and production volume trajectory metrics are not applicable, emission intensity serves as the primary measure for assessing alignment and guiding capital toward emissions reductions in these sectors.
 
 #### Explanation of Output
 
