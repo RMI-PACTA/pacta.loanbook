@@ -475,7 +475,7 @@ The company's current projections should mostly align with projections from PACT
 
 **Example**
 
-Suppose a bank has a client in the power sector that has developed a transition plan to reduce the share of coal-fired power plants in its production mix. The bank has obtained the company's projections for the  total level and share of coal-fired power capacity in its technology mix until 2025 and wants to compare these projections with the PACTA for Banks projections for the same time frame.
+Suppose a bank has a client in the power sector that has developed a transition plan to reduce the share of coal-fired power plants in its production mix. The bank has obtained the company's projections for the total level and share of coal-fired power capacity in its technology mix until 2025 and wants to compare these projections with the PACTA for Banks projections for the same time frame.
 
 ```{r use_case_four_transition_plan_calculation}
 power_company_coal_plan <- market_share_targets_company %>% 
