@@ -1,3 +1,10 @@
+#' @inherit r2dii.match::calculate_match_success_rate
+#' @family matching functions
+#' @export
+
+calculate_match_success_rate <- r2dii.match::calculate_match_success_rate
+
+
 #' @inherit r2dii.match::crucial_lbk return title description details seealso sections references examples author source note format
 #' @family matching functions
 #' @export
