@@ -20,9 +20,14 @@ This section provides guidance on interpreting key metrics used in PACTA alignme
 
 ## Target Market Share
 
-The target market share approach is used to calculate PACTA alignment metrics for the automotive, coal mining, oil & gas and power sectors. The commonality of these sectors is that there are production pathways by technology or fuel type available for each of them and the asset-based company data is available at the same level of technological granularity as the pathways. As long as these preconditions are fulfilled, the target market share approach could be extended to other sectors. The principle idea of the target market share approach is that every actor in a sector maintains their market share in terms of output units and that each actor reduces their use of high-carbon technologies proportionally, while expanding their use of low carbon technologies so that their market share remains constant, assuming all other actors follow the same approach. In aggregate, this will solve for the scenario changes at the sector level.
+The target market share approach is used to calculate PACTA alignment metrics for the automotive, coal mining, oil & gas and power sectors. These sectors share two key characteristics:
 
-For detailed information about the Target Market Share metric and how it is calculated, see the [Metrics appendix](cookbook_metrics.html#market-share-approach).
+- production pathway scenarios are available by technology or fuel type
+- asset-based company data at the same level of technological granularity is also available
+
+The target market share approach can be extended to any sector that meets these conditions. The core idea is that each actor maintains a constant market share in output units while proportionally reducing high-carbon technologies and increasing low-carbon alternatives, assuming all actors follow the same strategy. In aggregate, this ensures alignment with the sector’s transition pathway.
+
+For more details on the Target Market Share metric and its calculation, see the [Metrics appendix](cookbook_metrics.html#market-share-approach).
 
 ### `target_market_share()` function
 
