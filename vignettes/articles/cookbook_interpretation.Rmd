@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 library(pacta.loanbook)
 ```
 
+This section provides guidance on interpreting key metrics used in PACTA alignment assessments. It explains how different methodologies, including the [Target Market Share](#target-market-share) and [Sectoral Decarbonization](#sectoral-decarbonization-sda-target) approaches, evaluate portfolio alignment with climate transition scenarios. By understanding these outputs users can assess their portfolio’s position relative to sector-wide decarbonization goals and transition risks.
+
 ## Target Market Share
 
 The target market share approach is used to calculate PACTA alignment metrics for the automotive, coal mining, oil & gas and power sectors. The commonality of these sectors is that there are production pathways by technology or fuel type available for each of them and the asset-based company data is available at the same level of technological granularity as the pathways. As long as these preconditions are fulfilled, the target market share approach could be extended to other sectors. The principle idea of the target market share approach is that every actor in a sector maintains their market share in terms of output units and that each actor reduces their use of high-carbon technologies proportionally, while expanding their use of low carbon technologies so that their market share remains constant, assuming all other actors follow the same approach. In aggregate, this will solve for the scenario changes at the sector level.
