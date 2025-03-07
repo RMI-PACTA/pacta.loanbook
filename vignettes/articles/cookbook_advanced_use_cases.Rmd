@@ -330,6 +330,13 @@ tech_mix_sector_targets <- market_share_targets_portfolio %>%
   select(sector, technology, metric, year, technology_share) %>% 
   mutate(technology_share = round(technology_share, 3))
 
+high_carbon_share_sector_targets <- tech_mix_sector_targets %>% 
+  filter(technology %in% c("coalcap", "gascap", "oilcap", "ice")) %>% 
+  summarise(
+    high_carbon_share = sum(technology_share, na.rm = TRUE),
+    .by = c("sector", "metric", "year")
+  )
+
 ei_sector_targets <- sda_targets_portfolio %>% 
   filter(
     region == "global",
@@ -342,27 +349,25 @@ ei_sector_targets <- sda_targets_portfolio %>%
 available_sectors <- unique(pull(filter(matched, sector %in% c(unique(scenario$sector), unique(co2$sector))), sector))
 
 ```
-In this example, we set targets for a bank, based on its loan book composition in `r min(scenario$year, na.rm = TRUE)`. The loan book contains exposures to the following PACTA sectors, for which trajectories are available in the scenarios: `r paste(available_sectors, collapse = ", ")`. The bank wants to set targets for the year 2030. The bank has decided to use the "target_sda" scenario as a benchmark for setting targets based on the [market share approach](cookbook_metrics.html#market-share-approach) and "target_demo" for setting targets based on the [sectoral decarbonization approach](cookbook_metrics.html#sectoral-decarbonization-approach). Targets are set based on global scenario benchmarks. The following two tables show how targets are set for sectors based on PACTA.
 
-```{r use_case_two_sector_targets_results, echo = FALSE, warning = FALSE}
-result_table(tech_mix_sector_targets, title = "Sector targets", subtitle = "high-carbon share")
+In this example, we set targets for a bank, based on its loan book composition in `r min(scenario$year, na.rm = TRUE)`. The loan book contains exposures to the following PACTA sectors, for which trajectories are available in the scenarios: `r paste(available_sectors, collapse = ", ")`. The bank wants to set targets for the year 2030. The bank has decided to use the "target_sda" scenario as a benchmark for setting targets based on the [market share approach](cookbook_metrics.html#market-share-approach) and "target_demo" for setting targets based on the [sectoral decarbonization approach](cookbook_metrics.html#sectoral-decarbonization-approach). Targets are set based on global scenario benchmarks. The sector targets for 2030 based on this loan book are as follows:
+
+```{r use_case_two_sector_targets_high_carbon, echo = FALSE, warning = FALSE}
+result_table(high_carbon_share_sector_targets, title = "Sector targets", subtitle = "high-carbon share")
+```
+
+For sectors with technology pathways, the banks could set targets based on the high-carbon share of technologies in the sector. Alternatively it could break down the targets by individual technologies.
+
+```{r use_case_two_sector_targets_tech_mix, echo = FALSE, warning = FALSE}
+result_table(tech_mix_sector_targets, title = "Sector targets", subtitle = "technology share")
+```
+
+In sectors without technology pathways, the bank could set targets based on the emission intensity of the sector.
+
+```{r use_case_two_sector_targets_emission_intensity, echo = FALSE, warning = FALSE}
 
 result_table(ei_sector_targets, title = "Sector targets", subtitle = "emission intensity")
 ```
-
-The sector targets for 2030 based on this loan book are as follows:
-
-- The target high-carbon share in the automotive sector is: `r sum(filter(tech_mix_sector_targets, sector == "automotive", technology == "ice")$technology_share, na.rm = TRUE) * 100`% - which coincides with the technology level target for light-duty vehicles with internal combustion engines (ice)
-- The target high-carbon share in the power sector is: `r sum(filter(tech_mix_sector_targets, sector == "power", technology %in% c("coalcap", "gascap", "oilcap"))$technology_share, na.rm = TRUE) * 100`%
-- If targets are set by technology in the power sector, the targets would look as follows:
-  - share of coal-fired power plants: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "coalcap")$technology_share, na.rm = TRUE) * 100`%
-  - share of gas-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "gascap")$technology_share, na.rm = TRUE) * 100`%
-  - share of oil-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "oilcap")$technology_share, na.rm = TRUE) * 100`%
-  - share of renewable power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "renewablescap")$technology_share, na.rm = TRUE) * 100`%
-  - share of hydro power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "hydrocap")$technology_share, na.rm = TRUE) * 100`%
-- The target emission intensity in the cement sector is: `r pull(filter(ei_sector_targets, sector == "cement"), emission_factor_value)` tonnes of CO^2^/tonne of cement
-- The target emission intensity in the steel sector is: `r pull(filter(ei_sector_targets, sector == "steel"), emission_factor_value)` tonnes of CO^2^/tonne of steel
-
 
 ### Notes and caveats
 
