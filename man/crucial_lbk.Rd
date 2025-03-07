@@ -18,6 +18,7 @@ crucial_lbk()
 }
 \seealso{
 Other matching functions: 
+\code{\link{calculate_match_success_rate}()},
 \code{\link{match_name}()},
 \code{\link{prioritize}()},
 \code{\link{prioritize_level}()}
