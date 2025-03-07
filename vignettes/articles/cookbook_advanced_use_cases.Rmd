@@ -154,13 +154,11 @@ sda_targets_company <-
 
 PACTA for Banks analyses support a wide range of real-world applications. This section highlights key use cases that are particularly suited to this type of analysis, all of which are either actively used or currently being explored by PACTA users.
 
-# Potential Follow-up Actions based on PACTA for Banks analysis
+# Potential Follow-up Actions Based on PACTA for Banks Analysis
 
-The types of use cases we explore in this section all build on the standard PACTA for Banks outputs – that is they use results based on the [market share approach](cookbook_metrics.html#market-share-approach) or the [sectoral decarbonization approach](cookbook_metrics.html#sectoral-decarbonization-approach) – either at loan book level or at company level. They vary by the intended target audience – generally either an internal audience (another department in the FI or management) or an external audience (often either a client or a regulator/supervisor, sometimes the broader public). Additionally, the use cases vary by type, where some are focused more on communicating/reporting and others are more focused on implementing change or informing internal decisions.
+These use cases leverage standard PACTA for Banks outputs - derived from either the [market share approach](cookbook_metrics.html#market-share-approach) or the [sectoral decarbonization approach](cookbook_metrics.html#sectoral-decarbonization-approach) — at the loan book or company level. They vary in intended audience, targeting either internal stakeholders (such as management or other departments) or external parties (such as clients, regulators, or the general public). Additionally, some focus on communication and reporting, while others guide internal decision-making or drive strategic change.
 
-We will explain in some detail some of the most established use cases in this cookbook, but we will mention others only briefly, especially ones that have not been explored in quite as much detail yet and that would therefore require additional research before describing potential ways to implement them.
-
-You may notice that none of the example use cases below make use of the three standard PACTA plots - or of any plots for that matter. This is intentional. While we do believe that all plots showcased in this cookbook are useful for interpreting PACTA results and really understanding the intricacies of the results, we believe that further analysis and reporting will almost always be based on precise numbers. This is why we showcase how such use cases make use of the output result tables rather than the plots. An obvious exception would be a public facing analysis or report, but that is not considered an advanced use case in need of a detailed explanation.
+This section provides detailed explanations of well-established use cases, while others are mentioned briefly, particularly those still requiring future exploration. Notably, the examples do not include the standard PACTA plots, as follow-up analyses typically rely on precise numerical outputs rather than visualizations. While plots are valuable for interpreting PACTA results, detailed reporting and decision-making are generally based on quantitative data—except in cases of public-facing analyses, which are not covered in depth here.
 
 ## Use Case 1: Regulatory compliance
 
