@@ -570,7 +570,7 @@ match_name(loanbook = loanbook, abcd = abcd_demo, method = "cosine")
 
 Next, you have validated that "Acme Co." is indeed in scope. Given the financial exposure to this company is highly relevant for running a meaningful PACTA analysis of your loanbook, you have now decided to supplement the ABCD data set with additional data from a different source.
 
-Suppose you manage to compile the relevant data for Acme Co. from a different source in a `my_custom_abcd.xlsx` file, e.g.
+Suppose you manage to compile the relevant data for Acme Co. from a different source in a `my_custom_abcd.xlsx` file (following preceisely the same [format of ABCD data](data_abcd.html)), e.g.
 
 ```{r, include = FALSE}
 custom_abcd <-
