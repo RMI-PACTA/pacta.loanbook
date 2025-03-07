@@ -532,7 +532,7 @@ Please be advised that supplementing the ABCD can be a rather complex and time c
 
 ## Example
 
-Suppose you have a loanbook containing a loan to the power company "Acme Co.". information on "Acme Co." from a different source.
+Suppose you have a loanbook containing a loan to the power company "Acme Co."
 
 ```{r, message = FALSE, R.options = list(width = 400)}
 library(pacta.loanbook)
