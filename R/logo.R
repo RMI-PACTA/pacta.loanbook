@@ -5,8 +5,6 @@
 #' @param unicode Whether to use Unicode symbols. Default is `TRUE` on UTF-8
 #'   platforms.
 #'
-#' @md
-#'
 #' @family utility functions
 #'
 #' @export
