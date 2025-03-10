@@ -495,7 +495,7 @@ If there are significant discrepancies between a company’s projections and PAC
 
 **Example**
 
-Suppose a bank has a power sector client that plans to reduce its share of coal-fired power generation. The client provides projections for its total coal capacity and technology mix through 2025. The bank compares these projections with PACTA for Banks results over the same time-frame to evaluate alignment and credibility.
+Suppose a bank has a power sector client that plans to reduce its share of coal-fired power generation. The client provides projections for its total coal capacity and power technology mix through 2025. The bank compares these projections with PACTA for Banks results over the same time-frame to evaluate alignment and credibility.
 
 ```{r use_case_four_transition_plan_calculation}
 power_company_coal_plan <- market_share_targets_company %>% 
