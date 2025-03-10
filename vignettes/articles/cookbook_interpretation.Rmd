@@ -134,7 +134,7 @@ The `target_sda()` function calculates the Sectoral Decarbonization Target metri
 The primary variable of interest in the output is `emission_factor_value`, which represents an emission intensity depending on the possible values of the `emission_factor_metric` column`:
 
 - `"projected"`: The portfolio’s physical emission intensity based on ABCD data for the sector, year, region, and scenario.
-- `"target_*"` (e.g., `"target_cps"`): The scenario-aligned target emission intensity, starting from the portfolio’s initial intensity and converging with the sector-level scenario target by the final year.
+- `"target_*"` (e.g., `"target_cps"`): The scenario-aligned individual target emission intensity, starting from the portfolio’s initial intensity and converging with the sector-level scenario target by the final year.
 - `"corporate_economy"`: The weighted average emission intensity of the entire sector, serving as a benchmark for comparison.
 - `"adjusted_*"`: The scenario trajectory for emission intensity, adjusted for differences between ABCD sector totals and scenario data.
 
