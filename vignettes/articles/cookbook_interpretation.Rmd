@@ -144,7 +144,7 @@ For detailed information about the table output of the `target_sda()` function a
 
 ### Emission Intensity Plot
 
-The emission intensity metric measures the average CO~2~ intensity of a portfolio in the `r cli::format_inline("{unique(co2_intensity_scenario_demo$sector)} sector{?s}")`, expressed as CO~2~ per unit of economic output (e.g., CO2 per ton of steel produced). This five-year forward-looking trajectory is compared to an emission intensity reference trend based on a climate transition scenario.
+The emission intensity metric measures the average CO~2~ intensity of a portfolio in the aviation, cement, and steel sectors, expressed as CO~2~ per unit of economic output (e.g., CO2 per ton of steel produced). This five-year forward-looking trajectory is compared to an emission intensity reference trend based on a climate transition scenario.
 
 This metric is used for sectors without clear technology pathways or scalable zero-carbon alternatives (namely, `r cli::format_inline("{unique(co2_intensity_scenario_demo$sector)}")`). Since technology mix and production volume trajectory metrics are not applicable, emission intensity serves as the primary measure for assessing alignment and guiding capital toward emissions reductions in these sectors.
 
