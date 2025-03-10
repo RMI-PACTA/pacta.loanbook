@@ -111,25 +111,34 @@
 
     
     
+<p>This section provides guidance on interpreting key metrics used in
+PACTA alignment assessments. It explains how different methodologies,
+including the <a href="#target-market-share">Target Market Share</a> and
+<a href="#sectoral-decarbonization-sda-target">Sectoral
+Decarbonization</a> approaches, evaluate portfolio alignment with
+climate transition scenarios. By understanding these outputs users can
+assess their portfolio’s position relative to sector-wide
+decarbonization goals and transition risks.</p>
 <div class="section level2">
 <h2 id="target-market-share">Target Market Share<a class="anchor" aria-label="anchor" href="#target-market-share"></a>
 </h2>
 <p>The target market share approach is used to calculate PACTA alignment
 metrics for the automotive, coal mining, oil &amp; gas and power
-sectors. The commonality of these sectors is that there are production
-pathways by technology or fuel type available for each of them and the
-asset-based company data is available at the same level of technological
-granularity as the pathways. As long as these preconditions are
-fulfilled, the target market share approach could be extended to other
-sectors. The principle idea of the target market share approach is that
-every actor in a sector maintains their market share in terms of output
-units and that each actor reduces their use of high-carbon technologies
-proportionally, while expanding their use of low carbon technologies so
-that their market share remains constant, assuming all other actors
-follow the same approach. In aggregate, this will solve for the scenario
-changes at the sector level.</p>
-<p>For detailed information about the Target Market Share metric and how
-it is calculated, see the <a href="cookbook_metrics.html#market-share-approach">Metrics
+sectors. These sectors share two key characteristics:</p>
+<ul>
+<li>production pathway scenarios are available by technology or fuel
+type</li>
+<li>asset-based company data at the same level of technological
+granularity is also available</li>
+</ul>
+<p>The target market share approach can be extended to any sector that
+meets these conditions. The core idea is that each actor maintains a
+constant market share in output units while proportionally reducing
+high-carbon technologies and increasing low-carbon alternatives,
+assuming all actors follow the same strategy. In aggregate, this ensures
+alignment with the sector’s transition pathway.</p>
+<p>For more details on the Target Market Share metric and its
+calculation, see the <a href="cookbook_metrics.html#market-share-approach">Metrics
 appendix</a>.</p>
 <div class="section level3">
 <h3 id="target_market_share-function">
@@ -142,30 +151,24 @@ selected.</p>
 <div class="section level4">
 <h4 id="explanation-of-output">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output"></a>
 </h4>
-<p>The primary columns/variables of interest in the output are the
-<code>production</code> and <code>metric</code> variables. What the
-<code>production</code> variable represents depends on the values in all
-of the columns that precede it, and in particular the
-<code>metric</code> column. If the value in the <code>metric</code>
-column on the same row is <code>"projected"</code>, then the value in
-the <code>production</code> variable will represent the production level
-of your portfolio based on the ABCD data for that
-sector/technology/year/scenario/etc. If the value in the
-<code>metric</code> column on the same row begins with
-<code>"target_"</code>, e.g. <code>"target_cps"</code>, then the value
-in the <code>production</code> variable will represent the target level
-of production for that sector/technology/year/scenario/etc. This target
-level of production is derived based on the ABCD production value of
-your portfolio in the start year follows the relative required changes
-of the scenario based on the market share approach for the given year.
-If the value in the <code>metric</code> column on the same row is
-<code>"corporate_economy"</code>, then the value in the
-<code>production</code> variable will represent the total production
-levels of the entire sector based on the ABCD for a given region, which
-can be used as a benchmark to compare to your portfolio’s technology mix
-or production volume trajectory.</p>
+<p>The primary variables of interest in the output are
+<code>production</code> and <code>metric</code>. The
+<code>production</code> variable’s meaning depends on the
+<code>metric</code> column and other preceding columns. If
+<code>metric</code> is <code>"projected"</code>, then
+<code>production</code> represents the portfolio’s projected production
+output based on ABCD data for the specified sector, technology, year,
+and scenario. If <code>metric</code> starts with <code>"target_"</code>
+(e.g., <code>"target_cps"</code>), production represents the target
+production level for that <code>sector</code> and <code>scenario</code>,
+derived from the portfolio’s initial ABCD production and following the
+relative required changes of the scenario according to the market share
+approach. If <code>metric</code> is <code>"corporate_economy"</code>,
+then <code>production</code> reflects the total sector production in a
+given region, calculated using the ABCD. This serves as a benchmark for
+comparison.</p>
 <p>For example, the output table could be filtered to view the projected
-coal power production values for your portfolio with:</p>
+coal power production values for your portfolio:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">market_share</span>,</span>
@@ -186,159 +189,118 @@ coal power production values for your portfolio with:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> power  coalcap     <span style="text-decoration: underline;">2</span>028 global demo_2020       projected     <span style="text-decoration: underline;">20</span>589.            0.126 technology                                  -<span style="color: #BB0000;">0.054</span><span style="color: #BB0000; text-decoration: underline;">1</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> power  coalcap     <span style="text-decoration: underline;">2</span>029 global demo_2020       projected     <span style="text-decoration: underline;">20</span>751.            0.128 technology                                  -<span style="color: #BB0000;">0.046</span><span style="color: #BB0000; text-decoration: underline;">6</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more rows</span></span></span></code></pre></div>
-<p>The <code>technology_share</code> and
-<code>percentage_of_initial_production_by_scope</code> variables also
-contain values of interest, but they are derivatives of the values
-contained in the <code>production</code> variable. For each
-<code>metric</code>, the <code>technology_share</code> variable
-represents the share of the row’s technology within its sector, relative
-to the production values of other technologies in the same sector,
-similar to what is shown in the <a href="cookbook_interpretation.html#technoloy-mix-plot">technology mix
-plots</a>. The <code>percentage_of_initial_production_by_scope</code>
-variable shows the percent change of the production value from the prior
-year.</p>
-<p>If you use the <code>by_company = TRUE</code> and the
-<code>weight_production = FALSE</code> options of the
-<code><a href="../reference/target_market_share.html">target_market_share()</a></code> function, most of what’s said above
-is true except relative to the company listed in that row in the
-<code>name_abcd</code> column.</p>
-<p>For detailed information about the table output of the
-<code><a href="../reference/target_market_share.html">target_market_share()</a></code> function and its columns, see the <a href="data_outputs.html#target_market_share-output">data
+<p>Additional variables include <code>technology_share</code>, which
+represents the share of a given technology within the sector, and
+<code>percentage_of_initial_production_by_scope</code>, which shows the
+relative change in <code>production</code> compared to the start year.
+Both are derived from the <code>production</code> variable. The
+<code>technology_share</code> values can be visualized in the <a href="cookbook_interpretation.html#technoloy-mix-plot">technology mix
+plots</a>.</p>
+<p>If <code>by_company = TRUE</code> and
+<code>weight_production = FALSE</code> are used in
+<code><a href="../reference/target_market_share.html">target_market_share()</a></code>, the output is interpreted relative
+to the company listed in the <code>name_abcd</code> column.</p>
+<p>For a detailed breakdown of <code><a href="../reference/target_market_share.html">target_market_share()</a></code>’s
+output table and its columns, see the <a href="data_outputs.html#target_market_share-output">data
 dictionary</a>.</p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="technoloy-mix-plot">Technoloy Mix Plot<a class="anchor" aria-label="anchor" href="#technoloy-mix-plot"></a>
 </h3>
-<p>The technology mix metric focuses on technology shifts within the
-power, fossil fuels and automotive sectors, namely: (i) the changes in
-the technological processes by which outputs are produced (e.g. shift
-from coal-fueled to renewable-fueled power capacity), and (ii) changes
-in the nature of the output itself (e.g. shift from internal combustion
-engines to electric vehicles). This metric measures the bank’s relative
-exposure to the economic activities that are impacted by the transition
-to a low-carbon economy.</p>
+<p>The technology mix metric tracks shifts in production methods and
+outputs within the power, fossil fuels and automotive sectors. It
+captures:</p>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>changes in production technology (e.g., transitioning from
+coal-fueled to renewable power capacity)</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>changes in output type (e.g. shift from internal combustion engines
+to electric vehicles).</li>
+</ol></li>
+</ul>
+<p>This metric measures the bank’s exposure to the economic activities
+that are impacted by the transition to a low-carbon economy.</p>
 <div class="section level4">
 <h4 id="explanation-of-output-1">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output-1"></a>
 </h4>
-<p>The technology mix plot shows how large a share of each technology
-the portfolio or company is exposed to in the sector - both at the time
-of the start of the analysis as well as five years into the future. This
-projected technology mix of the portfolio is compared to the technology
-mix in the benchmark region at the same two points in time. And it is
-compared to the technology mix that the portfolio would have to display
-five years in the future in order to be aligned with the selected
-transition scenario. All three types of technology mixes are shown based
-on assets from the same geographic region, as selected in the
-analysis.</p>
+<p>The technology mix plot illustrates the share of each technology in a
+portfolio or company at the analysis start and five years into the
+future. It compares the portfolio’s projected technology mix to both the
+benchmark region’s mix and the mix required for alignment with the
+selected transition scenario. All comparisons are based on assets from
+the same geographic region as defined in the analysis.</p>
 </div>
 <div class="section level4">
 <h4 id="interpretation-intuition">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition"></a>
 </h4>
-<p>For any sector with low-carbon alternatives that can substitute
-high-carbon products or technologies, the technology mix plot shows the
-required relative effort to achieve technology shares in line with
-climate targets. If the low carbon shares of the portfolio/company are
-larger than those of the benchmark in a given year, then the
-portfolio/company can be a leader in the sector. If they are smaller
-than those of the benchmark, then the portfolio/company is a
-laggard.</p>
-<p>In terms of alignment, a portfolio/company is aligned with the
-scenario if the technology shares of the low-carbon alternatives in the
-future are at least as large as those of the low-carbon alternatives
-shown in the technology mix of the climate scenario.</p>
-<p>The overall intuition behind the technology mix plot is that all
-technologies or fuel types in a sector produce equivalent outputs
-(e.g. a MWh of electricity has the same use for the end user, regardless
-of whether it was generated from a coal-fired power plant or a solar
-panel). Given that the outputs are substitutes and with all else being
-equal, from an impact angle it can be said that the higher the share of
-low carbon technologies in the portfolio, the better the result from a
-climate perspective. From a financial risk angle, the intuition depends
-a lot on what the user expects the future of the market of a given
-sector to look like. If the user assumes that transition risk will
-primarily materialize in the form of carbon pricing, then it is again
-possible to say that the higher the share of low-carbon technologies in
-the portfolio, the lower the transition risk. If the user thinks that
-other, potentially opposing factors could be at play in the sector
-transition that shape the future of the market, it may be best to pick a
-scenario that closely resembles that expected future, such that a
-portfolio technology mix similar to the future scenario technology mix
-should reduce transition risk.</p>
-<p>Generally, it is required to assess the alignment of a
-portfolio/company not only by the technology mix, but also by the
-production volume trajectory of the individual technologies of a given
-sector. This is because the technology mix plot cannot show if the
-overall output of the portfolio/company grows or declines, even thought
-he scenario may prescribe an overall production trend for the
-sector.</p>
+<p>The technology mix plot illustrates the effort required to align a
+portfolio’s technology shares with climate targets. If a portfolio or
+company has a higher share of low-carbon technologies than the benchmark
+in a given year, it is considered a leader; if lower, it is a laggard.
+Alignment with the scenario occurs when the portfolio’s future
+low-carbon technology shares meet or exceed those in the scenario’s
+technology mix.</p>
+<p>The underlying intuition is that all technologies in a sector produce
+equivalent outputs (e.g., a MWh of electricity, regardless of source).
+From a climate impact perspective, a higher share of low-carbon
+technologies is preferable. From a financial risk perspective, the
+implications depend on market expectations. If, for example, transition
+risk is expected to materialize through carbon pricing, then higher
+low-carbon shares reduce risk. However, if other factors influence
+sector transitions, selecting a scenario that mirrors expected market
+trends can help mitigate that risk.</p>
+<p>To fully assess alignment, technology mix should be evaluated
+alongside production volume trajectory, as the technology mix plot alone
+does not indicate whether overall output is increasing or decreasing,
+even if a scenario prescribes a specific production trend.</p>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="trajectory-plot">Trajectory Plot<a class="anchor" aria-label="anchor" href="#trajectory-plot"></a>
 </h3>
-<p>The production volume trajectory metric aims to measure the alignment
-of a portfolio’s projected production volumes, based on the five-year
-capital expenditure plans of companies, to those given in climate
-scenarios. It is used for the fossil fuels, power, and automotive
-sectors. Changes in production volumes result either from transfer of
-production from one technology to another (e.g. internal combustion
-engines to electric vehicles) or from sheer expansion or contraction in
-the production coming from the technology/fuel (e.g. a company brings a
-new coal-fired power plant online). Projected production volumes at a
-5-year horizon are considered at the individual client level at the
-technology level. The resulting volume trajectories are then compared
-with the trends set as targets in climate scenarios.</p>
+<p>The production volume trajectory metric evaluates a portfolio’s
+alignment with climate scenarios by comparing projected production
+volumes—based on companies’ five-year capital expenditure plans—to
+scenario pathways. It applies to the fossil fuels, power, and automotive
+sectors, where production changes occur either through shifts between
+technologies (e.g., internal combustion engines to electric vehicles) or
+overall expansion/contraction (e.g., closing down coal mines). The
+trajectory reflects these changes at the technology level for individual
+clients and is compared to climate scenario trends.</p>
 <div class="section level4">
 <h4 id="explanation-of-output-2">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output-2"></a>
 </h4>
-<p>The production volume trajectory plot shows the production volume of
-the portfolio or company for one technology (or fuel type) at a time.
-The plot shows relative changes over a time frame between the start year
-of the analysis and five years into the future (solid black line). This
-projected production volume of the portfolio is compared to the
-production volume in the benchmark region over the same period of time
-(dashed black line). Finally the background of the plot is shaded in a
-color scale from red to yellow and green. The lines between the shaded
-areas represent the relative changes for the technology based on the
-scenario, using the market share approach. For low-carbon technologies,
-anything above the most ambitious scenario will be displayed in green,
-anything below the least ambitious scenario will be displayed in red.
-For high-carbon technologies, anything below the most ambitious scenario
-will be displayed in green, anything above the least ambitious scenario
-will be displayed in red. Generally, the production volume trajectory
-plot shows multiple scenarios from the same scenario publication,
-although it also works when comparing the portfolio to a single scenario
-(the scenario line would split the background in two shaded areas in
-that case).</p>
+<p>The trajectory plot displays a portfolio’s production volume for a
+specific technology or fuel type, tracking changes from the start year
+to five years into the future (<strong>solid black line</strong>). This
+projection is compared to the benchmark region’s production trajectory
+(<strong>dashed black line</strong>). The plot’s background is
+color-coded: green indicates alignment with ambitious climate scenarios,
+red signifies misalignment, and shades of yellow for in-between. For
+low-carbon technologies, values above the most ambitious scenario appear
+green, and those below the least ambitious scenario appear red; the
+opposite applies to high-carbon technologies. Typically, the plot
+includes multiple scenarios but can also compare the portfolio against a
+single scenario.</p>
 </div>
 <div class="section level4">
 <h4 id="interpretation-intuition-1">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-1"></a>
 </h4>
-<p>For a technology in a portfolio/company to be perfectly aligned with
-a climate transition scenario, the production pathway (solid black line)
-would have to exactly follow the scenario line (the line separating two
-shaded areas). Low carbon technologies will usually have increasing
-scenario lines for the more ambitious scenarios. Business-as-usual
-scenarios for low-carbon technologies can have scenario lines in either
-direction. For a low-carbon technology, a portfolio/company is aligned
-with any scenario below the production plans. For a high-carbon
-technology, a portfolio/company is aligned with any scenario above the
-production plans.</p>
-<p>The intuition is that low-carbon technologies must be scaled up to
-reach more ambitious climate targets, whereas high-carbon technologies
-have to be scaled down or, in some cases, even phased out. Therefore, if
-the production plan of a portfolio/company scales up a low carbon
-technology faster than the scenario, it contributes strongly to reaching
-the scenario outcome. conversely, if the portfolio/company does not
-scale up low-carbon technologies at the scenario pace, it contributes to
-slowing down the transition below the scenario ambition.</p>
-<p>Another aspect about the intuition behind the more ambitious
-scenarios is that a higher ambition in transitioning to a low-carbon
-economy (scaling up low-carbon technologies and scaling down high-carbon
-technologies) correlates with a lower expected global heating
-outcome.</p>
+<p>A portfolio is aligned with a climate scenario if its production
+trajectory (<strong>solid black line</strong>) follows the scenario
+line. Low-carbon technologies generally require increasing production
+under ambitious scenarios, whereas high-carbon technologies must decline
+or phase-out. If a portfolio scales up low-carbon production faster than
+the scenario, it supports the transition; if it lags, it slows
+progress.</p>
+<p>More ambitious scenarios assume stronger shifts toward low-carbon
+solutions, leading to lower global heating outcomes. Thus, the degree of
+ambition in a portfolio’s production trajectory directly correlates to
+its alignment with climate targets.</p>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 </div>
@@ -346,81 +308,66 @@ outcome.</p>
 <div class="section level2">
 <h2 id="sectoral-decarbonization-sda-target">Sectoral Decarbonization (SDA) Target<a class="anchor" aria-label="anchor" href="#sectoral-decarbonization-sda-target"></a>
 </h2>
-<p>The sectoral decarbonization approach (SDA) is used to calculate
-PACTA alignment metrics for the aviation, cement and steel sectors. The
-commonality of these sectors is that there are no market ready
-production-pathways at the technology level (or fuel type level)
-available yet that can be used to describe how to decarbonize the sector
-activities. They are currently considered “hard-to-abate” sectors. Since
-there are no market-ready low-carbon alternatives available in these
-sectors at the moment, that can be scaled up fast, the SDA approach is
-used to calculate sector-level metrics instead of the technology level
-metrics available for sectors that use the market share approach. These
-sector level metrics are production-based emission intensities, such as
-tonnes of CO<sub>2</sub> per tonne of cement or tonnes of CO<sub>2</sub>
-per tonne of steel. Regardless of how the output unit is produced, this
-is a comparable measure for the entire sector. The principle idea of the
-SDA approach is that the required carbon intensity that a sector needs
-to reach in the future, given assumptions around future production
-volumes, can be derived by dividing a sector specific carbon budget by
-the expected production volume. The current GHG emissions divided by the
-current aggregate sector production volume gives the starting point of
-the emission intensity. If the actors in a sector decarbonize the
-production in a way that follows the average emission intensity of the
-sector, then the scenario assumptions will be solved for in aggregate.
-At the portfolio/company level, the SDA approach requires every actor to
-decarbonize their production following their individual trajectory that
-starts at their current emission intensity and converges on a common
-emission intensity that is the same for all actors in a sector at the
-end of the scenario time frame (for example in 2050). This means that a
-company with an already lower emission intensity will not have to reduce
-their emission intensity as much as a company that lags the current
-sector average.</p>
-<p>For detailed information about the Sectoral Decarbonization (SDA)
-metric and how it is calculated, see the <a href="cookbook_metrics.html#sectoral-decarbonization-approach">Metrics
+<p>The sectoral decarbonization approach (SDA) calculates PACTA
+alignment metrics for aviation, cement, and steel—sectors. These sectors
+are considered “hard-to-abate” due to the lack of market-ready
+low-carbon alternatives. As a result, there are no clear
+production-pathways at the level of technology or fuel-type. Unlike the
+market share approach, which tracks technology shifts, the SDA evaluates
+sector-level emission intensities (e.g., tonnes of CO<sub>2</sub> per
+tonne of cement or steel produced), providing a comparable measure
+across all production methods.</p>
+<p>The SDA determines the required carbon intensity for a sector—as
+specified by a climate scenario—by dividing a sector-specific carbon
+budget by expected production volumes. The starting emission intensity
+is calculated as current GHG emissions divided by total sector output.
+To align with the scenario, companies must follow an individual
+decarbonization trajectory that starts at their current emission
+intensity and converges with a common sector-wide target by the
+scenario’s endpoint (e.g., 2050). Companies with lower initial
+intensities require less reduction than those above the sector average.
+If all companies in a sector decarbonize their production in such a way
+that their average emission intensity converges to the sectoral target,
+then the scenario target will be reached in aggregate.</p>
+<p>For more details on the Sectoral Decarbonization (SDA) metric and its
+calculation, see the <a href="cookbook_metrics.html#sectoral-decarbonization-approach">Metrics
 appendix</a>.</p>
 <div class="section level3">
 <h3 id="target_sda-function">
 <code>target_sda()</code> function<a class="anchor" aria-label="anchor" href="#target_sda-function"></a>
 </h3>
 <p>The <code><a href="../reference/target_sda.html">target_sda()</a></code> function calculates the Sectoral
-Decarbonization Target metric and outputs a table including the
-calculated targets at the portfolio level or at the company level,
-depending on the options selected.</p>
+Decarbonization Target metric, producing a table that includes the
+calculated targets at the portfolio or company level, depending on the
+options selected.</p>
 <div class="section level4">
 <h4 id="explanation-of-output-3">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output-3"></a>
 </h4>
-<p>The primary column/variable of interest in the output is the
-<code>emission_factor_value</code> variable. What the
-<code>emission_factor_value</code> variable represents depends on the
-values in all of the other columns, and in particular the
-<code>emission_factor_metric</code> column. If the value in the
-<code>emission_factor_metric</code> column on the same row is
-<code>"projected"</code>, then the value in the
-<code>emission_factor_value</code> variable will represent the physical
-emission intensity level of your portfolio based on the ABCD data for
-that sector/year/region/scenario/etc. If the value in the
-<code>emission_factor_metric</code> column on the same row begins with
-<code>"target_"</code>, e.g. <code>"target_cps"</code>, then the value
-in the <code>emission_factor_value</code> variable will represent the
-target level of physical emission intensity for that
-sector/year/region/scenario/etc. This target level is derived based on
-the ABCD emission intensity value of your portfolio in the start year
-and converging with the emission intensity of the scenario in the final
-year. If the value in the <code>emission_factor_metric</code> column on
-the same row is <code>"corporate_economy"</code>, then the value in the
-<code>emission_factor_value</code> variable will represent the weighted
-average physical emission intensity of the entire sector, which can be
-used as a benchmark to compare to your portfolio’s emission intensity
-levels. If the value in the <code>emission_factor_metric</code> column
-on the same row starts with <code>"adjusted_"</code>, then the value in
-the <code>emission_factor_value</code> variable will represent the
-scenario trajectory of the emission intensity, adjusted for differences
-between the sector totals in the ABCD and the scenario data.</p>
-<p>If you use the <code>by_company = TRUE</code> option of the
-<code><a href="../reference/target_sda.html">target_sda()</a></code> function, most of what’s said above is true
-except relative to the company listed in that row in the
-<code>name_abcd</code> column.</p>
+<p>The primary variable of interest in the output is
+<code>emission_factor_value</code>, which represents an emission
+intensity depending on the possible values of the
+<code>emission_factor_metric</code> column`:</p>
+<ul>
+<li>
+<code>"projected"</code>: The portfolio’s physical emission
+intensity based on ABCD data for the sector, year, region, and
+scenario.</li>
+<li>
+<code>"target_*"</code> (e.g., <code>"target_cps"</code>): The
+scenario-aligned individual target emission intensity, starting from the
+portfolio’s initial intensity and converging with the sector-level
+scenario target by the final year.</li>
+<li>
+<code>"corporate_economy"</code>: The weighted average emission
+intensity of the entire sector, serving as a benchmark for
+comparison.</li>
+<li>
+<code>"adjusted_*"</code>: The scenario trajectory for emission
+intensity, adjusted for differences between ABCD sector totals and
+scenario data.</li>
+</ul>
+<p>When <code>by_company = TRUE</code>, the output is specific to the
+company listed in the <code>name_abcd</code> column.</p>
 <p>For detailed information about the table output of the
 <code><a href="../reference/target_sda.html">target_sda()</a></code> function and its columns, see the <a href="data_outputs.html#target_sda-output">data dictionary</a>.</p>
 </div>
@@ -429,70 +376,52 @@ except relative to the company listed in that row in the
 <h3 id="emission-intensity-plot">Emission Intensity Plot<a class="anchor" aria-label="anchor" href="#emission-intensity-plot"></a>
 </h3>
 <p>The emission intensity metric measures the average CO<sub>2</sub>
-intensity of the portfolio in the cement and steel sectors. This
-projected emission intensity of a portfolio or company is given as
-CO<sub>2</sub>/economic unit of output (for example, CO<sub>2</sub> per
-ton of steel produced). This five year forward-looking trajectory of the
-emission intensity is then compared to an emission intensity reference
-trend over the same period of time based on a climate transition
-scenario.</p>
-<p>The emission intensity of the activities financed by the portfolio is
-the metric of choice in sectors for which no clear technology pathways
-have been set out (namely, cement and steel). Put differently, for these
-sectors, no scalable zero-carbon alternative yet exists. As such, it is
-not possible to use the technology mix metric or the production volume
-trajectory metric to measure alignment. However, it is still imperative
-to steer capital in a way that aims to decrease carbon emissions in
-these sectors – hence the emission intensity metric is used.</p>
+intensity of a portfolio in the aviation, cement, and steel sectors,
+expressed as CO<sub>2</sub> per unit of economic output (e.g., CO2 per
+ton of steel produced). This five-year forward-looking trajectory is
+compared to an emission intensity reference trend based on a climate
+transition scenario.</p>
+<p>This metric is used for sectors without clear technology pathways or
+scalable zero-carbon alternatives (namely, aviation, cement and steel).
+Since technology mix and production volume trajectory metrics are not
+applicable, emission intensity serves as the primary measure for
+assessing alignment and guiding capital toward emissions reductions in
+these sectors.</p>
 <div class="section level4">
 <h4 id="explanation-of-output-4">Explanation of Output<a class="anchor" aria-label="anchor" href="#explanation-of-output-4"></a>
 </h4>
-<p>The emission intensity plot shows the projected emission intensity of
-the portfolio or company (labeled “Projected” in the plot) for a given
-sector. This is compared to the emission intensity target of the
-portfolio or company (labeled “Target” in the plot), which starts at the
-same initial value, but then converges towards a common emission
-intensity target for all actors in the sector at the end of the scenario
-time frame. Additionally, the plot show a benchmark trajectory of the
-emission intensity of the sector (labeled “Corporate Economy” in the
-plot), which is based on the average of all companies in the given
-sector and region. The starting point of this benchmark often differs
-from that of the portfolio or company. Lastly, the plot contains the
-scenario target for the sector as a whole, based on all companies in the
-benchmark group (labeled “Adjusted Scenario” in the plot). This is the
-trend line that the target of the portfolio or company converges towards
-at the end of the scenario time frame (often 2050 and not always shown
-in the plot).</p>
+<p>The emission intensity plot visualizes the projected emission
+intensity of a portfolio or company (labeled “Projected”) for a given
+sector. This is compared to:</p>
+<ul>
+<li>“Target”: The portfolio’s emission intensity target, which starts at
+the same initial value and converges toward a common sector-wide target
+by the scenario’s endpoint.</li>
+<li>“Corporate Economy”: The sector’s benchmark trajectory, representing
+the average emission intensity across all companies in the sector and
+region. This starting value may differ from the portfolio’s.</li>
+<li>“Adjusted Scenario”: The sector-wide scenario target, based on all
+companies in the benchmark group. This trend line indicates where the
+portfolio’s emission intensity should align by the scenario’s end (often
+2050, though not always shown).</li>
+</ul>
 </div>
 <div class="section level4">
 <h4 id="interpretation-intuition-2">Interpretation &amp; Intuition<a class="anchor" aria-label="anchor" href="#interpretation-intuition-2"></a>
 </h4>
-<p>The start value of the portfolio or company relative to the benchmark
-tells us if the portfolio or company is a leader or a laggard in the
-sector at the start year of the analysis. If the start value is higher
-than that of the average, the emission intensity of the
-portfolio/company is higher than average. This implies that the
-portfolio/company will have to reduce its emission intensity in the
-given sector at a steeper rate than the average company, because all
-emission intensities of the sector need to converge at the end of the
-scenario time frame and the distance towards that target is higher for a
-laggard with a high start value than for a leader with a lower than
-average start value. A portfolio or company is considered aligned with
-the scenario of the projected emission intensity decreases at a rate at
-least as steep as the individual target trajectory, as this trend
-ensures that the portfolio or company will reach the point of
-convergence at the end of the time frame. Not reaching that level of
-emission intensity would contribute to jeopardizing the sector target
-according to the scenario or place a higher burden on other participants
-to compensate for the lack of ambition. Such a trend, indicated by a
-projected line higher than the individual scenario target, would
-therefore be considered misaligned.</p>
-<p>The intuition behind the emission intensity plot is that the lower
-the emission intensity of the portfolio/company, the better the result
-from a climate perspective. This is because, assuming the overall
-production of the sector remains constant, the absolute emissions of the
-sector are lower when the emission intensity is lower which, in turn,
-leads to less GHG emissions and finally to less global heating.</p>
+<p>The portfolio or company’s starting emission intensity relative to
+the sector benchmark indicates whether it is a leader or laggard. A
+higher-than-average starting value means the portfolio must decarbonize
+at a steeper rate to reach the sector-wide target by the scenario’s
+endpoint. Alignment with the scenario requires the portfolio’s emission
+intensity to decline at least as fast as its target trajectory; failing
+to do so shifts the burden onto other market participants and risks
+misalignment.</p>
+<p>The core intuition behind the emission intensity plot is that lower
+emission intensity leads to lower absolute emissions, assuming
+sector-wide production remains constant. This reduction translates to
+fewer greenhouse gas emissions and, ultimately, mitigates global
+heating.</p>
 <p><img src="cookbook_interpretation_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <hr>
 <p><strong>PREVIOUS CHAPTER:</strong> <a href="cookbook_running_the_analysis.html">Running the Analysis</a></p>
