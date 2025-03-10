@@ -406,7 +406,7 @@ PACTA can complement other company-level risk assessments, including financial m
 
 When managing transition risk, financial institutions can consider two primary approaches:
 
-(1) **Client Engagement**: Helping clients mitigate their transition risk by providing insights into how their production plans compare to benchmarks and guiding them toward a transition plan. This may involve shifting away from high-carbon activities, investing in low-carbon technologies, or securing transition finance. More details on client transition assessments and transition finance can be found in RMI’s [Transition Finance Resource Hub](https://rmi.org/transitionfinance/).
+(1) **Client Engagement**: Helping clients mitigate their transition risk by providing insights into how their production plans compare to benchmarks and guiding them towards implementing a transition plan. This may involve shifting away from high-carbon activities, investing in low-carbon technologies, or securing transition finance. More details on client transition assessments and transition finance can be found in RMI’s [Transition Finance Resource Hub](https://rmi.org/transitionfinance/).
 
 (2) **Exposure Management**: If the client is unwilling or unable to address transition risk, the financial institution may choose to reduce its exposure, including potentially exiting the client relationship at maturity.
 
