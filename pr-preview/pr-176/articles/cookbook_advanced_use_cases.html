@@ -163,9 +163,11 @@ alignment with external benchmarks or financial institutions’ transition
 targets. Reporting requirements may differ based on:</p>
 <ul>
 <li>Type of climate metrics (e.g. absolute emissions, financed
-emissions, production-based emission intensity, production volumes)</li>
-<li>Scope and granularity (e.g., aggregated loan book exposures,
-climate-relevant sector exposures, or sector-specific reporting)</li>
+emissions, production-based emission intensity, production volumes or
+technology mix)</li>
+<li>Scope and granularity (e.g., aggregated loan book exposures across
+all sectors, aggregate loan book exposures across climate-relevant
+sector, or sector-specific exposure reporting)</li>
 <li>Value chain coverage (e.g., full value chain reporting or focusing
 on the most emission-intensive segments)</li>
 </ul>
@@ -660,18 +662,18 @@ benchmark, typically derived from climate transition scenarios. If a
 regulation mandates a specific benchmark data source, financial
 institutions should adhere to it. Otherwise, they should be prepared to
 justify their choice, whether based on sectoral granularity, perceived
-scenario realism, or regulatory preference for credibility and
-comparability. In some cases, regulators may provide explicit benchmark
-values for alignment assessments.</p>
+credibility or likelihood of scenario assumptions, or regulatory
+preference for credibility and comparability. In some cases, regulators
+may provide explicit benchmark values for alignment assessments.</p>
 <p>For example, a regulator may require financial institutions to report
 sectoral physical emission intensity (for SDA sectors) or the
 high-carbon share (for market share sectors) of their loan book,
-compared to both a 2030 scenario benchmark (e.g., scenario XY) and the
-FI’s own 2030 target. In such cases, users can extract the
-portfolio-weighted emission intensity from their PACTA for Banks results
-and compare it to the corresponding 2030 scenario value. If the FI has
-set sector-specific targets, these should also be included in the
-reporting.</p>
+compared to both a 2030 scenario benchmark (e.g., scenario X) and the
+financial institution’s own 2030 target. In such cases, users can
+extract the portfolio-weighted emission intensity from their PACTA for
+Banks results and compare it to the corresponding 2030 scenario value.
+If the financial institution has set sector-specific targets, these
+should also be included in the reporting.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tech_mix_power_current</span> <span class="op">&lt;-</span> <span class="va">market_share_targets_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
@@ -3240,15 +3242,15 @@ two primary approaches:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Client Engagement</strong>: Helping clients mitigate
 their transition risk by providing insights into how their production
-plans compare to benchmarks and guiding them toward a transition plan.
-This may involve shifting away from high-carbon activities, investing in
-low-carbon technologies, or securing transition finance. More details on
-client transition assessments and transition finance can be found in
-RMI’s <a href="https://rmi.org/transitionfinance/" class="external-link">Transition Finance
-Resource Hub</a>.</p></li>
+plans compare to benchmarks and guiding them towards implementing a
+transition plan. This may involve shifting away from high-carbon
+activities, investing in low-carbon technologies, or securing transition
+finance. More details on client transition assessments and transition
+finance can be found in RMI’s <a href="https://rmi.org/transitionfinance/" class="external-link">Transition Finance Resource
+Hub</a>.</p></li>
 <li><p><strong>Exposure Management</strong>: If the client is unwilling
 or unable to address transition risk, the financial institution may
-choose to reduce its exposure, including potentially exiting the
+choose to reduce its exposure, including potentially exiting the client
 relationship at maturity.</p></li>
 </ol>
 <p><strong>Example</strong></p>
@@ -4277,9 +4279,9 @@ validity of the transition plan.</p>
 <p><strong>Example</strong></p>
 <p>Suppose a bank has a power sector client that plans to reduce its
 share of coal-fired power generation. The client provides projections
-for its total coal capacity and technology mix through 2025. The bank
-compares these projections with PACTA for Banks results over the same
-time-frame to evaluate alignment and credibility.</p>
+for its total coal capacity and power technology mix through 2025. The
+bank compares these projections with PACTA for Banks results over the
+same time-frame to evaluate alignment and credibility.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">power_company_coal_plan</span> <span class="op">&lt;-</span> <span class="va">market_share_targets_company</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
@@ -5812,15 +5814,15 @@ requires careful validation:</p>
 emission intensity data aligns with ABCD’s sector definitions and value
 chain scope. Technology classifications should match existing ABCD
 conventions (e.g., hydro power is separate from renewable power, and
-plug-in hybrids are distinct from internal combustion engine vehicles in
-the automotive sector).</p></li>
+plug-in hybrids are distinct from mild hybrids in the automotive
+sector).</p></li>
 <li><p><strong>Consolidation Method</strong>: If a company does not
 fully own all production assets, its attributed production should follow
-the same consolidation method used in ABCD. For instance, under an
+the same consolidation method used in the ABCD. For instance, under an
 equity ownership approach, a company owning 50% of a power plant should
 only be assigned 50% of its capacity. Similarly, subsidiary production
 should be proportionally rolled up based on ownership stakes, while
-assets operated without ownership should be excluded. If ABCD uses a
+assets operated without ownership should be excluded. If the ABCD uses a
 different consolidation method (e.g., financial control), refer to the
 data provider’s documentation for alignment.</p></li>
 <li><p><strong>Data Formatting</strong>: Ensure all necessary columns
