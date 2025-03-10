@@ -176,7 +176,7 @@ Regulators typically focus on the overall loan book. Regulations generally apply
 
 Financial regulators worldwide have introduced climate-related financial risk regulations, varying in scope and requirements. Many regulations mandate reporting on climate-relevant exposures, often including forward-looking metrics such as emissions or production alignment with external benchmarks or financial institutions’ transition targets. Reporting requirements may differ based on:
 
-- Type of climate metrics (e.g. absolute emissions, financed emissions, production-based emission intensity, production volumes)
+- Type of climate metrics (e.g. absolute emissions, financed emissions, production-based emission intensity, production volumes or technology mix)
 - Scope and granularity (e.g., aggregated loan book exposures, climate-relevant sector exposures, or sector-specific reporting)
 - Value chain coverage (e.g., full value chain reporting or focusing on the most emission-intensive segments)
 
