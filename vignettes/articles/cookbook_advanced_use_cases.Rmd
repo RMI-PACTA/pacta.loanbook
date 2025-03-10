@@ -330,6 +330,13 @@ tech_mix_sector_targets <- market_share_targets_portfolio %>%
   select(sector, technology, metric, year, technology_share) %>% 
   mutate(technology_share = round(technology_share, 3))
 
+high_carbon_share_sector_targets <- tech_mix_sector_targets %>% 
+  filter(technology %in% c("coalcap", "gascap", "oilcap", "ice")) %>% 
+  summarise(
+    high_carbon_share = sum(technology_share, na.rm = TRUE),
+    .by = c("sector", "metric", "year")
+  )
+
 ei_sector_targets <- sda_targets_portfolio %>% 
   filter(
     region == "global",
@@ -342,27 +349,25 @@ ei_sector_targets <- sda_targets_portfolio %>%
 available_sectors <- unique(pull(filter(matched, sector %in% c(unique(scenario$sector), unique(co2$sector))), sector))
 
 ```
-In this example, we set targets for a bank, based on its loan book composition in `r min(scenario$year, na.rm = TRUE)`. The loan book contains exposures to the following PACTA sectors, for which trajectories are available in the scenarios: `r paste(available_sectors, collapse = ", ")`. The bank wants to set targets for the year 2030. The bank has decided to use the "target_sda" scenario as a benchmark for setting targets based on the [market share approach](cookbook_metrics.html#market-share-approach) and "target_demo" for setting targets based on the [sectoral decarbonization approach](cookbook_metrics.html#sectoral-decarbonization-approach). Targets are set based on global scenario benchmarks. The following two tables show how targets are set for sectors based on PACTA.
 
-```{r use_case_two_sector_targets_results, echo = FALSE, warning = FALSE}
-result_table(tech_mix_sector_targets, title = "Sector targets", subtitle = "high-carbon share")
+In this example, we set targets for a bank, based on its loan book composition in `r min(scenario$year, na.rm = TRUE)`. The loan book contains exposures to the following PACTA sectors, for which trajectories are available in the scenarios: `r paste(available_sectors, collapse = ", ")`. The bank wants to set targets for the year 2030. The bank has decided to use the "target_sda" scenario as a benchmark for setting targets based on the [market share approach](cookbook_metrics.html#market-share-approach) and "target_demo" for setting targets based on the [sectoral decarbonization approach](cookbook_metrics.html#sectoral-decarbonization-approach). Targets are set based on global scenario benchmarks. The sector targets for 2030 based on this loan book are as follows:
+
+```{r use_case_two_sector_targets_high_carbon, echo = FALSE, warning = FALSE}
+result_table(high_carbon_share_sector_targets, title = "Sector targets", subtitle = "high-carbon share")
+```
+
+For sectors with technology pathways, the banks could set targets based on the high-carbon share of technologies in the sector. Alternatively it could break down the targets by individual technologies.
+
+```{r use_case_two_sector_targets_tech_mix, echo = FALSE, warning = FALSE}
+result_table(tech_mix_sector_targets, title = "Sector targets", subtitle = "technology share")
+```
+
+In sectors without technology pathways, the bank could set targets based on the emission intensity of the sector.
+
+```{r use_case_two_sector_targets_emission_intensity, echo = FALSE, warning = FALSE}
 
 result_table(ei_sector_targets, title = "Sector targets", subtitle = "emission intensity")
 ```
-
-The sector targets for 2030 based on this loan book are as follows:
-
-- The target high-carbon share in the automotive sector is: `r sum(filter(tech_mix_sector_targets, sector == "automotive", technology == "ice")$technology_share, na.rm = TRUE) * 100`% - which coincides with the technology level target for light-duty vehicles with internal combustion engines (ice)
-- The target high-carbon share in the power sector is: `r sum(filter(tech_mix_sector_targets, sector == "power", technology %in% c("coalcap", "gascap", "oilcap"))$technology_share, na.rm = TRUE) * 100`%
-- If targets are set by technology in the power sector, the targets would look as follows:
-  - share of coal-fired power plants: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "coalcap")$technology_share, na.rm = TRUE) * 100`%
-  - share of gas-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "gascap")$technology_share, na.rm = TRUE) * 100`%
-  - share of oil-fired power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "oilcap")$technology_share, na.rm = TRUE) * 100`%
-  - share of renewable power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "renewablescap")$technology_share, na.rm = TRUE) * 100`%
-  - share of hydro power: `r sum(filter(tech_mix_sector_targets, sector == "power", technology == "hydrocap")$technology_share, na.rm = TRUE) * 100`%
-- The target emission intensity in the cement sector is: `r pull(filter(ei_sector_targets, sector == "cement"), emission_factor_value)` tonnes of CO^2^/tonne of cement
-- The target emission intensity in the steel sector is: `r pull(filter(ei_sector_targets, sector == "steel"), emission_factor_value)` tonnes of CO^2^/tonne of steel
-
 
 ### Notes and caveats
 
@@ -391,7 +396,7 @@ This is only one way of supplementing company level risk information. Other opti
 
 When engaging with a client that was identified for risk management, many approaches may lead to reducing risk. Two of the main ones are (1) to engage with the client and try to help them reduce risk and (2) to assess the relationship with the client and potentially reduce exposure.
 
-The first approach can include providing the client with information on how their production plans compare to external benchmarks and what the implications of that are for their risk profile. This can be used as an impulse to work on a transition plan for the client to help reduce their exposure to high-carbon activities and increase their exposure to low-carbon activities. Some of these actions can be relatively easy to implement by the client autonomously. Other actions may require dedicated funding, for example to develop new technologies or to scale up existing low-carbon technologies, possible while decommissioning high-carbon assets. Such activities are related to the broader topic of client transition assessments and transition finance, which are not covered in detail in this cookbook. But thorough additional information on both can be found in other RMI resources, such as the Transition Finance Hub (**LINK**) and ... **LINK TO CTA**.
+The first approach can include providing the client with information on how their production plans compare to external benchmarks and what the implications of that are for their risk profile. This can be used as an impulse to work on a transition plan for the client to help reduce their exposure to high-carbon activities and increase their exposure to low-carbon activities. Some of these actions can be relatively easy to implement by the client autonomously. Other actions may require dedicated funding, for example to develop new technologies or to scale up existing low-carbon technologies, possible while decommissioning high-carbon assets. Such activities are related to the broader topic of client transition assessments and transition finance, which are not covered in detail in this cookbook. But thorough additional information on both can be found in other RMI resources, such as the [Transition Finance Resource Hub](https://rmi.org/transitionfinance/) and ... **LINK TO CTA**.
 
 If a client turns out to be unwilling or incapable to engage and manage their transition risk, another route may be taken by the financial institution. In such a scenario, the financial institution may decide to reduce its exposure to the client, including the possible termination of the relationship at maturity.
 
@@ -518,11 +523,96 @@ Upon engaging with the client `r company_select`, it is determined that the clie
 
 ### Notes and caveats
 
-- Past experience shows that companies will not always use the same consolidation methods as used in PACTA. Any production values provided by a company should therefore be checked thoroughly. In case the discrepancies cannot be resolved, it may be necessary to reach out to the provider of the ABCD used in the PACTA analysis to help understand such differences. They should be able to provide additional methodological documentation for how data is handled for each sector and can pinpoint issues at the asset level. Since RMI is not a data provider, the user will have to engage with the data provider directly. In case the data provider is Asset Impact, the following website contains information on how to reach out **LINK**.
+- Past experience shows that companies will not always use the same consolidation methods as used in PACTA. Any production values provided by a company should therefore be checked thoroughly. In case the discrepancies cannot be resolved, it may be necessary to reach out to the provider of the ABCD used in the PACTA analysis to help understand such differences. They should be able to provide additional methodological documentation for how data is handled for each sector and can pinpoint issues at the asset level. Since RMI is not a data provider, the user will have to engage with the data provider directly. In case the data provider is Asset Impact, you can find contact information on the [Asset Impact website](https://asset-impact.gresb.com/).
 
 ## Other Use Cases
 
-A variety of other use cases are conceivable and could benefit from PACTA for Banks analysis. These could include additional components of risk management, such as taking steps internally to adapt the risk position based on PACTA analyses; using PACTA to identify opportunities to expand into certain sectors/fields, possibly identifying clients that are well positioned to make this step; informing the development of new products or services in the realm of transition finance (**ADD LINK to TF Hub**). With additional research, these use cases may be part of future iterations of this cookbook.
+A variety of other use cases are conceivable and could benefit from PACTA for Banks analysis. These could include additional components of risk management, such as taking steps internally to adapt the risk position based on PACTA analyses; using PACTA to identify opportunities to expand into certain sectors/fields, possibly identifying clients that are well positioned to make this step; informing the development of new products or services in the realm of transition finance (for general information on transition finance, see the [Transition Finance Resource Hub](https://rmi.org/transitionfinance/)). With additional research, these use cases may be part of future iterations of this cookbook.
+
+# Supplementing ABCD data
+
+When running a PACTA for Banks analysis, it may not always be possible to find matches for in-scope companies from the loan book in the ABCD. The coverage of ABCD data sets should not expected to be perfect and in some cases it may miss companies that account for a significant exposure in a loan book. If you have validated that the respective company is indeed in scope and none of the steps described in the [matching section](cookbook_running_the_analysis.html#matching-process) have yielded a result, you can consider supplementing the ABCD data set manually instead.
+
+Please be advised that supplementing the ABCD can be a rather complex and time consuming research task and should therefore not be used as the default method if an initial matching run has not immediately yielded a clear match for a company in the loan book. Running a few iterations of the matching process with adjusted parameters is still recommended.
+
+## Example
+
+Suppose you have a loanbook containing a loan to the power company "Acme Co."
+
+```{r, message = FALSE, R.options = list(width = 400)}
+library(pacta.loanbook)
+
+loanbook <- 
+  data.frame(
+    id_loan = "L1",
+    id_direct_loantaker = "C123",
+    name_direct_loantaker = "Acme Co.",
+    id_ultimate_parent = "C45",
+    name_ultimate_parent = "Acme Holdings",
+    loan_size_outstanding = 1e7,
+    loan_size_outstanding_currency = "USD",
+    loan_size_credit_limit = 1e8,
+    loan_size_credit_limit_currency = "USD",
+    sector_classification_system = "NACE",
+    sector_classification_direct_loantaker = "D35.12"
+  )
+
+loanbook
+```
+
+You have not been able to find a match in the ABCD after running multiple iterations of the matching algorithm.
+
+```{r, message = FALSE, R.options = list(width = 400)}
+match_name(loanbook = loanbook, abcd = abcd_demo)
+match_name(loanbook = loanbook, abcd = abcd_demo, min_score = 0.7)
+match_name(loanbook = loanbook, abcd = abcd_demo, method = "cosine")
+```
+
+Next, you have validated that "Acme Co." is indeed in scope. Given the financial exposure to this company is highly relevant for running a meaningful PACTA analysis of your loanbook, you have now decided to supplement the ABCD data set with additional data from a different source.
+
+Suppose you manage to compile the relevant data for Acme Co. from a different source in a `my_custom_abcd.xlsx` file (following preceisely the same [format of ABCD data](data_abcd.html)), e.g.
+
+```{r, include = FALSE}
+custom_abcd <-
+  data.frame(
+    company_id = rep("175", 5),
+    name_company = rep("Acme Co.", 5),
+    lei = rep("18500033XH6RG332SX57", 5),
+    sector = rep("power", 5),
+    technology = rep("hydrocap", 5),
+    production_unit = rep("MW", 5),
+    year = 2020L:2024L,
+    production = c(12000, 12000, 12375, 13000, 13000),
+    emission_factor = rep(NA_real_, 5),
+    plant_location = rep("MY", 5),
+    is_ultimate_owner = rep(TRUE, 5),
+    emission_factor_unit = rep(NA_character_, 5)
+  )
+
+writexl::write_xlsx(x = custom_abcd, path = file.path(tempdir(), "my_custom_abcd.xlsx"))
+```
+
+```{r custom_abcd_table, echo = FALSE}
+result_table(custom_abcd, title = "my_custom_abcd.xlsx")
+```
+
+You could now read in this XLSX file, merge the imported data with your existing ABCD data by adding the rows to the bottom of the ABCD table, and with the combined ABCD, you can now get a matched loan, when re-running the matching process.
+
+```{r, message = FALSE, R.options = list(width = 400)}
+abcd_addition <- readxl::read_excel(path = file.path(tempdir(), "my_custom_abcd.xlsx"))
+
+abcd_combined <- rbind(abcd_demo, abcd_addition)
+
+match_name(loanbook = loanbook, abcd = abcd_combined)
+```
+
+## Note on adding manually researched data to the ABCD
+
+While the technical implementation shown in the example above is very straightforward, it makes some assumptions that should be validated while doing the research:
+
+- The production data or emission intensity data supplemented to the ABCD should have the same scopes as the existing data in the ABCD. I.e. it should only contain data based on the correct part of the value chain that is actually in scope. And any technology split that may be required should follow the same definitions as the existing data. For example, in the power sector, hydro power is treated as a separate category from renewable power. In the automotive sector, plug-in hybrids are considered actual hybrids, whereas wheras no-plug or mild hybrids are considered internal combustion engine vehicles.
+- If the company for which data is supplemented does not fully own all of the production assets considered, the consolidation method from the physical production unit to the company level should be consistent with that used in the ABCD. For example, if the company only owns 50% of a power plant, then under an equity ownership consolidation method, the company should only be attributed 50% of the capacity of that power plant. Similarly, if the company is partial owner of subsidiary companies, the production owned by the subsidiary companies should only be rolled up according to the ownership share. Some companies may also report production or capacity of assets that they operate but that they have no ownership stake in. This would have to be disregarded. Different allocation rules may apply in case another consolidation method is used in the original ABCD data, such as financial control. This should be documented in the materials provided by the third party data provider of the ABCD.
+- To ensure that the process of supplementing the ABCD works seamlessly, you should add all relevant columns to the data you are reading in. Refer to the [ABCD data dictionary](data_abcd.html). for more information.
 
 ---
 
