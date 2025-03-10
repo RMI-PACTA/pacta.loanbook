@@ -168,7 +168,7 @@ Reporting or disclosing loan book alignment or targets to a financial supervisor
 
 ### Level of Analysis
 
-Regulators typically focus on the overall loan book rather than individual clients, allowing financial institutions to determine client-specific reporting. Regulations generally apply to the structure of the loan book, making portfolio-level PACTA analysis the most appropriate depth of analysis for this use case.
+Regulators typically focus on the overall loan book. Regulations generally apply to the structure of the loan book, making portfolio-level PACTA analysis the most appropriate depth of analysis for this use case.
 
 ### Potential Application
 
