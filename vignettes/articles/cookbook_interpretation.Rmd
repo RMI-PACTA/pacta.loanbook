@@ -47,7 +47,7 @@ dplyr::filter(
 )
 ```
 
-Additional variables include `technology_share`, which represents the share of a given technology within the sector, and `percentage_of_initial_production_by_scope`, which shows the percent change in `production` from the previous year. Both are derived from the `production` variable. The `technology_share` values can be visualized in the [technology mix plots](cookbook_interpretation.html#technoloy-mix-plot). 
+Additional variables include `technology_share`, which represents the share of a given technology within the sector, and `percentage_of_initial_production_by_scope`, which shows the relative change in `production` compared to the start year. Both are derived from the `production` variable. The `technology_share` values can be visualized in the [technology mix plots](cookbook_interpretation.html#technoloy-mix-plot). 
 
 If `by_company = TRUE` and `weight_production = FALSE` are used in `target_market_share()`, the output is interpreted relative to the company listed in the `name_abcd` column.
 
