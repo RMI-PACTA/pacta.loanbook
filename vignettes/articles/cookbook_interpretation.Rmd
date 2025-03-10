@@ -91,7 +91,7 @@ qplot_techmix(
 
 ### Trajectory Plot
 
-The production volume trajectory metric evaluates a portfolio’s alignment with climate scenarios by comparing projected production volumes---based on companies' five-year capital expenditure plans---to scenario pathways. It applies to the fossil fuels, power, and automotive sectors, where production changes occur either through shifts between technologies (e.g., internal combustion engines to electric vehicles) or overall expansion/contraction (e.g., adding new coal-fired power plants). The trajectory reflects these changes at the technology level for individual clients and is compared to climate scenario trends.
+The production volume trajectory metric evaluates a portfolio’s alignment with climate scenarios by comparing projected production volumes---based on companies' five-year capital expenditure plans---to scenario pathways. It applies to the fossil fuels, power, and automotive sectors, where production changes occur either through shifts between technologies (e.g., internal combustion engines to electric vehicles) or overall expansion/contraction (e.g., closing down coal mines). The trajectory reflects these changes at the technology level for individual clients and is compared to climate scenario trends.
 
 #### Explanation of Output
 
