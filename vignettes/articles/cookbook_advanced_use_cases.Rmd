@@ -633,7 +633,7 @@ match_name(loanbook = loanbook, abcd = abcd_combined)
 
 While technically straightforward, manually supplementing ABCD data requires careful validation:
 
-- **Scope Consistency**: Ensure that production or emission intensity data aligns with ABCD’s sector definitions and value chain scope. Technology classifications should match existing ABCD conventions (e.g., hydro power is separate from renewable power, and plug-in hybrids are distinct from internal combustion engine vehicles in the automotive sector).
+- **Scope Consistency**: Ensure that production or emission intensity data aligns with ABCD’s sector definitions and value chain scope. Technology classifications should match existing ABCD conventions (e.g., hydro power is separate from renewable power, and plug-in hybrids are distinct from mild hybrids in the automotive sector).
 
 - **Consolidation Method**: If a company does not fully own all production assets, its attributed production should follow the same consolidation method used in ABCD. For instance, under an equity ownership approach, a company owning 50% of a power plant should only be assigned 50% of its capacity. Similarly, subsidiary production should be proportionally rolled up based on ownership stakes, while assets operated without ownership should be excluded. If ABCD uses a different consolidation method (e.g., financial control), refer to the data provider’s documentation for alignment.
 
