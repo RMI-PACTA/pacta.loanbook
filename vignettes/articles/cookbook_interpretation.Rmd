@@ -57,7 +57,7 @@ For a detailed breakdown of `target_market_share()`'s output table and its colum
 
 The technology mix metric tracks shifts in production methods and outputs within the power, fossil fuels and automotive sectors. It captures:
 
-- (i) changes in production technology (e.g., transitioning from coal-fueled to renewable power production)
+- (i) changes in production technology (e.g., transitioning from coal-fueled to renewable power capacity)
 - (ii) changes in output type (e.g. shift from internal combustion engines to electric vehicles). 
 
 This metric measures the bank’s exposure to the economic activities that are impacted by the transition to a low-carbon economy.
