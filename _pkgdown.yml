@@ -3,14 +3,14 @@ template:
   package: pacta.pkgdown.rmitemplate
   includes:
     in_header: |
-       <!-- Global site tag (gtag.js) - Google Analytics -->
-       <script async src="www.googletagmanager.com/gtag/js?id={YOUR TRACKING ID}"#' ></script>
+       <!-- Google tag (gtag.js) -->
+       <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNR067LYK2"></script>
        <script>
          window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
          gtag('js', new Date());
 
-         gtag('config', '{YOUR TRACKING ID}');
+         gtag('config', 'G-CNR067LYK2');
        </script>
 
 development:
