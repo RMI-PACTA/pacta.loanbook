@@ -24,7 +24,13 @@ This section outlines the preparations that are necessary before running the PAC
 
 The PACTA for Banks analysis requires several input data sets, some from external sources and others prepared by the user. Certain data sets are optional.
 
-The key required inputs include:
+The key required inputs include (described in more detail below):
+
+- [Asset-Based Company Data (ABCD)](#asset-based-company-data-abcd)
+- [Scenario Data](#scenario-data)
+- [Loan Book](#loan-book)
+- [Misclassified Loans (optional)](#misclassified-loans-optional)
+- [Manual Sector Classification (optional)](#manual-sector-classification-optional)
 
 ### Asset-Based Company Data (ABCD)
 
