@@ -53,7 +53,7 @@ If `by_company = TRUE` and `weight_production = FALSE` are used in `target_marke
 
 For a detailed breakdown of `target_market_share()`'s output table and its columns, see the [data dictionary](data_outputs.html#target_market_share-output).
 
-### Technoloy Mix Plot
+### Technology Mix Plot
 
 The technology mix metric tracks shifts in production methods and outputs within the power, fossil fuels and automotive sectors. It captures:
 
