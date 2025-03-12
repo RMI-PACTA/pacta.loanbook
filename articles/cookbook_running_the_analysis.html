@@ -243,17 +243,17 @@ after importing.</p>
 matching process, where you will match loans from the loanbook data with
 production data from the ABCD dataset</p>
 <p>The matching process is divided into three main steps:</p>
-<ul>
+<ol style="list-style-type: decimal">
 <li>Apply Matching Algorithm – Calculate match precision scores between
 the loan book and ABCD datasets.</li>
 <li>Validate Matches – Manually review matches, selecting the correct
 company when multiple exceed the threshold score.</li>
-<li>Prioritize Matches – Rank validated matches by priority level.</li>
-</ul>
+<li>Prioritize Matches – Pick validated matches by priority level.</li>
+</ol>
 <p>The following sections provide a detailed breakdown of each step.</p>
 <div class="section level4">
-<h4 id="score-the-match-precision-between-the-loanbook-and-abcd-datasets">Score the match precision between the loanbook and abcd
-datasets<a class="anchor" aria-label="anchor" href="#score-the-match-precision-between-the-loanbook-and-abcd-datasets"></a>
+<h4 id="apply-matching-algorithm-calculate-match-precision-scores-between-the-loan-book-and-abcd-datasets">Apply Matching Algorithm – Calculate match precision scores between
+the loan book and ABCD datasets<a class="anchor" aria-label="anchor" href="#apply-matching-algorithm-calculate-match-precision-scores-between-the-loan-book-and-abcd-datasets"></a>
 </h4>
 <p><code><a href="../reference/match_name.html">match_name()</a></code> scores the match between names in a
 loanbook dataset and names in an asset-based company dataset. The names
@@ -344,7 +344,8 @@ matches.</p>
 <span><span class="co">#&gt; [1] 0.9007692 1.0000000</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="manually-validate-matches">Manually validate matches<a class="anchor" aria-label="anchor" href="#manually-validate-matches"></a>
+<h4 id="validate-matches-manually-review-matches-selecting-the-correct-company-when-multiple-exceed-the-threshold-score">Validate Matches – Manually review matches, selecting the correct
+company when multiple exceed the threshold score<a class="anchor" aria-label="anchor" href="#validate-matches-manually-review-matches-selecting-the-correct-company-when-multiple-exceed-the-threshold-score"></a>
 </h4>
 <p>After calculating initial match scores, you must manually review the
 suggested matches to decide which to keep or remove. This step is
@@ -386,7 +387,7 @@ materials section of the PACTA for Banks website</a> and in the <a href="https:/
 slide deck</a>.</p>
 </div>
 <div class="section level4">
-<h4 id="prioritize-validated-matches-by-level">Prioritize validated matches by level<a class="anchor" aria-label="anchor" href="#prioritize-validated-matches-by-level"></a>
+<h4 id="prioritize-matches-pick-validated-matches-by-priority-level">Prioritize Matches – Pick validated matches by priority level<a class="anchor" aria-label="anchor" href="#prioritize-matches-pick-validated-matches-by-priority-level"></a>
 </h4>
 <p>The validated dataset may have multiple matches per loan. Consider
 the case where a loan is given to “Acme Power USA”, a subsidiary of
