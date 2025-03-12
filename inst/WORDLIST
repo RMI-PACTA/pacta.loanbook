@@ -1,8 +1,11 @@
 ABCD
+ABCD's
 CMD
 Colour
 DII
 Decarbonization
+EMDCs
+GHG
 GICS
 IEA
 ISF
@@ -11,6 +14,7 @@ JRC
 Jaro
 Lifecycle
 Loanbook
+MWh
 Misclassified
 NACE
 NAICS
@@ -18,7 +22,9 @@ ORCID
 PACTA
 PACTA's
 PSIC
+RMI's
 RStudio
+Rebaselining
 SBTI
 SDA
 SMSP
@@ -29,6 +35,7 @@ Winkler
 XLS
 XLSX
 abcd
+aspirational
 codecov
 colour
 colours
@@ -36,6 +43,8 @@ counterparties
 counterparty
 csv
 decarbonization
+decarbonize
+decarbonizing
 dev
 dfrac
 dii
@@ -46,12 +55,14 @@ frac
 funder
 gg
 ggplot
+impactful
 isin
 iso
 lifecycle
 loanbook
 loanbooks
 loantaker
+materiality
 misclassified
 organisations
 outstandings
@@ -59,10 +70,13 @@ pacta
 programmatically
 pts
 quosure
+rebaselining
 rect
 replicability
 repo
+reputational
 roadmaps
+scalable
 sda
 sds
 sectoral

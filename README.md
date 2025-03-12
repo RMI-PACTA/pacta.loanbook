@@ -24,12 +24,11 @@ explains in detail how you can run a PACTA analysis.
 
 ## Installation
 
-You can install the development version of `{pacta.loanbook}` from
-[GitHub](https://github.com/) with:
+You can install the release version of the package by running the
+following command in R:
 
 ``` r
-# install.packages("pak")
-pak::pak("RMI-PACTA/pacta.loanbook")
+install.packages("pacta.loanbook")
 ```
 
 ## Usage
