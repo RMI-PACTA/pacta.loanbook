@@ -212,7 +212,7 @@ By default, highest priority refers to the most granular match (`direct_loantake
 prioritize_level(valid_matches)
 ```
 
-You may use a different priority stratgey by passing a function to the `priority` argument of `prioritize()`.
+You may use a different prioritization stratgey by passing a function to the `priority` argument of `prioritize()`.
 
 ### A Note on Sector Classifications and the `borderline` Flag
 
