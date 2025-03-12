@@ -397,7 +397,7 @@ for this loan. To get the best match only, use <code><a href="../reference/prior
 – it picks rows where <code>score</code> is 1 and <code>level</code> per
 loan is of highest <code>priority</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">some_interesting_columns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id_2dii"</span>, <span class="st">"level"</span>, <span class="st">"score"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">some_interesting_columns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id_loan"</span>, <span class="st">"level"</span>, <span class="st">"score"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">prioritized_matches</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">valid_matches</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -405,18 +405,18 @@ loan is of highest <code>priority</code>:</p>
 <span></span>
 <span><span class="va">prioritized_matches</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 177 × 3</span></span></span>
-<span><span class="co">#&gt;    id_2dii level            score</span></span>
+<span><span class="co">#&gt;    id_loan level            score</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> DL129   direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> DL144   direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> DL270   direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> DL86    direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> DL5     direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> DL80    direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> DL150   direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> DL3     direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> DL65    direct_loantaker     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> DL79    direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> L6      direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> L13     direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> L20     direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> L21     direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> L22     direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> L24     direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> L25     direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> L26     direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> L27     direct_loantaker     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> L28     direct_loantaker     1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 167 more rows</span></span></span></code></pre></div>
 <p>By default, highest priority refers to the most granular match
 (<code>direct_loantaker</code>). The default priority is set internally
