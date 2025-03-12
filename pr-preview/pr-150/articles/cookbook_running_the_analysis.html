@@ -20,7 +20,13 @@
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
+<![endif]--><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CNR067LYK2"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CNR067LYK2');
+</script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -167,8 +173,9 @@ convenient data manipulation and import functions.</p>
 <div class="section level3">
 <h3 id="import-data">Import Data<a class="anchor" aria-label="anchor" href="#import-data"></a>
 </h3>
-<p>We need two datasets to begin: a <a href="cookbook_preparatory_steps.html#raw-loan-book">loanbook</a> and an
-<a href="cookbook_preparatory_steps.html#asset-based-company-data-abcd">asset-based
+<p>We need two datasets to begin, as described in the <a href="cookbook_preparatory_steps.html">Preparatory Steps</a> chapter: a
+<a href="cookbook_preparatory_steps.html#raw-loan-book">loanbook</a> and
+an <a href="cookbook_preparatory_steps.html#asset-based-company-data-abcd">asset-based
 company dataset (abcd)</a>. For more detail about the necessary
 structure of these datasets, see the data dictionaries for <a href="data_loanbook.html">loanbook</a> and <a href="data_abcd.html">abcd</a>.</p>
 <p>To simulate having these data files prepared, we will use the demo
@@ -236,17 +243,17 @@ after importing.</p>
 matching process, where you will match loans from the loanbook data with
 production data from the ABCD dataset</p>
 <p>The matching process is divided into three main steps:</p>
-<ul>
+<ol style="list-style-type: decimal">
 <li>Apply Matching Algorithm – Calculate match precision scores between
 the loan book and ABCD datasets.</li>
 <li>Validate Matches – Manually review matches, selecting the correct
 company when multiple exceed the threshold score.</li>
-<li>Prioritize Matches – Rank validated matches by priority level.</li>
-</ul>
+<li>Prioritize Matches – Pick validated matches by priority level.</li>
+</ol>
 <p>The following sections provide a detailed breakdown of each step.</p>
 <div class="section level4">
-<h4 id="score-the-match-precision-between-the-loanbook-and-abcd-datasets">Score the match precision between the loanbook and abcd
-datasets<a class="anchor" aria-label="anchor" href="#score-the-match-precision-between-the-loanbook-and-abcd-datasets"></a>
+<h4 id="apply-matching-algorithm-calculate-match-precision-scores-between-the-loan-book-and-abcd-datasets">Apply Matching Algorithm – Calculate match precision scores between
+the loan book and ABCD datasets<a class="anchor" aria-label="anchor" href="#apply-matching-algorithm-calculate-match-precision-scores-between-the-loan-book-and-abcd-datasets"></a>
 </h4>
 <p><code><a href="../reference/match_name.html">match_name()</a></code> scores the match between names in a
 loanbook dataset and names in an asset-based company dataset. The names
@@ -337,17 +344,21 @@ matches.</p>
 <span><span class="co">#&gt; [1] 0.9007692 1.0000000</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="manually-validate-matches">Manually validate matches<a class="anchor" aria-label="anchor" href="#manually-validate-matches"></a>
+<h4 id="validate-matches-manually-review-matches-selecting-the-correct-company-when-multiple-exceed-the-threshold-score">Validate Matches – Manually review matches, selecting the correct
+company when multiple exceed the threshold score<a class="anchor" aria-label="anchor" href="#validate-matches-manually-review-matches-selecting-the-correct-company-when-multiple-exceed-the-threshold-score"></a>
 </h4>
 <p>After calculating initial match scores, you must manually review the
 suggested matches to decide which to keep or remove. This step is
 critical for ensuring a high quality match result, especially in
 text-based matching, where similar company names may not actually refer
 to the same entity.</p>
-<p>Manual validation helps to: - Prevent incorrect matches from
-affecting the analysis. - Ensure accuracy in linking loan book data to
-the ABCD dataset. - Improve overall match precision, especially when
-iterating to enhance coverage.</p>
+<p>Manual validation helps to:</p>
+<ul>
+<li>Prevent incorrect matches from affecting the analysis.</li>
+<li>Ensure accuracy in linking loan book data to the ABCD dataset.</li>
+<li>Improve overall match precision, especially when iterating to
+enhance coverage.</li>
+</ul>
 <p>Since this step is not automated, it requires effort, often making it
 the most time-consuming part of the process.</p>
 <p>To begin, save the output of match_name() to a CSV file for review.
@@ -376,7 +387,7 @@ materials section of the PACTA for Banks website</a> and in the <a href="https:/
 slide deck</a>.</p>
 </div>
 <div class="section level4">
-<h4 id="prioritize-validated-matches-by-level">Prioritize validated matches by level<a class="anchor" aria-label="anchor" href="#prioritize-validated-matches-by-level"></a>
+<h4 id="prioritize-matches-pick-validated-matches-by-priority-level">Prioritize Matches – Pick validated matches by priority level<a class="anchor" aria-label="anchor" href="#prioritize-matches-pick-validated-matches-by-priority-level"></a>
 </h4>
 <p>The validated dataset may have multiple matches per loan. Consider
 the case where a loan is given to “Acme Power USA”, a subsidiary of
@@ -413,34 +424,15 @@ via <code><a href="../reference/prioritize_level.html">prioritize_level()</a></c
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prioritize_level.html">prioritize_level</a></span><span class="op">(</span><span class="va">valid_matches</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "direct_loantaker" "ultimate_parent"</span></span></code></pre></div>
-<p>You may use a different priority. One way to do that is to pass a
-function to <code>priority</code>. For example, use <code><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev()</a></code>
-to reverse the default priority.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">valid_matches</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">rev</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">some_interesting_columns</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 177 × 3</span></span></span>
-<span><span class="co">#&gt;    id_2dii level           score</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> UP190   ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> UP101   ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> UP39    ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> UP63    ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> UP224   ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> UP132   ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> UP12    ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> UP20    ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> UP134   ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> UP127   ultimate_parent     1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 167 more rows</span></span></span></code></pre></div>
+<p>You may use a different prioritization stratgey by passing a function
+to the <code>priority</code> argument of <code><a href="../reference/prioritize.html">prioritize()</a></code>.</p>
 </div>
 <div class="section level4">
 <h4 id="a-note-on-sector-classifications-and-the-borderline-flag">A Note on Sector Classifications and the <code>borderline</code>
 Flag<a class="anchor" aria-label="anchor" href="#a-note-on-sector-classifications-and-the-borderline-flag"></a>
 </h4>
 <div class="section level5">
-<h5 id="a-note-on-sector-classification">A note on sector classification<a class="anchor" aria-label="anchor" href="#a-note-on-sector-classification"></a>
+<h5 id="sector-classifications">Sector Classifications<a class="anchor" aria-label="anchor" href="#sector-classifications"></a>
 </h5>
 <p>Matches are preferred when the sector from the <code>loanbook</code>
 matches the sector from the <code>abcd</code>. The <code>loanbook</code>
@@ -468,7 +460,7 @@ enough to map it to PACTA sectors unambiguously. For this reason, we
 introduced the <code>borderline</code> flag.</p>
 <p>In the example below, we see two classification codes coming from the
 NACE classification standard:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nace_classification</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D35.11"</span>, <span class="st">"D35.14"</span>, <span class="st">"D35.1"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 6</span></span></span>
@@ -559,12 +551,12 @@ using one of the <code>loan_size_*</code> columns.</p></li>
 </ol>
 <p>To visualize matching coverage, first load the <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>
 package:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <p>We will use the example datasets created in the previous section. To
 illustrate the point, we create a <code>loanbook</code> dataset with two
 mismatched loans:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    name_ultimate_parent <span class="op">=</span> </span>
@@ -573,7 +565,7 @@ mismatched loans:</p>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">id_loan</span> <span class="op">==</span> <span class="st">"L2"</span>, <span class="st">"99"</span>, <span class="va">sector_classification_direct_loantaker</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>We will then run the matching algorithm on this loanbook:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span><span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -615,7 +607,7 @@ data types in the two datasets. To prevent errors in
 match the type of <code>code</code> before merging.</li>
 <li>After merging, we restore its original type.</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">merge_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    sector_classification_system <span class="op">=</span> <span class="st">"code_system"</span>,</span>
 <span>    sector_classification_direct_loantaker <span class="op">=</span> <span class="st">"code"</span></span>
@@ -626,7 +618,7 @@ match the type of <code>code</code> before merging.</li>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sector_classification_direct_loantaker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">sector_classification_direct_loantaker</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>To generate the <code>coverage</code> dataset, we merge these two
 datasets together:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">loanbook_with_sectors</span>, <span class="va">matched</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    loan_size_outstanding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">loan_size_outstanding</span><span class="op">)</span>,</span>
@@ -657,7 +649,7 @@ helper functions:</p>
 <li>A function to calculate coverage by dollar value.</li>
 <li>A plotting function to visualize coverage.</li>
 </ol>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dollar_value</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>loan_size_outstanding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">loan_size_outstanding</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">matched</span>, <span class="va">...</span><span class="op">)</span><span class="op">)</span></span>
@@ -670,26 +662,26 @@ helper functions:</p>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Let’s first explore all loans.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">matched</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
 <p>To calculate the total, in-scope, loanbook coverage:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sector</span> <span class="op">!=</span> <span class="st">"not in scope"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">matched</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
+<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
 <p>You may break-down the plot by sector:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
+<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
 <p>Or even further, by matching level:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>matched <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
 <span>    <span class="va">matched</span> <span class="op">==</span> <span class="st">"Matched"</span> <span class="op">&amp;</span> <span class="va">level</span> <span class="op">==</span> <span class="st">"direct_loantaker"</span>      <span class="op">~</span> <span class="st">"Matched DL"</span>,</span>
@@ -700,7 +692,7 @@ helper functions:</p>
 <span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 </div>
 <div class="section level5">
 <h5 id="count-the-number-of-companies-matched">2. Count the number of companies matched<a class="anchor" aria-label="anchor" href="#count-the-number-of-companies-matched"></a>
@@ -708,13 +700,13 @@ helper functions:</p>
 <p>Another useful metric is the number of companies in your loan book
 that were successfully matched. The most relevant level for this
 analysis is likely the <code>direct_loantaker</code> level.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">companies_matched</span> <span class="op">&lt;-</span> <span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>no_companies <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">name_direct_loantaker</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sector</span>, <span class="va">matched</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">companies_matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">no_companies</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
+<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
 </div>
 </div>
 <div class="section level4">
@@ -779,7 +771,7 @@ cannot be matched to ABCD, but the sector classification cannot be
 changed, we handle it by creating a CSV file with its ID.</p>
 <p>This correction process can be done programmatically or manually,
 ensuring more accurate match success rate reporting.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>id_loan <span class="op">=</span> <span class="st">"L255"</span><span class="op">)</span>,</span>
 <span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"loans_to_remove.csv"</span><span class="op">)</span></span>
@@ -798,7 +790,7 @@ the removal of the misclassified loan to see the impact of the
 correction. For demonstration purposes, we artificially increase the
 loan_size_outstanding of the affected counterparty while focusing on the
 steel sector only, to see the clear impact.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage_compare</span> <span class="op">&lt;-</span> <span class="va">coverage</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    loan_size_outstanding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">id_loan</span> <span class="op">==</span> <span class="st">"L255"</span>, <span class="fl">50000000</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span>
@@ -815,8 +807,8 @@ steel sector only, to see the clear impact.</p>
 <span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">loans_to_remove</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"loans_to_remove.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -833,7 +825,7 @@ steel sector only, to see the clear impact.</p>
 <span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dollar_value</span><span class="op">(</span><span class="va">sector</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">plot_coverage</span><span class="op">(</span><span class="va">sector</span>, <span class="va">loan_size_outstanding</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-29-2.png" width="700"></p>
+<p><img src="cookbook_running_the_analysis_files/figure-html/unnamed-chunk-28-2.png" width="700"></p>
 </div>
 </div>
 </div>
@@ -851,7 +843,7 @@ technology within a sector. For example, it can define targets for
 electric vehicle production in the automotive sector. This approach is
 recommended for sectors with detailed technology roadmaps.</p>
 <p>Targets can be set at the portfolio level:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use these datasets to practice but eventually you should use your own data.</span></span>
 <span><span class="va">scenario</span> <span class="op">&lt;-</span> <span class="va">scenario_demo_2020</span></span>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="va">region_isos_demo</span></span>
@@ -880,7 +872,7 @@ recommended for sectors with detailed technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> automotive electric    <span style="text-decoration: underline;">2</span>022 global demo_2020       target_cps    <span style="text-decoration: underline;">148</span>155.            0.164 sector                                  0.001<span style="text-decoration: underline;">01</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,066 more rows</span></span></span></code></pre></div>
 <p>or at the company level:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">market_share_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
@@ -908,7 +900,7 @@ recommended for sectors with detailed technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14,495 more rows</span></span></span></code></pre></div>
 <p>These results can be saved/written to a CSV file for potential input
 to other models and software, for example:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">market_share_targets_portfolio</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"market_share_targets_portfolio.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">market_share_targets_company</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"market_share_targets_company.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Remember to replace <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> with the path to the
@@ -922,7 +914,7 @@ Decarbonization Approach</a> sets scenario targets based on a sector’s
 emission factor. For example, it can define targets for the average
 emission factor in the cement sector. This approach is recommended for
 sectors without detailed technology roadmaps.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use this dataset to practice but eventually you should use your own data.</span></span>
 <span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
 <span></span>
@@ -952,7 +944,7 @@ sectors without detailed technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cement  <span style="text-decoration: underline;">2</span>023 advanced economies demo_2020       projected                             0.023<span style="text-decoration: underline;">5</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 100 more rows</span></span></span></code></pre></div>
 <p>or at the company level:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sda_targets_company</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">prioritized_matches</span>,</span>
@@ -980,7 +972,7 @@ sectors without detailed technology roadmaps.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 956 more rows</span></span></span></code></pre></div>
 <p>These results can be saved/written to a CSV file for potential input
 to other models and software, for example:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sda_targets</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sda_targets.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sda_targets_company</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sda_targets_company.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Remember to replace <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> with the path to the
@@ -1001,7 +993,7 @@ we highlight a few common plots that can be easily created using the
 to various climate sensitive technologies (<code>projected</code>), and
 compare with the corporate economy, or against various scenario
 targets.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pick the targets you want to plot.</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">market_share_targets_portfolio</span>,</span>
@@ -1025,7 +1017,7 @@ targets.</p>
 <p>You can also plot the technology-specific volume trend. All starting
 values are normalized to 1, to emphasize that we are comparing the rates
 of build-out and/or retirement.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">market_share_targets_portfolio</span>,</span>
 <span>  <span class="va">sector</span> <span class="op">==</span> <span class="st">"power"</span>,</span>
@@ -1044,7 +1036,7 @@ of build-out and/or retirement.</p>
 intensity attributed to the portfolio, with the actual emission
 intensity scenario, and the scenario compliant SDA pathway that the
 portfolio must follow to achieve the scenario ambition by 2050.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sda_targets</span>, <span class="va">sector</span> <span class="op">==</span> <span class="st">"cement"</span>, <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_running_the_analysis_files/figure-html/sda%20plot-1.png" width="700"></p>
@@ -1057,7 +1049,7 @@ plots, e.g. <code><a href="../reference/qplot_techmix.html">qplot_techmix()</a>
 <code><a href="../reference/plot_trajectory.html">plot_trajectory()</a></code>, return a <code>ggplot</code> object,
 which can be saved as an image file using the
 <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> function, for example:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">emission_intensity_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span></span>
