@@ -213,13 +213,7 @@ By default, highest priority refers to the most granular match (`direct_loantake
 prioritize_level(valid_matches)
 ```
 
-You may use a different priority. One way to do that is to pass a function to `priority`. For example, use `rev()` to reverse the default priority.
-
-```{r}
-valid_matches %>%
-  prioritize(priority = rev) %>%
-  select(all_of(some_interesting_columns))
-```
+You may use a different prioritization stratgey by passing a function to the `priority` argument of `prioritize()`.
 
 ### A Note on Sector Classifications and the `borderline` Flag
 
