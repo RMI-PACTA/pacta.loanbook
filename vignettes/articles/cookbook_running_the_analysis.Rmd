@@ -57,7 +57,7 @@ library(readr)
 
 ## Import Data
 
-We need two datasets to begin: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd). For more detail about the necessary structure of these datasets, see the data dictionaries for [loanbook](data_loanbook.html) and [abcd](data_abcd.html).
+We need two datasets to begin, as described in the [Preparatory Steps](cookbook_preparatory_steps.html) chapter: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd). For more detail about the necessary structure of these datasets, see the data dictionaries for [loanbook](data_loanbook.html) and [abcd](data_abcd.html).
 
 To simulate having these data files prepared, we will use the demo data included in the `{pacta.loanbook}` package to create example XLS files using the `{writexl}` package.
 
