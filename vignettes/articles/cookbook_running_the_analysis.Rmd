@@ -57,7 +57,7 @@ library(readr)
 
 ## Import Data
 
-We need two datasets to begin: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd). For more detail about the necessary structure of these datasets, see the data dictionaries for [loanbook](data_loanbook.html) and [abcd](data_abcd.html).
+We need two datasets to begin, as described in the [Preparatory Steps](cookbook_preparatory_steps.html) chapter: a [loanbook](cookbook_preparatory_steps.html#raw-loan-book) and an [asset-based company dataset (abcd)](cookbook_preparatory_steps.html#asset-based-company-data-abcd). For more detail about the necessary structure of these datasets, see the data dictionaries for [loanbook](data_loanbook.html) and [abcd](data_abcd.html).
 
 To simulate having these data files prepared, we will use the demo data included in the `{pacta.loanbook}` package to create example XLS files using the `{writexl}` package.
 
@@ -93,13 +93,13 @@ The next step after loading all required input files is to run the matching proc
 
 The matching process is divided into three main steps:
 
-- Apply Matching Algorithm – Calculate match precision scores between the loan book and ABCD datasets.
-- Validate Matches – Manually review matches, selecting the correct company when multiple exceed the threshold score.
-- Prioritize Matches – Rank validated matches by priority level.
+1. Apply Matching Algorithm – Calculate match precision scores between the loan book and ABCD datasets.
+2. Validate Matches – Manually review matches, selecting the correct company when multiple exceed the threshold score.
+3. Prioritize Matches – Pick validated matches by priority level.
 
 The following sections provide a detailed breakdown of each step.
 
-### Score the match precision between the loanbook and abcd datasets
+### Apply Matching Algorithm – Calculate match precision scores between the loan book and ABCD datasets
 
 `match_name()` scores the match between names in a loanbook dataset and names in an asset-based company dataset. The names come from the columns `name_direct_loantaker` and `name_ultimate_parent` of the loanbook dataset, and from the column `name_company` of the asset-based company dataset. In the loan book data set, it is possible to optionally add any number of `name_intermediate_parent_*` columns, where `*` indicates the level up the corporate tree from `direct_loantaker`.
 
@@ -154,11 +154,12 @@ match_name(loanbook, abcd, min_score = 0.9) %>%
   range()
 ```
 
-### Manually validate matches
+### Validate Matches – Manually review matches, selecting the correct company when multiple exceed the threshold score
 
 After calculating initial match scores, you must manually review the suggested matches to decide which to keep or remove. This step is critical for ensuring a high quality match result, especially in text-based matching, where similar company names may not actually refer to the same entity.
 
 Manual validation helps to:
+
 - Prevent incorrect matches from affecting the analysis.
 - Ensure accuracy in linking loan book data to the ABCD dataset.
 - Improve overall match precision, especially when iterating to enhance coverage.
@@ -192,7 +193,7 @@ valid_matches <- readr::read_csv(file = file.path(tempdir(), "valid_matches.csv"
 
 You can find more detailed information about the matching process under the header "PACTA for Banks Training Webinar 2" in the [training materials section of the PACTA for Banks website](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/) and in the [corresponding slide deck](https://pacta.rmi.org/wp-content/uploads/2020/12/PACTA-for-Banks-Training-Webinar-2-Matching-a-loan-book-to-physical-assets-in-the-real-economy-.pdf).
 
-### Prioritize validated matches by level
+### Prioritize Matches – Pick validated matches by priority level
 
 The validated dataset may have multiple matches per loan. Consider the case where a loan is given to "Acme Power USA", a subsidiary of "Acme Power Co.". There may be both "Acme Power USA" and "Acme Power Co." in the `abcd`, and so there could be two valid matches for this loan. To get the best match only, use `prioritize()` -- it picks rows where `score` is 1 and `level` per loan is of highest `priority`:
 
@@ -212,17 +213,11 @@ By default, highest priority refers to the most granular match (`direct_loantake
 prioritize_level(valid_matches)
 ```
 
-You may use a different priority. One way to do that is to pass a function to `priority`. For example, use `rev()` to reverse the default priority.
-
-```{r}
-valid_matches %>%
-  prioritize(priority = rev) %>%
-  select(all_of(some_interesting_columns))
-```
+You may use a different prioritization stratgey by passing a function to the `priority` argument of `prioritize()`.
 
 ### A Note on Sector Classifications and the `borderline` Flag
 
-#### A note on sector classification
+#### Sector Classifications
 
 Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally by mapping the sector classification code from the loan book to a PACTA sector, using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, the following options are supported for `sector_classification_system`, specified in `sector_classifications`:
 
