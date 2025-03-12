@@ -223,7 +223,7 @@ valid_matches %>%
 
 ### A Note on Sector Classifications and the `borderline` Flag
 
-#### A note on sector classification
+#### Sector Classifications
 
 Matches are preferred when the sector from the `loanbook` matches the sector from the `abcd`. The `loanbook` sector is determined internally by mapping the sector classification code from the loan book to a PACTA sector, using the `sector_classification_system` and `sector_classification_direct_loantaker` columns. Currently, the following options are supported for `sector_classification_system`, specified in `sector_classifications`:
 
