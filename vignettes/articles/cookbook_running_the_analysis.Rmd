@@ -159,6 +159,7 @@ match_name(loanbook, abcd, min_score = 0.9) %>%
 After calculating initial match scores, you must manually review the suggested matches to decide which to keep or remove. This step is critical for ensuring a high quality match result, especially in text-based matching, where similar company names may not actually refer to the same entity.
 
 Manual validation helps to:
+
 - Prevent incorrect matches from affecting the analysis.
 - Ensure accuracy in linking loan book data to the ABCD dataset.
 - Improve overall match precision, especially when iterating to enhance coverage.
