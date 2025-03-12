@@ -1,6 +1,17 @@
 url: https://rmi-pacta.github.io/pacta.loanbook/
 template:
   package: pacta.pkgdown.rmitemplate
+  includes:
+    in_header: |
+       <!-- Google tag (gtag.js) -->
+       <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNR067LYK2"></script>
+       <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-CNR067LYK2');
+       </script>
 
 development:
   mode: auto
