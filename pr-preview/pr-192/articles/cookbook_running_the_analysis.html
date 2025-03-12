@@ -167,8 +167,9 @@ convenient data manipulation and import functions.</p>
 <div class="section level3">
 <h3 id="import-data">Import Data<a class="anchor" aria-label="anchor" href="#import-data"></a>
 </h3>
-<p>We need two datasets to begin: a <a href="cookbook_preparatory_steps.html#raw-loan-book">loanbook</a> and an
-<a href="cookbook_preparatory_steps.html#asset-based-company-data-abcd">asset-based
+<p>We need two datasets to begin, as described in the <a href="cookbook_preparatory_steps.html">Preparatory Steps</a> chapter: a
+<a href="cookbook_preparatory_steps.html#raw-loan-book">loanbook</a> and
+an <a href="cookbook_preparatory_steps.html#asset-based-company-data-abcd">asset-based
 company dataset (abcd)</a>. For more detail about the necessary
 structure of these datasets, see the data dictionaries for <a href="data_loanbook.html">loanbook</a> and <a href="data_abcd.html">abcd</a>.</p>
 <p>To simulate having these data files prepared, we will use the demo
@@ -241,7 +242,7 @@ production data from the ABCD dataset</p>
 the loan book and ABCD datasets.</li>
 <li>Validate Matches – Manually review matches, selecting the correct
 company when multiple exceed the threshold score.</li>
-<li>Prioritize Matches – Rank validated matches by priority level.</li>
+<li>Prioritize Matches – Pick validated matches by priority level.</li>
 </ol>
 <p>The following sections provide a detailed breakdown of each step.</p>
 <div class="section level4">
@@ -345,10 +346,13 @@ suggested matches to decide which to keep or remove. This step is
 critical for ensuring a high quality match result, especially in
 text-based matching, where similar company names may not actually refer
 to the same entity.</p>
-<p>Manual validation helps to: - Prevent incorrect matches from
-affecting the analysis. - Ensure accuracy in linking loan book data to
-the ABCD dataset. - Improve overall match precision, especially when
-iterating to enhance coverage.</p>
+<p>Manual validation helps to:</p>
+<ul>
+<li>Prevent incorrect matches from affecting the analysis.</li>
+<li>Ensure accuracy in linking loan book data to the ABCD dataset.</li>
+<li>Improve overall match precision, especially when iterating to
+enhance coverage.</li>
+</ul>
 <p>Since this step is not automated, it requires effort, often making it
 the most time-consuming part of the process.</p>
 <p>To begin, save the output of match_name() to a CSV file for review.
