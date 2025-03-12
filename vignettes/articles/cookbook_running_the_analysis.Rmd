@@ -95,7 +95,7 @@ The matching process is divided into three main steps:
 
 1. Apply Matching Algorithm – Calculate match precision scores between the loan book and ABCD datasets.
 2. Validate Matches – Manually review matches, selecting the correct company when multiple exceed the threshold score.
-3. Prioritize Matches – Rank validated matches by priority level.
+3. Prioritize Matches – Pick validated matches by priority level.
 
 The following sections provide a detailed breakdown of each step.
 
