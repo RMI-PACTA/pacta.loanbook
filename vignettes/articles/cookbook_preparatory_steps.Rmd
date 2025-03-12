@@ -149,7 +149,7 @@ You can install the `{pacta.loanbook}` R package from any CRAN mirror by running
 install.packages("pacta.loanbook")
 ```
 
-You can install the development versions of the `{pacta.loanbook}` R package from GitHub with:
+Alternatively, you can install the development versions of the `{pacta.loanbook}` R package from GitHub with:
 
 ``` r
 # install.packages("pak")
