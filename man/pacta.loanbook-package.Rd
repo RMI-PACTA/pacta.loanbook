@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-'PACTA' (Paris Agreement Capital Transition Assessment) for Banks is a tool that allows banks to calculate the climate alignment of their corporate lending portfolios. This package is designed to make it easy to install and load multiple 'PACTA' for Banks packages in a single step. It also provides thorough documentation in an online tutorial - the 'PACTA' for Banks cookbook - on how to run a 'PACTA' for Banks analysis. This covers prerequisites for the analysis, the separate steps of running the analysis, the interpretation of 'PACTA' for Banks results, and advanced use cases.
+'PACTA' (Paris Agreement Capital Transition Assessment) for Banks is a tool that allows banks to calculate the climate alignment of their corporate lending portfolios. This package is designed to make it easy to install and load multiple 'PACTA' for Banks packages in a single step. It also provides thorough documentation - the 'PACTA' for Banks cookbook at \url{https://rmi-pacta.github.io/pacta.loanbook/articles/cookbook_overview.html} - on how to run a 'PACTA' for Banks analysis. This covers prerequisites for the analysis, the separate steps of running the analysis, the interpretation of 'PACTA' for Banks results, and advanced use cases.
 }
 \seealso{
 Useful links:
