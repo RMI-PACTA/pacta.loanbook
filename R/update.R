@@ -14,9 +14,7 @@
 #'   of printing the status of locally installed, relevant packages.
 #'
 #' @examples
-#' \dontrun{
-#' pacta_loanbook_update()
-#' }
+#' pacta_loanbook_update(repos = "https://cran.r-project.org")
 
 pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos")) {
 
@@ -50,6 +48,9 @@ pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos"))
 #' quick idea of what's going on when you're helping someone else debug a
 #' problem.
 #'
+#' @param repos The repositories to use to check for updates.
+#'   Defaults to \code{getOption("repos")}.
+#'
 #' @family utility functions
 #'
 #' @export
@@ -58,18 +59,16 @@ pacta_loanbook_update <- function(recursive = FALSE, repos = getOption("repos"))
 #'   of printing a situation report of `{pacta.loanbook}` and its core packages.
 #'
 #' @examples
-#' \dontrun{
-#' pacta_loanbook_sitrep()
-#' }
+#' pacta_loanbook_sitrep(repos = "https://cran.r-project.org")
 
-pacta_loanbook_sitrep <- function() {
+pacta_loanbook_sitrep <- function(repos = getOption("repos")) {
   cli::cat_rule("R & RStudio")
   if (rstudioapi::isAvailable()) {
     cli::cat_bullet("RStudio: ", rstudioapi::getVersion())
   }
   cli::cat_bullet("R: ", getRversion())
 
-  deps <- pacta_loanbook_deps()
+  deps <- pacta_loanbook_deps(repos = repos)
   package_pad <- format(deps$package)
   packages <- ifelse(
     deps$behind,
@@ -98,9 +97,7 @@ pacta_loanbook_sitrep <- function() {
 #'   packages.
 #'
 #' @examples
-#' \dontrun{
-#' pacta_loanbook_deps()
-#' }
+#' pacta_loanbook_deps(repos = "https://cran.r-project.org")
 
 pacta_loanbook_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)
