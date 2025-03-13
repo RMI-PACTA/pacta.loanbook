@@ -65,6 +65,7 @@ To calculate market-share targets, you need to use the package `{pacta.loanbook}
 
 ```{r, message = FALSE}
 library(pacta.loanbook)
+library(dplyr)  # for `%>%`
 ```
 
 * Match the loanbook to asset level data.
