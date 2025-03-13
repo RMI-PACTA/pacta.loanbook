@@ -2,7 +2,6 @@
 
 S3method(print,pacta_loanbook_conflicts)
 S3method(print,pacta_loanbook_logo)
-export("%>%")
 export(abcd_demo)
 export(co2_intensity_scenario_demo)
 export(crucial_lbk)
