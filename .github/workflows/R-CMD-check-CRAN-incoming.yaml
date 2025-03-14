@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'devel'}
+          - {os: windows-latest, r: 'next'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
