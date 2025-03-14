@@ -64,13 +64,13 @@ This metric measures the bank's exposure to the economic activities that are imp
 
 #### Explanation of Output
 
-The technology mix plot illustrates the share of each technology in a portfolio or company at the analysis start and five years into the future. It compares the portfolio's projected technology mix to both the benchmark region's mix and the mix required for alignment with the selected transition scenario. All comparisons are based on assets from the same geographic region as defined in the analysis.
+The technology mix plot illustrates the share of each technology in a portfolio or company at the analysis start and five years into the future. It compares the portfolio's projected technology mix to both the benchmark's technology mix for the selected region and the mix required for alignment with the selected transition scenario. All comparisons are based on assets from the same geographic region as defined in the analysis.
 
 #### Interpretation & Intuition
 
 The technology mix plot illustrates the effort required to align a portfolio's technology shares with climate targets. If a portfolio or company has a higher share of low-carbon technologies than the benchmark in a given year, it is considered a leader; if lower, it is a laggard. Alignment with the scenario occurs when the portfolio's future low-carbon technology shares meet or exceed those in the scenario's technology mix.
 
-The underlying intuition is that all technologies in a sector produce equivalent outputs (e.g., a MWh of electricity, regardless of source). From a climate impact perspective, a higher share of low-carbon technologies is preferable. From a financial risk perspective, the implications depend on market expectations. If, for example, transition risk is expected to materialize through carbon pricing, then higher low-carbon shares reduce risk. However, if other factors influence sector transitions, selecting a scenario that mirrors expected market trends can help mitigate that risk.
+The core principle is that all technologies in a sector produce equivalent outputs (e.g., a MWh of electricity, regardless of source). From a climate impact perspective, a higher share of low-carbon technologies is preferable. From a financial risk perspective, the implications depend on market expectations. If, for example, transition risk is expected to materialize through carbon pricing, then higher low-carbon shares reduce risk. However, if other factors influence sector transitions, selecting a scenario that mirrors expected market trends can help mitigate that risk.
 
 To fully assess alignment, technology mix should be evaluated alongside production volume trajectory, as the technology mix plot alone does not indicate whether overall output is increasing or decreasing, even if a scenario prescribes a specific production trend.
 
@@ -95,7 +95,7 @@ The production volume trajectory metric evaluates a portfolio's alignment with c
 
 #### Explanation of Output
 
-The trajectory plot displays a portfolio's production volume for a specific technology or fuel type, tracking changes from the start year to five years into the future (**solid black line**). This projection is compared to the benchmark region's production trajectory (**dashed black line**). The plot's background is color-coded: green indicates alignment with ambitious climate scenarios, red signifies misalignment, and shades of yellow for in-between. For low-carbon technologies, values above the most ambitious scenario appear green, and those below the least ambitious scenario appear red; the opposite applies to high-carbon technologies. Typically, the plot includes multiple scenarios but can also compare the portfolio against a single scenario.
+The trajectory plot displays a portfolio's production volume for a specific technology or fuel type, tracking changes from the start year to five years into the future (**solid black line**). This projection is compared to the benchmark's production trajectory for the selected region (**dashed black line**). The plot's background is color-coded: green indicates alignment with ambitious climate scenarios, red signifies misalignment, and shades of yellow for in-between. For low-carbon technologies, values above the most ambitious scenario appear green, and those below the least ambitious scenario appear red; the opposite applies to high-carbon technologies. Typically, the plot includes multiple scenarios but can also compare the portfolio against a single scenario.
 
 #### Interpretation & Intuition
 

@@ -9,6 +9,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/RMI-PACTA/pacta.loanbook/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RMI-PACTA/pacta.loanbook/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/RMI-PACTA/pacta.loanbook/graph/badge.svg)](https://app.codecov.io/gh/RMI-PACTA/pacta.loanbook)
+[![pacta.loanbook status
+badge](https://rmi-pacta.r-universe.dev/badges/pacta.loanbook)](https://rmi-pacta.r-universe.dev/pacta.loanbook)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/pacta.loanbook)](https://CRAN.R-project.org/package=pacta.loanbook)
 <!-- badges: end -->
 
 ## Overview
@@ -21,6 +25,10 @@ In addition to simplifying package management, `{pacta.loanbook}` serves
 as a central resource for documentation. The
 [cookbook](https://rmi-pacta.github.io/pacta.loanbook/articles/cookbook_overview.html)
 explains in detail how you can run a PACTA analysis.
+
+If you’re new to climate scenario alignment and PACTA, see the [PACTA
+website](https://pacta.rmi.org) for more information about PACTA for
+Banks, more on PACTA methodology, and other PACTA applications.
 
 ## Installation
 

@@ -21,9 +21,7 @@ packages.
 List all \code{{pacta.loanbook}} dependencies
 }
 \examples{
-\dontrun{
-pacta_loanbook_deps()
-}
+pacta_loanbook_deps(repos = "https://cran.r-project.org")
 }
 \seealso{
 Other utility functions: 
