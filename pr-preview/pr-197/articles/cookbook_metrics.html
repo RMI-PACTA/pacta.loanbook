@@ -36,7 +36,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">pacta.loanbook</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -205,7 +205,8 @@ should structure your own data.</p>
 <li>Load the package.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>  <span class="co"># for `%&gt;%`</span></span></code></pre></div>
 <ul>
 <li>Match the loanbook to asset level data.</li>
 </ul>
@@ -213,7 +214,7 @@ should structure your own data.</p>
 <code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook_demo</span></span>
 <span><span class="va">abcd</span> <span class="op">&lt;-</span> <span class="va">abcd_demo</span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span>loanbook <span class="op">=</span> <span class="va">loanbook</span>, abcd <span class="op">=</span> <span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span>loanbook <span class="op">=</span> <span class="va">loanbook</span>, abcd <span class="op">=</span> <span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># WARNING: Remember to validate the output of match_name() before prioritize()</span></span>
 <span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -243,7 +244,7 @@ level.</li>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="va">region_isos_demo</span></span>
 <span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    scenario <span class="op">=</span> <span class="va">scenario</span>,</span>
@@ -268,7 +269,7 @@ level.</li>
 level.</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/target_market_share.html">target_market_share</a></span><span class="op">(</span></span>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    scenario <span class="op">=</span> <span class="va">scenario</span>,</span>
@@ -431,7 +432,7 @@ should structure your own data.</p>
 <code class="sourceCode R"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="va">loanbook_demo</span></span>
 <span><span class="va">abcd</span> <span class="op">&lt;-</span> <span class="va">abcd_demo</span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span>loanbook <span class="op">=</span> <span class="va">loanbook</span>, abcd <span class="op">=</span> <span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_name.html">match_name</a></span><span class="op">(</span>loanbook <span class="op">=</span> <span class="va">loanbook</span>, abcd <span class="op">=</span> <span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># WARNING: Remember to validate the output of match_name() before prioritize()</span></span>
 <span>  <span class="fu"><a href="../reference/prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -459,7 +460,7 @@ the portfolio level:</li>
 <code class="sourceCode R"><span><span class="va">co2_intensity</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="va">region_isos_demo</span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    co2_intensity_scenario <span class="op">=</span> <span class="va">co2_intensity</span>,</span>
@@ -488,7 +489,7 @@ the company level:</li>
 <code class="sourceCode R"><span><span class="va">co2_intensity</span> <span class="op">&lt;-</span> <span class="va">co2_intensity_scenario_demo</span></span>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="va">region_isos_demo</span></span>
 <span></span>
-<span><span class="va">matched</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/target_sda.html">target_sda</a></span><span class="op">(</span></span>
 <span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span>
 <span>    co2_intensity_scenario <span class="op">=</span> <span class="va">co2_intensity</span>,</span>
