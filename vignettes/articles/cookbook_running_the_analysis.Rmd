@@ -198,7 +198,7 @@ You can find more detailed information about the matching process under the head
 The validated dataset may have multiple matches per loan. Consider the case where a loan is given to "Acme Power USA", a subsidiary of "Acme Power Co.". There may be both "Acme Power USA" and "Acme Power Co." in the `abcd`, and so there could be two valid matches for this loan. To get the best match only, use `prioritize()` -- it picks rows where `score` is 1 and `level` per loan is of highest `priority`:
 
 ```{r}
-some_interesting_columns <- c("id_2dii", "level", "score")
+some_interesting_columns <- c("id_loan", "level", "score")
 
 prioritized_matches <-
   valid_matches %>%
@@ -255,9 +255,7 @@ For a code example how to implement your own sector classification system, see t
 ### Calculate the Match Success Rate
 
 ```{r include=FALSE}
-sector_in_scope <- glue::glue_collapse(
-  unique(abcd$sector), sep = ", ", last = ", and "
-)
+sector_in_scope <- cli::format_inline("{unique(abcd$sector)}")
 ```
 
 `{pacta.loanbook}` allows you to match loans from your loanbook to the companies in an asset-based company dataset. However, not all loans will have a match -- some companies may be missing from the ABCD dataset, or they may operate outside the PACTA focus sectors (`r sector_in_scope`).
