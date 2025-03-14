@@ -9,6 +9,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/RMI-PACTA/pacta.loanbook/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RMI-PACTA/pacta.loanbook/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/RMI-PACTA/pacta.loanbook/graph/badge.svg)](https://app.codecov.io/gh/RMI-PACTA/pacta.loanbook)
+[![pacta.loanbook status
+badge](https://rmi-pacta.r-universe.dev/badges/pacta.loanbook)](https://rmi-pacta.r-universe.dev/pacta.loanbook)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/pacta.loanbook)](https://CRAN.R-project.org/package=pacta.loanbook)
 <!-- badges: end -->
 
 ## Overview
