@@ -67,7 +67,6 @@ Suggests:
     glue,
     gt (>= 0.11.0),
     knitr (>= 1.42),
-    mockr,
     readr,
     readxl,
     rmarkdown (>= 2.19),
