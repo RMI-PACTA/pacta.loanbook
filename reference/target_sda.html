@@ -168,12 +168,12 @@ the column <code>name_abcd</code>.</p>
 <span class="r-in"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">loanbook_demo</span>, <span class="fl">150</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">abcd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">abcd_demo</span>, <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="match_name.html">match_name</a></span><span class="op">(</span><span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="match_name.html">match_name</a></span><span class="op">(</span><span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate targets at portfolio level</span></span></span>
-<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">target_sda</span><span class="op">(</span></span></span>
 <span class="r-in"><span>   abcd <span class="op">=</span> <span class="va">abcd</span>,</span></span>
 <span class="r-in"><span>   co2_intensity_scenario <span class="op">=</span> <span class="va">co2_intensity_scenario_demo</span>,</span></span>
@@ -186,7 +186,7 @@ the column <code>name_abcd</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emission_factor_value &lt;dbl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate targets at company level</span></span></span>
-<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">target_sda</span><span class="op">(</span></span></span>
 <span class="r-in"><span>   abcd <span class="op">=</span> <span class="va">abcd</span>,</span></span>
 <span class="r-in"><span>   co2_intensity_scenario <span class="op">=</span> <span class="va">co2_intensity_scenario_demo</span>,</span></span>
