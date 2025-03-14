@@ -23,9 +23,7 @@ their dependencies) are up-to-date, and will install after an interactive
 confirmation.
 }
 \examples{
-\dontrun{
-pacta_loanbook_update()
-}
+pacta_loanbook_update(repos = "https://cran.r-project.org")
 }
 \seealso{
 Other utility functions: 
