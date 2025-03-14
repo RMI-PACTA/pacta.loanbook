@@ -1,6 +1,6 @@
 Package: pacta.loanbook
-Title: Easily Install and Load 'PACTA' for Banks Packages
-Version: 0.1.0
+Title: Easily Install and Load PACTA for Banks Packages
+Version: 0.0.0.9000
 Authors@R:
     c(
       person(
@@ -30,14 +30,15 @@ Authors@R:
         email = "PACTA4banks@rmi.org"
       )
     )
-Description: 'PACTA' (Paris Agreement Capital Transition Assessment) for Banks
-  is a tool that allows banks to calculate the climate alignment of their
-  corporate lending portfolios. This package is designed to make it easy to
-  install and load multiple 'PACTA' for Banks packages in a single step. It also
-  provides thorough documentation in an online tutorial - the 'PACTA' for Banks
-  cookbook - on how to run a 'PACTA' for Banks analysis. This covers
-  prerequisites for the analysis, the separate steps of running the analysis,
-  the interpretation of 'PACTA' for Banks results, and advanced use cases.
+Description: PACTA (Paris Agreement Capital Transition Assessment) for Banks is
+  a tool that allows banks to calculate the climate alignment of their corporate
+  lending portfolios. This package is designed to make it easy to install and
+  load multiple PACTA for Banks packages in a single step. It also provides
+  thorough documentation - the PACTA for Banks cookbook at
+  <https://rmi-pacta.github.io/pacta.loanbook/articles/cookbook_overview.html> -
+  on how to run a PACTA for Banks analysis. This covers prerequisites for the
+  analysis, the separate steps of running the analysis, the interpretation of
+  PACTA for Banks results, and advanced use cases.
 License: MIT + file LICENSE
 URL: https://rmi-pacta.github.io/pacta.loanbook/,
     https://github.com/RMI-PACTA/pacta.loanbook
