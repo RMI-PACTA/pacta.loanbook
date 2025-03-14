@@ -46,6 +46,7 @@ production forecast."><meta property="og:image" content="https://rmi-pacta.githu
     <li><a class="dropdown-item" href="../articles/data_outputs.html">PACTA Outputs</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item dropdown">
@@ -68,7 +69,7 @@ production forecast."><meta property="og:image" content="https://rmi-pacta.githu
     <li><a class="external-link dropdown-item" href="https://rmi-pacta.github.io/r2dii.analysis/articles/target-market-share.html">Market Share Approach</a></li>
     <li><a class="external-link dropdown-item" href="https://rmi-pacta.github.io/r2dii.analysis/articles/production-percent-change.html">Indicator Choices: Weighted Production vs. Weighted Percent Change in Production</a></li>
   </ul></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rmi-pacta/pacta.loanbook/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/RMI-PACTA/pacta.loanbook/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -77,7 +78,7 @@ production forecast."><meta property="og:image" content="https://rmi-pacta.githu
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Add targets for production, using the market share approach</h1>
-      <small class="dont-index">Source: <a href="https://github.com/rmi-pacta/pacta.loanbook/blob/is_valid_lei/R/r2dii.analysis.R" class="external-link"><code>R/r2dii.analysis.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RMI-PACTA/pacta.loanbook/blob/is_valid_lei/R/r2dii.analysis.R" class="external-link"><code>R/r2dii.analysis.R</code></a></small>
       <div class="d-none name"><code>target_market_share.Rd</code></div>
     </div>
 
@@ -168,11 +169,6 @@ output the unweighted production values.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.data/" class="external-link">r2dii.data</a></span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘r2dii.data’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:pacta.loanbook’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     data_dictionary</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmi-pacta.github.io/r2dii.match/" class="external-link">r2dii.match</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘r2dii.match’</span>
@@ -186,12 +182,12 @@ output the unweighted production values.</p></dd>
 <span class="r-in"><span><span class="va">loanbook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">loanbook_demo</span>, <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">abcd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">abcd_demo</span>, <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="match_name.html">match_name</a></span><span class="op">(</span><span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="va">loanbook</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="match_name.html">match_name</a></span><span class="op">(</span><span class="va">abcd</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="prioritize.html">prioritize</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate targets at portfolio level</span></span></span>
-<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">target_market_share</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span></span>
 <span class="r-in"><span>    scenario <span class="op">=</span> <span class="va">scenario_demo_2020</span>,</span></span>
@@ -215,7 +211,7 @@ output the unweighted production values.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   percentage_of_initial_production_by_scope &lt;dbl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate targets at company level</span></span></span>
-<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">target_market_share</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  abcd <span class="op">=</span> <span class="va">abcd</span>,</span></span>
 <span class="r-in"><span>  scenario <span class="op">=</span> <span class="va">scenario_demo_2020</span>,</span></span>
@@ -243,7 +239,7 @@ output the unweighted production values.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: technology_share &lt;dbl&gt;, scope &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   percentage_of_initial_production_by_scope &lt;dbl&gt;</span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">matched</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">target_market_share</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    abcd <span class="op">=</span> <span class="va">abcd</span>,</span></span>
 <span class="r-in"><span>    scenario <span class="op">=</span> <span class="va">scenario_demo_2020</span>,</span></span>
