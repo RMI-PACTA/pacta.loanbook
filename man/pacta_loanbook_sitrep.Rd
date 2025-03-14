@@ -4,7 +4,11 @@
 \alias{pacta_loanbook_sitrep}
 \title{Get a situation report on \code{{pacta.loanbook}}}
 \usage{
-pacta_loanbook_sitrep()
+pacta_loanbook_sitrep(repos = getOption("repos"))
+}
+\arguments{
+\item{repos}{The repositories to use to check for updates.
+Defaults to \code{getOption("repos")}.}
 }
 \value{
 returns \code{NULL} invisibly. The function is called for its side effect
@@ -17,9 +21,7 @@ quick idea of what's going on when you're helping someone else debug a
 problem.
 }
 \examples{
-\dontrun{
-pacta_loanbook_sitrep()
-}
+pacta_loanbook_sitrep(repos = "https://cran.r-project.org")
 }
 \seealso{
 Other utility functions: 
