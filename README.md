@@ -26,6 +26,10 @@ as a central resource for documentation. The
 [cookbook](https://rmi-pacta.github.io/pacta.loanbook/articles/cookbook_overview.html)
 explains in detail how you can run a PACTA analysis.
 
+If you’re new to climate scenario alignment and PACTA, see the [PACTA
+website](https://pacta.rmi.org) for more information about PACTA for
+Banks, more on PACTA methodology, and other PACTA applications.
+
 ## Installation
 
 You can install the release version of the package by running the
