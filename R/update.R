@@ -101,7 +101,7 @@ pacta_loanbook_sitrep <- function(repos = getOption("repos")) {
 
 pacta_loanbook_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)
-  deps <- tools::package_dependencies("pacta_loanbook", pkgs, recursive = recursive)
+  deps <- tools::package_dependencies("pacta.loanbook", pkgs, recursive = recursive)
 
   pkg_deps <- unique(sort(unlist(deps)))
 
