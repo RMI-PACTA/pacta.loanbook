@@ -1,6 +1,6 @@
 Package: pacta.loanbook
 Title: Easily Install and Load PACTA for Banks Packages
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R:
     c(
       person(
