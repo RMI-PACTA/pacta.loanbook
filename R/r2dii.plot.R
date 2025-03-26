@@ -1,10 +1,4 @@
 #' @inherit r2dii.plot::plot_emission_intensity
-#' @examples
-#' # plot with `qplot_emission_intensity()` parameters
-#' data <- subset(sda, sector == "cement" & region == "global")
-#' data <- prep_emission_intensity(data, span_5yr = TRUE, convert_label = to_title)
-#'
-#' plot_emission_intensity(data)
 #' @family plotting functions
 #' @export
 
@@ -12,23 +6,6 @@ plot_emission_intensity <- r2dii.plot::plot_emission_intensity
 
 
 #' @inherit r2dii.plot::plot_techmix
-#' @examples
-#' # plot with `qplot_techmix()` parameters
-#' data <- subset(
-#'   market_share,
-#'   scenario_source == "demo_2020" &
-#'     sector == "power" &
-#'     region == "global" &
-#'     metric %in% c("projected", "corporate_economy", "target_sds")
-#' )
-#' data <- prep_techmix(
-#'   data,
-#'   span_5yr = TRUE,
-#'   convert_label = recode_metric_techmix,
-#'   convert_tech_label = spell_out_technology
-#' )
-#'
-#' plot_techmix(data)
 #' @family plotting functions
 #' @export
 
@@ -36,22 +13,6 @@ plot_techmix <- r2dii.plot::plot_techmix
 
 
 #' @inherit r2dii.plot::plot_trajectory
-#' @examples
-#' # plot with `qplot_trajectory()` parameters
-#' data <- subset(
-#'   market_share,
-#'   sector == "power" &
-#'     technology == "renewablescap" &
-#'     region == "global" &
-#'     scenario_source == "demo_2020"
-#' )
-#' data <- prep_trajectory(data)
-#'
-#' plot_trajectory(
-#'   data,
-#'   center_y = TRUE,
-#'   perc_y_scale = TRUE
-#' )
 #' @family plotting functions
 #' @export
 
@@ -179,11 +140,11 @@ to_title <- r2dii.plot::to_title
 
 # -------------------------------------------------------------------------
 
-#' @inherit r2dii.plot::market_share return title description details seealso sections references examples author source note format
+#' @inherit r2dii.plot::market_share_demo return title description details seealso sections references examples author source note format
 #' @family demo data
 #' @export
 
-market_share <- r2dii.plot::market_share
+market_share_demo <- r2dii.plot::market_share_demo
 
 
 #' @inherit r2dii.plot::palette_colours return title description details seealso sections references examples author source note format
@@ -200,11 +161,11 @@ palette_colours <- r2dii.plot::palette_colours
 scenario_colours <- r2dii.plot::scenario_colours
 
 
-#' @inherit r2dii.plot::sda return title description details seealso sections references examples author source note format
+#' @inherit r2dii.plot::sda_demo return title description details seealso sections references examples author source note format
 #' @family demo data
 #' @export
 
-sda <- r2dii.plot::sda
+sda_demo <- r2dii.plot::sda_demo
 
 
 #' @inherit r2dii.plot::sector_colours return title description details seealso sections references examples author source note format
