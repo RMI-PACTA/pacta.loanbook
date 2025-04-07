@@ -105,6 +105,56 @@ For details on the required structure of this dataset, refer to the [loanbook da
  
 For detailed descriptions of how to prepare raw loan books, see the ["Training Materials" section of the PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/). The ["User Guide 2"](https://pacta.rmi.org/wp-content/uploads/2020/10/User-Guide-2..pdf), the ["Data Dictionary"](https://pacta.rmi.org/wp-content/uploads/2020/09/data_dictionary.xlsx), and the ["Loan Book Template"](https://pacta.rmi.org/wp-content/uploads/2020/09/loanbook_demo.xlsx) files can all be helpful in preparing your data.
 
+**NOTE:** When preparing the raw loan book data, you will need to fill in the columns `sector_classification_system` and `sector_classification_direct_loantaker`. If you are planning to use one fo the sector classification systems that are built into the `{pacta.loanbook}` package (`r unique(sector_classifications$code_system)`), you will need to make sure that you obtain the sector codes based on the correct version or revision of the sector classification system you are using. Here you can find an overview of the sector classification systems currently featured and the version or revision they are based on:
+
+```{r, echo = FALSE, results = 'asis'}
+classification_system_by_version <- tibble::tribble(
+  ~classification_system, ~version_or_revision,
+  "GICS", unique(pacta.loanbook:::gics_classification$version),
+  "ISIC", unique(pacta.loanbook:::isic_classification$revision),
+  "NACE", unique(pacta.loanbook:::nace_classification$version),
+  "NAICS", unique(pacta.loanbook:::naics_classification$version),
+  "PSIC", unique(pacta.loanbook:::psic_classification$version),
+  "SIC", unique(pacta.loanbook:::sic_classification$version)
+)
+
+classification_system_by_version <- gt::gt(data = classification_system_by_version)
+
+classification_system_by_version <-
+  gt::tab_header(
+    data = classification_system_by_version,
+    title = "Sector Classification Systems",
+    subtitle = "Built-in classification systems and their versions or revisions"
+  )
+
+classification_system_by_version <-
+  gt::cols_label(
+    .data = classification_system_by_version,
+    classification_system = "Classification System",
+    version_or_revision = "Version or Revision"
+  )
+
+classification_system_by_version <-
+  gt::tab_style(
+    data = classification_system_by_version,
+    style = gt::cell_text(size = "smaller"),
+    locations = gt::cells_body(columns = everything())
+  )
+
+classification_system_by_version <-
+  gt::tab_options(
+    data = classification_system_by_version,
+    ihtml.active = TRUE,
+    ihtml.use_pagination = FALSE,
+    ihtml.use_sorting = FALSE,
+    ihtml.use_highlight = TRUE
+  )
+
+classification_system_by_version
+```
+
+If you cannot obtain sector classification codes for the version of the sector classification system you are using as described in thetable above, you will have to to treat the sector classification system like a [manual sector classification](#manual-sector-classification-optional).
+
 ### Misclassified Loans (optional)
 
 - Optional input
