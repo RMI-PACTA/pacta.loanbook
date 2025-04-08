@@ -1469,11 +1469,20 @@ targets.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot the technology mix</span></span>
-<span><span class="fu"><a href="../reference/qplot_techmix.html">qplot_techmix</a></span><span class="op">(</span><span class="va">data_portfolio</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/qplot_techmix.html">qplot_techmix</a></span><span class="op">(</span><span class="va">data_portfolio</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Add labels to the bars. This is optional.</span></span>
+<span>  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_label_repel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">technology_share</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    min.segment.length <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html" class="external-link">position_stack</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>    show.legend <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; The `technology_share` values are plotted for extreme years.</span></span>
 <span><span class="co">#&gt; Do you want to plot different years? E.g. filter . with:`subset(., year %in% c(2020, 2030))`.</span></span>
 <span><span class="co">#&gt; Warning: Removed 3 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_bar()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; (`geom_bar()`).</span></span>
+<span><span class="co">#&gt; Warning: Removed 3 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_label_repel()`).</span></span></code></pre></div>
 <p><img src="cookbook_running_the_analysis_files/figure-html/technoloy-mix-portfolio-1.png" width="700"></p>
 <p>To obtain the technology mix chart for an individual company in your
 portfolio, you can run the following code (notice that we do not
@@ -1492,7 +1501,14 @@ almost the same as the tech mix plot for a portfolio):</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot the technology mix</span></span>
-<span><span class="fu"><a href="../reference/qplot_techmix.html">qplot_techmix</a></span><span class="op">(</span><span class="va">data_company</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/qplot_techmix.html">qplot_techmix</a></span><span class="op">(</span><span class="va">data_company</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Add labels to the bars. This is optional.</span></span>
+<span>  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_label_repel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">technology_share</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    min.segment.length <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html" class="external-link">position_stack</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>    show.legend <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="market-share-technology-level-volume-trajectory">Market Share: Technology-level volume trajectory<a class="anchor" aria-label="anchor" href="#market-share-technology-level-volume-trajectory"></a>
@@ -1509,7 +1525,18 @@ of build-out and/or retirement.</p>
 <span>  <span class="va">scenario_source</span> <span class="op">==</span> <span class="st">"demo_2020"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/qplot_trajectory.html">qplot_trajectory</a></span><span class="op">(</span><span class="va">data_portfolio</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># to optionally display the emission factor metric at the end of the lines,</span></span>
+<span><span class="co"># we have to create an auxiliary data set</span></span>
+<span><span class="va">data_ends</span> <span class="op">&lt;-</span> <span class="va">data_portfolio</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">year</span><span class="op">)</span> <span class="op">+</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>value <span class="op">=</span> <span class="st">"percentage_of_initial_production_by_scope"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/qplot_trajectory.html">qplot_trajectory</a></span><span class="op">(</span><span class="va">data_portfolio</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Add labels to the end of the lines. This is optional.</span></span>
+<span>  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">value</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">data_ends</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="cookbook_running_the_analysis_files/figure-html/trajetory-portfolio-1.png" width="700"></p>
 <p>Again, the volume trajectory chart for an individual company in your
 portfolio can be obtained by running the following code (notice that we
@@ -1527,7 +1554,18 @@ portfolio):</p>
 <span>  <span class="va">scenario_source</span> <span class="op">==</span> <span class="st">"demo_2020"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/qplot_trajectory.html">qplot_trajectory</a></span><span class="op">(</span><span class="va">data_company</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># to optionally display the emission factor metric at the end of the lines,</span></span>
+<span><span class="co"># we have to create an auxiliary data set</span></span>
+<span><span class="va">data_ends</span> <span class="op">&lt;-</span> <span class="va">data_company</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">year</span><span class="op">)</span> <span class="op">+</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>value <span class="op">=</span> <span class="st">"percentage_of_initial_production_by_scope"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/qplot_trajectory.html">qplot_trajectory</a></span><span class="op">(</span><span class="va">data_company</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Add labels to the end of the lines. This is optional.</span></span>
+<span>  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">value</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">data_ends</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="sda-target-sector-level-emission-intensity">SDA Target: Sector-level emission intensity<a class="anchor" aria-label="anchor" href="#sda-target-sector-level-emission-intensity"></a>
@@ -1543,8 +1581,21 @@ portfolio must follow to achieve the scenario ambition by 2050.</p>
 <span>  <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data_portfolio</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cookbook_running_the_analysis_files/figure-html/sda%20plot-1.png" width="700"></p>
+<span><span class="va">data_ends</span> <span class="op">&lt;-</span> <span class="va">data_portfolio</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">year</span><span class="op">)</span> <span class="op">+</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu">pacta.loanbook</span><span class="fu">::</span><span class="fu"><a href="../reference/to_title.html">to_title</a></span><span class="op">(</span><span class="va">emission_factor_metric</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data_portfolio</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Add labels to the end of the lines. This is optional.</span></span>
+<span>  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">emission_factor_value</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">data_ends</span>,</span>
+<span>    show.legend <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="cookbook_running_the_analysis_files/figure-html/sda%20plot%20portfolio-1.png" width="700"></p>
 <p>The emission intensity plot can also be plotted for an individual
 company. Similarly to the above cases, you can create the company-level
 emissions intensity plot by running the following code (notice that we
@@ -1560,7 +1611,21 @@ portfolio):</p>
 <span>  <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data_company</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># to optionally display the emission factor metric at the end of the lines, we have to create an auxiliary data set</span></span>
+<span><span class="va">data_ends</span> <span class="op">&lt;-</span> <span class="va">data_company</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">year</span><span class="op">)</span> <span class="op">+</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu">pacta.loanbook</span><span class="fu">::</span><span class="fu"><a href="../reference/to_title.html">to_title</a></span><span class="op">(</span><span class="va">emission_factor_metric</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/qplot_emission_intensity.html">qplot_emission_intensity</a></span><span class="op">(</span><span class="va">data_company</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Add labels to the end of the lines. This is optional.</span></span>
+<span>  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">emission_factor_value</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">data_ends</span>,</span>
+<span>    show.legend <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="exporting-plots-to-an-image-file">Exporting plots to an image file<a class="anchor" aria-label="anchor" href="#exporting-plots-to-an-image-file"></a>
