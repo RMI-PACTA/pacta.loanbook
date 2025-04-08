@@ -658,7 +658,7 @@ economy, or against various scenario targets.
 
 ```{r technoloy-mix-portfolio}
 # Pick the targets you want to plot.
-data <- filter(
+data_portfolio <- filter(
   market_share_targets_portfolio,
   scenario_source == "demo_2020",
   sector == "power",
@@ -667,7 +667,27 @@ data <- filter(
 )
 
 # Plot the technology mix
-qplot_techmix(data)
+qplot_techmix(data_portfolio)
+```
+
+To obtain the technology mix chart for an individual company in your portfolio,
+you can run the following code (notice that we do not actually run the code here,
+as the output plot will look structurally almost the same as the tech mix plot for a portfolio):
+
+```{r technoloy-mix-company, eval = FALSE}
+# Pick the targets you want to plot.
+data_company <- filter(
+  market_share_targets_company,
+  # provide the name of the company and "corporate_economy" to select the relevant emission intensity pathways
+  name_abcd %in% c("Mariani-Mariani s.r.l.", "corporate_economy"),
+  scenario_source == "demo_2020",
+  sector == "power",
+  region == "global",
+  metric %in% c("projected", "corporate_economy", "target_sds")
+)
+
+# Plot the technology mix
+qplot_techmix(data_company)
 ```
 
 ### Market Share: Technology-level volume trajectory
@@ -677,7 +697,7 @@ normalized to 1, to emphasize that we are comparing the rates of build-out and/o
 retirement. 
 
 ```{r trajetory-portfolio}
-data <- filter(
+data_portfolio <- filter(
   market_share_targets_portfolio,
   sector == "power",
   technology == "renewablescap",
@@ -685,7 +705,26 @@ data <- filter(
   scenario_source == "demo_2020"
 )
 
-qplot_trajectory(data)
+qplot_trajectory(data_portfolio)
+```
+
+Again, the volume trajectory chart for an individual company in your portfolio
+can be obtained by running the following code (notice that we do not actually
+run the code here, as the output plot will look structurally almost the same as the volume
+trajectory plot for a portfolio):
+
+```{r trajetory-company, eval = FALSE}
+data_company <- filter(
+  market_share_targets_company,
+  # provide the name of the company and "corporate_economy" to select the relevant emission intensity pathways
+  name_abcd %in% c("Mariani-Mariani s.r.l.", "corporate_economy"),
+  sector == "power",
+  technology == "renewablescap",
+  region == "global",
+  scenario_source == "demo_2020"
+)
+
+qplot_trajectory(data_company)
 ```
 
 ### SDA Target: Sector-level emission intensity
@@ -696,8 +735,31 @@ the scenario compliant SDA pathway that the portfolio must follow to achieve
 the scenario ambition by 2050.
 
 ```{r sda plot}
-data <- filter(sda_targets_portfolio, sector == "cement", region == "global")
-qplot_emission_intensity(data)
+data_portfolio <- filter(
+  sda_targets_portfolio,
+  sector == "cement",
+  region == "global"
+)
+
+qplot_emission_intensity(data_portfolio)
+```
+
+The emission intensity plot can also be plotted for an individual company. 
+Similarly to the above cases, you can create the company-level emissions intensity
+plot by running the following code (notice that we do not actually run the code
+here, as the output plot will look structurally almost the same as the emission intensity plot
+for a portfolio):
+
+```{r sda plot company, eval = FALSE}
+data_company <- filter(
+  sda_targets_company,
+  # provide the name of the company and "market" to select the relevant emission intensity pathways
+  name_abcd %in% c("Kramer GmbH & Co. OHG", "market"),
+  sector == "cement",
+  region == "global"
+)
+
+qplot_emission_intensity(data_company)
 ```
 
 ### Exporting plots to an image file
@@ -705,7 +767,7 @@ qplot_emission_intensity(data)
 All of the functions from `{pacta.loanbook}` that produce plots, e.g. `qplot_techmix()` and `plot_trajectory()`, return a `ggplot` object, which can be saved as an image file using the `ggplot2::ggsave()` function, for example:
 
 ```{r save_plot_to_file}
-emission_intensity_plot <- qplot_emission_intensity(data)
+emission_intensity_plot <- qplot_emission_intensity(data_portfolio)
 
 ggplot2::ggsave(
   filename = file.path(tempdir(), "emission_intensity_plot.png"),
