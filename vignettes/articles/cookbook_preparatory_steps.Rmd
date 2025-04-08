@@ -153,7 +153,7 @@ classification_system_by_version <-
 classification_system_by_version
 ```
 
-If you cannot obtain sector classification codes for the version of the sector classification system you are using as described in thetable above, you will have to to treat the sector classification system like a [manual sector classification](#manual-sector-classification-optional).
+If you cannot obtain sector classification codes for the version of the sector classification system you are using as described in the table above, you will have to to treat the sector classification system like a [manual sector classification](#manual-sector-classification-optional).
 
 ### Misclassified Loans (optional)
 
