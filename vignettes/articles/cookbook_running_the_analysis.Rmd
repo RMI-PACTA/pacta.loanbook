@@ -615,8 +615,9 @@ data <- filter(
 # Plot the technology mix
 qplot_techmix(data) +
   # Add labels to the bars. This is optional.
-  ggplot2::geom_label(
-    aes(label = paste0(round(technology_share, 2) * 100, "%")),
+  ggrepel::geom_label_repel(
+    aes(label = paste0(round(technology_share, 3) * 100, "%")),
+    min.segment.length = 0,
     position = position_stack(vjust = 0.5),
     show.legend = FALSE
   )
