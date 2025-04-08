@@ -498,7 +498,61 @@ coverage_corrected %>%
 
 ## Calculate PACTA alignment metrics
 
-PACTA alignment metrics can be calculated using two approaches: the Market Share Approach and the Sectoral Decarbonization Approach.
+PACTA alignment metrics can be calculated using two approaches: the Market Share Approach and the Sectoral Decarbonization Approach. If a sector has a technology-level scenario pathway you can use the Market Share Approach whereas sector-level scenario pathways will use the Sectoral Decarbonization Approach. If you are using the scenarios prepared by RMI, you will have the following pairing of approaches, sectors and technologies:
+
+```{r, echo = FALSE, results = 'asis'}
+sda_sectors <- tibble::tribble(
+  ~sector, ~technology, ~approach,
+  "aviation", "---", "sda",
+  "cement", "---", "sda",
+  "steel", "---", "sda"
+)
+
+market_share_sectors <- pacta.loanbook::increasing_or_decreasing
+market_share_sectors <- dplyr::select(.data = market_share_sectors, dplyr::all_of(c("sector", "technology")))
+market_share_sectors <- dplyr::filter(.data = market_share_sectors, !sector %in% c("hdv", "fossil fuels"))
+market_share_sectors <- dplyr::mutate(.data = market_share_sectors, approach = "market_share")
+
+sectors_technologies_approaches <- dplyr::bind_rows(
+  market_share_sectors,
+  sda_sectors
+)
+
+sectors_technologies_approaches <- gt::gt(data = sectors_technologies_approaches)
+
+sectors_technologies_approaches <-
+  gt::tab_header(
+    data = sectors_technologies_approaches,
+    title = "Sector-Technology Pairs for PACTA Alignment Metrics",
+    subtitle = "Sector and Technology Pairings for Market Share and Sectoral Decarbonization Approaches"
+  )
+
+sectors_technologies_approaches <-
+  gt::cols_label(
+    .data = sectors_technologies_approaches,
+    sector = "Sector",
+    technology = "Technology",
+    approach = "Calculation Method"
+  )
+
+sectors_technologies_approaches <-
+  gt::tab_style(
+    data = sectors_technologies_approaches,
+    style = gt::cell_text(size = "smaller"),
+    locations = gt::cells_body(columns = everything())
+  )
+
+sectors_technologies_approaches <-
+  gt::tab_options(
+    data = sectors_technologies_approaches,
+    ihtml.active = TRUE,
+    ihtml.use_pagination = FALSE,
+    ihtml.use_sorting = FALSE,
+    ihtml.use_highlight = TRUE
+  )
+
+sectors_technologies_approaches
+```
 
 ### Market Share Approach
 
