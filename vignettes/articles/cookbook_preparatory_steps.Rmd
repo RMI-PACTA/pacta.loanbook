@@ -56,6 +56,8 @@ For details on the required structure of this dataset, refer to the [ABCD data d
 - External source
 - CSV file(s)
 
+#### Sectors with Technology-Level Pathways
+
 For sectors with technology-level trajectories, the dataset provides Sectoral Market Share Percentage (SMSP) and Target Market Share Ratio (TMSR) pathways using the "market share approach". This allocation rule assumes that all companies in a sector must adjust production while maintaining constant market shares within a sector to align with the overall climate transition scenario.
 
 A more detailed explanation of the market share approach can be found [here](cookbook_metrics.html).
@@ -67,6 +69,8 @@ pacta.loanbook:::list_col_names_and_types(scenario_demo_2020)
 ```
 
 For details on the required structure of this dataset, refer to the [market share scenario data dictionary](data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation).
+
+#### Sectors with Sector-Level Pathways
 
 For sectors without technology-level pathways, PACTA applies the Sectoral Decarbonization Approach (SDA). This method requires all companies in a sector to align their physical emission intensity with a future scenario target (e.g., by 2050). Higher-emission companies must reduce their intensity more drastically than those already using cleaner technologies. However, SDA does not directly affect production volumes.
 
@@ -80,12 +84,14 @@ pacta.loanbook:::list_col_names_and_types(co2_intensity_scenario_demo)
 
 For details on the required structure of this dataset, refer to the [SDA scenario data dictionary](data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach).
 
+#### Scenario Data Sources
+
 While the raw input values of the scenarios are based on models from external third party organisations - such as the [World Energy Outlook](https://www.iea.org/reports/world-energy-outlook-2024) by the [International Energy Agency (IEA)](https://www.iea.org/), the [Global Energy and Climate Outlook by the Joint Research Center of the European Commission (JRC)](https://joint-research-centre.ec.europa.eu/scientific-activities-z/geco_en), or the [One Earth Climate Model by the Institute for Sustainable Futures (ISF)](https://www.uts.edu.au/oecm) - the input data set for PACTA must be prepared using additional steps, which are documented publicly on the following GitHub repositories:
 
 - [pacta.scenario.data.preparation](https://github.com/RMI-PACTA/pacta.scenario.data.preparation)
 - [workflow.scenario.preparation](https://github.com/RMI-PACTA/workflow.scenario.preparation)
 
-Prepared scenario files are available for download as CSVs in the [Methodology and Supporting Documents](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/) section of the PACTA website. These files are typically updated annually based on the latest scenario publications. As a general rule, the publication year defines the initial year of the dataset, which is also commonly used as the analysis start year.
+**Downloads:** Prepared scenario files are available for download as CSVs in the [Methodology and Supporting Documents](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/) section of the PACTA website, both more technology-level production pathways and sector-level emission intensity pathways. These files are typically updated annually based on the latest scenario publications. As a general rule, the publication year defines the initial year of the dataset, which is also commonly used as the analysis start year.
 
 ### Loan Book
 
