@@ -692,7 +692,8 @@ data <- filter(
   scenario_source == "demo_2020"
 )
 
-# to optionally display the emission factor metric at the end of the lines, we have to create an auxiliary data set
+# to optionally display the emission factor metric at the end of the lines,
+# we have to create an auxiliary data set
 data_ends <- data %>% 
   dplyr::filter(year == min(.data$year) + 5) %>% 
   dplyr::rename(value = "percentage_of_initial_production_by_scope")
