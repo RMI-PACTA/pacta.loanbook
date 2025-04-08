@@ -91,7 +91,7 @@ While the raw input values of the scenarios are based on models from external th
 - [pacta.scenario.data.preparation](https://github.com/RMI-PACTA/pacta.scenario.data.preparation)
 - [workflow.scenario.preparation](https://github.com/RMI-PACTA/workflow.scenario.preparation)
 
-**Downloads:** Prepared scenario files are available for download as CSVs in the [Methodology and Supporting Documents](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/) section of the PACTA website, both more technology-level production pathways and sector-level emission intensity pathways. These files are typically updated annually based on the latest scenario publications. As a general rule, the publication year defines the initial year of the dataset, which is also commonly used as the analysis start year.
+**Downloads:** Prepared scenario files are available for download as CSVs in the [Methodology and Supporting Documents](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/) section of the PACTA website, both technology-level production pathways and sector-level emission intensity pathways. These files are typically updated annually based on the latest scenario publications. As a general rule, the publication year defines the initial year of the dataset, which is also commonly used as the analysis start year.
 
 ### Loan Book
 
