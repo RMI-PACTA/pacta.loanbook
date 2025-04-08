@@ -610,7 +610,7 @@ The [Sectoral Decarbonization Approach](cookbook_metrics.html#sectoral-decarboni
 # Use this dataset to practice but eventually you should use your own data.
 co2 <- co2_intensity_scenario_demo
 
-sda_targets <-
+sda_targets_portfolio <-
   target_sda(
     data = prioritized_matches,
     abcd = abcd,
@@ -619,7 +619,7 @@ sda_targets <-
   ) %>% 
   filter(sector == "cement", year >= 2020)
 
-sda_targets
+sda_targets_portfolio
 ```
 
 or at the company level:
@@ -640,7 +640,7 @@ sda_targets_company
 These results can be saved/written to a CSV file for potential input to other models and software, for example:
 
 ```{r}
-readr::write_csv(x = sda_targets, file = file.path(tempdir(), "sda_targets.csv"))
+readr::write_csv(x = sda_targets_portfolio, file = file.path(tempdir(), "sda_targets_portfolio.csv"))
 readr::write_csv(x = sda_targets_company, file = file.path(tempdir(), "sda_targets_company.csv"))
 ```
 
@@ -696,7 +696,7 @@ the scenario compliant SDA pathway that the portfolio must follow to achieve
 the scenario ambition by 2050.
 
 ```{r sda plot}
-data <- filter(sda_targets, sector == "cement", region == "global")
+data <- filter(sda_targets_portfolio, sector == "cement", region == "global")
 qplot_emission_intensity(data)
 ```
 
