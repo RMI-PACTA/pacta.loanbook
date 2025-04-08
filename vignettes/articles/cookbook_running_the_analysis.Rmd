@@ -613,7 +613,13 @@ data <- filter(
 )
 
 # Plot the technology mix
-qplot_techmix(data)
+qplot_techmix(data) +
+  # Add labels to the bars. This is optional.
+  ggplot2::geom_label(
+    aes(label = paste0(round(technology_share, 2) * 100, "%")),
+    position = position_stack(vjust = 0.5),
+    show.legend = FALSE
+  )
 ```
 
 ### Market Share: Technology-level volume trajectory
@@ -631,7 +637,18 @@ data <- filter(
   scenario_source == "demo_2020"
 )
 
-qplot_trajectory(data)
+# to optionally display the emission factor metric at the end of the lines, we have to create an auxiliary data set
+data_ends <- data %>% 
+  dplyr::filter(year == min(.data$year) + 5) %>% 
+  dplyr::rename(value = "percentage_of_initial_production_by_scope")
+
+qplot_trajectory(data) +
+  # Add labels to the end of the lines. This is optional.
+  ggrepel::geom_text_repel(
+    aes(label = paste0(round(value, 3) * 100, "%")),
+    data = data_ends
+  )
+
 ```
 
 ### SDA Target: Sector-level emission intensity
@@ -643,7 +660,22 @@ the scenario ambition by 2050.
 
 ```{r sda plot}
 data <- filter(sda_targets, sector == "cement", region == "global")
-qplot_emission_intensity(data)
+
+# to optionally display the emission factor metric at the end of the lines, we have to create an auxiliary data set
+data_ends <- data %>% 
+  dplyr::filter(year == min(.data$year) + 5) %>% 
+  dplyr::mutate(
+    year = as.Date(strptime(as.character(year), "%Y")),
+    label = pacta.loanbook::to_title(emission_factor_metric)
+  )
+
+qplot_emission_intensity(data) +
+  # Add labels to the end of the lines. This is optional.
+  ggrepel::geom_text_repel(
+    aes(label = round(emission_factor_value, 3)),
+    data = data_ends,
+    show.legend = FALSE
+  )
 ```
 
 ### Exporting plots to an image file
