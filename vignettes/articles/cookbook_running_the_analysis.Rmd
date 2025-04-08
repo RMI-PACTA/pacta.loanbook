@@ -498,7 +498,7 @@ coverage_corrected %>%
 
 ## Calculate PACTA alignment metrics
 
-PACTA alignment metrics can be calculated using two approaches: the Market Share Approach and the Sectoral Decarbonization Approach. If a sector has a technology-level scenario pathway you can use the Market Share Approach whereas sector-level scenario pathways will use the Sectoral Decarbonization Approach. If you are using the scenarios prepared by RMI, you will have the following pairing of approaches, sectors and technologies:
+PACTA alignment metrics can be calculated using two approaches: the [Market Share Approach](cookbook_metrics.html#market-share-approach) and the [Sectoral Decarbonization Approach](cookbook_metrics.html#sectoral-decarbonization-approach). If a sector has a technology-level scenario pathway you can use the Market Share Approach whereas sector-level scenario pathways will use the Sectoral Decarbonization Approach. If you are using the scenarios prepared by RMI, you will have the following pairing of approaches, sectors and technologies:
 
 ```{r, echo = FALSE, results = 'asis'}
 sda_sectors <- tibble::tribble(
