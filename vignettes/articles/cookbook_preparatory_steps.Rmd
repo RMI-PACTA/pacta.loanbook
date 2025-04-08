@@ -74,7 +74,7 @@ For details on the required structure of this dataset, refer to the [market shar
 
 For sectors without technology-level pathways, PACTA applies the Sectoral Decarbonization Approach (SDA). This method requires all companies in a sector to align their physical emission intensity with a future scenario target (e.g., by 2050). Higher-emission companies must reduce their intensity more drastically than those already using cleaner technologies. However, SDA does not directly affect production volumes.
 
-A more detailed explanation of the sectoral decarbonization approach can be found [here](cookbook_metrics.html)
+A more detailed explanation of the sectoral decarbonization approach can be found [here](cookbook_metrics.html#sectoral-decarbonization-approach)
 
 The SDA scenario dataset must be a `.csv` file that contains the following columns:
 
