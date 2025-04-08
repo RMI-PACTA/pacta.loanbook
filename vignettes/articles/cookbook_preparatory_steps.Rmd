@@ -181,7 +181,7 @@ The manual sector classification dataset must be prepared as a CSV file and cont
 pacta.loanbook:::list_col_names_and_types(sector_classifications)
 ```
 
-In case the user cannot obtain sector classification codes of any of the classification systems featured in `sector_classifications` (currently the following classification systems are featured: `r unique(sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of `sector_classifications`. It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
+In case the user cannot obtain sector classification codes of any of the classification systems featured in [`sector_classifications`](data_classification.html#sector-classifications-dataset) (currently the following classification systems are featured: `r unique(sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of [`sector_classifications`](data_classification.html#sector-classifications-dataset). It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
 
 ## Required Software
 
