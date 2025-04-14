@@ -70,6 +70,7 @@ Suggests:
     readr,
     readxl,
     rmarkdown (>= 2.19),
+    roxygen2 (>= 4.1.0),
     spelling,
     testthat (>= 3.2.2),
     tidyr,
