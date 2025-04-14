@@ -165,6 +165,17 @@ is the portfolio-specific target production for that technology.</li>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mrow><msub><mi>s</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><msub><mi>s</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><annotation encoding="application/x-tex">\dfrac{s_i(t)}{s_i(t_0)}</annotation></semantics></math>
 This method is used to set targets for “decreasing” (i.e. brown)
 technologies.</p>
+<p>Below you can see an example of how the market share approach is
+illustrated for a portfolio with exposure to companies that produce
+vehicles with internal combustion engines (ICE), a high-carbon
+technology that is expected to decrease in climate-ambitious scenarios.
+The lines separating the colors reflect the Target Market Share Ratio
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>p</mi><mi>i</mi><mrow><mi>t</mi><mi>m</mi><mi>s</mi><mi>r</mi></mrow></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p_{i}^{tmsr}(t)</annotation></semantics></math>)
+for ICE vehicles for the portfolio as defined above. The most ambitious
+scenario in this example is the SDS scenario, which describes a
+decreasing amount of ICE production over time, in line with the
+expectations for a high-carbon technology.</p>
+<p><img src="cookbook_metrics_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="market-share-by-sector">2. Market-share by sector<a class="anchor" aria-label="anchor" href="#market-share-by-sector"></a>
@@ -189,6 +200,17 @@ is the scenario total production at
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mrow><msub><mi>s</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><msub><mi>s</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><annotation encoding="application/x-tex">\dfrac{s_i(t)-s_i(t_0)}{S(t_0)}</annotation></semantics></math>
 This method is used to calculate targets for “increasing” (i.e. green)
 technologies.</p>
+<p>Below you can see an example of how the market share approach is
+illustrated for a portfolio with exposure to companies that produce
+electric vehicles, a low-carbon technology that is expected to increase
+in climate-ambitious scenarios. The lines separating the colors reflect
+the Sector Market Share Percentage
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>p</mi><mi>i</mi><mrow><mi>s</mi><mi>m</mi><mi>s</mi><mi>p</mi></mrow></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p_{i}^{smsp}(t)</annotation></semantics></math>)
+for electric vehicles for the portfolio as defined above. The most
+ambitious scenario in this example is the SDS scenario, which describes
+an increasing amount of electric vehicle production over time, in line
+with the expectations for a high-carbon technology.</p>
+<p><img src="cookbook_metrics_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 </div>
 <div class="section level3">
@@ -409,6 +431,22 @@ and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p(t)</annotation></semantics></math>
 also must be re-calculated using this adjusted scenario intensity,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><msup><mi>′</mi><mrow><mi>S</mi><mi>c</mi></mrow></msup></mrow><annotation encoding="application/x-tex">I'^{Sc}</annotation></semantics></math>.</p>
+<p>Below you can see an example of how the sectoral decarbonization
+approach is illustrated for a portfolio with exposure to companies in
+the steel sector, a sector that is currently considered hard-to-abate
+and that does not have technology level high- and low-carbon pathways.
+The “target demo” line reflects the SDA target
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>I</mi><mrow><mi>T</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I^{Target}(t)</annotation></semantics></math>)
+for the emission intensity of steel production for the portfolio as
+defined above (the “adjusted scenario demo” line reflects the scenario
+pathway adjusted to the production universe covered in the ABCD, defined
+above as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><msup><mi>′</mi><mrow><mi>S</mi><mi>c</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I'^{Sc}(t)</annotation></semantics></math>).
+As expected for a hard-to-abate carbon intensive sector like steel
+production, the emission intensity target decreases over time, and the
+portfolio level and adjusted scenario level targets are slowly
+converging over time.</p>
+<p><img src="cookbook_metrics_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="calculating-sda-targets">Calculating SDA Targets<a class="anchor" aria-label="anchor" href="#calculating-sda-targets"></a>
