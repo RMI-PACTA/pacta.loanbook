@@ -30,7 +30,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item RMI \email{PACTA4banks@rmi.org} [copyright holder, funder]
+  \item RMI \email{PACTA4banks@rmi.org} (03anfar33) [copyright holder, funder]
 }
 
 }
