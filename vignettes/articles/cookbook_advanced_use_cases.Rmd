@@ -474,26 +474,29 @@ result_table(
 
 ```
 
-The bank can now engage with these companies to understand the reasons for the deviation and to help them develop a transition plan to reduce their exposure to high-carbon activities. A few calculations that help with determining the right approach to engaging these companies are the following:
+The bank can now engage with these companies to understand the reasons for the deviation and to help them develop a transition plan to reduce their exposure to high-carbon activities. A few calculations that help with determining the right approach to engaging these companies are laid out below:
 
-(A) The bank can calculate the percent deviation of the projected technology share relative to the target technology share of a company for a technology in t5 as follows:
+- let $T_{c, i}(t)$ be the technology share of company $c$ and technology $i$ at time $t$, and
+- let $p_{c, i}(t)$ be the production (or capacity) level of company $c$ and technology $i$ at time $t$.
 
-$$tech share_{comp, tech}^{deviation}(t_{5}) = \frac{tech share_{comp, tech}^{projected}(t_{5}) - tech share_{comp, tech}^{target}(t_{5})}{tech share_{comp, tech}^{target}(t_{5})}$$
-This can be a good first indicator of misalignment a the company level. A related calculation would be to calculate the percent deviation of the projected production (or capacity) level relative to the target production level of a company for a technology in t5, again as follows:
+(A) The bank can calculate the percent deviation of the projected technology share $T^{projected}$ relative to the target technology share $T^{target}$ of a company $c$ for a technology $i$ in $t_5$ as follows:
 
-$$prod_{comp, tech}^{deviation}(t_{5}) = \frac{prod_{comp, tech}^{projected}(t_{5}) - prod_{comp, tech}^{target}(t_{5})}{prod_{comp, tech}^{target}(t_{5})}$$
+$$T_{c, i}^{deviation}(t_{5}) = \frac{T_{c, i}^{projected}(t_{5}) - T_{c, i}^{target}(t_{5})}{T_{c, i}^{target}(t_{5})}$$
+This can be a good first indicator of misalignment a the company level. A related calculation would be to calculate the percent deviation of the projected production (or capacity) level $p^{projected}$ relative to the target production level $p^{target}$ of a company $c$ for a technology $i$ in $t_5$, again as follows:
+
+$$p_{c, i}^{deviation}(t_{5}) = \frac{p_{c, i}^{projected}(t_{5}) - p_{c, i}^{target}(t_{5})}{p_{c, i}^{target}(t_{5})}$$
 
 These two calculations mostly aim to identify the degree of misalignment of a company with the scenario target. Next it may be necessary to determine the severity of that misalignment.
 
-(B) The bank can calculate the relative deviation of the difference between projected production and target production relative to the initial production level of a company for a technology as follows:
+(B) The bank can calculate the relative deviation of the difference between projected production $p_{c, i}^{projected}(t_{5})$ and target production $p_{c, i}^{target}(t_{5})$ relative to the initial production level $p_{c, i}^{projected}(t_{0})$ of a company $c$ for a technology $i$ as follows:
 
-$$prod_{comp, tech}^{deviation}(t_{0,5}) = \frac{prod_{comp, tech}^{projected}(t_{5}) - prod_{comp, tech}^{target}(t_{5})}{prod_{comp, tech}^{projected}(t_{0})}$$
+$$p_{c, i}^{deviation}(t_{0,5}) = \frac{p_{c, i}^{projected}(t_{5}) - p_{c, i}^{target}(t_{5})}{p_{c, i}^{projected}(t_{0})}$$
 
-Comparing the difference in t5 with the initial company production level highlights how large the remaining effort can be considered. For example, if a company misses its coal power target in t5 by 5MW, this would be relatively more severe if the company initially operated 10MW of coal power capacity and relatively less severe if it initially operated 50MW of coal capacity. After understanding the severity of the misalignment, it may be necessary to determine the underlying drivers of the misalignment.
+Comparing the difference in $t_5$ with the initial company production level highlights how large the remaining effort can be considered. For example, if a company misses its coal power target in $t_5$ by 5MW, this would be relatively more severe if the company initially operated 10MW of coal power capacity and relatively less severe if it initially operated 50MW of coal capacity. After understanding the severity of the misalignment, it may be necessary to determine the underlying drivers of the misalignment.
 
-(C) The bank can now calculate the relative change in production (or capacity) level of a company for a technology as follows:
+(C) The bank can now calculate the relative change in production (or capacity) level $p_{c, i}^{projected}$ over time from $t_0$ to $t_5$ of a company $c$ for a technology $i$ as follows:
 
-$$prod_{comp, tech}^{change}(t_{0,5}) = \frac{prod_{comp, tech}^{projected}(t_{5}) - prod_{comp, tech}^{projected}(t_{0})}{prod_{comp, tech}^{projected}(t_{0})}$$
+$$p_{c, i}^{change}(t_{0,5}) = \frac{p_{c, i}^{projected}(t_{5}) - p_{c, i}^{projected}(t_{0})}{p_{c, i}^{projected}(t_{0})}$$
 
 If a company has reduced its coal power capacity but is still misaligned, it may be an indication that the company is struggling to replace its coal power capacity with other energy sources. In this case, the bank may want to engage with the company to help them develop a transition plan.
 
@@ -551,21 +554,23 @@ result_table(
 
 Again, the bank can engage with the companies identified as misaligned to understand the reasons for the deviation and to help them develop a transition plan to reduce their exposure to high-carbon activities. The production related-equations from above can be adjusted for emission intensity sectors.
 
-(A) The bank can calculate the percent deviation of the projected emission intensity relative to the target emission intensity of a company in a sector in t5 as follows:
+- let $I_{c, s}(t)$ be the emission intensity in emissions per physical unit of production or capacity of a company $c$ in sector $s$ at time $t$
 
-$$EI_{comp, sector}^{deviation}(t_{5}) = \frac{EI_{comp, sector}^{projected}(t_{5}) - EI_{comp, sector}^{target}(t_{5})}{EI_{comp, sector}^{target}(t_{5})}$$
+(A) The bank can calculate the percent deviation of the projected emission intensity $I_{c, s}^{projected}(t_{5})$ relative to the target emission intensity $I_{c, s}^{target}(t_{5})$ of a company $c$ in a sector $s$ in $t_5$ as follows:
 
-This first indicator of misalignment can also reveal that all misaligned cement companies seem to be relatively far off their target in this example, which may lead the bank to inspect if there are reasons beyond the immediate control of the companies for this misalignment. In the cement sector, one might assume that there is not yet a technology to significantly lower the EI available to any company, which would limit their ability to meet the emissions target in the short term.
+$$I_{c, s}^{deviation}(t_{5}) = \frac{I_{c, s}^{projected}(t_{5}) - I_{c, s}^{target}(t_{5})}{I_{c, s}^{target}(t_{5})}$$
+
+This first indicator of misalignment can also reveal that all misaligned cement companies seem to be relatively far off their target in this example, which may lead the bank to inspect if there are reasons beyond the immediate control of the companies for this misalignment. In the cement sector, one might assume that there is not yet a technology to significantly lower the emission intensity available to any company, which would limit their ability to meet the emissions target in the short term.
 
 The remaining calculations presented above would translate to emission intensity sectors as follows:
 
-(B) Relative deviation of the difference between projected EI and target EI relative to the initial EI of a company in a sector:
+(B) Relative deviation of the difference between projected emission intensity $I_{c, s}^{projected}(t_{5})$ and target emission intensity $I_{c, s}^{target}(t_{5})$ relative to the initial emission intensity $I_{c, s}^{projected}(t_{0})$ of a company $c$ in a sector $s$:
 
-$$EI_{comp, sector}^{deviation}(t_{0,5}) = \frac{EI_{comp, sector}^{projected}(t_{5}) - EI_{comp, sector}^{target}(t_{5})}{EI_{comp, sector}^{projected}(t_{0})}$$
+$$I_{c, s}^{deviation}(t_{0,5}) = \frac{I_{c, s}^{projected}(t_{5}) - I_{c, s}^{target}(t_{5})}{I_{c, s}^{projected}(t_{0})}$$
 
-(C) Relative change in EI of a company over time in a sector:
+(C) Relative change in emission intensity $I_{c, s}^{projected}$ of a company $c$ over time from $t_0$ to $t_5$ in a sector $s$:
 
-$$EI_{comp, sector}^{change}(t_{0,5}) = \frac{EI_{comp, sector}^{projected}(t_{5}) - EI_{comp, sector}^{projected}(t_{0})}{EI_{comp, sector}^{projected}(t_{0})}$$
+$$I_{c, s}^{change}(t_{0,5}) = \frac{I_{c, s}^{projected}(t_{5}) - I_{c, s}^{projected}(t_{0})}{I_{c, s}^{projected}(t_{0})}$$
 
 In the end, any of the companies the bank engages with turns out to be unwilling to or incapable to manage their transition risk, the bank can also use this information to assess the relationship with these companies and potentially reduce the financial exposure.
 
