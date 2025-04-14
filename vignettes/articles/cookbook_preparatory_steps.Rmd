@@ -56,9 +56,11 @@ For details on the required structure of this dataset, refer to the [ABCD data d
 - External source
 - CSV file(s)
 
+#### Sectors with Technology-Level Pathways
+
 For sectors with technology-level trajectories, the dataset provides Sectoral Market Share Percentage (SMSP) and Target Market Share Ratio (TMSR) pathways using the "market share approach". This allocation rule assumes that all companies in a sector must adjust production while maintaining constant market shares within a sector to align with the overall climate transition scenario.
 
-A more detailed explanation of the market share approach can be found [here](cookbook_metrics.html).
+A more detailed explanation of the market share approach can be found [here](cookbook_metrics.html#market-share-approach).
 
 The Target Market Share Scenario dataset must be a CSV file and include the following columns:
 
@@ -68,9 +70,11 @@ pacta.loanbook:::list_col_names_and_types(scenario_demo_2020)
 
 For details on the required structure of this dataset, refer to the [market share scenario data dictionary](data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation).
 
+#### Sectors with Sector-Level Pathways
+
 For sectors without technology-level pathways, PACTA applies the Sectoral Decarbonization Approach (SDA). This method requires all companies in a sector to align their physical emission intensity with a future scenario target (e.g., by 2050). Higher-emission companies must reduce their intensity more drastically than those already using cleaner technologies. However, SDA does not directly affect production volumes.
 
-A more detailed explanation of the sectoral decarbonization approach can be found [here](cookbook_metrics.html)
+A more detailed explanation of the sectoral decarbonization approach can be found [here](cookbook_metrics.html#sectoral-decarbonization-approach)
 
 The SDA scenario dataset must be a `.csv` file that contains the following columns:
 
@@ -80,12 +84,14 @@ pacta.loanbook:::list_col_names_and_types(co2_intensity_scenario_demo)
 
 For details on the required structure of this dataset, refer to the [SDA scenario data dictionary](data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach).
 
+#### Scenario Data Sources
+
 While the raw input values of the scenarios are based on models from external third party organisations - such as the [World Energy Outlook](https://www.iea.org/reports/world-energy-outlook-2024) by the [International Energy Agency (IEA)](https://www.iea.org/), the [Global Energy and Climate Outlook by the Joint Research Center of the European Commission (JRC)](https://joint-research-centre.ec.europa.eu/scientific-activities-z/geco_en), or the [One Earth Climate Model by the Institute for Sustainable Futures (ISF)](https://www.uts.edu.au/oecm) - the input data set for PACTA must be prepared using additional steps, which are documented publicly on the following GitHub repositories:
 
 - [pacta.scenario.data.preparation](https://github.com/RMI-PACTA/pacta.scenario.data.preparation)
 - [workflow.scenario.preparation](https://github.com/RMI-PACTA/workflow.scenario.preparation)
 
-Prepared scenario files are available for download as CSVs in the [Methodology and Supporting Documents](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/) section of the PACTA website. These files are typically updated annually based on the latest scenario publications. As a general rule, the publication year defines the initial year of the dataset, which is also commonly used as the analysis start year.
+**Downloads:** Prepared scenario files are available for download as CSVs in the [Methodology and Supporting Documents](https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/) section of the PACTA website, both technology-level production pathways and sector-level emission intensity pathways. These files are typically updated annually based on the latest scenario publications. As a general rule, the publication year defines the initial year of the dataset, which is also commonly used as the analysis start year.
 
 ### Loan Book
 
@@ -104,6 +110,56 @@ pacta.loanbook:::list_col_names_and_types(loanbook_demo)
 For details on the required structure of this dataset, refer to the [loanbook data dictionary](data_loanbook.html).
  
 For detailed descriptions of how to prepare raw loan books, see the ["Training Materials" section of the PACTA for Banks documentation](https://pacta.rmi.org/pacta-for-banks-2020/training-materials/). The ["User Guide 2"](https://pacta.rmi.org/wp-content/uploads/2020/10/User-Guide-2..pdf), the ["Data Dictionary"](https://pacta.rmi.org/wp-content/uploads/2020/09/data_dictionary.xlsx), and the ["Loan Book Template"](https://pacta.rmi.org/wp-content/uploads/2020/09/loanbook_demo.xlsx) files can all be helpful in preparing your data.
+
+**NOTE:** When preparing the raw loan book data, you will need to fill in the columns `sector_classification_system` and `sector_classification_direct_loantaker`. If you are planning to use one of the sector classification systems that are built into the `{pacta.loanbook}` package (`r unique(sector_classifications$code_system)`), you will need to make sure that you obtain the sector codes based on the correct version or revision of the sector classification system you are using. Here you can find an overview of the sector classification systems currently featured and the version or revision they are based on:
+
+```{r, echo = FALSE, results = 'asis'}
+classification_system_by_version <- tibble::tribble(
+  ~classification_system, ~version_or_revision,
+  "GICS", unique(pacta.loanbook:::gics_classification$version),
+  "ISIC", unique(pacta.loanbook:::isic_classification$revision),
+  "NACE", unique(pacta.loanbook:::nace_classification$version),
+  "NAICS", unique(pacta.loanbook:::naics_classification$version),
+  "PSIC", unique(pacta.loanbook:::psic_classification$version),
+  "SIC", unique(pacta.loanbook:::sic_classification$version)
+)
+
+classification_system_by_version <- gt::gt(data = classification_system_by_version)
+
+classification_system_by_version <-
+  gt::tab_header(
+    data = classification_system_by_version,
+    title = "Sector Classification Systems",
+    subtitle = "Built-in classification systems and their versions or revisions"
+  )
+
+classification_system_by_version <-
+  gt::cols_label(
+    .data = classification_system_by_version,
+    classification_system = "Classification System",
+    version_or_revision = "Version or Revision"
+  )
+
+classification_system_by_version <-
+  gt::tab_style(
+    data = classification_system_by_version,
+    style = gt::cell_text(size = "smaller"),
+    locations = gt::cells_body(columns = everything())
+  )
+
+classification_system_by_version <-
+  gt::tab_options(
+    data = classification_system_by_version,
+    ihtml.active = TRUE,
+    ihtml.use_pagination = FALSE,
+    ihtml.use_sorting = FALSE,
+    ihtml.use_highlight = TRUE
+  )
+
+classification_system_by_version
+```
+
+If you cannot obtain sector classification codes for the version of the sector classification system you are using as described in the table above, you will have to to treat the sector classification system like a [manual sector classification](#manual-sector-classification-optional).
 
 ### Misclassified Loans (optional)
 
@@ -131,7 +187,7 @@ The manual sector classification dataset must be prepared as a CSV file and cont
 pacta.loanbook:::list_col_names_and_types(sector_classifications)
 ```
 
-In case the user cannot obtain sector classification codes of any of the classification systems featured in `sector_classifications` (currently the following classification systems are featured: `r unique(sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of `sector_classifications`. It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
+In case the user cannot obtain sector classification codes of any of the classification systems featured in [`sector_classifications`](data_classification.html#sector-classifications-dataset) (currently the following classification systems are featured: `r unique(sector_classifications$code_system)`), the user can provide a manually created sector classification file for matching the loan book to the ABCD instead. Generally, any such manually prepared sector classification file must follow the format of [`sector_classifications`](data_classification.html#sector-classifications-dataset). It is recommended to use the built in sector classifications if possible, as mapping your own sector classification to the PACTA sectors can be complex and time consuming.
 
 ## Required Software
 

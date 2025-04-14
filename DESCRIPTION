@@ -27,7 +27,8 @@ Authors@R:
       person(
         given = "RMI",
         role = c("cph", "fnd"),
-        email = "PACTA4banks@rmi.org"
+        email = "PACTA4banks@rmi.org",
+        comment = c(ROR = "03anfar33")
       )
     )
 Description: PACTA (Paris Agreement Capital Transition Assessment) for Banks is
@@ -70,6 +71,7 @@ Suggests:
     readr,
     readxl,
     rmarkdown (>= 2.19),
+    roxygen2 (>= 4.1.0),
     spelling,
     testthat (>= 3.2.2),
     tidyr,
