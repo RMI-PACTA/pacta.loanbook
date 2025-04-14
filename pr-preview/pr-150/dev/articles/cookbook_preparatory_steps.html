@@ -106,8 +106,8 @@
 
 
 
-
-<div class="row">
+<script src="cookbook_preparatory_steps_files/core-js-2.5.3/shim.min.js"></script><script src="cookbook_preparatory_steps_files/react-18.2.0/react.min.js"></script><script src="cookbook_preparatory_steps_files/react-18.2.0/react-dom.min.js"></script><script src="cookbook_preparatory_steps_files/reactwidget-2.0.0/react-tools.js"></script><script src="cookbook_preparatory_steps_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="cookbook_preparatory_steps_files/reactable-0.4.4/reactable.css" rel="stylesheet">
+<script src="cookbook_preparatory_steps_files/reactable-binding-0.4.4/reactable.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Preparatory Steps</h1>
             
@@ -211,6 +211,9 @@ correct format. One option is purchasing ABCD from <a href="https://asset-impact
 <li>External source</li>
 <li>CSV file(s)</li>
 </ul>
+<div class="section level5">
+<h5 id="sectors-with-technology-level-pathways">Sectors with Technology-Level Pathways<a class="anchor" aria-label="anchor" href="#sectors-with-technology-level-pathways"></a>
+</h5>
 <p>For sectors with technology-level trajectories, the dataset provides
 Sectoral Market Share Percentage (SMSP) and Target Market Share Ratio
 (TMSR) pathways using the “market share approach”. This allocation rule
@@ -218,7 +221,7 @@ assumes that all companies in a sector must adjust production while
 maintaining constant market shares within a sector to align with the
 overall climate transition scenario.</p>
 <p>A more detailed explanation of the market share approach can be found
-<a href="cookbook_metrics.html">here</a>.</p>
+<a href="cookbook_metrics.html#market-share-approach">here</a>.</p>
 <p>The Target Market Share Scenario dataset must be a CSV file and
 include the following columns:</p>
 <ul>
@@ -250,6 +253,10 @@ include the following columns:</p>
 <p>For details on the required structure of this dataset, refer to the
 <a href="data_scenario.html#climate-transition-scenario-dataset-technology-pathways-for-target-market-share-calculation">market
 share scenario data dictionary</a>.</p>
+</div>
+<div class="section level5">
+<h5 id="sectors-with-sector-level-pathways">Sectors with Sector-Level Pathways<a class="anchor" aria-label="anchor" href="#sectors-with-sector-level-pathways"></a>
+</h5>
 <p>For sectors without technology-level pathways, PACTA applies the
 Sectoral Decarbonization Approach (SDA). This method requires all
 companies in a sector to align their physical emission intensity with a
@@ -258,7 +265,7 @@ reduce their intensity more drastically than those already using cleaner
 technologies. However, SDA does not directly affect production
 volumes.</p>
 <p>A more detailed explanation of the sectoral decarbonization approach
-can be found <a href="cookbook_metrics.html">here</a></p>
+can be found <a href="cookbook_metrics.html#sectoral-decarbonization-approach">here</a></p>
 <p>The SDA scenario dataset must be a <code>.csv</code> file that
 contains the following columns:</p>
 <ul>
@@ -287,6 +294,10 @@ contains the following columns:</p>
 <p>For details on the required structure of this dataset, refer to the
 <a href="data_scenario.html#climate-transition-scenario-dataset-co2-intensity-pathways-for-sectoral-decarbonization-approach">SDA
 scenario data dictionary</a>.</p>
+</div>
+<div class="section level5">
+<h5 id="scenario-data-sources">Scenario Data Sources<a class="anchor" aria-label="anchor" href="#scenario-data-sources"></a>
+</h5>
 <p>While the raw input values of the scenarios are based on models from
 external third party organisations - such as the <a href="https://www.iea.org/reports/world-energy-outlook-2024" class="external-link">World
 Energy Outlook</a> by the <a href="https://www.iea.org/" class="external-link">International
@@ -300,12 +311,15 @@ which are documented publicly on the following GitHub repositories:</p>
 <li><a href="https://github.com/RMI-PACTA/pacta.scenario.data.preparation" class="external-link">pacta.scenario.data.preparation</a></li>
 <li><a href="https://github.com/RMI-PACTA/workflow.scenario.preparation" class="external-link">workflow.scenario.preparation</a></li>
 </ul>
-<p>Prepared scenario files are available for download as CSVs in the <a href="https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/" class="external-link">Methodology
-and Supporting Documents</a> section of the PACTA website. These files
-are typically updated annually based on the latest scenario
-publications. As a general rule, the publication year defines the
-initial year of the dataset, which is also commonly used as the analysis
-start year.</p>
+<p><strong>Downloads:</strong> Prepared scenario files are available for
+download as CSVs in the <a href="https://pacta.rmi.org/pacta-for-banks-2020/methodology-and-supporting-materials/" class="external-link">Methodology
+and Supporting Documents</a> section of the PACTA website, both
+technology-level production pathways and sector-level emission intensity
+pathways. These files are typically updated annually based on the latest
+scenario publications. As a general rule, the publication year defines
+the initial year of the dataset, which is also commonly used as the
+analysis start year.</p>
+</div>
 </div>
 <div class="section level4">
 <h4 id="loan-book">Loan Book<a class="anchor" aria-label="anchor" href="#loan-book"></a>
@@ -369,6 +383,478 @@ Materials” section of the PACTA for Banks documentation</a>. The <a href="http
 Guide 2”</a>, the <a href="https://pacta.rmi.org/wp-content/uploads/2020/09/data_dictionary.xlsx" class="external-link">“Data
 Dictionary”</a>, and the <a href="https://pacta.rmi.org/wp-content/uploads/2020/09/loanbook_demo.xlsx" class="external-link">“Loan
 Book Template”</a> files can all be helpful in preparing your data.</p>
+<p><strong>NOTE:</strong> When preparing the raw loan book data, you
+will need to fill in the columns
+<code>sector_classification_system</code> and
+<code>sector_classification_direct_loantaker</code>. If you are planning
+to use one of the sector classification systems that are built into the
+<a href="https://rmi-pacta.github.io/pacta.loanbook/">pacta.loanbook</a> package (GICS, ISIC, NACE, NAICS, PSIC,
+SIC), you will need to make sure that you obtain the sector codes based
+on the correct version or revision of the sector classification system
+you are using. Here you can find an overview of the sector
+classification systems currently featured and the version or revision
+they are based on:</p>
+<div id="mwlefoodfi" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mwlefoodfi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mwlefoodfi thead, #mwlefoodfi tbody, #mwlefoodfi tfoot, #mwlefoodfi tr, #mwlefoodfi td, #mwlefoodfi th {
+  border-style: none;
+}
+
+#mwlefoodfi p {
+  margin: 0;
+  padding: 0;
+}
+
+#mwlefoodfi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mwlefoodfi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mwlefoodfi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mwlefoodfi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mwlefoodfi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mwlefoodfi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mwlefoodfi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mwlefoodfi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mwlefoodfi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mwlefoodfi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mwlefoodfi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mwlefoodfi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mwlefoodfi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mwlefoodfi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mwlefoodfi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mwlefoodfi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mwlefoodfi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_left {
+  text-align: left;
+}
+
+#mwlefoodfi .gt_center {
+  text-align: center;
+}
+
+#mwlefoodfi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mwlefoodfi .gt_font_normal {
+  font-weight: normal;
+}
+
+#mwlefoodfi .gt_font_bold {
+  font-weight: bold;
+}
+
+#mwlefoodfi .gt_font_italic {
+  font-style: italic;
+}
+
+#mwlefoodfi .gt_super {
+  font-size: 65%;
+}
+
+#mwlefoodfi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mwlefoodfi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mwlefoodfi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mwlefoodfi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mwlefoodfi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mwlefoodfi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mwlefoodfi .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mwlefoodfi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mwlefoodfi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div style="font-family:system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;border-top-style:solid;border-top-width:2px;border-top-color:#D3D3D3;">
+<div class="gt_heading gt_title gt_font_normal" style="text-size:bigger;">Sector Classification Systems</div>
+<div class="gt_heading gt_subtitle ">Built-in classification systems and their versions or revisions</div>
+</div>
+<div id="mwlefoodfi" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="mwlefoodfi">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"classification_system":["GICS","ISIC","NACE","NAICS","PSIC","SIC"],"version_or_revision":["2023","5","2.1","2022","2019","1987"]},"columns":[{"id":"classification_system","name":"Classification System","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'classification_system' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\n}","html":true,"align":"left"},{"id":"version_or_revision","name":"Version or Revision","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'classification_system' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'classification_system' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'version_or_revision' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\n}","html":true,"align":"right"}],"sortable":false,"pagination":false,"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":false,"showPageInfo":true,"minRows":1,"highlight":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"16px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"mwlefoodfi","dataKey":"24bb2a498fa7c87cb7568d4379de4439"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
+</div>
+<p>If you cannot obtain sector classification codes for the version of
+the sector classification system you are using as described in the table
+above, you will have to to treat the sector classification system like a
+<a href="#manual-sector-classification-optional">manual sector
+classification</a>.</p>
 </div>
 <div class="section level4">
 <h4 id="misclassified-loans-optional">Misclassified Loans (optional)<a class="anchor" aria-label="anchor" href="#misclassified-loans-optional"></a>
@@ -418,16 +904,15 @@ file and contain the following columns:</p>
 </li>
 </ul>
 <p>In case the user cannot obtain sector classification codes of any of
-the classification systems featured in
-<code>sector_classifications</code> (currently the following
-classification systems are featured: GICS, ISIC, NACE, NAICS, PSIC,
-SIC), the user can provide a manually created sector classification file
-for matching the loan book to the ABCD instead. Generally, any such
-manually prepared sector classification file must follow the format of
-<code>sector_classifications</code>. It is recommended to use the built
-in sector classifications if possible, as mapping your own sector
-classification to the PACTA sectors can be complex and time
-consuming.</p>
+the classification systems featured in <a href="data_classification.html#sector-classifications-dataset"><code>sector_classifications</code></a>
+(currently the following classification systems are featured: GICS,
+ISIC, NACE, NAICS, PSIC, SIC), the user can provide a manually created
+sector classification file for matching the loan book to the ABCD
+instead. Generally, any such manually prepared sector classification
+file must follow the format of <a href="data_classification.html#sector-classifications-dataset"><code>sector_classifications</code></a>.
+It is recommended to use the built in sector classifications if
+possible, as mapping your own sector classification to the PACTA sectors
+can be complex and time consuming.</p>
 </div>
 </div>
 <div class="section level3">
