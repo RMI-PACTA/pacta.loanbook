@@ -414,12 +414,11 @@ When managing transition risk, financial institutions can consider two primary a
 
 Suppose a bank aims to reduce transition risk in its loan book to align with its defined risk appetite. After assessing its portfolio, say it identifies power and cement as the primary risk-intensive sectors. In the power sector, the key transition risk stems from coal-fired power generation.
 
-The bank can use company-level PACTA results to compare counterparties' production plans against company-specific benchmarks, based on the same transition scenarios used for sector-level targets. By conducting the analysis in 2020 and assessing deviations over a five-year horizon, the bank can identify which companies are proactively transitioning and which are not, informing its engagement or exposure management strategy.
+The bank can use company-level PACTA results to compare counterparties' production plans against company-specific benchmarks, based on the same transition scenarios used for sector-level targets. By conducting the analysis in 2020 and assessing deviations over a five-year horizon, the bank can identify which companies are proactively transitioning away from heir coal power business and which ones are not, informing its engagement or exposure management strategy. The following code is a an example of how to obtain the appropriate subset of company level results and restructure the data to easily calculate a range of metrics to identify and analyse company-level misalignment:
 
 
-```{r use_case_three_risk_mangement_calculation_power, warning = FALSE}
-
-misaligned_coal_tech_mix <- market_share_targets_company %>% 
+```{r use_case_three_risk_mangement_coal_power_tech_mix, warning = FALSE}
+power_company_tech_mix <- market_share_targets_company %>% 
   filter(
     region == "global",
     sector == "power",
@@ -427,54 +426,81 @@ misaligned_coal_tech_mix <- market_share_targets_company %>%
     year %in% c(2020, 2025),
     technology == "coalcap"
   ) %>% 
-  select(name_abcd, sector, technology, year, metric, technology_share, production) %>%
-  mutate(
-    technology_share = round(technology_share * 100, 1),
-    production = round(production * 100)
-  )
-
-most_misaligned_coal_tech_mix <- misaligned_coal_tech_mix %>%
-  filter(year == 2025) %>% 
-  mutate(
-    deviation_tech_share = (technology_share - lead(technology_share)) / lead(technology_share) * 100,
-    .by = "name_abcd"
+  select(name_abcd, sector, technology, metric, year, technology_share) %>%
+  mutate(technology_share = round(technology_share, 3) * 100) %>% 
+  pivot_wider(
+    names_from = c("metric", "year"),
+    values_from = "technology_share",
+    names_prefix = "tech_share_"
   ) %>% 
-  arrange(desc(deviation_tech_share)) %>% 
-  head(3) %>% 
-  pull(name_abcd)
-  
+  select(-"tech_share_target_sds_2020")
+
 ```
 
-The bank determines the three most misaligned coal power (based on future technology mix) and cement (based on future emission intensity) companies are the following, each of which it intends to engage with directly.
-
-```{r use_case_three_risk_mangement_result_power, echo = FALSE}
-# misaligned_coal_tech_mix
-misaligned_coal_tech_mix %>% 
-  filter(name_abcd %in% most_misaligned_coal_tech_mix) %>%
-result_table(
-  title = "Most misaligned coal power companies",
-  subtitle = "based on coal share in technology mix in 2025"
-) %>%
+```{r use_case_three_risk_mangement_coal_power_tech_mix_table, echo = FALSE}
+power_company_tech_mix %>%
+  result_table(
+    title = "Company-level technology share of coal power capacity",
+    subtitle = "restructured for input into company metrics"
+  ) %>%
   gt::cols_width(
     name_abcd ~ px(110),
     sector ~ px(80),
-    technology ~ px(100),
-    year ~ px(70),
-    metric ~ px(100)
+    technology ~ px(100)
   ) %>%
   gt::cols_label(
     name_abcd = "Company",
     sector = "Sector",
     technology = "Technology",
-    year = "Year",
-    metric = "Metric",
-    technology_share = "Tech Share (% Capacity)",
-    production = "Production (MW Capacity)"
+    tech_share_projected_2020 = "Projected tech share 2020 (%)",
+    tech_share_projected_2025 = "Projected tech share 2025 (%)",
+    tech_share_target_sds_2025 = "Target tech share 2025 (%)"
   )
 
 ```
 
-The bank can now engage with these companies to understand the reasons for the deviation and to help them develop a transition plan to reduce their exposure to high-carbon activities. A few calculations that help with determining the right approach to engaging these companies are laid out below:
+```{r use_case_three_risk_mangement_coal_power_prod, warning = FALSE}
+power_company_production <- market_share_targets_company %>% 
+  filter(
+    region == "global",
+    sector == "power",
+    metric %in% c("projected", "target_sds"),
+    year %in% c(2020, 2025),
+    technology == "coalcap"
+  ) %>% 
+  select(name_abcd, sector, technology, metric, year, production) %>%
+  mutate(production = round(production)) %>% 
+  pivot_wider(
+    names_from = c("metric", "year"),
+    values_from = "production",
+    names_prefix = "prod_"
+  ) %>% 
+  select(-"prod_target_sds_2020")
+  
+```
+
+```{r use_case_three_risk_mangement_result_power, echo = FALSE}
+power_company_production %>%
+  result_table(
+    title = "Company-level capacity level of coal power",
+    subtitle = "restructured for input into company metrics"
+  ) %>%
+  gt::cols_width(
+    name_abcd ~ px(110),
+    sector ~ px(80),
+    technology ~ px(100)
+  ) %>%
+  gt::cols_label(
+    name_abcd = "Company",
+    sector = "Sector",
+    technology = "Technology",
+    prod_projected_2020 = "Projected capacity 2020 (MW)",
+    prod_projected_2025 = "Projected capacity 2025 (MW)",
+    prod_target_sds_2025 = "Target capacity 2025 (MW)"
+  )
+```
+
+The bank can now determine the most misaligned companies in the coal power business (based on technology share or production capacities) and engage with these companies to understand the reasons for the deviation. It can then help them develop a transition plan to reduce their exposure to high-carbon activities. A few calculations that help with determining the right approach to engaging these companies are laid out below:
 
 - let $T_{c, i}(t)$ be the technology share of company $c$ and technology $i$ at time $t$, and
 - let $p_{c, i}(t)$ be the production (or capacity) level of company $c$ and technology $i$ at time $t$.
@@ -482,7 +508,7 @@ The bank can now engage with these companies to understand the reasons for the d
 (A) The bank can calculate the percent deviation of the projected technology share $T^{projected}$ relative to the target technology share $T^{target}$ of a company $c$ for a technology $i$ in $t_5$ as follows:
 
 $$T_{c, i}^{deviation}(t_{5}) = \frac{T_{c, i}^{projected}(t_{5}) - T_{c, i}^{target}(t_{5})}{T_{c, i}^{target}(t_{5})}$$
-This can be a good first indicator of misalignment a the company level. A related calculation would be to calculate the percent deviation of the projected production (or capacity) level $p^{projected}$ relative to the target production level $p^{target}$ of a company $c$ for a technology $i$ in $t_5$, again as follows:
+This can be a good first indicator of misalignment at the company level. A related calculation would be to calculate the percent deviation of the projected production (or capacity) level $p^{projected}$ relative to the target production level $p^{target}$ of a company $c$ for a technology $i$ in $t_5$, again as follows:
 
 $$p_{c, i}^{deviation}(t_{5}) = \frac{p_{c, i}^{projected}(t_{5}) - p_{c, i}^{target}(t_{5})}{p_{c, i}^{target}(t_{5})}$$
 
@@ -502,9 +528,8 @@ If a company has reduced its coal power capacity but is still misaligned, it may
 
 If a company has increased its coal capacity but is still misaligned, it may be an indication that the company is not taking transition risk seriously and the bank may want to question the strategy of that company.
 
-```{r use_case_three_risk_mangement_calculation_cement, warning = FALSE}
-
-misaligned_cement <- sda_targets_company %>% 
+```{r use_case_three_risk_mangement_cement_ei, warning = FALSE}
+cement_company_ei <- sda_targets_company %>% 
   filter(
     region == "global",
     sector == "cement",
@@ -512,47 +537,40 @@ misaligned_cement <- sda_targets_company %>%
     year %in% c(2020, 2025)
   ) %>% 
   select(name_abcd, sector, year, emission_factor_metric, emission_factor_value) %>%
-  mutate(emission_factor_value = round(emission_factor_value * 100, 1))
-
-most_misaligned_cement <- misaligned_cement %>%
-  filter(year == 2025) %>% 
-  mutate(
-    deviation_ei = (emission_factor_value - lead(emission_factor_value)) / lead(emission_factor_value) * 100,
-    .by = "name_abcd"
+  mutate(emission_factor_value = round(emission_factor_value, 3)) %>% 
+  pivot_wider(
+    names_from = c("emission_factor_metric", "year"),
+    values_from = "emission_factor_value",
+    names_prefix = "ei_"
   ) %>% 
-  arrange(desc(deviation_ei)) %>% 
-  head(3) %>% 
-  pull(name_abcd)
+  select(-"ei_target_demo_2020")
 
 ```
 
-Similarly, the bank can now determine the three most misaligned cement companies (based on future emission intensity) are the following, each of which it intends to engage with directly.
+Similarly, the bank can now determine the most misaligned cement companies (based on projected emission intensity) and engage with these companies as well. Following up on this, the bank can again help these companies develop a transition plan to reduce their emission intensity and align their business more with energy transition targets or trends.
 
-```{r use_case_three_risk_mangement_result_cement, echo = FALSE}
-# misaligned_cement
-misaligned_cement %>% 
-  filter(name_abcd %in% most_misaligned_cement) %>%
-result_table(
-  title = "Most misaligned cement companies",
-  subtitle = "based on emission intensity (EI) in 2025"
-) %>%
+```{r use_case_three_risk_mangement_cement_ei_table, echo = FALSE}
+cement_company_ei %>%
+  result_table(
+    title = "Company-level emission intensity per tonne of cement",
+    subtitle = "restructured for input into company metrics"
+  ) %>%
   gt::cols_width(
-    name_abcd ~ px(200),
-    sector ~ px(80),
-    year ~ px(80)#,
-    # everything() ~ px(90)
+    name_abcd ~ px(110),
+    sector ~ px(80)
   ) %>%
   gt::cols_label(
     name_abcd = "Company",
     sector = "Sector",
-    year = "Year",
-    emission_factor_metric = "Metric",
-    emission_factor_value = "EI (tCO2/tonne cement)"
+    ei_projected_2020 = "Projected EI 2020 (t CO2eq/t cement)",
+    ei_projected_2025 = "Projected EI 2025 (t CO2eq/t cement)",
+    ei_target_demo_2025 = "Target EI 2025 (t CO2eq/t cement)"
+  ) %>% gt::tab_options(
+    ihtml.use_pagination = TRUE
   )
-
 ```
 
-Again, the bank can engage with the companies identified as misaligned to understand the reasons for the deviation and to help them develop a transition plan to reduce their exposure to high-carbon activities. The production related-equations from above can be adjusted for emission intensity sectors.
+The production related-equations from above can be adjusted for emission intensity sectors. The bank can use these to identify the most misaligned companies and understand the reasons for their deviation.
 
 - let $I_{c, s}(t)$ be the emission intensity in emissions per physical unit of production or capacity of a company $c$ in sector $s$ at time $t$
 
