@@ -93,6 +93,57 @@ market_share_result_portfolio %>%
   qplot_trajectory()
 ```
 
+### Overview of increasing and decreasing technologies
+
+As stated above, the decision to use the technology market share ratio (TMSR) or the sector market share percentage (SMSP) depends on whether the technology in question is increasing or decreasing in the scenario. Generally, low-carbon or "green" technologies are treated as increasing technologies and high-carbon or "brown" technologies are treated as decreasing technologies. The table below summarizes the technologies and their expected behavior in the scenarios.
+
+```{r, echo = FALSE}
+
+pacta.loanbook::increasing_or_decreasing %>% 
+  dplyr::filter(!.data$sector %in% c("hdv", "fossil fuels")) %>%
+  dplyr::mutate(
+    high_or_low = dplyr::if_else(.data$increasing_or_decreasing == "increasing", "low-carbon", "high-carbon"),
+    market_share_approach = dplyr::if_else(.data$increasing_or_decreasing == "increasing", "SMSP", "TMSR"),
+  ) %>%
+  gt::gt() %>% 
+  gt::tab_header(
+    title = "Overview of Increasing and Decreasing Technologies",
+    subtitle = "Technologies mapped to appropriate market share approach",
+  ) %>% 
+  gt::tab_style(
+    style = gt::cell_text(size = "smaller"),
+    locations = gt::cells_body(columns = everything())
+  ) %>% 
+  gt::tab_options(
+    ihtml.active = TRUE,
+    ihtml.use_pagination = FALSE,
+    ihtml.use_sorting = TRUE,
+    ihtml.use_highlight = TRUE
+  ) %>%
+  gt::fmt_passthrough() %>% 
+  gt::cols_width(
+    sector ~ px(90),
+    technology ~ px(110)
+  ) %>%
+  gt::cols_label(
+    sector = "Sector",
+    technology = "Technology",
+    increasing_or_decreasing = "Increasing or decreasing technology",
+    high_or_low = "High- or low-carbon technology",
+    market_share_approach = "Market share approach"
+  ) %>% 
+  gt::data_color(
+    columns = high_or_low,
+    rows = high_or_low == "high-carbon",
+    palette = "brown4"
+  ) %>% 
+  gt::data_color(
+    columns = high_or_low,
+    rows = high_or_low == "low-carbon",
+    palette = "darkgreen"
+  )
+```
+
 ### How to calculate market-share targets for a given scenario
 
 To calculate market-share targets, you need to use the package `{pacta.loanbook}` and a number of datasets, including a "matched" dataset (loanbook + asset-level data) that you can get by following the [Matching Process](cookbook_running_the_analysis.html#matching-process) section of the [Running the Analysis](cookbook_running_the_analysis.html) chapter of the cookbook. The datasets used here are included in the `{pacta.loanbook}` package; they are fake but show how you should structure your own data.
