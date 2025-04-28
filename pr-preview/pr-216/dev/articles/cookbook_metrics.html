@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/headshot_placeholder.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Overpass-0.4.9/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Overpass-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -107,8 +107,8 @@
 
 
 
-
-<div class="row">
+<script src="cookbook_metrics_files/core-js-2.5.3/shim.min.js"></script><script src="cookbook_metrics_files/react-18.2.0/react.min.js"></script><script src="cookbook_metrics_files/react-18.2.0/react-dom.min.js"></script><script src="cookbook_metrics_files/reactwidget-2.0.0/react-tools.js"></script><script src="cookbook_metrics_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="cookbook_metrics_files/reactable-0.4.4/reactable.css" rel="stylesheet">
+<script src="cookbook_metrics_files/reactable-binding-0.4.4/reactable.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Metrics</h1>
             
@@ -166,6 +166,17 @@ is the portfolio-specific target production for that technology.</li>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mrow><msub><mi>s</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><msub><mi>s</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><annotation encoding="application/x-tex">\dfrac{s_i(t)}{s_i(t_0)}</annotation></semantics></math>
 This method is used to set targets for “decreasing” (i.e. brown)
 technologies.</p>
+<p>Below you can see an example of how the market share approach is
+illustrated for a portfolio with exposure to companies that produce
+vehicles with internal combustion engines (ICE), a high-carbon
+technology that is expected to decrease in climate-ambitious scenarios.
+The lines separating the colors reflect the Target Market Share Ratio
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>p</mi><mi>i</mi><mrow><mi>t</mi><mi>m</mi><mi>s</mi><mi>r</mi></mrow></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p_{i}^{tmsr}(t)</annotation></semantics></math>)
+for ICE vehicles for the portfolio as defined above. The most ambitious
+scenario in this example is the SDS scenario, which describes a
+decreasing amount of ICE production over time, in line with the
+expectations for a high-carbon technology.</p>
+<p><img src="cookbook_metrics_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="market-share-by-sector">2. Market-share by sector<a class="anchor" aria-label="anchor" href="#market-share-by-sector"></a>
@@ -190,6 +201,484 @@ is the scenario total production at
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mrow><msub><mi>s</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><msub><mi>s</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><annotation encoding="application/x-tex">\dfrac{s_i(t)-s_i(t_0)}{S(t_0)}</annotation></semantics></math>
 This method is used to calculate targets for “increasing” (i.e. green)
 technologies.</p>
+<p>Below you can see an example of how the market share approach is
+illustrated for a portfolio with exposure to companies that produce
+electric vehicles, a low-carbon technology that is expected to increase
+in climate-ambitious scenarios. The lines separating the colors reflect
+the Sector Market Share Percentage
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>p</mi><mi>i</mi><mrow><mi>s</mi><mi>m</mi><mi>s</mi><mi>p</mi></mrow></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p_{i}^{smsp}(t)</annotation></semantics></math>)
+for electric vehicles for the portfolio as defined above. The most
+ambitious scenario in this example is the SDS scenario, which describes
+an increasing amount of electric vehicle production over time, in line
+with the expectations for a high-carbon technology.</p>
+<p><img src="cookbook_metrics_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="overview-of-increasing-and-decreasing-technologies">Overview of increasing and decreasing technologies<a class="anchor" aria-label="anchor" href="#overview-of-increasing-and-decreasing-technologies"></a>
+</h3>
+<p>As stated above, the decision to use the technology market share
+ratio (TMSR) or the sector market share percentage (SMSP) depends on
+whether the technology in question is increasing or decreasing in the
+scenario. Generally, low-carbon or “green” technologies are treated as
+increasing technologies and high-carbon or “brown” technologies are
+treated as decreasing technologies. The table below summarizes the
+technologies and their expected behavior in the scenarios.</p>
+<div id="dfieexombw" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dfieexombw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dfieexombw thead, #dfieexombw tbody, #dfieexombw tfoot, #dfieexombw tr, #dfieexombw td, #dfieexombw th {
+  border-style: none;
+}
+
+#dfieexombw p {
+  margin: 0;
+  padding: 0;
+}
+
+#dfieexombw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dfieexombw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dfieexombw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dfieexombw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dfieexombw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dfieexombw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dfieexombw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dfieexombw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dfieexombw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dfieexombw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dfieexombw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dfieexombw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dfieexombw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dfieexombw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dfieexombw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dfieexombw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dfieexombw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dfieexombw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dfieexombw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfieexombw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dfieexombw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dfieexombw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dfieexombw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfieexombw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dfieexombw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dfieexombw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dfieexombw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfieexombw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dfieexombw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dfieexombw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dfieexombw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dfieexombw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dfieexombw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfieexombw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dfieexombw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfieexombw .gt_left {
+  text-align: left;
+}
+
+#dfieexombw .gt_center {
+  text-align: center;
+}
+
+#dfieexombw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dfieexombw .gt_font_normal {
+  font-weight: normal;
+}
+
+#dfieexombw .gt_font_bold {
+  font-weight: bold;
+}
+
+#dfieexombw .gt_font_italic {
+  font-style: italic;
+}
+
+#dfieexombw .gt_super {
+  font-size: 65%;
+}
+
+#dfieexombw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dfieexombw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dfieexombw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dfieexombw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dfieexombw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dfieexombw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dfieexombw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#dfieexombw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dfieexombw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div style="font-family:system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;border-top-style:solid;border-top-width:2px;border-top-color:#D3D3D3;">
+<div class="gt_heading gt_title gt_font_normal" style="text-size:bigger;">Overview of Increasing and Decreasing Technologies</div>
+<div class="gt_heading gt_subtitle ">Technologies mapped to appropriate market share approach</div>
+</div>
+<div id="dfieexombw" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="dfieexombw">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"sector":["automotive","automotive","automotive","automotive","power","power","power","power","power","power","oil and gas","oil and gas","coal"],"technology":["electric","hybrid","ice","fuelcell","hydrocap","renewablescap","coalcap","gascap","oilcap","nuclearcap","oil","gas","coal"],"increasing_or_decreasing":["increasing","increasing","decreasing","increasing","increasing","increasing","decreasing","decreasing","decreasing","increasing","decreasing","decreasing","decreasing"],"high_or_low":["low-carbon","low-carbon","high-carbon","low-carbon","low-carbon","low-carbon","high-carbon","high-carbon","high-carbon","low-carbon","high-carbon","high-carbon","high-carbon"],"market_share_approach":["SMSP","SMSP","TMSR","SMSP","SMSP","SMSP","TMSR","TMSR","TMSR","SMSP","TMSR","TMSR","TMSR"]},"columns":[{"id":"sector","name":"Sector","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 1) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 2) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 3) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 4) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 5) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 6) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 7) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 8) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 9) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 10) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 11) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 12) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 13) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["automotive","automotive","automotive","automotive","power","power","power","power","power","power","oil and gas","oil and gas","coal"],"html":true,"width":90,"align":"left"},{"id":"technology","name":"Technology","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 1) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 2) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 3) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 4) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 5) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 6) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 7) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 8) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 9) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 10) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 11) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 12) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 13) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["electric","hybrid","ice","fuelcell","hydrocap","renewablescap","coalcap","gascap","oilcap","nuclearcap","oil","gas","coal"],"html":true,"width":110,"align":"left"},{"id":"increasing_or_decreasing","name":"Increasing or decreasing technology","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 1) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 2) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 3) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 4) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 5) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 6) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 7) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 8) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 9) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 10) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 11) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 12) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 13) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["increasing","increasing","decreasing","increasing","increasing","increasing","decreasing","decreasing","decreasing","increasing","decreasing","decreasing","decreasing"],"html":true,"align":"left"},{"id":"high_or_low","name":"High- or low-carbon technology","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 1) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 2) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 3) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 4) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 5) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 6) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 7) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 8) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 9) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 10) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 11) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 12) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 13) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["low-carbon","low-carbon","high-carbon","low-carbon","low-carbon","low-carbon","high-carbon","high-carbon","high-carbon","low-carbon","high-carbon","high-carbon","high-carbon"],"html":true,"align":"left"},{"id":"market_share_approach","name":"Market share approach","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'sector' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'sector' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'technology' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'increasing_or_decreasing' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 1) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 2) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 3) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 4) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 5) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 6) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 7) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 8) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 9) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 10) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#006400' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 11) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 12) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'high_or_low' & rowIndex === 13) {\n  return { fontSize: 'smaller', color: '#FFFFFF', backgroundColor: '#8B2323' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 1) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 2) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 3) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 4) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 5) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 6) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 7) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 8) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 9) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 10) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 11) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 12) {\n  return { fontSize: 'smaller' }\n}\n\nif (colInfo.id === 'market_share_approach' & rowIndex === 13) {\n  return { fontSize: 'smaller' }\n}\n\n}","cell":["SMSP","SMSP","TMSR","SMSP","SMSP","SMSP","TMSR","TMSR","TMSR","SMSP","TMSR","TMSR","TMSR"],"html":true,"align":"left"}],"pagination":false,"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":false,"showPageInfo":true,"minRows":1,"highlight":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"16px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"dfieexombw","dataKey":"49ab8ebb2ee1734ef9dec28ff0a8ba48"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style","tag.attribs.columns.2.style","tag.attribs.columns.3.style","tag.attribs.columns.4.style"],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="section level3">
@@ -410,6 +899,22 @@ and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p(t)</annotation></semantics></math>
 also must be re-calculated using this adjusted scenario intensity,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><msup><mi>′</mi><mrow><mi>S</mi><mi>c</mi></mrow></msup></mrow><annotation encoding="application/x-tex">I'^{Sc}</annotation></semantics></math>.</p>
+<p>Below you can see an example of how the sectoral decarbonization
+approach is illustrated for a portfolio with exposure to companies in
+the steel sector, a sector that is currently considered hard-to-abate
+and that does not have technology level high- and low-carbon pathways.
+The “target demo” line reflects the SDA target
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>I</mi><mrow><mi>T</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I^{Target}(t)</annotation></semantics></math>)
+for the emission intensity of steel production for the portfolio as
+defined above (the “adjusted scenario demo” line reflects the scenario
+pathway adjusted to the production universe covered in the ABCD, defined
+above as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><msup><mi>′</mi><mrow><mi>S</mi><mi>c</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I'^{Sc}(t)</annotation></semantics></math>).
+As expected for a hard-to-abate carbon intensive sector like steel
+production, the emission intensity target decreases over time, and the
+portfolio level and adjusted scenario level targets are slowly
+converging over time.</p>
+<p><img src="cookbook_metrics_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="calculating-sda-targets">Calculating SDA Targets<a class="anchor" aria-label="anchor" href="#calculating-sda-targets"></a>
