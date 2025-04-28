@@ -42,7 +42,35 @@ where:
 We define the "Technology Market Share Ratio" as:
 
 $$\dfrac{s_i(t)}{s_i(t_0)}$$
-This method is used to set targets for "decreasing" (i.e. brown) technologies. 
+This method is used to set targets for "decreasing" (i.e. brown) technologies.
+
+Below you can see an example of how the market share approach is illustrated for a portfolio with exposure to companies that produce vehicles with internal combustion engines (ICE), a high-carbon technology that is expected to decrease in climate-ambitious scenarios. The lines separating the colors reflect the Target Market Share Ratio ($p_{i}^{tmsr}(t)$) for ICE vehicles for the portfolio as defined above. The most ambitious scenario in this example is the SDS scenario, which describes a decreasing amount of ICE production over time, in line with the expectations for a high-carbon technology.
+
+```{r, message = FALSE, echo = FALSE}
+library(pacta.loanbook)
+library(dplyr)
+
+loanbook <- loanbook_demo
+abcd <- abcd_demo
+
+matched <- match_name(loanbook = loanbook, abcd = abcd) %>%
+  prioritize()
+
+scenario <- scenario_demo_2020
+regions <- region_isos_demo
+
+market_share_result_portfolio <- matched %>%
+  target_market_share(
+    abcd = abcd,
+    scenario = scenario,
+    region_isos = regions
+  )
+
+market_share_result_portfolio %>% 
+  filter(region == "global", sector == "automotive", technology == "ice") %>% 
+  qplot_trajectory()
+```
+
 
 #### 2. Market-share by sector
 To calculate the market-share by sector, we use the initial production of both the portfolio and scenario at the sector-level instead. 
@@ -56,6 +84,65 @@ We define the "Sector Market Share Percentage" as:
 
 $$\dfrac{s_i(t)-s_i(t_0)}{S(t_0)}$$
 This method is used to calculate targets for "increasing" (i.e. green) technologies. 
+
+Below you can see an example of how the market share approach is illustrated for a portfolio with exposure to companies that produce electric vehicles, a low-carbon technology that is expected to increase in climate-ambitious scenarios. The lines separating the colors reflect the Sector Market Share Percentage ($p_{i}^{smsp}(t)$) for electric vehicles for the portfolio as defined above. The most ambitious scenario in this example is the SDS scenario, which describes an increasing amount of electric vehicle production over time, in line with the expectations for a high-carbon technology.
+
+```{r, message = FALSE, echo = FALSE}
+market_share_result_portfolio %>% 
+  filter(region == "global", sector == "automotive", technology == "electric") %>% 
+  qplot_trajectory()
+```
+
+### Overview of increasing and decreasing technologies
+
+As stated above, the decision to use the technology market share ratio (TMSR) or the sector market share percentage (SMSP) depends on whether the technology in question is increasing or decreasing in the scenario. Generally, low-carbon or "green" technologies are treated as increasing technologies and high-carbon or "brown" technologies are treated as decreasing technologies. The table below summarizes the technologies and their expected behavior in the scenarios.
+
+```{r, echo = FALSE}
+
+pacta.loanbook::increasing_or_decreasing %>% 
+  dplyr::filter(!.data$sector %in% c("hdv", "fossil fuels")) %>%
+  dplyr::mutate(
+    high_or_low = dplyr::if_else(.data$increasing_or_decreasing == "increasing", "low-carbon", "high-carbon"),
+    market_share_approach = dplyr::if_else(.data$increasing_or_decreasing == "increasing", "SMSP", "TMSR"),
+  ) %>%
+  gt::gt() %>% 
+  gt::tab_header(
+    title = "Overview of Increasing and Decreasing Technologies",
+    subtitle = "Technologies mapped to appropriate market share approach",
+  ) %>% 
+  gt::tab_style(
+    style = gt::cell_text(size = "smaller"),
+    locations = gt::cells_body(columns = everything())
+  ) %>% 
+  gt::tab_options(
+    ihtml.active = TRUE,
+    ihtml.use_pagination = FALSE,
+    ihtml.use_sorting = TRUE,
+    ihtml.use_highlight = TRUE
+  ) %>%
+  gt::fmt_passthrough() %>% 
+  gt::cols_width(
+    sector ~ px(90),
+    technology ~ px(110)
+  ) %>%
+  gt::cols_label(
+    sector = "Sector",
+    technology = "Technology",
+    increasing_or_decreasing = "Increasing or decreasing technology",
+    high_or_low = "High- or low-carbon technology",
+    market_share_approach = "Market share approach"
+  ) %>% 
+  gt::data_color(
+    columns = high_or_low,
+    rows = high_or_low == "high-carbon",
+    palette = "brown4"
+  ) %>% 
+  gt::data_color(
+    columns = high_or_low,
+    rows = high_or_low == "low-carbon",
+    palette = "darkgreen"
+  )
+```
 
 ### How to calculate market-share targets for a given scenario
 
@@ -162,7 +249,24 @@ $$I'^{Sc}(t) = \left(\dfrac{I^{ABCD}(t_0)}{I^{Sc}(t_0)}\right) * I^{Sc}(t)$$
 This yields the final PACTA SDA target equation:
 
 $$I^{Target}(t) = \left( d * p (t) \right) + I'^{Sc}(t)$$
-Note: $d$ and $p(t)$ also must be  re-calculated using this adjusted scenario intensity, $I'^{Sc}$. 
+Note: $d$ and $p(t)$ also must be re-calculated using this adjusted scenario intensity, $I'^{Sc}$. 
+
+Below you can see an example of how the sectoral decarbonization approach is illustrated for a portfolio with exposure to companies in the steel sector, a sector that is currently considered hard-to-abate and that does not have technology level high- and low-carbon pathways. The "target demo" line reflects the SDA target ($I^{Target}(t)$) for the emission intensity of steel production for the portfolio as defined above (the "adjusted scenario demo" line reflects the scenario pathway adjusted to the production universe covered in the ABCD, defined above as $I'^{Sc}(t)$). As expected for a hard-to-abate carbon intensive sector like steel production, the emission intensity target decreases over time, and the portfolio level and adjusted scenario level targets are slowly converging over time.
+
+```{r, message = FALSE, echo = FALSE, warning = FALSE}
+co2_intensity <- co2_intensity_scenario_demo
+
+sda_result_portfolio <- matched %>%
+  target_sda(
+    abcd = abcd,
+    co2_intensity_scenario = co2_intensity,
+    region_isos = regions
+  )
+
+sda_result_portfolio %>% 
+  filter(region == "global", sector == "steel") %>% 
+  qplot_emission_intensity()
+```
 
 ### Calculating SDA Targets
 
