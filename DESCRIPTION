@@ -50,6 +50,7 @@ Imports:
     cli,
     dplyr,
     ggrepel,
+    gmp,
     magrittr,
     purrr,
     r2dii.analysis (>= 0.5.1),
