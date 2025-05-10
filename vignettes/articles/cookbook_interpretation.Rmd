@@ -41,7 +41,7 @@ For example, the output table could be filtered to view the projected coal power
 
 ```{r, message = FALSE, warning = FALSE, R.options = list(width = 400)}
 dplyr::filter(
-  market_share,
+  market_share_demo,
   metric == "projected",
   technology == "coalcap"
 )
@@ -80,7 +80,7 @@ library(pacta.loanbook)
 
 qplot_techmix(
   dplyr::filter(
-    market_share,
+    market_share_demo,
     scenario_source == "demo_2020",
     sector == "power",
     region == "global",
@@ -108,7 +108,7 @@ library(pacta.loanbook)
 
 qplot_trajectory(
   dplyr::filter(
-    market_share,
+    market_share_demo,
     sector == "power",
     technology == "renewablescap",
     region == "global",
@@ -167,7 +167,7 @@ library(pacta.loanbook)
 
 qplot_emission_intensity(
   dplyr::filter(
-    sda,
+    sda_demo,
     sector == "cement",
     region == "global"
   )
