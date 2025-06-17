@@ -73,10 +73,10 @@ The output of `target_market_share()` has the following columns:
 plot_table("target_market_share_output")
 ```
 
-The `{pacta.loanbook}` package provides a demo `target_market_share()` output dataset `market_share`.
+The `{pacta.loanbook}` package provides a demo `target_market_share()` output dataset `market_share_demo`.
 
 ```{r, R.options = list(width = 400)}
-market_share
+market_share_demo
 ```
 
 ## target_sda() output
@@ -87,10 +87,10 @@ The output of `target_sda()` has the following columns:
 plot_table("target_sda_output")
 ```
 
-The `{pacta.loanbook}` package provides a demo `target_sda()` output dataset `sda`.
+The `{pacta.loanbook}` package provides a demo `target_sda()` output dataset `sda_demo`.
 
 ```{r, R.options = list(width = 400)}
-sda
+sda_demo
 ```
 
 ## prep_techmix() output
