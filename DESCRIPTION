@@ -54,7 +54,7 @@ Imports:
     purrr,
     r2dii.analysis (>= 0.5.1),
     r2dii.data (>= 0.6.0),
-    r2dii.match (>= 0.4.0),
+    r2dii.match (>= 0.4.1),
     r2dii.plot (>= 0.5.1),
     rlang,
     rstudioapi,
