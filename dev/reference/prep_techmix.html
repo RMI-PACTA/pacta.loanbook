@@ -97,7 +97,7 @@
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A data frame. Requirements:</p><ul><li><p>The structure must be like <a href="https://rmi-pacta.github.io/r2dii.plot/reference/market_share.html" class="external-link">market_share</a>.</p></li>
+<dd><p>A data frame. Requirements:</p><ul><li><p>The structure must be like <a href="https://rmi-pacta.github.io/r2dii.plot/reference/market_share_demo.html" class="external-link">market_share_demo</a>.</p></li>
 <li><p>The following columns must have a single value: <code>sector</code>, <code>region</code>,
 <code>scenario_source</code>.</p></li>
 <li><p>The column <code>metric</code> must have a portfolio (e.g. "projected"), a benchmark
@@ -161,7 +161,7 @@ use <code>convert_tech_label = toupper</code>. To get the default behavior of
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># `data` must meet documented "Requirements"</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">market_share</span>,</span></span>
+<span class="r-in"><span>  <span class="va">market_share_demo</span>,</span></span>
 <span class="r-in"><span>  <span class="va">scenario_source</span> <span class="op">==</span> <span class="st">"demo_2020"</span> <span class="op">&amp;</span></span></span>
 <span class="r-in"><span>    <span class="va">sector</span> <span class="op">==</span> <span class="st">"power"</span> <span class="op">&amp;</span></span></span>
 <span class="r-in"><span>    <span class="va">region</span> <span class="op">==</span> <span class="st">"global"</span> <span class="op">&amp;</span></span></span>
