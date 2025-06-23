@@ -28,7 +28,7 @@ Compared to \code{\link[r2dii.plot:plot_trajectory]{plot_trajectory()}} this fun
 \examples{
 # `data` must meet documented "Requirements"
 data <- subset(
-  market_share,
+  market_share_demo,
   sector == "power" &
     technology == "renewablescap" &
     region == "global" &
