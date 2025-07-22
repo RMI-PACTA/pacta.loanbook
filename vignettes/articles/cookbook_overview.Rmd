@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 This cookbook provides a step-by-step guide to running the PACTA for Banks analysis using the `{pacta.loanbook}` R package. The analysis determines alignment with climate scenarios to infer progress toward the Paris Agreement goals. If you're new to climate scenario alignment and PACTA, see the [PACTA website](https://pacta.rmi.org) for more information about PACTA for Banks, more on PACTA methodology, and other PACTA applications.
 
-This cookbook is produced with funding support from the government of Japan through the IFC’s climate risk management advisory program.
+This cookbook is produced with funding support from the Government of Japan through the International Finance Corporation (member of the World Bank Group)’s Climate Risk Management Program.
 
 The cookbook is structured as follows:
 
