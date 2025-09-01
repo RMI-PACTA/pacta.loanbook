@@ -52,11 +52,13 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+          extra-repositories: 'https://packagemanager.posit.co/cran/latest'
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          upgrade: 'TRUE'
 
       - uses: r-lib/actions/check-r-package@v2
         with:
