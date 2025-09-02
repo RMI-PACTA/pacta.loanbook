@@ -34,7 +34,7 @@ PACTA for Banks applies the PACTA methodology to assess corporate lending portfo
 
 ## Who are these tools for?
 
-PACTA for Banks is primarily designed for banks to run independently with no or limited support from RMI. However, it can also be useful for others interested in conducting a transition assessment on their loan books.
+PACTA for Banks is primarily designed for banks to run independently with no or limited support from RMI. However, it can also be useful for others interested in conducting a transition assessment on their loan books. If you are interested in comparing multiple loanbooks at the same time, check out the `{pacta.multi.loanbook}` package.
 
 ## How can the results be used?
 
