@@ -9,17 +9,15 @@ prep_emission_intensity(data, convert_label = identity, span_5yr = FALSE)
 \arguments{
 \item{data}{A data frame. Requirements:
 \itemize{
-\item The structure must be like \link[r2dii.plot]{sda}.
+\item The structure must be like \link[r2dii.plot]{sda_demo}.
 \item The column \code{sector} must have a single value (e.g. "cement").
 \item (Optional) If present, the column \code{label} is used for data labels.
 }}
 
-\item{convert_label}{A symbol. The unquoted name of a function to apply to
-y-axis labels. For example:
+\item{convert_label}{A symbol. The unquoted name of a function to apply to y-axis labels. For example:
 \itemize{
 \item To convert labels to uppercase use \code{convert_label = toupper}.
-\item To get the default behavior of \code{qplot_emission_intensity()} use
-\code{convert_label = to_title}.
+\item To get the default behavior of \code{qplot_emission_intensity} use \code{convert_label = to_title}.
 }}
 
 \item{span_5yr}{Logical. Use \code{TRUE} to restrict the time span to 5 years from
@@ -34,7 +32,7 @@ Prepare data for a emission intensity plot
 }
 \examples{
 # `data` must meet documented "Requirements"
-data <- subset(sda, sector == "cement" & region == "global")
+data <- subset(sda_demo, sector == "cement" & region == "global")
 prep_emission_intensity(data)
 }
 \seealso{
