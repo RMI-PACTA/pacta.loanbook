@@ -79,7 +79,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Upload 00check.log
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ format('{0}-{1}-r{2}-{3}-00check.log', runner.os, runner.arch, matrix.config.r, matrix.config.id || strategy.job-index ) }}
           path: ${{ steps.rcmdcheck.outputs.check-dir-path }}/*.Rcheck/00check.log
