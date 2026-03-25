@@ -1,0 +1,87 @@
+# Overview
+
+## Overview
+
+This cookbook provides a step-by-step guide to running the PACTA for
+Banks analysis using the
+[pacta.loanbook](https://rmi-pacta.github.io/pacta.loanbook/) R package.
+The analysis determines alignment with climate scenarios to infer
+progress toward the Paris Agreement goals. If you’re new to climate
+scenario alignment and PACTA, see the [PACTA
+website](https://pacta.rmi.org) for more information about PACTA for
+Banks, more on PACTA methodology, and other PACTA applications.
+
+This cookbook is produced with funding support from the Government of
+Japan through the International Finance Corporation (member of the World
+Bank Group)’s Climate Risk Management Program.
+
+The cookbook is structured as follows:
+
+- **[Preparatory
+  Steps](https://rmi-pacta.github.io/pacta.loanbook/dev/articles/cookbook_preparatory_steps.md)**:
+  Prepare the loanbook, ABCD and scenario input datasets.
+- **[Running the
+  Analysis](https://rmi-pacta.github.io/pacta.loanbook/dev/articles/cookbook_running_the_analysis.md)**:
+  Match the raw loanbooks to the ABCD data and run the PACTA for Banks
+  analysis.
+- **[Interpretation of
+  Results](https://rmi-pacta.github.io/pacta.loanbook/dev/articles/cookbook_interpretation.md)**:
+  Understand the analysis outputs.
+- **[Advanced
+  Topics](https://rmi-pacta.github.io/pacta.loanbook/dev/articles/cookbook_advanced_use_cases.md)**:
+  Guidance on advanced research questions.
+- **[Metrics](https://rmi-pacta.github.io/pacta.loanbook/dev/articles/cookbook_metrics.md)**:
+  More detailed explanations and formulae of the key metrics.
+
+### What is the PACTA for Banks analysis?
+
+PACTA for Banks applies the PACTA methodology to assess corporate
+lending portfolios’ alignment with climate goals. It uses
+forward-looking asset-based company data (ABCD) linked to financial
+assets to compare companies’ production profiles with sector- and
+technology-level climate transition scenarios.
+
+### Who are these tools for?
+
+PACTA for Banks is primarily designed for banks to run independently
+with no or limited support from RMI. However, it can also be useful for
+others interested in conducting a transition assessment on their loan
+books. If you are interested in comparing multiple loanbooks at the same
+time, check out the
+[pacta.multi.loanbook](https://rmi-pacta.github.io/pacta.multi.loanbook/)
+package.
+
+### How can the results be used?
+
+Banks can use the analysis results to:
+
+- Assess loan book alignment to climate scenarios.
+- Identify sectors that need action to improve alignment.
+- Screen for climate-related transition risks.
+- Spot opportunities for climate-aligned investments.
+- Detect counter-parties exposed to transition risks for risk
+  management.
+
+The results include both tabular outputs and visualizations. Tabular
+data can be further processed in financial risk models or integrated
+into internal monitoring systems.
+
+### What are the main steps of the analysis?
+
+The main steps of the analysis are as follows:
+
+1.  Data preparation: Prepare the loan book, ABCD and Scenario input
+    data.
+2.  Matching: Match the raw loan book to the ABCD data.
+3.  Match prioritization: Prioritize the matched loan book and analyze
+    its coverage.
+4.  Running the analysis: Execute PACTA for Banks and generate
+    visualizations.
+
+This cookbook provides detailed guidance on each step, including
+required inputs, software, and result interpretation.
+
+------------------------------------------------------------------------
+
+**NEXT CHAPTER:** [Preparatory
+Steps](https://rmi-pacta.github.io/pacta.loanbook/dev/articles/cookbook_preparatory_steps.md)
