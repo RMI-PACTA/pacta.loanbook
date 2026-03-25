@@ -3,6 +3,10 @@
 
 # pacta.loanbook <a href='https://rmi-pacta.github.io/pacta.loanbook/'><img src='man/figures/logo.png' align="right" height="31"/></a>
 
+[![Project Status: Unsupported](https://www.repostatus.org/badges/latest/unsupported.svg)](https://www.repostatus.org/#unsupported)
+
+**This project is archived for future reference, but no new work is expected in this repository.**
+
 <!-- badges: start -->
 
 [![Lifecycle:
